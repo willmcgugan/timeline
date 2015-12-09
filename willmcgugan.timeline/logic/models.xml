@@ -7,4 +7,25 @@
         <string name="email" length="300" />
     </model>
     -->
+
+
+    <model libname="Timeline" xmlns="http://moyaproject.com/db">
+    	<foreign-key model="moya.auth#User" backref="timeline" null="yes" blank="yes" />
+    	<integer name="update" default="0"/>
+    </model>
+
+    <model libname="Event" xmlns="http://moyaproject.com/db">
+    	<foreign-key name="timeline" backref="event" model="#Timeline" null="yes" blank="yes"/>
+    	<datetime name="time" null="no" blank="no" /> 
+    	<datetime name="added_time" auto="yes"/>
+    	<string name="type" length="30"/>
+    	<integer name="priority" default="10"/>
+    	<string name="title" length="100" null="yes" blank="yes"/>
+    	<text name="text" null="yes" blank="yes" />
+    	<string name="markup" length="20" default="markup"/>
+    	<text name="info_json" null="yes" blank="yes"/>
+
+    	<property name="info" expression="info_json ? {} : json:info_json" />
+    </model>
+
 </moya>
