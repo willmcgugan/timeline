@@ -18,6 +18,7 @@
     	<foreign-key name="timeline" backref="event" model="#Timeline" null="yes" blank="yes"/>
     	<datetime name="time" null="no" blank="no" /> 
     	<datetime name="added_time" auto="yes"/>
+        <datetime name="expire_time" null="yes" blank="yes"/>
     	<string name="type" length="30"/>
     	<integer name="priority" default="10"/>
     	<string name="title" length="100" null="yes" blank="yes"/>

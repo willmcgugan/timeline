@@ -1,0 +1,24 @@
+body.timeline-view
+{
+    background-color:#E5E9ED;
+}
+
+.card
+{
+    border-radius:4px;
+    background-color:#fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
+    margin:8px 0px;
+    overflow:hidden;
+}
+
+.card .content
+{
+    padding: 10px 20px 20px;
+}
+
+.card .footer
+{
+    border-top:1px solid #E5E9ED;
+    margin-top:8px;
+}

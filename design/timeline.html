@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+{% data %}
+{
+	"timeline": 
+	{
+		"uuid": "asd213joi24u23klj"
+	},
+
+	"events":
+	[
+		{
+			"type": "image",
+			"title": "Just an event"
+		},
+		{
+			"type": "text",
+			"title": "Hello, World"
+		}		
+	]
+	
+}
+{% end %}
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/timeline.css">
+</head>
+
+<body class="timeline-view">
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="timelines">
+
+				<div class="timeline-container" data-timeline="timeline.uuid">
+
+				{% for event in events %}
+					<div class="card event-${event.type}" data-type="${event.type}">
+						<div class="photo">
+							<img src="img/img1.jpg" width="100%"/>
+						</div>
+						<div class="content">
+							<div class="title">${event.title}</div>
+							<div class="footer">
+						Hello
+						</div>
+						</div>
+
+					</div>
+				{% endfor %}
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<body>
+<html>
+
