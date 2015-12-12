@@ -7,7 +7,7 @@
     <tag name="get-stream">
     	<doc>Get a stream object from a UUID or slug</doc>
     	<signature>
-    		<attribute name="id" type="text"/>
+    		<attribute name="id" type="text">A stream UUID or slug</attribute>
     	</signature>
     	<if test="if id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
             <db:get model="#Stream" let:uuid="id" dst="stream" />
