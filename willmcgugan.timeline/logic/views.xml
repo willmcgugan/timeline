@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
-      xmlns:let="http://moyaproject.com/let"
-      xmlns:db="http://moyaproject.com/db"
-      xmlns:forms="http://moyaproject.com/forms">
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:forms="http://moyaproject.com/forms">
 
-    <!-- Example view that gets a form -->
-    <view libname="view.front" content="#content.front">
-        <!-- Get the form -->
-        <forms:get form="#form.getname" dst="form"/>
-        <!-- Validate the form using POST data -->
-        <forms:validate src="form" if=".request.POST">
-            <!-- if the form validates set the value 'name' which is passed to the content -->
-            <let name="form.data.name" />
-        </forms:validate>
+    <mountpoint name="main">
+        <url route="/api/public/" methods="GET,POST" view='#jsonrpc.interface' name="jsonrpc" />
+        <url route="/s/{stream_id}/" methods="GET,POST" view="#view.stream" name="stream" />
+    </mountpoint>
+
+    <view libname="view.stream" template="stream.html">
+        <echo obj=".url"/>
     </view>
 
 </moya>

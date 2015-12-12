@@ -6,10 +6,9 @@
       xmlns:html="http://moyaproject.com/html">
 
     <!-- Content is a high level description of a page -->
-    <content libname="content.front" template="base.html">
+    <content libname="content.base" template="base.html">
         <section name="body">
-            <html:div class="well" if="name">Hello, ${name}!</html:div>
-            <render src="form" />
+            
         </section>
     </content>
 
