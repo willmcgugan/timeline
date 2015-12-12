@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
-      xmlns:let="http://moyaproject.com/let">
+	xmlns:db="http://moyaproject.com/db"
+    xmlns:let="http://moyaproject.com/let">
     <!-- define your tags here -->
+
+    <tag name="get-stream">
+    	<doc>Get a stream object from a UUID or slug</doc>
+    	<signature>
+    		<attribute name="id" type="text"/>
+    	</signature>
+    	<if test="if id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
+            <db:get model="#Stream" let:uuid="id" dst="stream" />
+        </if>
+        <else>
+            <db:get model="#Stream" let:slug="id" dst="stream" />
+        </else>
+        <throw exception="willmcgugan.timeline.missing.stream" msg="No stream called '${id}'"/>
+        <return value="stream"/>
+    </tag>
 
 </moya>

@@ -6,11 +6,22 @@
 
     <mountpoint name="main">
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.interface' name="jsonrpc" />
-        <url route="/s/{stream_id}/" methods="GET,POST" view="#view.stream" name="stream" />
+        <url route="/t/{timeline_id}/" methods="GET" view="#view.timeline" name="timeline" />
+        <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
     </mountpoint>
 
     <view libname="view.stream" template="stream.html">
-        <echo obj=".url"/>
+        <let stream_id=".url.stream_id"/>
+        <if test="stream_id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
+            <db:get-required model="#Stream" let:uuid="stream_id" dst="stream" />
+        </if>
+        <else>
+            <db:get-required model="#Stream" let:slug="stream_id" dst="stream" />
+        </else>
+    </view>
+
+    <view libname="view.timeline" template="stream.html">
+
     </view>
 
 </moya>

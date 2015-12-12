@@ -6,7 +6,7 @@
         <m:doc>A timeline is a collection of events from subscriptions</m:doc>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes"/>
-        <uuid name="uuid"/>
+        <uuid name="uuid" unique="yes"/>
     	<foreign-key name="user" model="moya.auth#User" backref="timelines" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
     	<integer name="update" default="0"/>
         <many-to-many name="subscriptions" model="#Stream" through="#Subscription"/>
@@ -23,14 +23,17 @@
         <m:doc>A stream is a time-based sequence of events</m:doc>
         <foreign-key name="user" model="moya.auth#User" backref="streams" null="yes" blank="yes" picker="moya.auth#admintable.users" owned="yes"/>
         <string name="title" length="100" blank="yes" null="yes"/>
-        <string name="slug" length="100" blank="yes" null="yes"/>
-        <uuid name="uuid"/>
+        <string name="slug" length="100" blank="yes" null="yes" unique="yes"/>
+        <string name="ip" length="45" null="yes"/>
+        <uuid name="uuid" unique="yes"/>
+        <integer name="retention" default="24" null="yes" blank="yes"/>
     </model>
 
     <model libname="Event" xmlns="http://moyaproject.com/db">
         <m:doc>An event is an individul item in a stream</m:doc>
     	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes"/>
 
+        <uuid name="uuid" unique="yes"/>
     	<datetime name="time" null="no" blank="no" /> 
     	<datetime name="added_time" auto="yes"/>
         <datetime name="expire_time" null="yes" blank="yes"/>
