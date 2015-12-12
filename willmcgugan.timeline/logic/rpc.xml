@@ -35,7 +35,7 @@
         <rpc:method name="new" group="stream" description="create a new anonymous stream">
             <db:create model="#Stream" dst="stream"
                 let:ip=".request.client_addr" let:retention="24"/>
-            <return-dict let:status="ok" let:uuid="stream.uuid">
+            <return-dict let:status="'ok'" let:uuid="stream.uuid">
                 <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
             </return-dict>
         </rpc:method>
