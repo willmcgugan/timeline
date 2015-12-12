@@ -1,0 +1,27 @@
+<moya xmlns="http://moyaproject.com"
+        xmlns:moya="http://moyaproject.com"
+        xmlns:let="http://moyaproject.com/let"
+        xmlns:auth="http://moyaproject.com/auth"
+        xmlns:admin="http://moyaproject.com/admin"
+        xmlns:html="http://moyaproject.com/html"
+        xmlns:w="http://moyaproject.com/widgets">
+
+    <module xmlns="http://moyaproject.com/admin" content="#content.admin"
+        slug="willmcgugan-timeline" title="Timeline" description="IOT Timelines">
+
+        <link to="#admintable.timelines" title="Timelines"/>
+
+
+    </module>
+
+
+    <table xmlns="http://moyaproject.com/admin"
+        libname="admintable.timelines" slug="timelines" title="Timelines" model="#Timeline" description="Timelines"
+        search="#Timeline.slug==q or #Timeline.title contains q">
+        <column title="UUID" sort="uuid" link="yes">${object.uuid}</column>
+        <column title="User" sort="#User.username"><moya:render src="object.user"/></column>
+
+    </table>
+
+
+</moya>
