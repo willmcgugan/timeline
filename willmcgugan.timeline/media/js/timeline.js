@@ -27,10 +27,5 @@ function Watcher(url, on_instruction)
 		on_instruction(instruction);
 	}
 
-	var addWatch = function(paths)
-	{
-		var watch_json = JSON.stringify(paths);
-		self.ws.send(watch_json);
-	}
 	return self;
 }

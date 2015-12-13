@@ -1,14 +1,14 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
-from moya.elementbase import LogicElement, Attribute
+from moya.elements.elementbase import LogicElement, Attribute
 
 from websocket import create_connection
 
 import json
 import logging
 
-log = logging('moya.runtime')
+log = logging.getLogger('moya.runtime')
 
 
 class Notify(LogicElement):
@@ -24,7 +24,8 @@ class Notify(LogicElement):
 		ws_url_base = timeline_app.settings['notifier_url']
 		notifier_secret = timeline_app.settings['notifier_secret']
 		ws_url = "{}?secret={}".format(ws_url_base, notifier_secret)
-		ws = create_connection(ws_url)
+		ws = create_connection(ws_url,
+							   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY),))
 
 		packet = [path, instruction_json]
 		packet_json = json.dumps(paths)

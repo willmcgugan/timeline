@@ -1,8 +1,9 @@
 <moya xmlns="http://moyaproject.com"
-      xmlns:rpc="http://moyaproject.com/jsonrpc"
-      xmlns:let="http://moyaproject.com/let"
-      xmlns:db="http://moyaproject.com/db"
-      xmlns:tl="http://willmcgugan.com/timeline">
+    xmlns:m="http://moayproject.com"
+    xmlns:rpc="http://moyaproject.com/jsonrpc"
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:tl="http://willmcgugan.com/timeline">
 
     <!-- Here's an example JSONRPC interface to get you started. -->
 
@@ -40,13 +41,26 @@
             </return-dict>
         </rpc:method>
 
-        <rpc:method name="add_events" group="stream" description="add event(s) to a stream">
+        <rpc:method name="new" group="event" description="add event(s) to a stream">
             <rpc:parameter name="stream" type="string" required="yes" />
-            <rpc:parameter name="events" type="list" required="yes">A list of streams</rpc:parameter>
+            <rpc:parameter name="events" type="list" required="yes">A list of events</rpc:parameter>
             <tl:get-stream id="stream" dst="stream" />
             <catch exception="willmcgugan.timeline.missing.*">
                 <rpc:error code="missing_stream"/>
             </catch>
+            <list dst="ids"/>
+            <for src="events" dst="event">
+                <db:create model="#Event"
+                    let:stream="stream"
+                    let:time="event.time or .now"
+                    let:type="event.type"
+                    let:title="event.title"
+                    let:text="event.text"
+                    let:markup="event.markup"
+                    dst="event"/>
+                <append src="ids" value="event.uuid"/>
+            </for>
+            <return-dict let:ids="ids"/>
         </rpc:method>
 
     </rpc:interface>

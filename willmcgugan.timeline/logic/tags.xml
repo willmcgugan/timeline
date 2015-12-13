@@ -7,16 +7,32 @@
     <tag name="get-stream">
     	<doc>Get a stream object from a UUID or slug</doc>
     	<signature>
-    		<attribute name="id" type="text">A stream UUID or slug</attribute>
+    		<attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
     	</signature>
-    	<if test="if id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
+    	<if test="id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
             <db:get model="#Stream" let:uuid="id" dst="stream" />
         </if>
         <else>
             <db:get model="#Stream" let:slug="id" dst="stream" />
         </else>
-        <throw exception="willmcgugan.timeline.missing.stream" msg="No stream called '${id}'"/>
+        <throw exception="willmcgugan.timeline.missing.stream" msg="No stream called '${id}'"
+            if="not stream"/>
         <return value="stream"/>
     </tag>
+
+    <tag name="get-stream-required">
+        <doc>Get a stream object from a UUID or slug</doc>
+        <signature>
+            <attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
+        </signature>
+        <if test="id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
+            <db:get-required model="#Stream" let:uuid="id" dst="stream" />
+        </if>
+        <else>
+            <db:get-required model="#Stream" let:slug="id" dst="stream" />
+        </else>
+        <return value="stream"/>
+    </tag>
+
 
 </moya>

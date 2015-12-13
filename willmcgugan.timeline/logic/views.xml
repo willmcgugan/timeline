@@ -2,7 +2,8 @@
 <moya xmlns="http://moyaproject.com"
     xmlns:let="http://moyaproject.com/let"
     xmlns:db="http://moyaproject.com/db"
-    xmlns:forms="http://moyaproject.com/forms">
+    xmlns:forms="http://moyaproject.com/forms"
+    xmlns:tl="http://willmcgugan.com/timeline">
 
     <mountpoint name="main">
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.interface' name="jsonrpc" />
@@ -11,17 +12,14 @@
     </mountpoint>
 
     <view libname="view.stream" template="stream.html">
-        <let stream_id=".url.stream_id"/>
-        <if test="stream_id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
-            <db:get-required model="#Stream" let:uuid="stream_id" dst="stream" />
-        </if>
-        <else>
-            <db:get-required model="#Stream" let:slug="stream_id" dst="stream" />
-        </else>
+        <tl:get-stream-required id=".url.stream_id" dst="stream"/>
+        <echo obj="stream.events"/>
+        <let events="stream.events[:10]"/>
     </view>
 
     <view libname="view.timeline" template="stream.html">
-
+        <tl:get-stream-required id=".url.stream_id" dst="stream"/>
+        <let events="stream.events[:10]"/>
     </view>
 
 </moya>

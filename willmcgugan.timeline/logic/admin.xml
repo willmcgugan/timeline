@@ -10,7 +10,7 @@
         slug="willmcgugan-timeline" title="Timeline" description="IOT Timelines">
 
         <link to="#admintable.timelines" title="Timelines"/>
-
+        <link to="#admintable.events" title="Events"/>
 
     </module>
 
@@ -20,8 +20,12 @@
         search="#Timeline.slug==q or #Timeline.title contains q">
         <column title="UUID" sort="uuid" link="yes">${object.uuid}</column>
         <column title="User" sort="#User.username"><moya:render src="object.user"/></column>
-
     </table>
 
+    <table xmlns="http://moyaproject.com/admin"
+        libname="admintable.events" slug="events" title="Events" model="#Event" description="Events"
+        search="#Event.title contains q">
+        <column title="ID" link="yes">${object.uuid}</column>
+    </table>
 
 </moya>
