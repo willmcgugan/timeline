@@ -10,10 +10,13 @@
     <!-- Use an enumeration so you can refer to error codes by a label -->
     <enum libname="enum.jsonrpc.errors">
         <value id="1" name="name_too_long">
-            This error occurs when you enter a name of more than 10 characters.
+            This error occurs when you enter a name of more than 10 characters
         </value>
         <value id="2" name="missing_stream">
-            The requested stream does not exist.
+            The requested stream does not exist
+        </value>
+        <value id="3" name="password_failed">
+            The password isn't correct
         </value>
     </enum>
 
@@ -36,7 +39,23 @@
         <rpc:method name="new" group="stream" description="create a new anonymous stream">
             <db:create model="#Stream" dst="stream"
                 let:ip=".request.client_addr" let:retention="24"/>
-            <return-dict let:status="'ok'" let:uuid="stream.uuid">
+            <return-dict let:status="'ok'" let:uuid="stream.uuid" let:slug="strem.slug">
+                <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
+            </return-dict>
+        </rpc:method>
+
+        <rpc:method name="get" group="stream" description="get an existing stream">
+            <rpc:parameter name="stream" type="string">A stream's UUID or slug</rpc:parameter>
+            <rpc:parameter name="password" type="string">Password for a stream</rpc:parameter>
+
+            <tl:get-stream id="stream" dst="stream"/>
+            <catch exception="willmcgugan.timeline.missing.*">
+                <rpc:error code="missing_stream"/>
+            </catch>
+            <if test="stream.password">
+                <rpc:error code="password_failed" if="stream.password != password" />
+            </if>
+            <return-dict let:status="'ok'" let:uuid="stream.uuid" let:slug="stream.slug">
                 <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
             </return-dict>
         </rpc:method>

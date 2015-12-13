@@ -27,10 +27,12 @@
         <string name="ip" length="45" null="yes"/>
         <uuid name="uuid" unique="yes"/>
         <integer name="retention" default="24" null="yes" blank="yes"/>
+        <string name="password" length="100" blank="yes" null="yes"/>
+        <boolean name="public" default="yes" />
     </model>
 
     <model libname="Event" xmlns="http://moyaproject.com/db">
-        <m:doc>An event is an individul item in a stream</m:doc>
+        <m:doc>An event is an individual item in a stream</m:doc>
     	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes"/>
 
         <uuid name="uuid" unique="yes"/>

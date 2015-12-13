@@ -8,18 +8,24 @@
 
     <module xmlns="http://moyaproject.com/admin" content="#content.admin"
         slug="willmcgugan-timeline" title="Timeline" description="IOT Timelines">
-
         <link to="#admintable.timelines" title="Timelines"/>
+        <link to="#admintable.streams" title="Streams"/>
         <link to="#admintable.events" title="Events"/>
-
     </module>
-
 
     <table xmlns="http://moyaproject.com/admin"
         libname="admintable.timelines" slug="timelines" title="Timelines" model="#Timeline" description="Timelines"
         search="#Timeline.slug==q or #Timeline.title contains q">
         <column title="UUID" sort="uuid" link="yes">${object.uuid}</column>
         <column title="User" sort="#User.username"><moya:render src="object.user"/></column>
+    </table>
+
+    <table xmlns="http://moyaproject.com/admin"
+        libname="admintable.streams" slug="streams" title="Streams" model="#Stream" description="Streams"
+        search="#Stream.slug==q or #Stream.uuid=q">
+        <column title="UUID" sort="uuid" link="yes">${object.uuid}</column>
+        <column title="Slug" sort="slug">${object.slug}</column>
+        <column title="User" sort="#User.username"><moya:render src="object.user"/></column> 
     </table>
 
     <table xmlns="http://moyaproject.com/admin"
