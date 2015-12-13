@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="{% media 'css/timeline.css' %}">
 </head>
 
-<body class="timeline-view"
-	{% data-attrib watchurl=watch_url, watcherurl=slashjoin:[.app.settings.watcher_url, watch_url], time=time %}>
+<body class="timeline-view" {% data-attrib config %}>
 
 <div class="container">
 

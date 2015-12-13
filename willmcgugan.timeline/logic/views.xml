@@ -6,7 +6,8 @@
     xmlns:tl="http://willmcgugan.com/timeline">
 
     <mountpoint name="main">
-        <url route="/api/public/" methods="GET,POST" view='#jsonrpc.interface' name="jsonrpc" />
+        <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
+        <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
         <url route="/t/{timeline_id}/" methods="GET" view="#view.timeline" name="timeline" />
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
     </mountpoint>
@@ -15,8 +16,15 @@
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
         <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
         <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-time" dst="events"/>
-        <breakpoint />
-        <let recent="events.first" time="recent.time.epoch" />
+        
+        <dict dst="config"
+            let:watchurl="watch_url"
+            let:watcherurl="slashjoin:[.app.settings.watcher_url]"
+            let:time="events.first.recent.time.epoch"
+            let:rpc_url="rpc_url">
+            <get-url name="jsonrpc_private" dst="rpc_url"/>
+        </dict>
+
     </view>
 
     <view libname="view.timeline" template="stream.html">
