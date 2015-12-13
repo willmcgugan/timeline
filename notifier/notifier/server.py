@@ -1,31 +1,19 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
-import sys
-from collections import defaultdict
 import json
 import logging
+from collections import defaultdict
 from weakref import WeakSet
 
 from tornado import websocket, web
-
-PY2 = sys.version_info[0] == 2
-
-if PY2:
-    text_type = unicode
-else:
-    text_type = str
 
 log = logging.getLogger('notifier')
 
 
 class WatchHandler(websocket.WebSocketHandler):
     """Watch a URL (resource)"""
-
     watching = defaultdict(WeakSet)
-
-    def initialize(self):
-        pass
 
     def check_origin(self, origin):
         return True
