@@ -20,6 +20,7 @@ log = logging.getLogger('notifier')
 
 
 class WatchHandler(websocket.WebSocketHandler):
+    """Watch a URL (resource)"""
 
     watching = defaultdict(WeakSet)
 
@@ -36,14 +37,12 @@ class WatchHandler(websocket.WebSocketHandler):
         log.debug(' watching %s', path)
         self.watching[path].add(self)
 
-    # def on_message(self, message):
-    #     pass
-
     def on_close(self):
         log.debug('%s client left', self.request.remote_ip)
 
 
 class NotifyHandler(websocket.WebSocketHandler):
+    """Broadcast notification for resource"""
 
     def initialize(self, secret=None):
         self.secret = secret
@@ -66,17 +65,12 @@ class NotifyHandler(websocket.WebSocketHandler):
 
     def on_message(self, message_json):
         try:
-            message = json.loads(message_json)
+            path, instruction = json.loads(message_json)
         except:
             log.exception('failed to decode message')
             self.close()
         else:
-            try:
-                path, instruction = message
-            except:
-                log.debug('message invalid')
-            else:
-                self.notify(path, instruction)
+            self.notify(path, instruction)
 
     def notify(self, path, instruction):
         log.debug('notify for %s', path)
