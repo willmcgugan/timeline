@@ -31,17 +31,20 @@ class Notify(LogicElement):
 		let_map = self.get_let_map(context)
 		if let_map:
 			instruction.update(let_map)
-		instruction_json = json.dumps(instruction)
+		instruction_json = json.dumps([instruction])
 
 		timeline_app = self.archive.find_app('willmcgugan.timeline')
 		ws_url_base = timeline_app.settings['notifier_url']
 		notifier_secret = timeline_app.settings['notifier_secret']
 		ws_url = "{}?secret={}".format(ws_url_base, notifier_secret)
-		
-		ws = create_connection(ws_url,
-							   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+
+		ws = context.get('.notify_ws', None)
+		if ws is None:
+			ws = create_connection(ws_url,
+								   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+			context['.notify_ws'] = ws
 
 		packet = [path, instruction_json]
 		packet_json = json.dumps(packet)
 		ws.send(packet_json)
-		ws.close()
+		#ws.close()

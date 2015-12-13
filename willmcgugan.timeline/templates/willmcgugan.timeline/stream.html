@@ -9,8 +9,7 @@
 </head>
 
 <body class="timeline-view"
-	data-watchurl="${watch_url}"
-	data-watcherurl="${slashjoin:[.app.settings.watcher_url, watch_url]}">
+	{% data-attrib watchurl=watch_url, watcherurl=slashjoin:[.app.settings.watcher_url, watch_url], time=time %}>
 
 <div class="container">
 
