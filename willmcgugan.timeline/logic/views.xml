@@ -13,7 +13,7 @@
 
     <view libname="view.stream" template="stream.html">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
-        <echo obj="stream.events"/>
+        <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
         <let events="stream.events[:10]"/>
     </view>
 

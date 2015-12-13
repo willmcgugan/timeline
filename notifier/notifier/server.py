@@ -29,10 +29,11 @@ class WatchHandler(websocket.WebSocketHandler):
     def check_origin(self, origin):
         return True
 
-    def open(self):
+    def open(self, path):
         self.set_nodelay(True)
         log.debug('%s client connected', self.request.remote_ip)
-        path = self.get_argument('path')
+        path = '/' + path.lstrip('/')
+        log.debug(' watching %s', path)
         self.watching[path].add(self)
 
     # def on_message(self, message):
@@ -44,12 +45,11 @@ class WatchHandler(websocket.WebSocketHandler):
 
 class NotifyHandler(websocket.WebSocketHandler):
 
-    def __init__(self, *args, **kwargs):
-        super(WatchHandler, self).__init__(*args, **kwargs)
-        self.secret = None
-
     def initialize(self, secret=None):
         self.secret = secret
+
+    def check_origin(self, origin):
+        return True
 
     def open(self):
         try:
@@ -79,7 +79,9 @@ class NotifyHandler(websocket.WebSocketHandler):
                 self.notify(path, instruction)
 
     def notify(self, path, instruction):
+        log.debug('notify for %s', path)
         for handler in WatchHandler.watching[path]:
+            log.debug('  notify %r', handler)
             handler.write_message(instruction)
 
     def on_close(self):

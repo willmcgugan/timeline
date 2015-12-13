@@ -4,7 +4,7 @@ function Watcher(url, on_instruction)
 	var ws = null;
 	var watch = [];
 
-	var connect = function()
+	self.connect = function()
 	{
 		var ws = new WebSocket(url);
 		ws.onopen = function(event)
@@ -21,7 +21,7 @@ function Watcher(url, on_instruction)
 		}
 	}
 
-	var onmessage = function(event)
+	self.onmessage = function(event)
 	{
 		var instruction = JSON.parse(event.data);
 		on_instruction(instruction);
@@ -29,3 +29,18 @@ function Watcher(url, on_instruction)
 
 	return self;
 }
+
+function on_instruction(instruction)
+{
+	console.log(instruction)
+}
+
+$(function(){
+	var $body = $('body');
+	var data = $body.data();
+	var watcher_url = data.watcherurl;
+
+	watcher = new Watcher(watcher_url, on_instruction);
+	watcher.connect()
+
+});

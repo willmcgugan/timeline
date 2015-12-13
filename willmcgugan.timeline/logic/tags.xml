@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
 	xmlns:db="http://moyaproject.com/db"
-    xmlns:let="http://moyaproject.com/let">
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:tl="http://willmcgugan.com/timeline">
     <!-- define your tags here -->
 
     <tag name="get-stream">
@@ -43,6 +44,15 @@
         <return>
             <render-template template="${template}" let:event="event"/>
         </return>
+    </tag>
+
+    <tag name="notify-stream">
+        <doc>Send notification of stream update</doc>
+        <signature>
+            <attribute name="stream" type="expression" required="yes" missing="no"/>
+        </signature>
+        <get-url name="stream" let:stream_id="stream.uuid" dst="path"/>
+        <tl:notify path="path" action="check-stream"/>
     </tag>
 
 </moya>

@@ -79,6 +79,7 @@
                     dst="event"/>
                 <append src="ids" value="event.uuid"/>
             </for>
+            <tl:notify-stream stream="stream"/>
             <return-dict let:ids="ids"/>
         </rpc:method>
 

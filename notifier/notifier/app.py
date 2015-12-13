@@ -15,7 +15,7 @@ def main():
 						help='server IP')
 	parser.add_argument('--port', dest='port', metavar='PORT', default=7474, type=int,
 						help='server port')
-	parser.add_argument('-s', '--secret', dest='secret', metavar='SECRET_TEXT',
+	parser.add_argument('-s', '--secret', dest='secret', metavar='SECRET_TEXT', default="secret",
 						help='server secret (password)')
 
 	args = parser.parse_args()
@@ -24,6 +24,7 @@ def main():
 						level=logging.DEBUG)
 
 	app = server.make_app(args.secret)
+	
 	app.listen(args.port)
 	log.info('listening on port %s', args.port)
 	try:
