@@ -7,7 +7,7 @@ import json
 import logging
 from weakref import WeakSet
 
-from tornado import websocket, web, gen
+from tornado import websocket, web
 
 PY2 = sys.version_info[0] == 2
 
@@ -31,20 +31,15 @@ class WatchHandler(websocket.WebSocketHandler):
 
     def open(self):
         self.set_nodelay(True)
-        
-    def on_message(self, message_json):
-        try:
-            message = json.loads(message_json)
-        except:
-            log.debug('failed to decode message')
-            self.close()
-        else:
-            for path in message:
-                if isinstance(path, text_type):
-                    self.watching[path].add(self)
+        log.debug('%s client connected', self.request.remote_ip)
+        path = self.get_argument('path')
+        self.watching[path].add(self)
+
+    # def on_message(self, message):
+    #     pass
 
     def on_close(self):
-        pass
+        log.debug('%s client left', self.request.remote_ip)
 
 
 class NotifyHandler(websocket.WebSocketHandler):
@@ -52,7 +47,6 @@ class NotifyHandler(websocket.WebSocketHandler):
     def __init__(self, *args, **kwargs):
         super(WatchHandler, self).__init__(*args, **kwargs)
         self.secret = None
-        self.authorized = False
 
     def initialize(self, secret=None):
         self.secret = secret
@@ -65,11 +59,9 @@ class NotifyHandler(websocket.WebSocketHandler):
             self.close()
         else:
             if self.secret == secret:
-                self.authorized = True
                 log.debug('%s connected', self.request.remote_ip)
             else:
                 log.debug('secret key invalid')
-                self.authorized = False
                 self.close()
 
     def on_message(self, message_json):
@@ -96,8 +88,7 @@ class NotifyHandler(websocket.WebSocketHandler):
 
 def make_app(secret):
     app = web.Application([
-        (r'^/watch/$', WatchHandler),
+        (r'^/watch/(?P<path>.*?)$', WatchHandler),
         (r'^/notify/$', NotifyHandler, {'secret': secret})
     ])
     return app
-    
