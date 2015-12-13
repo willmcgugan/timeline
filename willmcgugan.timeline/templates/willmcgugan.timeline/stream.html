@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-
-{% data %}
-{
-	"timeline": 
-	{
-		"uuid": "asd213joi24u23klj"
-	}
-	
-}
-{% end %}
 <html>
 <head>
 	<meta charset="utf-8">
@@ -27,23 +17,10 @@
 		<div class="col-sm-6 col-sm-offset-3">
 			<div class="timelines">
 
-				<div class="timeline-container" data-timeline="timeline.uuid">
-
+				<div class="timeline-container">
 				{% for event in events %}
-					<div class="card event-${event.type}" data-type="${event.type}">
-						<div class="photo">
-							<img src="{% media 'img/img1.jpg' %}" width="100%"/>
-						</div>
-						<div class="content">
-							<div class="title">${event.title}</div>
-							<div class="footer">
-								Hello
-							</div>
-						</div>
-
-					</div>
+				{% include "event.html" %}
 				{% endfor %}
-
 				</div>
 
 			</div>

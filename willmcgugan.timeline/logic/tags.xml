@@ -34,5 +34,15 @@
         <return value="stream"/>
     </tag>
 
+    <tag name="render-event">
+        <doc>Render an event object</doc>
+        <signature>
+            <attribute name="event" type="expression" missing="no">An #Event object</attribute>
+        </signature>
+        <str dst="template">event.html</str>
+        <return>
+            <render-template template="${template}" let:event="event"/>
+        </return>
+    </tag>
 
 </moya>
