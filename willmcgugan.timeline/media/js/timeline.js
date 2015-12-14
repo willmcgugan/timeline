@@ -35,12 +35,36 @@ function on_instruction(instruction)
 	console.log(instruction)
 }
 
+function update_events(time, events)
+{
+	stream_time = time;
+	var $timeline_container = $('.timeline-container');
+	$(events).each(function(i, event){
+		var $event = $(event.html);
+		$event.appendTo($timeline_container).addClass('new-event');
+		setTimeout(function(){$event.removeClass('new-event')}, 100);
+	});
+}
+
+function update_stream()
+{
+	rpc.call(
+		'stream.get_updates',
+		{'time': 0, 'stream': stream},
+		function(result){
+			update_events(result.time, result.events);
+		});
+}
+
 $(function(){
 	var $body = $('body');
 	var data = $body.data();
-	var watcher_url = data.watcherurl;
+	stream = data.stream;
+	stream_time = data.time;
 
-	watcher = new Watcher(watcher_url, on_instruction);
+	watcher = new Watcher(data.watcherurl, on_instruction);
 	watcher.connect()
 
+	rpc = new JSONRPC(data.rpc_url);
+	update_stream();
 });

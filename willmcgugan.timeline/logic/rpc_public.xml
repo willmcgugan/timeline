@@ -1,0 +1,82 @@
+<moya xmlns="http://moyaproject.com"
+    xmlns:m="http://moayproject.com"
+    xmlns:rpc="http://moyaproject.com/jsonrpc"
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:tl="http://willmcgugan.com/timeline">
+
+    <!-- Here's an example JSONRPC interface to get you started. -->
+
+    <!-- Use an enumeration so you can refer to error codes by a label -->
+    <enum libname="enum.jsonrpc.errors">
+        <value id="1" name="name_too_long">More than 10 characters in name</value>
+        <value id="2" name="missing_stream">The requested stream does not exist</value>
+        <value id="3" name="password_failed">The password isn't correct</value>
+    </enum>
+
+    <!-- This object creates a view that exposes methods via JSON RPC -->
+    <rpc:interface libname="jsonrpc.public" errors="#enum.jsonrpc.errors">
+
+        <rpc:method name="greet" description="Renders a greeting">
+            <doc>This method will greet you, using the name of your choice</doc>
+            <rpc:parameter name="who" type="string" default="'World'" required="no">
+                This parameter should be the name of the person you wish to greet. If not given, the name will default to "World"
+            </rpc:parameter>
+            <rpc:error code="name_too_long" if="len:who gt 10" data="errortext='What were you thinking?',foo='bar'">
+                'who' should be ten characters or less, not '${who}'
+            </rpc:error>
+            <return-str>Hello, ${who}!</return-str>
+        </rpc:method>
+
+        <rpc:method name="new" group="stream" description="create a new anonymous stream">
+            <db:create model="#Stream" dst="stream"
+                let:ip=".request.client_addr" let:retention="24"/>
+            <return-dict let:status="'ok'" let:uuid="stream.uuid" let:slug="strem.slug">
+                <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
+            </return-dict>
+        </rpc:method>
+
+        <rpc:method name="get" group="stream" description="get an existing stream">
+            <rpc:parameter name="stream" type="string">A stream's UUID or slug</rpc:parameter>
+            <rpc:parameter name="password" type="string">Password for a stream</rpc:parameter>
+
+            <tl:get-stream id="stream" dst="stream"/>
+            <catch exception="willmcgugan.timeline.missing.*">
+                <rpc:error code="missing_stream"/>
+            </catch>
+            <if test="stream.password">
+                <rpc:error code="password_failed" if="stream.password != password" />
+            </if>
+            <return-dict let:status="'ok'" let:uuid="stream.uuid" let:slug="stream.slug">
+                <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
+            </return-dict>
+        </rpc:method>
+
+        <rpc:method name="new" group="event" description="add event(s) to a stream">
+            <rpc:parameter name="stream" type="string" required="yes" />
+            <rpc:parameter name="events" type="list" required="yes">A list of events</rpc:parameter>
+            <tl:get-stream id="stream" dst="stream" />
+            <catch exception="willmcgugan.timeline.missing.*">
+                <rpc:error code="missing_stream"/>
+            </catch>
+            <list dst="ids"/>
+            <for src="events" dst="event">
+                <db:create model="#Event"
+                    let:stream="stream"
+                    let:time="event.time or .now"
+                    let:type="event.type"
+                    let:title="event.title"
+                    let:text="event.text"
+                    let:markup="event.markup"
+                    dst="event"/>
+                <append src="ids" value="event.uuid"/>
+            </for>
+            <tl:notify-stream stream="stream"/>
+            <return-dict let:ids="ids"/>
+        </rpc:method>
+
+    </rpc:interface>
+
+
+</moya>
+

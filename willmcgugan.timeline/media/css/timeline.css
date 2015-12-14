@@ -10,6 +10,10 @@ body.timeline-view
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
     margin:8px 0px;
     overflow:hidden;
+
+    transform: perspective(600px) rotateX(0deg);
+    transition: transform 1s, opacity 1s;
+    opacity: 1;
 }
 
 .card .content
@@ -21,4 +25,12 @@ body.timeline-view
 {
     border-top:1px solid #E5E9ED;
     margin-top:8px;
+
+}
+
+.new-event
+{
+	transform: perspective(600px) rotateX(90deg);
+	transition: transform 1s, opacity 1s;
+	opacity: 0;
 }

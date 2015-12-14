@@ -18,10 +18,9 @@
         <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-time" dst="events"/>
         
         <dict dst="config"
-            let:watchurl="watch_url"
-            let:watcherurl="slashjoin:[.app.settings.watcher_url]"
-            let:time="events.first.recent.time.epoch"
-            let:rpc_url="rpc_url">
+            let:stream="stream.uuid"
+            let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
+            let:time="events.first.time.epoch">
             <get-url name="jsonrpc_private" dst="rpc_url"/>
         </dict>
 
