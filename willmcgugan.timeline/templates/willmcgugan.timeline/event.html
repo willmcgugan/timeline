@@ -1,3 +1,5 @@
+{% cache for 24h key [event.uuid, event.update] %}
 <div id="${event.uuid}" class="card event-${event.type}" data-type="${event.type}" data-update="${event.update}">
 {% include sub:"events/${event.type}.html" %}
 </div>
+{% endcache %}
