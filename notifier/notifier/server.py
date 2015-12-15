@@ -15,18 +15,27 @@ class WatchHandler(websocket.WebSocketHandler):
     """Watch a URL (resource)"""
     watching = defaultdict(WeakSet)
 
+    def initialize(self):
+        self.ip = self.request.remote_ip
+
+    def __repr__(self):
+        if self.ip is not None:
+            return "<watch-handler {}>".format(self.ip)
+        else:
+            return "<watch-handler>"
+
     def check_origin(self, origin):
         return True
 
     def open(self, path):
         self.set_nodelay(True)
-        log.debug('%s client connected', self.request.remote_ip)
+        log.debug('%s connected', self.ip)
         path = '/' + path.lstrip('/')
-        log.debug(' watching %s', path)
+        log.info('%s watching %s', self.ip, path)
         self.watching[path].add(self)
 
     def on_close(self):
-        log.debug('%s client left', self.request.remote_ip)
+        log.debug('%s client left', self.ip)
 
 
 class NotifyHandler(websocket.WebSocketHandler):
@@ -61,10 +70,17 @@ class NotifyHandler(websocket.WebSocketHandler):
             self.notify(path, instruction)
 
     def notify(self, path, instruction):
-        log.debug('notify for %s', path)
-        for handler in WatchHandler.watching[path]:
-            log.debug('  notify %r', handler)
-            handler.write_message(instruction)
+        log.debug('notify %s', path)
+        watching = WatchHandler.watching[path]
+        log.info('notifying %s watchers of %s', len(watching), path)
+        for handler in watching:
+
+            try:
+                handler.write_message(instruction)
+            except:
+                pass
+            else:
+                log.debug(' notified %r', handler)
 
     def on_close(self):
         log.debug('%s left', self.request.remote_ip)
