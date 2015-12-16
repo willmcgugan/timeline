@@ -1,2 +1,45 @@
-{% extends "/base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% media 'css/bootstrap.min.css' from 'moya.twitter.bootstrap' %}" rel="stylesheet"/>
+    <link href="{% media 'css/timeline.css' %}" rel="stylesheet">
+    {# <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/1.5.2/assets/css/emojione.min.css" /> #}
+</head>
 
+<body class="timeline-view" {% data-attrib config or {} %}>
+
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-md-3">
+			<div class="stream-info">
+				{% empty-block 'side' %}
+			</div>
+		</div> 
+
+		<div class="col-md-8">
+			<div class="timelines">
+				<div class="timeline-container">
+				{% empty-block 'main' %}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-1">
+		Hello
+		</div>
+	</div>
+</div>
+
+<script src="{% media 'js/jquery.js' from 'moya.twitter.bootstrap' %}"></script>
+<script src="{% media 'js/bootstrap.min.js' from 'moya.twitter.bootstrap' %}"></script>
+<script src="{% media 'js/jsonrpc.js' from 'moya.jsonrpc' %}"></script>
+<script src="{% media 'js/timeline.js' %}"></script>
+{# <script src="//cdn.jsdelivr.net/emojione/1.5.2/lib/js/emojione.min.js"></script> #}
+
+<body>
+<html>

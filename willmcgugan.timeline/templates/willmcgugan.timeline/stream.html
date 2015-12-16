@@ -1,38 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% media 'css/bootstrap.min.css' from 'moya.twitter.bootstrap' %}" rel="stylesheet"/>
-    <link rel="stylesheet" href="{% media 'css/timeline.css' %}">
-</head>
+{% extends "base.html" %}
 
-<body class="timeline-view" {% data-attrib config %}>
+{% block 'main' %}
+{% for event in events %}
+{% include "event.html" %}
+{% endfor %}
+{% endblock %}
 
-<div class="container">
-
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="timelines">
-
-				<div class="timeline-container">
-				{#
-				{% for event in events %}
-				{% include "event.html" %}
-				{% endfor %}
-				#}
-				</div>
-
-			</div>
-		</div>
+{% block 'side' %}
+<div class="stream-info">
+	<h4>
+		${stream.title}<br/>
+		<small>@${stream.name}</small>
+	</h4>
+	{% inspect subscription %}
+	<div {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
+		<input class="btn btn-primary btn-subscribe" type="button" value="Subscribe"/>
+		<input class="btn btn-primary btn-unsubscribe" type="button" value="Unsubscribe"/>
 	</div>
 </div>
-
-<script src="{% media 'js/jquery.js' from 'moya.twitter.bootstrap' %}"></script>
-<script src="{% media 'js/bootstrap.min.js' from 'moya.twitter.bootstrap' %}"></script>
-<script src="{% media 'js/jsonrpc.js' from 'moya.jsonrpc' %}"></script>
-<script src="{% media 'js/timeline.js' %}"></script>
-
-<body>
-<html>
+{% endblock %}

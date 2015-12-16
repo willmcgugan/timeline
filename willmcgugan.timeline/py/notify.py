@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 from moya.elements.elementbase import LogicElement, Attribute
+from moya.compat import text_type
 
 from websocket import create_connection
 
@@ -40,8 +41,13 @@ class Notify(LogicElement):
 
 		ws = context.get('.notify_ws', None)
 		if ws is None:
-			ws = create_connection(ws_url,
-								   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+			try:
+				ws = create_connection(ws_url,
+									   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+			except Exception as e:
+				self.throw('notifier.connect-fail',
+						   'Unable to connect to notifier server {} ({})'.format(ws_url, text_type(e)),
+						   error=e)
 			context['.notify_ws'] = ws
 
 		packet = [path, instruction_json]

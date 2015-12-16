@@ -12,6 +12,9 @@
         <value id="1" name="name_too_long">
             This error occurs when you enter a name of more than 10 characters
         </value>
+        <value id="2" name="login_required">
+            User must be logged in to do that
+        </value>
     </enum>
 
     <!-- This object creates a view that exposes methods via JSON RPC -->
@@ -47,6 +50,34 @@
             </for>
 
             <return-dict let:events="events_html" let:time="update_time"/>
+
+        </rpc:method>
+
+        <rpc:method name="subscribe" group="stream" description="unsubscribe from a stream">
+            <rpc:parameter name="stream" type="string">stream to subscribe to"</rpc:parameter>
+       
+            <rpc:error code="login_required" if="not .user"/>
+            <tl:get-stream id="stream" dst="stream"/>
+            <db:get-or-create model="#Timeline" dst="timeline"
+                let:user=".user" let:slug="'default'"/>
+            <db:get-or-create model="#Subscription" dst="subscription"
+                let:stream="stream" let:timeline="timeline"/>
+
+            <return-dict let:status="ok" />
+
+        </rpc:method>
+
+        <rpc:method name="unsubscribe" group="stream" description="unsubscribe from a stream">
+            <rpc:parameter name="stream" type="string">stream to subscribe to</rpc:parameter>
+            <rpc:error code="login_required" if="not .user"/>
+            <tl:get-stream id="stream" dst="stream"/>
+            <db:get-or-create model="#Timeline" dst="timeline"
+                let:user=".user" let:slug="'default'"/>
+            <db:get-or-create model="#Subscription" dst="subscription"
+                let:stream="stream" let:timeline="timeline"/>
+            <db:delete src="subscription"/>>
+
+            <return-dict let:status="ok"/>
 
         </rpc:method>
 

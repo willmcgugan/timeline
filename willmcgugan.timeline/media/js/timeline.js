@@ -23,16 +23,22 @@ function Watcher(url, on_instruction)
 
 	self.onmessage = function(event)
 	{
-		var instruction = JSON.parse(event.data);
-		on_instruction(instruction);
+		var instructions = JSON.parse(event.data);
+		on_instructions(instructions);
 	}
 
 	return self;
 }
 
-function on_instruction(instruction)
+function on_instructions(instructions)
 {
-	console.log(instruction)
+	$(instructions).each(function(i, instruction){
+		var action = instruction.action;
+		if(action=='update-stream')
+		{
+			update_stream();
+		}
+	});
 }
 
 function update_events(time, events)
@@ -41,8 +47,13 @@ function update_events(time, events)
 	var $timeline_container = $('.timeline-container');
 	$(events).each(function(i, event){
 		var $event = $(event.html);
-		$event.appendTo($timeline_container).addClass('new-event');
-		setTimeout(function(){$event.removeClass('new-event')}, 100);
+		var $existing_event = $('#event-' + event.id);
+		if (!$existing_event.length)
+		{
+			emojione.shortnameToImage(input);
+			$event.prependTo($timeline_container).addClass('new-event');
+			setTimeout(function(){$event.removeClass('new-event')}, 10);
+		}
 	});
 }
 
@@ -50,7 +61,7 @@ function update_stream()
 {
 	rpc.call(
 		'stream.get_updates',
-		{'time': 0, 'stream': stream},
+		{'time': stream_time, 'stream': stream},
 		function(result){
 			update_events(result.time, result.events);
 		});
@@ -62,9 +73,33 @@ $(function(){
 	stream = data.stream;
 	stream_time = data.time;
 
-	watcher = new Watcher(data.watcherurl, on_instruction);
+	watcher = new Watcher(data.watcherurl, on_instructions);
 	watcher.connect()
 
 	rpc = new JSONRPC(data.rpc_url);
 	update_stream();
+
+	var $subscribe_button = $('.subscribe-button');
+
+	$('.subscribe-button').click(function(event){
+		if ($subscribe_button.hasClass('unsubscribed'))
+		{
+			rpc.call(
+				'stream.subscribe',
+				{'stream': stream},
+				function(result){
+					$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
+				});
+		}
+		else
+		{
+			rpc.call(
+				'stream.unsubscribe',
+				{'stream': stream},
+				function(result){
+					$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
+				});
+		}
+	});
+
 });

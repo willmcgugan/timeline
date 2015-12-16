@@ -35,6 +35,15 @@
         <return value="stream"/>
     </tag>
 
+    <tag name="get-user-timeline">
+        <doc>Get the timeline for logged in user</doc>
+        <return>
+            <db:get-or-create model="#Timeline"
+                    let:user=".user" let:slug="'default'"/>
+        </return>
+    </tag>
+
+
     <tag name="render-event">
         <doc>Render an event object</doc>
         <signature>
@@ -52,7 +61,7 @@
             <attribute name="stream" type="expression" required="yes" missing="no"/>
         </signature>
         <get-url name="stream" let:stream_id="stream.uuid" dst="path"/>
-        <tl:notify path="path" action="check-stream"/>
+        <tl:notify path="path" action="update-stream"/>
     </tag>
 
 </moya>

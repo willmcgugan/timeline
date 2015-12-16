@@ -7,7 +7,7 @@
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes"/>
         <uuid name="uuid" unique="yes"/>
-    	<foreign-key name="user" model="moya.auth#User" backref="timelines" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
+    	<one-to-one name="user" model="moya.auth#User" backref="timeline" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
     	<integer name="update" default="0"/>
         <many-to-many name="subscriptions" model="#Stream" through="#Subscription"/>
     </model>
@@ -29,6 +29,8 @@
         <integer name="retention" default="24" null="yes" blank="yes"/>
         <string name="password" length="100" blank="yes" null="yes"/>
         <boolean name="public" default="yes" />
+
+        <property name="name" expression="slug or uuid"/>
     </model>
 
     <model libname="Event" xmlns="http://moyaproject.com/db">

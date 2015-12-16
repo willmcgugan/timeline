@@ -12,8 +12,7 @@ body.timeline-view
     overflow:hidden;
 
     transform: perspective(600px) rotateX(0deg);
-    transition: transform 1s, opacity 1s;
-    opacity: 1;
+    transition: transform 0.5s;
 }
 
 .card .content
@@ -31,6 +30,26 @@ body.timeline-view
 .new-event
 {
 	transform: perspective(600px) rotateX(90deg);
-	transition: transform 1s, opacity 1s;
-	opacity: 0;
+	transition: transform 0.5s;
+}
+
+/*
+.stream-info
+{
+    background-image:url(/static/timeline-media/img/img1.jpg);
+}*/
+
+.subscribe-button .btn
+{
+    display:none;
+}
+
+.subscribe-button.subscribed .btn-unsubscribe
+{
+    display:inline;
+}
+
+.subscribe-button.unsubscribed .btn-subscribe
+{
+    display:inline;
 }
