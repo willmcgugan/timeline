@@ -17,6 +17,7 @@ class WatchHandler(websocket.WebSocketHandler):
 
     def initialize(self):
         self.ip = self.request.remote_ip
+        self.path = None
 
     def __repr__(self):
         if self.ip is not None:
@@ -30,12 +31,15 @@ class WatchHandler(websocket.WebSocketHandler):
     def open(self, path):
         self.set_nodelay(True)
         log.debug('%s connected', self.ip)
-        path = '/' + path.lstrip('/')
-        log.info('%s watching %s', self.ip, path)
+        self.path = path = '/' + path.lstrip('/')
         self.watching[path].add(self)
+        log.debug('%s client(s) watching %s', len(self.watching[path]), path)
 
     def on_close(self):
+        path = self.path
         log.debug('%s client left', self.ip)
+        self.watching[path].discard(self)
+        log.debug('%s client(s) watching %s', len(self.watching[path]), path)
 
 
 class NotifyHandler(websocket.WebSocketHandler):
