@@ -15,6 +15,9 @@
         <value id="2" name="login_required">
             User must be logged in to do that
         </value>
+        <value id="3" name="unknown_stream">
+            Not such stream
+        </value>
     </enum>
 
     <!-- This object creates a view that exposes methods via JSON RPC -->
@@ -32,15 +35,29 @@
             <return-str>Hello, ${who}!</return-str>
         </rpc:method>
 
-        <rpc:method name="get_updates" group="stream" description="Get updates to a stream">
-            <rpc:parameter name="stream" type="string" required="yes">stream id/slug</rpc:parameter>
+        <rpc:method name="get_updates" group="events" description="Get updates to a stream">
+            <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
             <rpc:parameter name="time" type="number" required="yes">update time</rpc:parameter>
 
             <let time="epoch:time"/>
-            <tl:get-stream id="stream" dst="stream"/>
+            <let parse="partition:[events, '-']"
+                source="parse.0"
+                pk="parse.2" />
 
-            <db:query model="#Event" filter="#Event.added_time gte time" let:stream="stream"
+            <switch on="source">
+                <case>stream</case>
+                <db:get model="#Stream" let:id="pk" dst="stream"/>
+                <rpc:error code="unknown-stream" if="not stream"/>
+                <db:query model="#Event" filter="#Event.added_time gte time" let:stream="stream"
                 maxresults="10" orderby="-time" dst="events"/>
+
+                <case>timeline</case>
+                <db:get model="#Timeline" let:id="pk" dst="timeline"/>
+                <db:query model="#Event" dst="events"
+                    filter="#Event.stream.id in timeline.streams" orderby="-time"/>
+
+            </switch>
+            
             <let update_time="events.first.added_time.epoch"/>
 
             <list dst="events_html"/>
@@ -63,7 +80,7 @@
             <db:get-or-create model="#Subscription" dst="subscription"
                 let:stream="stream" let:timeline="timeline"/>
 
-            <return-dict let:status="ok" />
+            <return-dict let:status="'ok'" />
 
         </rpc:method>
 
@@ -77,7 +94,7 @@
                 let:stream="stream" let:timeline="timeline"/>
             <db:delete src="subscription"/>>
 
-            <return-dict let:status="ok"/>
+            <return-dict let:status="'ok'"/>
 
         </rpc:method>
 

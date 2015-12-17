@@ -8,14 +8,17 @@
     <mountpoint name="main">
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
-        <url route="/t/{timeline_id}/" methods="GET" view="#view.timeline" name="timeline" />
+       
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
-        <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event" />
+        <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
+
+        <url route="/" methods="GET" view="#view.timeline" name="user_timeline"/>
+        <url route="/{username}/" methods="GET" view="#view.timeline" name="timeline"/>
     </mountpoint>
 
     <view libname="view.stream" template="stream.html">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
-        <tl:get-user-timeline dst="timeline" />
+        <tl:get-timeline dst="timeline" />
         <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
         <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-time" dst="events"/>
 
@@ -24,7 +27,7 @@
             let:stream="stream" let:timeline="timeline"/>
         
         <dict dst="config"
-            let:stream="stream.uuid"
+            let:events="sub:'stream-${stream.id}'"
             let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
             let:time="events.first.time.epoch">
             <get-url name="jsonrpc_private" dst="rpc_url"/>
@@ -33,13 +36,29 @@
     </view>
 
     <view libname="view.timeline" template="stream.html">
-        <tl:get-stream-required id=".url.stream_id" dst="stream"/>
-        <let events="stream.events[:10]"/>
+        <if test=".url.username">
+            <db:get model="moya.auth#User" let:username=".url.username" dst="user"/>
+        </if>
+        <else>
+            <let user=".user"/>
+        </else>
+        <tl:get-timeline let:user="user" dst="timeline"/>
+        <get-url name="timeline" let:username="user.username" dst="watch_url"/>
+        <db:query model="#Event" dst="events"
+            filter="#Event.stream.id in timeline.streams" orderby="-time"/>
+
+        <dict dst="config"
+            let:events="sub:'timeline-${timeline.id}'"
+            let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
+            let:time="events.first.time.epoch">
+            <get-url name="jsonrpc_private" dst="rpc_url"/>
+        </dict>
     </view>
 
     <view libname="view.event" template="view_event.html">
         <db:get-required model="#Event" let:uuid=".url.event_id" dst="event"/>
         <let stream="event.stream"/>
     </view>
+
 
 </moya>

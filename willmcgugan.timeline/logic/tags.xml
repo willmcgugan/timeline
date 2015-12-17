@@ -35,11 +35,14 @@
         <return value="stream"/>
     </tag>
 
-    <tag name="get-user-timeline">
+    <tag name="get-timeline">
         <doc>Get the timeline for logged in user</doc>
+        <signature>
+            <attribute name="user" type="expression" default=".user">Owner of timeline</attribute>
+        </signature>
         <return>
             <db:get-or-create model="#Timeline"
-                    let:user=".user" let:slug="'default'"/>
+                    let:user="user" let:slug="'default'"/>
         </return>
     </tag>
 
@@ -62,6 +65,12 @@
         </signature>
         <get-url name="stream" let:stream_id="stream.uuid" dst="path"/>
         <tl:notify path="path" action="update-stream"/>
+        <db:query columns="#Timeline" filter="#Subscription.stream==stream" dst="timelines"/>
+        <for src="timelines" dst="timeline">
+            <get-url name="timeline" let:username="timeline.user.username" dst="path"/>
+            <tl:notify path="path" action="update-stream"/>
+        </for>
     </tag>
+å
 
 </moya>

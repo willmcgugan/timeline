@@ -3,6 +3,7 @@ function Watcher(url, on_instruction)
 	var self = this;
 	var ws = null;
 	var watch = [];
+	var checker_id = null;
 
 	self.connect = function()
 	{
@@ -19,12 +20,25 @@ function Watcher(url, on_instruction)
 		{
 			self.onmessage(event)
 		}
+		if (checker_id)
+		{
+			clearInterval(checker_id);
+		}
+		checker_id = setInterval(self.check_connect, 2000);
 	}
 
 	self.onmessage = function(event)
 	{
 		var instructions = JSON.parse(event.data);
 		on_instructions(instructions);
+	}
+
+	self.check_connect = function()
+	{
+		if (!self.ws)
+		{
+			self.connect()
+		}
 	}
 
 	return self;
@@ -50,9 +64,8 @@ function update_events(time, events)
 		var $existing_event = $('#event-' + event.id);
 		if (!$existing_event.length)
 		{
-			emojione.shortnameToImage(input);
 			$event.prependTo($timeline_container).addClass('new-event');
-			setTimeout(function(){$event.removeClass('new-event')}, 10);
+			setTimeout(function(){$event.removeClass('new-event')}, 0);
 		}
 	});
 }
@@ -60,8 +73,8 @@ function update_events(time, events)
 function update_stream()
 {
 	rpc.call(
-		'stream.get_updates',
-		{'time': stream_time, 'stream': stream},
+		'events.get_updates',
+		{'time': stream_time, 'events': events},
 		function(result){
 			update_events(result.time, result.events);
 		});
@@ -70,7 +83,7 @@ function update_stream()
 $(function(){
 	var $body = $('body');
 	var data = $body.data();
-	stream = data.stream;
+	events = data.events;
 	stream_time = data.time;
 
 	watcher = new Watcher(data.watcherurl, on_instructions);
@@ -86,7 +99,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.subscribe',
-				{'stream': stream},
+				{'events': events},
 				function(result){
 					$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
 				});
@@ -95,7 +108,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.unsubscribe',
-				{'stream': stream},
+				{'events': events},
 				function(result){
 					$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
 				});
