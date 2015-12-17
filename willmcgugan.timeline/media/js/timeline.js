@@ -8,9 +8,10 @@ function Watcher(url, on_instruction)
 	self.connect = function()
 	{
 		var ws = new WebSocket(url);
+		self.ws = ws;
 		ws.onopen = function(event)
 		{
-			self.ws = ws;
+			
 		}
 		ws.onclose = function(event)
 		{
@@ -24,6 +25,7 @@ function Watcher(url, on_instruction)
 		{
 			clearInterval(checker_id);
 		}
+		/* Check for drop-outs periodically, so we can reconnect */
 		checker_id = setInterval(self.check_connect, 2000);
 	}
 
