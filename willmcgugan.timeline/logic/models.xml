@@ -57,8 +57,9 @@
 
     <model libname="Image" xmlns="http://moyaproject.com/db">
         <doc>An image associated with an Event</doc>
-        <one-to-one model="#Image" name="event" backref="image" null="yes" blank="yes"/>
+        <one-to-one model="#Event" name="event" backref="image" null="yes" blank="yes"/>
         <uuid name="uuid" unique="yes"/>
+        <string name="path" length="250" null="yes" blank="yes" />
         <integer name="filesize"/>
         <integer name="width"/>
         <integer name="height"/>

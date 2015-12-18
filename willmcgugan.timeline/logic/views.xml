@@ -4,7 +4,8 @@
     xmlns:db="http://moyaproject.com/db"
     xmlns:forms="http://moyaproject.com/forms"
     xmlns:tl="http://willmcgugan.com/timeline"
-    xmlns:fs="http://moyaproject.com/fs">
+    xmlns:fs="http://moyaproject.com/fs"
+    xmlns:image="http://moyaproject.com/image">
 
     <mountpoint name="main">
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
@@ -52,11 +53,18 @@
                 let:markup="data.markup"/>
             <db:commit/>
 
-            <if test="data.upload">
+            <if test="data.image">
                 <breakpoint />
-                <let-str ext=".jpg"/>
-                <str dst="path">${stream.uuid}/${event.uuid}.orig</str>
-                <fs:set-contents fs="uploads" path="path" contents="data.image"/>
+                <let ext="ext:data.image.filename"/>
+                <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
+                <image:get-size file="data.image" dst="size"/>
+                <db:create model="#Image" dst="img"
+                    let:event="event"
+                    let:path="path"
+                    let:filesize="len:data.image"
+                    let:width="size.width"
+                    let:height="size.height"/>
+                <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
             </if>
 
             <tl:notify-stream stream="stream"/>
