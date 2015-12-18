@@ -86,6 +86,7 @@ $(function(){
 	var $body = $('body');
 	var data = $body.data();
 	events = data.events;
+	stream = data.stream;
 	stream_time = data.time;
 
 	watcher = new Watcher(data.watcherurl, on_instructions);
@@ -100,7 +101,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.subscribe',
-				{'events': events},
+				{'stream': stream},
 				function(result){
 					$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
 				});
@@ -109,7 +110,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.unsubscribe',
-				{'events': events},
+				{'stream': stream},
 				function(result){
 					$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
 				});

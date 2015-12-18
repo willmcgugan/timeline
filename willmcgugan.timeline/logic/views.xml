@@ -3,7 +3,8 @@
     xmlns:let="http://moyaproject.com/let"
     xmlns:db="http://moyaproject.com/db"
     xmlns:forms="http://moyaproject.com/forms"
-    xmlns:tl="http://willmcgugan.com/timeline">
+    xmlns:tl="http://willmcgugan.com/timeline"
+    xmlns:fs="http://moyaproject.com/fs">
 
     <mountpoint name="main">
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
@@ -28,6 +29,7 @@
             let:stream="stream" let:timeline="timeline"/>
         
         <dict dst="config"
+            let:stream="stream.uuid"
             let:events="sub:'stream-${stream.id}'"
             let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
             let:time="events.first.time.epoch">
@@ -49,6 +51,14 @@
                 let:text="data.text"
                 let:markup="data.markup"/>
             <db:commit/>
+
+            <if test="data.upload">
+                <breakpoint />
+                <let-str ext=".jpg"/>
+                <str dst="path">${stream.uuid}/${event.uuid}.orig</str>
+                <fs:set-contents fs="uploads" path="path" contents="data.image"/>
+            </if>
+
             <tl:notify-stream stream="stream"/>
         </forms:validate>
     </view>

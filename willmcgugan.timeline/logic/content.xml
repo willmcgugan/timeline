@@ -13,6 +13,13 @@
 
     <content libname="content.stream.new_event">
     	<section name="body">
+    		<w:info>
+    			<markdown>
+This for can be used to create events.
+
+It's designed to be used by automated systems. You should probably use the official API.
+    			</markdown>
+    		</w:info>
     		<render src="form"/>
     		<w:success if="event">
     			Added ${event}
