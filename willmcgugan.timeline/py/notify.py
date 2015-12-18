@@ -19,6 +19,7 @@ class Notify(LogicElement):
 	path = Attribute("Path to update", type="expression")
 	action = Attribute("Action to send", type="text", required="yes")
 	data = Attribute("Data associated with the action", type="expression", default=None)
+	failsilently = Attribute("Ignore connectivity errors?", type="boolean", default=True)
 
 	def logic(self, context):
 		
@@ -45,9 +46,14 @@ class Notify(LogicElement):
 				ws = create_connection(ws_url,
 									   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
 			except Exception as e:
-				self.throw('notifier.connect-fail',
-						   'Unable to connect to notifier server {} ({})'.format(ws_url, text_type(e)),
-						   error=e)
+				msg = 'unable to connect to notifier server ({})'.format(text_type(e))
+				if params.failsilently:
+					log.warn(msg)
+					return
+				else:
+					self.throw('notifier.connect-fail',
+							   msg,
+							   error=e)
 			context['.notify_ws'] = ws
 
 		packet = [path, instruction_json]

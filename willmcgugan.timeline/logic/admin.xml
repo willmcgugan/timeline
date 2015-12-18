@@ -32,6 +32,9 @@
         libname="admintable.events" slug="events" title="Events" model="#Event" description="Events"
         search="#Event.title contains q">
         <column title="ID" link="yes">${object.uuid}</column>
+        <column title="Type" sort="type">${object.type}</column>
+        <column title="Added" sort="added">${localize:object.added_time}</column>
+        <column title="Time" sort="time">${localize:object.time}</column>
     </table>
 
 </moya>

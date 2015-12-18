@@ -48,12 +48,12 @@
                 <case>stream</case>
                 <db:get model="#Stream" let:id="pk" dst="stream"/>
                 <rpc:error code="unknown-stream" if="not stream"/>
-                <db:query model="#Event" filter="#Event.added_time gte time" let:stream="stream"
-                maxresults="10" orderby="-time" dst="events"/>
+                <db:query model="#Event" dst="events" maxresults="10"
+                    filter="#Event.added_time gte time" let:stream="stream" orderby="-time" />
 
                 <case>timeline</case>
                 <db:get model="#Timeline" let:id="pk" dst="timeline"/>
-                <db:query model="#Event" dst="events"
+                <db:query model="#Event" dst="events" maxresults="10"
                     filter="#Event.stream.id in timeline.streams" orderby="-time"/>
 
             </switch>

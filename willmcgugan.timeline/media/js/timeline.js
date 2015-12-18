@@ -61,9 +61,9 @@ function update_events(time, events)
 {
 	stream_time = time;
 	var $timeline_container = $('.timeline-container');
-	$(events).each(function(i, event){
-		var $event = $(event.html);
-		var $existing_event = $('#event-' + event.id);
+	$(events.reverse()).each(function(i, event_update){
+		var $event = $(event_update.html);
+		var $existing_event = $('#event-' + event_update.id);
 		if (!$existing_event.length)
 		{
 			$event.prependTo($timeline_container).addClass('new-event');
@@ -92,8 +92,7 @@ $(function(){
 	watcher.connect()
 
 	rpc = new JSONRPC(data.rpc_url);
-	update_stream();
-
+	
 	var $subscribe_button = $('.subscribe-button');
 
 	$('.subscribe-button').click(function(event){

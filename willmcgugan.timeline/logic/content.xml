@@ -3,13 +3,22 @@
       xmlns:let="http://moyaproject.com/let"
       xmlns:db="http://moyaproject.com/db"
       xmlns:forms="http://moyaproject.com/forms"
-      xmlns:html="http://moyaproject.com/html">
+      xmlns:html="http://moyaproject.com/html"
+      xmlns:w="http://moyaproject.com/widgets">
 
     <!-- Content is a high level description of a page -->
     <content libname="content.base" template="base.html">
-        <section name="body">
-            
-        </section>
+
     </content>
+
+    <content libname="content.stream.new_event">
+    	<section name="body">
+    		<render src="form"/>
+    		<w:success if="event">
+    			Added ${event}
+    		</w:success>
+    	</section>
+    </content>
+
 
 </moya>

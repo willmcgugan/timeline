@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
     xmlns:m="http://moyaproject.com">
-   
+
+
     <model libname="Timeline" xmlns="http://moyaproject.com/db">
-        <m:doc>A timeline is a collection of events from subscriptions</m:doc>
+        <doc>A timeline is a collection of events from subscriptions</doc>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes"/>
         <uuid name="uuid" unique="yes"/>
@@ -13,14 +14,14 @@
     </model>
 
     <model libname="Subscription" xmlns="http://moyaproject.com/db">
-        <m:doc>A subscription is a mapping of timeline to stream with filters</m:doc>
+        <doc>A subscription is a mapping of timeline to stream with filters</doc>
         <foreign-key name="timeline" model="#Timeline" owned="yes"/>
         <foreign-key name="stream" model="#Stream" owned="yes"/>
         <integer name="event_priority" default="-10" null="yes" blank="yes"/>
     </model>
 
     <model libname="Stream" xmlns="http://moyaproject.com/db">
-        <m:doc>A stream is a time-based sequence of events</m:doc>
+        <doc>A stream is a time-based sequence of events</doc>
         <foreign-key name="user" model="moya.auth#User" backref="streams" null="yes" blank="yes" picker="moya.auth#admintable.users" owned="yes"/>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes" unique="yes"/>
@@ -34,7 +35,7 @@
     </model>
 
     <model libname="Event" xmlns="http://moyaproject.com/db">
-        <m:doc>An event is an individual item in a stream</m:doc>
+        <doc>An event is an individual item in a stream</doc>
     	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes"/>
 
         <uuid name="uuid" unique="yes"/>
@@ -52,6 +53,15 @@
         <integer name="numcomments" default="0"/>
 
         <property name="info" expression="info_json ? {} : json:info_json" />
+    </model>
+
+    <model libname="Image" xmlns="http://moyaproject.com/db">
+        <doc>An image associated with an Event</doc>
+        <one-to-one model="#Image" name="event" backref="image" null="yes" blank="yes"/>
+        <uuid name="uuid" unique="yes"/>
+        <integer name="filesize"/>
+        <integer name="width"/>
+        <integer name="height"/>
     </model>
 
 </moya>

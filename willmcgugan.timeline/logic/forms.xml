@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<moya xmlns="http://moyaproject.com">
+<moya xmlns="http://moyaproject.com"
+	xmlns:w="http://moyaproject.com/widgets">
 
     <!-- Forms know how to render and validate themselves -->
     <form libname="form.getname" legend="Hello World Form" style="horizontal" xmlns="http://moyaproject.com/forms">
         <input requiredmsg="Enter something here you numpty" name="name" label="What is your name?" class="input-xlarge" type="text" maxlength="30" required="yes"/>
         <submit-button text="Submit" />
+    </form>
+
+    <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
+    	
+    	<input name="stream" label="Stream" placeholder="UUID or slug"/>
+    	<input name="password" label="Password" placeholder="Stream password or API key"/>
+        <input name="title" label="Title"/>
+        <input name="time" label="Time" type="integer" placeholder="epoch time"/>
+        <input name="type" maxlength="30" label="Event Type"/>
+        <input name="priority" label="Priority" initial="0" />
+        <input name="markup" maxlength="20" label="Markup" initial="'markdown'"/>
+        <text-area name="text" label="Text"/>
+        <upload name="image" label="Upload"/>
+        <submit-button text="Upload"/>
+
     </form>
 
 </moya>

@@ -10,6 +10,7 @@
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
        
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
+        <url route="/s/{stream_id}/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/" methods="GET" view="#view.timeline" name="user_timeline"/>
@@ -20,7 +21,7 @@
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
         <tl:get-timeline dst="timeline" />
         <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
-        <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-time" dst="events"/>
+        <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-added_time" dst="events"/>
 
 
         <db:get model="#Subscription" dst="subscription"
@@ -32,7 +33,24 @@
             let:time="events.first.time.epoch">
             <get-url name="jsonrpc_private" dst="rpc_url"/>
         </dict>
+    </view>
 
+    <view libname="view.stream.upload" content="#content.stream.new_event">
+        <forms:get form="#form.event" dst="form"/>
+        <forms:validate src="form">
+            <let data="form.data"/>
+            <tl:get-stream id="data.stream" dst="stream"/>
+            <db:create model="#Event" dst="event"
+                let:stream="stream"
+                let:time="data.time ? epoch:data.time : .now"
+                let:type="data.type or 'text'"
+                let:priority="int:data.priority"
+                let:title="data.title"
+                let:text="data.text"
+                let:markup="data.markup"/>
+            <db:commit/>
+            <tl:notify-stream stream="stream"/>
+        </forms:validate>
     </view>
 
     <view libname="view.timeline" template="stream.html">
@@ -44,7 +62,7 @@
         </else>
         <tl:get-timeline let:user="user" dst="timeline"/>
         <get-url name="timeline" let:username="user.username" dst="watch_url"/>
-        <db:query model="#Event" dst="events"
+        <db:query model="#Event" dst="events" maxresults="10"
             filter="#Event.stream.id in timeline.streams" orderby="-time"/>
 
         <dict dst="config"
