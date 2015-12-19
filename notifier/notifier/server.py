@@ -6,7 +6,8 @@ import logging
 from collections import defaultdict
 from weakref import WeakSet
 
-from tornado import websocket, web
+from tornado import websocket, web, gen
+from tornado.httpclient import AsyncHTTPClient
 
 log = logging.getLogger('notifier')
 
@@ -90,9 +91,28 @@ class NotifyHandler(websocket.WebSocketHandler):
         log.debug('%s left', self.request.remote_ip)
 
 
-def make_app(secret):
+class APIHandler(websocket.WebSocketHandler):
+
+    def initialize(self, api_url):
+        self.api_url = api_url
+
+    def check_origin(self, origin):
+        return True
+
+    @gen.coroutine
+    def on_message(self, message):
+        http_client = AsyncHTTPClient()
+        log.debug('forwarding %s', message[:50])
+        response = yield http_client.fetch(self.api_url,
+                                           method="POST",
+                                           body=message)
+        self.write_message(response.body)
+
+
+def make_app(secret, api_url):
     app = web.Application([
         (r'^/watch/(?P<path>.*?)$', WatchHandler),
-        (r'^/notify/$', NotifyHandler, {'secret': secret})
+        (r'^/notify/$', NotifyHandler, {'secret': secret}),
+        (r'^/api/$', APIHandler, {'api_url': api_url})
     ])
     return app
