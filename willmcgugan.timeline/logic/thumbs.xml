@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:forms="http://moyaproject.com/forms"
+    xmlns:tl="http://willmcgugan.com/timeline"
+    xmlns:fs="http://moyaproject.com/fs"
+    xmlns:img="http://moyaproject.com/image"
+    xmlns:tn="http://moyaproject.com/thumbnail">
+
+
+    <tn:thumbnails libname="thumbnails" name="timeline">
+
+        <tn:processor name="large" quality="70">
+            <img:resize-to-fit width="750"/>
+        </tn:processor>
+    
+    </tn:thumbnails>
+
+</moya>

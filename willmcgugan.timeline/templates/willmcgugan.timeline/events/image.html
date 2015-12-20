@@ -1,0 +1,12 @@
+<div class="image">
+		<img class="content-image" src="${event.image.path|'thumbnail'(processor='large')}" />
+	</div>
+<div class="content">
+	<div class="title">${event.title} ${localize:event.time}</div>
+	<div class="text">
+	{% markup event.text as event.markup %}
+	</div>
+	<div class="footer">
+		event footer
+	</div>
+</div>
