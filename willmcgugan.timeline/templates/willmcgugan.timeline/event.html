@@ -1,8 +1,1 @@
-{% cache for 24h key [event.uuid, event.update] if not .debug %}
-<div id="event-${event.uuid}" class="card event-${event.type}" data-type="${event.type}" data-update="${event.update}">
-
 {% include [sub:"events/${event.type}.html", 'events/text.html'] %}
-
-{# <a href="{% url 'event' with event_id=event.uuid %}">Event</a> #}
-</div>
-{% endcache %}

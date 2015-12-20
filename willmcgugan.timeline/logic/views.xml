@@ -72,7 +72,7 @@
         </forms:validate>
     </view>
 
-    <view libname="view.timeline" template="stream.html">
+    <view libname="view.timeline" template="timeline.html">
         <if test=".url.username">
             <db:get model="moya.auth#User" let:username=".url.username" dst="user"/>
         </if>

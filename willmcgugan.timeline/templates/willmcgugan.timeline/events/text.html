@@ -1,3 +1,6 @@
+{% extends "../card.html" %}
+
+{% block "content" %}
 <div class="content">
 	<div class="title">${event.type} ${event.title} ${localize:event.time}</div>
 	<div class="text">
@@ -7,3 +10,4 @@
 		event footer
 	</div>
 </div>
+{% endblock %}

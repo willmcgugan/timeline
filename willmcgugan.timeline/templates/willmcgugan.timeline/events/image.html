@@ -1,6 +1,9 @@
+{% extends "../card.html" %}
+
+{% block "content" %}
 <div class="image">
-		<img class="content-image" src="${event.image.path|'thumbnail'(processor='large')}" />
-	</div>
+	<img class="content-image" src="${event.image.path|'thumbnail'(processor='large')}" />
+</div>
 <div class="content">
 	<div class="title">${event.title} ${localize:event.time}</div>
 	<div class="text">
@@ -10,3 +13,4 @@
 		event footer
 	</div>
 </div>
+{% endblock %}
