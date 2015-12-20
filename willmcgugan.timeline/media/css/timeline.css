@@ -24,7 +24,11 @@ body.timeline-view
 {
     border-top:1px solid #E5E9ED;
     margin-top:8px;
+}
 
+.card img.content-image
+{
+    width:100%;
 }
 
 .new-event

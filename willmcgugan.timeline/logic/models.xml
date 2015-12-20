@@ -20,7 +20,7 @@
         <integer name="event_priority" default="-10" null="yes" blank="yes"/>
     </model>
 
-    <model libname="Stream" xmlns="http://moyaproject.com/db">
+    <model libname="Stream" xmlns="http://moyaproject.com/db" repr="stream ${name} #${id}">
         <doc>A stream is a time-based sequence of events</doc>
         <foreign-key name="user" model="moya.auth#User" backref="streams" null="yes" blank="yes" picker="moya.auth#admintable.users" owned="yes"/>
         <string name="title" length="100" blank="yes" null="yes"/>
@@ -51,8 +51,8 @@
     	<text name="info_json" null="yes" blank="yes"/>
         <integer name="update" default="0"/>
         <integer name="numcomments" default="0"/>
-
         <property name="info" expression="info_json ? {} : json:info_json" />
+
     </model>
 
     <model libname="Image" xmlns="http://moyaproject.com/db">

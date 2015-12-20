@@ -22,6 +22,7 @@
         <import py="moya.libs.jsonrpc" />
         <import py="moya.libs.wysihtml5" />
         <import py="moya.libs.recaptcha" />
+        <import py="moya.libs.thumbnail" />
         <import location="../willmcgugan.timeline"/>
 
         <!-- The 'site' library, for non reusable content -->
@@ -48,6 +49,8 @@
         <install name="jsonrpc" lib="moya.jsonrpc" />
         <install name="wysihtml5" lib="moya.wysihtml5" />
         <install name="recaptcha" lib="moya.google.recaptcha" />
+        <install name="thumbnail" lib="moya.thumbnail"/>
+        <install name="uploads" lib="moya.static" mount="/uploads/"/>
         <install name="timeline" lib="willmcgugan.timeline" mount="/"/>
 
     </server>
