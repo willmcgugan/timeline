@@ -66,7 +66,7 @@
         <get-url name="stream" let:stream_id="stream.uuid" dst="path"/>
         <tl:notify path="path" action="update-stream"/>
         <db:query columns="#Timeline" filter="#Subscription.stream==stream" dst="timelines"/>
-        <for src="timelines" dst="timeline">
+        <for src="timelines" dst="timeline" filter="timeline.user">
             <get-url name="timeline" let:username="timeline.user.username" dst="path"/>
             <tl:notify path="path" action="update-stream"/>
         </for>

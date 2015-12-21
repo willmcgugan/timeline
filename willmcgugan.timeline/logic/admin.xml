@@ -6,7 +6,7 @@
         xmlns:html="http://moyaproject.com/html"
         xmlns:w="http://moyaproject.com/widgets">
 
-    <module xmlns="http://moyaproject.com/admin" content="#content.admin"
+    <module xmlns="http://moyaproject.com/admin" 
         slug="willmcgugan-timeline" title="Timeline" description="IOT Timelines">
         <link to="#admintable.timelines" title="Timelines"/>
         <link to="#admintable.streams" title="Streams"/>

@@ -12,7 +12,9 @@ body.timeline-view
     overflow:hidden;
 
     transform: perspective(600px) rotateX(0deg);
-    transition: transform 0.5s;
+    /* transform: scale(1, 1); */
+    opacity: 1;
+    transition: transform 1s, opacity 1s;
 }
 
 .card .content
@@ -34,7 +36,9 @@ body.timeline-view
 .new-event
 {
 	transform: perspective(600px) rotateX(90deg);
-	transition: transform 0.5s;
+    /* transform: scale(.5, .5); */
+    opacity: 0;
+	transition: transform 1s, opacity 1s;
 }
 
 /*

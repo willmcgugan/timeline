@@ -44,30 +44,40 @@
         <forms:validate src="form">
             <let data="form.data"/>
             <tl:get-stream id="data.stream" dst="stream"/>
-            <db:create model="#Event" dst="event"
-                let:stream="stream"
-                let:time="data.time ? epoch:data.time : .now"
-                let:type="data.type or 'text'"
-                let:priority="int:data.priority"
-                let:title="data.title"
-                let:text="data.text"
-                let:markup="data.markup"/>
-            <db:commit/>
 
-            <if test="data.image">
-                <let ext="ext:data.image.filename"/>
-                <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
-                <image:get-size file="data.image" dst="size"/>
-                <db:create model="#Image" dst="img"
-                    let:event="event"
-                    let:path="path"
-                    let:filesize="len:data.image"
-                    let:width="size.width"
-                    let:height="size.height"/>
-                <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
-                <tn:generate thumbnails="#thumbnails" path="path" />
-            </if>
+            <try>
+                <db:create model="#Event" dst="event"
+                    let:stream="stream"
+                    let:time="data.time ? epoch:data.time : .now"
+                    let:type="data.type or 'text'"
+                    let:priority="int:data.priority"
+                    let:title="data.title"
+                    let:text="data.text"
+                    let:markup="data.markup"/>
 
+                <if test="data.image">
+                    <let ext="ext:data.image.filename"/>
+                    <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
+                    <image:get-size file="data.image" dst="size"/>
+                    <db:create model="#Image" dst="img"
+                        let:event="event"
+                        let:path="path"
+                        let:filesize="len:data.image"
+                        let:width="size.width"
+                        let:height="size.height"/>
+                    <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
+                    <tn:generate thumbnails="#thumbnails" path="path" />
+                </if>
+                <db:commit/>
+            </try>
+            <catch exception="*" dst="error">
+                <set-header header="inthing-result" value="fail"/>
+                <set-header header="inthing-error" value="${error.msg}"/>
+                <done/> 
+            </catch>
+
+            <set-header header="inthing-event" value="${event.uuid}" />
+            <set-header header="inthing-result" value="ok" />
             <tl:notify-stream stream="stream"/>
         </forms:validate>
     </view>

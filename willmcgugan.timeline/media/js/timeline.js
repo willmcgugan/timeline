@@ -1,4 +1,5 @@
-function Watcher(url, on_instruction)
+
+function Watcher(url, on_instructions)
 {
 	var self = this;
 	var ws = null;
@@ -46,53 +47,92 @@ function Watcher(url, on_instruction)
 	return self;
 }
 
-function on_instructions(instructions)
+function Stream(events, time)
 {
-	$(instructions).each(function(i, instruction){
-		var action = instruction.action;
-		if(action=='update-stream')
-		{
-			update_stream();
-		}
-	});
-}
+	var self = this;
+	self.event_source = events;
+	self.time = time;
 
-function update_events(time, events)
-{
-	stream_time = time;
-	var $timeline_container = $('.timeline-container');
-	$(events.reverse()).each(function(i, event_update){
-		var $event = $(event_update.html);
-		var $existing_event = $('#event-' + event_update.id);
-		if (!$existing_event.length)
-		{
-			$event.prependTo($timeline_container).addClass('new-event');
-			setTimeout(function(){$event.removeClass('new-event')}, 0);
-		}
-	});
-}
+	self.event_stack = [];
+	
 
-function update_stream()
-{
-	rpc.call(
-		'events.get_updates',
-		{'time': stream_time, 'events': events},
-		function(result){
-			update_events(result.time, result.events);
+	self.update_events = function(time, events)
+	{
+		self.time = time;
+		$(events).each(function(i, event_update){
+			self.add_event(event_update);
 		});
+		self.check_updates();
+	}
+
+	self.add_event = function(event_update)
+	{
+		self.event_stack.push(event_update);
+	}
+
+	self.check_updates = function()
+	{
+		if(!self.event_stack.length)
+		{
+			return;
+		}
+		$(self.event_stack).each(function(i, event_update){
+
+			var $event = $(event_update.html);
+			var $existing_event = $('#event-' + event_update.id);
+			if (!$existing_event.length)
+			{
+				var $timeline_container = $('.timeline-container');
+				$event.prependTo($timeline_container);
+				var $existing_event = $('#event-' + event_update.id);
+				$existing_event.addClass('new-event');
+			}
+		});
+		setTimeout(function(){
+			$('.event').removeClass('new-event');
+		}, 50);
+		
+	}
+
+ 	self.update = function()
+	{
+		rpc.call(
+			'events.get_updates',
+			{'time': self.time, 'events': self.event_source},
+			function(result){
+
+				self.update_events(result.time, result.events);
+			});
+	}
+
+
+	var on_instructions = function(instructions)
+	{
+		$(instructions).each(function(i, instruction){
+			var action = instruction.action;
+			if(action=='update-stream')
+			{
+				stream.update();
+			}
+		});
+	}
+
+	var $body = $('body');
+	var data = $body.data();
+
+	self.watcher = new Watcher(data.watcherurl, on_instructions);
+	self.watcher.connect()
+
+
+	return this;
 }
 
 $(function(){
 	var $body = $('body');
 	var data = $body.data();
-	events = data.events;
-	stream = data.stream;
-	stream_time = data.time;
-
-	watcher = new Watcher(data.watcherurl, on_instructions);
-	watcher.connect()
 
 	rpc = new JSONRPC(data.rpc_url);
+	stream = new Stream(data.events, data.time)
 	
 	var $subscribe_button = $('.subscribe-button');
 

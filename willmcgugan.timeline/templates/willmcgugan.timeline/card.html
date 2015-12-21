@@ -1,0 +1,8 @@
+{% cache for 24h key [event.uuid, event.update] if not .debug %}
+<div id="event-${event.uuid}" class="card event event-${event.type}" data-type="${event.type}" data-update="${event.update}">
+
+{% emptyblock "content" %}
+
+{# <a href="{% url 'event' with event_id=event.uuid %}">Event</a> #}
+</div>
+{% endcache %}
