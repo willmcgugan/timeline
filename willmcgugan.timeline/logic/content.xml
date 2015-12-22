@@ -7,8 +7,14 @@
       xmlns:w="http://moyaproject.com/widgets">
 
     <!-- Content is a high level description of a page -->
-    <content libname="content.base" template="base.html">
+    <content libname="content.base" template="base.html" final="yes">
+        <include-js path="js/query.js" from="moya.twitter.bootstrap"/>
+        <include-js path="js/bootstrap.min.js" from="moya.twitter.bootstrap"/>
+        <include-js path="js/jsonrpc/js" from="moya.jsonrpc"/>
+        <include-js path="js/timeline.js"/>
 
+        <include-css path="css/bootstrap.min.css" from="moya.twitter.bootstrap"/>
+        <include-css path="css/timeline.css"/>
     </content>
 
     <content libname="content.stream.new_event">
@@ -27,5 +33,31 @@ It's designed to be used by automated systems. You should probably use the offic
     	</section>
     </content>
 
+    <content libname="content.stream.base" extends="#content.base" template="stream_base.html">
+    </content>
+
+    <content libname="content.stream" extends="#content.stream.base">
+        <section name="main">
+            <node template="fragments/events.html" let:events="events"/>
+        </section>
+        <section name="side">
+            <node template="stream_info.html" let:stream="stream"/>
+        </section>
+    </content>
+
+    <content libname="content.timeline" extends="#content.stream.base">
+        <section name="main">
+            <node template="fragments/events.html" let:events="events"/>
+        </section>
+        <section name="side">
+            
+        </section>
+    </content>
+
+    <content libname="content.event" extends="#content.base">
+        <section name="body">
+            <node template="event.html" let:event="event"/>
+        </section>
+    </content>
 
 </moya>

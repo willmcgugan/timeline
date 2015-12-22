@@ -16,16 +16,19 @@
         <url route="/s/{stream_id}/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
-        <url route="/" methods="GET" view="#view.timeline" name="user_timeline"/>
+        <url route="/" methods="GET" view="#view.front" name="front"/>
         <url route="/{username}/" methods="GET" view="#view.timeline" name="timeline"/>
     </mountpoint>
 
-    <view libname="view.stream" template="stream.html">
+    <view libname="view.front" template="front.html">
+
+    </view>
+
+    <view libname="view.stream" content="#content.stream">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
         <tl:get-timeline dst="timeline" />
         <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
         <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-added_time" dst="events"/>
-
 
         <db:get model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
@@ -82,13 +85,10 @@
         </forms:validate>
     </view>
 
-    <view libname="view.timeline" template="timeline.html">
-        <if test=".url.username">
-            <db:get model="moya.auth#User" let:username=".url.username" dst="user"/>
-        </if>
-        <else>
-            <let user=".user"/>
-        </else>
+    <view libname="view.timeline" content="#content.timeline">
+       
+        <db:get-required model="moya.auth#User" let:username=".url.username" dst="user"/>
+       
         <tl:get-timeline let:user="user" dst="timeline"/>
         <get-url name="timeline" let:username="user.username" dst="watch_url"/>
         <db:query model="#Event" dst="events" maxresults="10"
@@ -102,7 +102,7 @@
         </dict>
     </view>
 
-    <view libname="view.event" template="view_event.html">
+    <view libname="view.event" content="#content.event">
         <db:get-required model="#Event" let:uuid=".url.event_id" dst="event"/>
         <let stream="event.stream"/>
     </view>
