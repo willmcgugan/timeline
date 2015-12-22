@@ -12,7 +12,7 @@ function Watcher(url, on_instructions)
 		self.ws = ws;
 		ws.onopen = function(event)
 		{
-			
+
 		}
 		ws.onclose = function(event)
 		{
@@ -54,7 +54,7 @@ function Stream(events, time)
 	self.time = time;
 
 	self.event_stack = [];
-	
+
 
 	self.update_events = function(time, events)
 	{
@@ -91,7 +91,7 @@ function Stream(events, time)
 		setTimeout(function(){
 			$('.event').removeClass('new-event');
 		}, 50);
-		
+
 	}
 
  	self.update = function()
@@ -133,7 +133,8 @@ $(function(){
 
 	rpc = new JSONRPC(data.rpc_url);
 	stream = new Stream(data.events, data.time)
-	
+    stream_id = data.stream;
+
 	var $subscribe_button = $('.subscribe-button');
 
 	$('.subscribe-button').click(function(event){
@@ -141,7 +142,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.subscribe',
-				{'stream': stream},
+				{'stream': stream_id},
 				function(result){
 					$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
 				});
@@ -150,7 +151,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.unsubscribe',
-				{'stream': stream},
+				{'stream': stream_id},
 				function(result){
 					$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
 				});
