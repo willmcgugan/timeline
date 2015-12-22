@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block 'main' %}
+
 {% for event in events %}
 {% include "event.html" %}
 {% endfor %}
 {% endblock %}
+
 
 {% block 'side' %}
 <div class="stream-info">

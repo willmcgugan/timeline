@@ -141,7 +141,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.subscribe',
-				{'stream': stream},
+				{'stream': data.stream},
 				function(result){
 					$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
 				});
@@ -150,7 +150,7 @@ $(function(){
 		{
 			rpc.call(
 				'stream.unsubscribe',
-				{'stream': stream},
+				{'stream': data.stream},
 				function(result){
 					$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
 				});

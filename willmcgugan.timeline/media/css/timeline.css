@@ -1,8 +1,9 @@
 body.timeline-view
 {
-    background-color:#E5E9ED;
+    /*background-color:#E5E9ED;*/
 }
 
+/*
 .card
 {
     border-radius:4px;
@@ -12,7 +13,6 @@ body.timeline-view
     overflow:hidden;
 
     transform: perspective(600px) rotateX(0deg);
-    /* transform: scale(1, 1); */
     opacity: 1;
     transition: transform 1s, opacity 1s;
 }
@@ -36,10 +36,10 @@ body.timeline-view
 .new-event
 {
 	transform: perspective(600px) rotateX(90deg);
-    /* transform: scale(.5, .5); */
     opacity: 0;
 	transition: transform 1s, opacity 1s;
 }
+*/
 
 /*
 .stream-info

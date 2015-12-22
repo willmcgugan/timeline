@@ -8,9 +8,9 @@
 
     <!-- Content is a high level description of a page -->
     <content libname="content.base" template="base.html" final="yes">
-        <include-js path="js/query.js" from="moya.twitter.bootstrap"/>
+        <include-js path="js/jquery.js" from="moya.twitter.bootstrap"/>
         <include-js path="js/bootstrap.min.js" from="moya.twitter.bootstrap"/>
-        <include-js path="js/jsonrpc/js" from="moya.jsonrpc"/>
+        <include-js path="js/jsonrpc.js" from="moya.jsonrpc"/>
         <include-js path="js/timeline.js"/>
 
         <include-css path="css/bootstrap.min.css" from="moya.twitter.bootstrap"/>

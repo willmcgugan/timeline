@@ -9,6 +9,11 @@
 
     {% block "includecss" %}{% render include.css %}{% end %}
     {% block "css" %}{% render sections.css %}{% end %}
+    <link rel="stylesheet" href="{% media 'css/gsdk.css' %}" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+
     {% block "jshead" %}{% render sections.jshead %}{% end %}
     {% block "head" %}{% render sections.head %}{% end %}
 
