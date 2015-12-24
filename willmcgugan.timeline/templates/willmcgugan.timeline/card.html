@@ -1,7 +1,7 @@
 {% cache for 24h key [event.uuid, event.update] if not .debug %}
 <div id="event-${event.uuid}" class="card event event-${event.type}" data-type="${event.type}" data-update="${event.update}">
 
-{% emptyblock "content" %}
+{%- emptyblock "content" -%}
 
 </div>
 {% endcache %}

@@ -3,16 +3,23 @@
 {% block "content" %}
 {%- if event.image %}
 <div class="image">
-	<img class="content-image" src="${event.image.path|'thumbnail'(processor='large')}" />
+	<img src="${event.image.path|'thumbnail'(processor='large')}" />
 </div>
 {%- endif %}
 <div class="content">
-	<div class="title">${event.title} ${localize:event.time}</div>
-	<div class="text">
-	{% markup event.text as event.markup %}
-	</div>
+	<a class="card-link" href="{% url 'event' with event_id=event.uuid %}">
+        <h4 class="title">${event.title}</h4>
+    </a>
+
+	{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
+        {% markup event.text as event.markup %}
+    {%- endextract %}
+	
 	<div class="footer">
-		event footer
+		<div class="author">Raspberry Pi</div>
+		<div class="stats pull-right">
+            <i class="fa fa-clock-o"></i> ${localize:(.now - event.time)} ago
+        </div>
 	</div>
 </div>
 {% endblock %}

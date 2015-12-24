@@ -47,6 +47,25 @@ body.timeline-view
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
 
+.card
+{
+    transform: perspective(600px) rotateX(0deg);
+    opacity: 1;
+    transition: transform 1s, opacity 1s;
+}
+
+.new-event
+{
+    transform: perspective(600px) rotateX(90deg);
+    opacity: 0;
+    transition: transform 1s, opacity 1s;
+}
+
+.timeline-container .card .image
+{
+    height:auto;
+}
+
 .subscribe-button .btn
 {
     display:none;
