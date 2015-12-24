@@ -4,7 +4,8 @@
       xmlns:db="http://moyaproject.com/db"
       xmlns:forms="http://moyaproject.com/forms"
       xmlns:html="http://moyaproject.com/html"
-      xmlns:w="http://moyaproject.com/widgets">
+      xmlns:w="http://moyaproject.com/widgets"
+      xmlns:comments="http://moyaproject.com/comments">
 
     <!-- Content is a high level description of a page -->
     <content libname="content.base" template="base.html" final="yes">
@@ -54,9 +55,13 @@ It's designed to be used by automated systems. You should probably use the offic
         </section>
     </content>
 
-    <content libname="content.event" extends="#content.base">
-        <section name="body">
+    <content libname="content.event" extends="#content.base" template="view_event.html">
+        <section name="event">
             <node template="event.html" let:event="event"/>
+        </section>
+        <section name="comments">
+            <comments:comments markup="markdown" namespace="app-${.app.name}" topic="event-${event.uuid}"
+                url="${.urls.timeline.event(event_id=event.uuid)}"/>
         </section>
     </content>
 

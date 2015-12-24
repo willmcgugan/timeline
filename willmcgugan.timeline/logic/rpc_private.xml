@@ -98,6 +98,19 @@
 
         </rpc:method>
 
+        
+        <rpc:method name="preview_comment" description="Preview comment">
+            <rpc:parameter name="comment" type="string" required="yes">Comment text</rpc:parameter>
+            <rpc:parameter name="markup" type="string" required="yes">Markup type</rpc:parameter>
+            <return-dict>
+                <render-template template="rpc/preview_comment.html" dst="html"
+                    let:comment="comment" let:markup="markup"/>
+            </return-dict>
+            <catch exception="markup.unsupported">
+                <rpc:error code="markup_not_supported">markup '${markup}' is not supported</rpc:error>
+            </catch>
+        </rpc:method>
+
     </rpc:interface>
 
 </moya>

@@ -159,3 +159,25 @@ $(function(){
 	});
 
 });
+
+$(function(){
+    $('.moya-comment-form-editor').each(function(i, el){
+        var $form = $(this);
+        var $edit = $form.find('textarea');
+        var $preview = $form.find('.preview-comment');
+
+        $edit.change(function(){
+            var markup = $form.data('markup');
+            var comment = $form.find('textarea').val();
+            rpc.call(
+                'preview_comment',
+                {comment:comment, markup:markup},
+                function(result){
+                    $preview.html(result.html);
+                    highlight_code($preview);
+                }
+            );
+        });
+
+    });
+});

@@ -47,6 +47,16 @@ body.timeline-view
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
 
+.timelines
+{
+    margin-top:60px;
+}
+
+.card.event
+{
+    margin-bottom:12px;
+}
+
 .card
 {
     transform: perspective(600px) rotateX(0deg);
@@ -79,6 +89,11 @@ body.timeline-view
 .subscribe-button.unsubscribed .btn-subscribe
 {
     display:inline;
+}
+
+.event-view .card
+{
+    margin-top:20px;
 }
 
 /*

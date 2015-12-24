@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 
-{% block "main" %}
+{% block "body" %}
 
-{% include "event.html" %}
+<div class="timelines event-view section section-gray">
+	<div class="container timeline-container">
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				{% render sections.event %}
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="section">
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
+			{% render sections.comments %}
+		</div>
+	</div>
+</div>
 
 {% endblock %}
