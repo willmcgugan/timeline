@@ -1,10 +1,25 @@
-<div class="stream-info">
-	<h4>
-		${stream.title}<br/>
-		<small>@${stream.name}</small>
-	</h4>
-	<div {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
-		<input class="btn btn-primary btn-subscribe" type="button" value="Subscribe"/>
-		<input class="btn btn-success btn-unsubscribe" type="button" value="Unsubscribe"/>
-	</div>
+
+
+<div class="card card-user">
+    <div class="image image-plain"></div>
+    <div class="content">
+        <div class="author">
+            <a href="#">
+            <img class="avatar" src="{% media 'img/rpi2.png' %}" alt="...">
+
+              <h4 class="title">${stream.title}<br>
+                 <small>Raspberry Pi</small>
+              </h4>
+            </a>
+        </div>
+        <p class="description text-center">
+        	Live Streaming stuff!
+        </p>
+    </div>
+    <div class="footer text-center">
+        <div {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
+			<input class="btn btn-primary btn-subscribe" type="button" value="Subscribe"/>
+			<input class="btn btn-success btn-unsubscribe" type="button" value="Unsubscribe"/>
+		</div>
+    </div>
 </div>

@@ -2,15 +2,19 @@
 
 {% block "content" %}
 <div class="content">
-    <p class="category text-danger">
-        <i class="fa fa-fire" rel="tooltip" title="" data-original-title="Hot!"></i>
+{#
+    <p class="category">
+        Text Post
     </p>
+#}
     <a class="card-link" href="{% url 'event' with event_id=event.uuid %}">
         <h4 class="title">${event.title}</h4>
     </a>
-	<div class="description">
-	{% markup event.text as event.markup %}
-	</div>
+
+	{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
+        {% markup event.text as event.markup %}
+    {%- endextract %}
+	
 	<div class="footer">
 		<div class="author">Raspberry Pi</div>
 		<div class="stats pull-right">

@@ -2,7 +2,8 @@
 <moya xmlns="http://moyaproject.com"
 	xmlns:db="http://moyaproject.com/db"
     xmlns:let="http://moyaproject.com/let"
-    xmlns:tl="http://willmcgugan.com/timeline">
+    xmlns:tl="http://willmcgugan.com/timeline"
+    xmlns:soup="http://moyaproject.com/soup">
     <!-- define your tags here -->
 
     <tag name="get-stream">
@@ -72,5 +73,14 @@
         </for>
     </tag>
 
+    <filter name="addpclass" value="markup">
+        <doc>Add a class to paragraphs</doc>
+        <signature>
+            <argument name="class"/>
+        </signature>
+        <return>
+            <soup:strain src="markup" select="p" let:class="class"/>
+        </return>
+    </filter>
 
 </moya>
