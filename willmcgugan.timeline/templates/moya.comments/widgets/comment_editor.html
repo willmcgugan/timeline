@@ -1,4 +1,5 @@
 {% with token=token:8 %}
+
 <div class="moya-comment-form-editor" data-markup="${commentobject.markup}">
 
     <ul class="nav nav-tabs" role="tablist">
@@ -9,7 +10,7 @@
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active fade in" id="comment_edit${token}">
 
-            <textarea class="form-control input-block-level" name="text" rows="8" maxlength="${.app.settings.max_comment_length.int}"></textarea>
+            <textarea {% if reply %}placeholder="Enter your reply here"{% else %}placeholder="What do you think of this?"{% endif %}class="form-control input-block-level" name="text" rows="8" maxlength="${.app.settings.max_comment_length.int}"></textarea>
 
             <small class="text-muted">
                 Use <a class="btn-link" role="button" data-toggle="collapse" data-target="#markuphelp${token}" target="_blank" expanded="false" title="formatting help">Markdown</a> for formatting
@@ -32,7 +33,7 @@ import this
 
         </div>
         <div role="tabpanel" class="tab-pane preview-comment fade" id="comment_preview${token}">
-            <em>your comment will be previewed here</em>
+            <em class="text-muted">your comment will be previewed here</em>
         </div>
     </div>
 

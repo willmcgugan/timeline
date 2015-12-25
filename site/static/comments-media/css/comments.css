@@ -5,12 +5,12 @@
 
 .moya-comments-container .moya-comments.root
 {
-    margin-top:20px;
+   
 }
 
 .moya-comments-container .moya-comment-form
 {
-    padding-top:8px;
+    
 }
 
 .moya-comments-container .moya-highlighted-comment
@@ -140,9 +140,9 @@
     font-weight:bold;
 }
 
-.moya-comments-container .moya-comments .moya-comment .moya-comment
+.moya-comments-container .moya-comments .moya-comments 
 {
-    margin-left:48px;
+    margin-left:83px;
 }
 
 .moya-comments-container form.moya-comment-reply-form label

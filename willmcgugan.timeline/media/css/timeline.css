@@ -101,7 +101,10 @@ body.timeline-view
     margin-bottom:16px;
 }
 
-
+.moya-comment-reply-form
+{
+    margin-top:20px;
+}
 
 pre
 {

@@ -1,5 +1,45 @@
 {%- def "comment" %}
-<a id="comment${comment.id}" style="margin-top:-50px;position:absolute;"></a>
+<a id="comment${comment.id}"></a>
+
+<div class="media moya-comment level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
+    <a class="pull-left" href="#">
+        <div class="avatar">
+            <img alt="gravatar" src="//www.gravatar.com/avatar/${md5:lower:(comment.user.email or comment.commenter_email)}?s=58&amp;d=identicon"/>
+        </div>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">${comment.user.display_name or comment.commenter_name}</h4>
+        <h6 class="pull-right text-muted">
+            <span class="time">
+                <moya insert="willmcgugan.timeline#insert.comment.time" app="timeline" data-timestamp="${comment.time.epoch}"></moya>
+            </span>
+
+        </h6>
+        {% include "widgets/comment_markup.html" %}
+        <div class="media-footer">
+            {%- if commentobject.allow_new %}
+            <div class="moya-comment-actions">
+                <a href="#" data-commentid="${comment.id}" class="reply">
+                    <i class="fa fa-reply"></i>
+                    {% trans %}Reply to ${comment.user.display_name or comment.commenter_name}{% end %}
+                </a>
+            </div>
+            {%- endif %}
+        </div>
+    </div>
+    {%- if commentobject.allow_new %}
+    {% include "widgets/comment_form_reply.html" %}
+    {%- endif %}
+    {%- if commentgraph[comment.id] %}
+    <div class="moya-comments">
+        {%- for comment in commentgraph[comment.id] %}
+        {%- call "comment" %}
+        {%- endfor %}
+    </div>
+    {%- endif %}
+</div>
+
+{#
 <div class="moya-comment clearfix level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
     <div class="moya-comment-body{% if comment.user %} user{% endif %} moya-comment-${comment.id}">
         <a href="#comment${comment.id}">
@@ -20,7 +60,7 @@
                 {%- if commentobject.allow_new %}
                 <div class="moya-comment-actions">
                     <a href="#" data-commentid="${comment.id}" class="reply">
-                        <i class="fa fa-comments"></i>
+                        <i class="fa fa-reply"></i>
                         {% trans %}Reply to ${comment.user.display_name or comment.commenter_name}{% end %}
                     </a>
                 </div>
@@ -39,6 +79,7 @@
     </div>
     {%- endif %}
 </div>
+#}
 {%- enddef %}
 
 <div id="techblog-comments">
@@ -100,7 +141,7 @@
 {%- if comments %}
 {% markup-block as 'moya' %}
 {% cache for 1d key [commentobject.id, commentobject.updates, bool:.user] %}
-<div class="moya-comments root">
+<div class="moya-comments root media-area media-area-small">
 {%- for comment in commentgraph.root %}
 {%- call "comment"  %}
 {%- endfor %}
