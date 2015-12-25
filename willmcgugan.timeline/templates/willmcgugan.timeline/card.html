@@ -1,5 +1,5 @@
 {% cache for 24h key [event.uuid, event.update] if not .debug %}
-<div id="event-${event.uuid}" class="card event event-${event.type}" data-type="${event.type}" data-update="${event.update}">
+<div id="event-${event.uuid}" class="card event event-${event.type}{% if new_event %} new-event{% endif %}" data-type="${event.type}" data-update="${event.update}">
 
 {%- emptyblock "content" -%}
 

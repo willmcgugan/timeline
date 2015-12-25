@@ -7,7 +7,7 @@
 
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{% render sections.event %}
+				{% render sections.event with new_event=yes %}
 			</div>
 		</div>
 
@@ -22,4 +22,12 @@
 	</div>
 </div>
 
+{% endblock %}
+
+{% block "js" append %}
+<script type="text/javascript">
+$(function(){
+	$('.event').removeClass('new-event');
+});
+</script>
 {% endblock %}

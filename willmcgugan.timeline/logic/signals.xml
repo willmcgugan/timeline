@@ -10,4 +10,10 @@
     </handle>
     -->
 
+    <handle signal="moya.comments.new-comment">
+    	<let event_uuid="(partition:[signal.data.commentobject.object, '-'])[-1]"/>
+    	<db:query model="#Event" let:uuid="event_uuid" dst="event"/>
+    	<db:update src="event" let:numcomments="signal.data.commentobject.count"/>
+    </handle>
+
 </moya>

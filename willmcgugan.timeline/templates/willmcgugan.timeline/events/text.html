@@ -15,11 +15,6 @@
         {% markup event.text as event.markup %}
     {%- endextract %}
 	
-	<div class="footer">
-		<div class="author">Raspberry Pi</div>
-		<div class="stats pull-right">
-            <i class="fa fa-clock-o"></i> ${localize:(.now - event.time)} ago
-        </div>
-	</div>
+	{% include "fragments/cardfooter.html" %}
 </div>
 {% endblock %}
