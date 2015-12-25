@@ -139,6 +139,10 @@ pre code.hljs *
     white-space:pre;
 }
 
+.moya-comments .media, .media-body
+{
+    overflow: visible
+}
 /*
 .stream-info
 {

@@ -1,7 +1,7 @@
 {%- def "comment" %}
 <a id="comment${comment.id}"></a>
 
-<div class="media moya-comment level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
+<div class="media moya-comment-${comment.id} moya-comment level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
     <a class="pull-left" href="#">
         <div class="avatar">
             <img alt="gravatar" src="//www.gravatar.com/avatar/${md5:lower:(comment.user.email or comment.commenter_email)}?s=58&amp;d=identicon"/>
