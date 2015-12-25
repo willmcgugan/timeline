@@ -181,3 +181,29 @@ $(function(){
 
     });
 });
+
+function highlight_code($el)
+{
+    $el.find('code').each(function(i, el){
+        var $code = $(this);
+        var language_spec = $code.attr('class');
+        if (language_spec)
+        {
+            var language = language_spec.split('-')[1];
+            if (language)
+            {
+                $code.attr('class', language);
+                hljs.highlightBlock($code[0]);
+            }
+        }
+        else
+        {
+            /*$code.addClass('hljs');*/
+        }
+    });
+}
+
+$(function(){
+    $('body').addClass('loaded');
+    highlight_code($('pre'));
+});

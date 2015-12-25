@@ -96,6 +96,46 @@ body.timeline-view
     margin-top:20px;
 }
 
+.moya-comment-form-editor ul.nav
+{
+    margin-bottom:16px;
+}
+
+
+
+pre
+{
+    background: #f8f8f8 !important;
+    overflow-x:auto;
+    border:none;
+    padding:2px;
+    margin-top:0px;
+    margin-bottom:16px;
+    font-size:13px;
+    box-sizing: border-box;
+    font-family:monospace;
+}
+
+
+
+pre code.hljs
+{
+    background: #f8f8f8 !important;
+    float:left;
+    min-width:100%;
+    display:inline-block;
+    white-space:pre;
+
+    font-family: Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, sans-serif;
+    font-family:monospace;
+
+}
+
+pre code.hljs *
+{
+    white-space:pre;
+}
+
 /*
 .stream-info
 {
