@@ -15,9 +15,12 @@
         <include-js path="js/timeline.js"/>
         <include-js path="highlight/highlight.pack.js"/>
 
+
+        <!--
         <include-css path="css/bootstrap.min.css" from="moya.twitter.bootstrap"/>
         <include-css path="css/timeline.css"/>
         <include-css path="highlight/styles/github.css"/>
+    -->
     </content>
 
     <content libname="content.stream.new_event">

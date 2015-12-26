@@ -7,7 +7,10 @@
 </div>
 {%- endif %}
 <div class="content">
-	<a class="card-link" href="{% url 'event' with event_id=event.uuid %}">
+
+	{% include "fragments/cardheader.html" %}
+
+	<a class="card-link title-link" href="{% url 'event' with event_id=event.uuid %}">
         <h4 class="title">${event.title}</h4>
     </a>
 

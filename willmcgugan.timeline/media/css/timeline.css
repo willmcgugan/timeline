@@ -47,6 +47,12 @@ body.timeline-view
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
 
+.body-content
+{
+    margin-top:90px;
+    min-height:60vh;
+}
+
 .timelines
 {
     margin-top:60px;
@@ -147,6 +153,11 @@ pre code.hljs *
 .moya-comments .media, .media-body
 {
     overflow: visible
+}
+
+.title-link:hover h4.title
+{
+    color: #2ca8ff !important;
 }
 /*
 .stream-info
