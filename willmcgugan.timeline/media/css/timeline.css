@@ -77,6 +77,12 @@ body.timeline-view
     transition: transform 1s, opacity 1s;
 }
 
+.section.event-view
+{
+    overflow:hidden;
+    background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
+}
+
 .timeline-container .card .image
 {
     height:auto;
@@ -159,9 +165,26 @@ pre code.hljs *
 {
     color: #2ca8ff !important;
 }
+
+.nav-open .nav.navbar-nav, .nav-open .nav.navbar-nav ul.dropdown-menu
+{
+    overflow:hidden;
+}
 /*
 .stream-info
 {
     position:fixed;
 }
 */
+
+.card .image-container
+{
+    border-top-left-radius:6px;
+    border-top-right-radius:6px;
+    overflow:hidden;
+}
+
+.card .image-container img
+{
+    width:100%;
+}

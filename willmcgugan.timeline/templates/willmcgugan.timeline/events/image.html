@@ -2,7 +2,7 @@
 
 {% block "content" %}
 {%- if event.image %}
-<div class="image">
+<div class="image-container">
 	<img src="${event.image.path|'thumbnail'(processor='large')}" />
 </div>
 {%- endif %}
@@ -17,7 +17,7 @@
 	{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
         {% markup event.text as event.markup %}
     {%- endextract %}
-	
+
 	{% include "fragments/cardfooter.html" %}
 </div>
 {% endblock %}

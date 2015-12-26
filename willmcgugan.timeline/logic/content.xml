@@ -9,8 +9,10 @@
 
     <!-- Content is a high level description of a page -->
     <content libname="content.base" template="base.html" final="yes">
+        <!--
         <include-js path="js/jquery.js" from="moya.twitter.bootstrap"/>
         <include-js path="js/bootstrap.min.js" from="moya.twitter.bootstrap"/>
+    -->
         <include-js path="js/jsonrpc.js" from="moya.jsonrpc"/>
         <include-js path="js/timeline.js"/>
         <include-js path="highlight/highlight.pack.js"/>
@@ -56,7 +58,7 @@ It's designed to be used by automated systems. You should probably use the offic
             <node template="fragments/events.html" let:events="events"/>
         </section>
         <section name="side">
-            
+
         </section>
     </content>
 
