@@ -49,8 +49,9 @@ body.timeline-view
 
 .body-content
 {
+    box-sizing: border-box;
     margin-top:90px;
-    min-height:60vh;
+    min-height:calc(100vh - 216px - 90px);
 }
 
 .timelines
