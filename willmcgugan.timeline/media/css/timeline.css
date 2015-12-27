@@ -171,12 +171,31 @@ pre code.hljs *
 {
     overflow:hidden;
 }
-/*
-.stream-info
-{
-    position:fixed;
+
+@media (min-width: 992px) {
+    .stream-info
+    {
+        position:fixed;
+        width:220px;
+    }  
+
 }
-*/
+
+@media (min-width:1200px) {
+
+    .stream-info
+    {
+        position:fixed;
+        width:270px;
+    }    
+}
+
+.stream-info .card-user .content
+{
+    min-height: auto;
+}
+
+
 
 .card .image-container
 {

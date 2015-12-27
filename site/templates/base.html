@@ -22,23 +22,6 @@
     <link href="{% media 'highlight/styles/github.css' from 'timeline' %}" rel="stylesheet" type="text/css">
 
 
-        <style>
-      .moya-admin-menu
-      {
-        position:fixed;
-        float:left;
-        left:8px;
-        
-       
-        z-index:10000;
-        
-      }
-      .moya-admin-menu:hover
-      {
-        opacity:1;
-      }
-    </style>
-
     {% block "jshead" %}{% render sections.jshead %}{% end %}
     {% block "head" %}{% render sections.head %}{% end %}
 
@@ -57,9 +40,10 @@
         <span class="icon-bar"></span>
       </button>
 
+
       {%- if .permissions.admin %}
-      <div class="btn-group moya-admin-menu">
-        <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" href="#" title="Admin menu">
+      <div class="btn-group moya-admin-menu" style="position:relative;">
+        <button class="btn btn-sm btn-round btn-default dropdown-toggle" data-toggle="dropdown" href="#" title="Admin menu">
           <i class="glyphicon glyphicon-wrench"></i>
       </button>
         <ul class="dropdown-menu">
@@ -81,6 +65,8 @@
       {%- endif %}
 
       <a class="navbar-brand" href="/">inthing.io</a>
+
+
     </div>
 
 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,11 +77,17 @@
         </li>
          <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-navicon"></i> Menu
+                <i class="fa fa-navicon"></i> Menu
               <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
+                <li>
+
+                  <a href="{% url 'logout' from 'moya.auth' %}">
+                    <i class="fa fa-sign-out"></i> Sign Out
+                  </a>
+
+                </li>
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something</a></li>
                 <li><a href="#">Another action</a></li>
@@ -104,8 +96,9 @@
                 <li><a href="#">Separated link</a></li>
               </ul>
         </li>
-
+        {#
         <li><button class="btn btn-round btn-neutral"><i class="fa fa-edit"></i> Post</button></li>
+        #}
        </ul>
 
     </div><!-- /.navbar-collapse -->
