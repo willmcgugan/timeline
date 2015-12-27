@@ -13,10 +13,10 @@
 				<h5 class="title">Help and Support</h5>
 				<nav>
 					<ul>
-						<a href="#">About</a>
-						<a href="#">FAQ</a>
-						<a href="#">Feedback</a>
-						<a href="#">Contact</a>
+						<a href="{% url 'showpage' with pagename='about' from 'pages' %}">About</a>
+						<a href="{% url 'faqs' from 'faq' %}">FAQ</a>
+						<a href="{% url 'feedback' from 'feedback' %}">Feedback</a>
+						<a href="{% url 'showpage' with pagename='contact' from 'pages' %}">Contact</a>
 					</ul>
 				</nav>
 			</div>
