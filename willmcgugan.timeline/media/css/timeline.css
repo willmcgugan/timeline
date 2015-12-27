@@ -250,3 +250,8 @@ pre code.hljs *
     right:0px;
     z-index:10;
 }
+
+.moya-comments .media-body
+{
+    display:static;
+}
