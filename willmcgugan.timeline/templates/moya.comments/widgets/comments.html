@@ -2,30 +2,31 @@
 <a id="comment${comment.id}"></a>
 
 <div class="media moya-comment-${comment.id} moya-comment level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
-    <a class="pull-left" href="#">
+    <a class="comment-image" href="#">
         <div class="avatar">
             <img alt="gravatar" src="//www.gravatar.com/avatar/${md5:lower:(comment.user.email or comment.commenter_email)}?s=58&amp;d=identicon"/>
         </div>
     </a>
-    <div class="media-body">
+    <div class="comment-body" style="display:block">
         <h4 class="media-heading">${comment.user.display_name or comment.commenter_name}</h4>
         <h6 class="pull-right text-muted">
             <span class="time">
                 <moya insert="willmcgugan.timeline#insert.comment.time" app="timeline" data-timestamp="${comment.time.epoch}"></moya>
             </span>
-
         </h6>
+        
         {% include "widgets/comment_markup.html" %}
-        <div class="media-footer">
-            {%- if commentobject.allow_new %}
-            <div class="moya-comment-actions">
-                <a href="#" data-commentid="${comment.id}" class="reply">
-                    <i class="fa fa-reply"></i>
-                    {% trans %}Reply to ${comment.user.display_name or comment.commenter_name}{% end %}
-                </a>
-            </div>
-            {%- endif %}
+
+        {%- if commentobject.allow_new %}
+        <div class="moya-comment-actions">
+            <a href="#" data-commentid="${comment.id}" class="reply">
+                <i class="fa fa-reply"></i>
+                {% trans %}Reply to ${comment.user.display_name or comment.commenter_name}{% end %}
+            </a>
         </div>
+        {%- endif %}
+        
+        
     </div>
     {%- if commentobject.allow_new %}
     {% include "widgets/comment_form_reply.html" %}

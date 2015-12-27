@@ -251,7 +251,14 @@ pre code.hljs *
     z-index:10;
 }
 
-.moya-comments .media-body
+
+.comment-image
 {
-    display:static;
+    float:left;
+}
+
+.comment-body
+{
+    margin-left:78px;
+ 
 }
