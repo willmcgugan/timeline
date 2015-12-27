@@ -207,3 +207,7 @@ $(function(){
     $('body').addClass('loaded');
     highlight_code($('pre'));
 });
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});

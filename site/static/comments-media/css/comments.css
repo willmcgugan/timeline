@@ -165,3 +165,8 @@ label.moya-comment-replies
         margin-left:20px;
     }
 }
+
+a.next-event, a.previous-event
+{
+    color:#000;
+}

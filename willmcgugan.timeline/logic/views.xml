@@ -106,6 +106,17 @@
         <db:get-required model="#Event" let:uuid=".url.event_id" dst="event"/>
         <get-url name="event" let:event_id="event.uuid" dst="watch_url"/>
         <let stream="event.stream"/>
+
+        <db:query model="#Event" dst="next_events"
+            orderby="added_time"
+            let:stream="stream" filter="#Event.added_time gt event.added_time"/>
+        <db:query model="#Event" dst="previous_events"
+            orderby="-added_time"
+            let:stream="stream" filter="#Event.added_time lt event.added_time"/>
+        <let next_event="next_events.first"
+            previous_event="previous_events.first"/>
+
+
         <dict dst="config"
             let:events="''"
             let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"

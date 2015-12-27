@@ -33,16 +33,9 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button id="menu-toggle" type="button" class="navbar-toggle">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
 
       {%- if .permissions.admin %}
-      <div class="btn-group moya-admin-menu" style="position:relative;">
+      <div class="btn-group moya-admin-menu pull-left" style="margin-right:1em;">
         <button class="btn btn-sm btn-round btn-default dropdown-toggle" data-toggle="dropdown" href="#" title="Admin menu">
           <i class="glyphicon glyphicon-wrench"></i>
       </button>
@@ -64,6 +57,13 @@
       </div>
       {%- endif %}
 
+      <button id="menu-toggle" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
       <a class="navbar-brand" href="/">inthing.io</a>
 
 
@@ -75,27 +75,35 @@
         <li>
             <a href="#"><i class="fa fa-globe"></i> Discover</a>
         </li>
-         <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-navicon"></i> Menu
-              <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
+        {% if .user %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user"></i> ${.user.username}
+            <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">
+                  <i class="fa fa-toggle-on"></i> Settings
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="{% url 'logout' from 'moya.auth' %}">
+                  <i class="fa fa-sign-out"></i> Sign Out
+                </a>
 
-                  <a href="{% url 'logout' from 'moya.auth' %}">
-                    <i class="fa fa-sign-out"></i> Sign Out
-                  </a>
-
-                </li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
+              </li>
+            </ul>
         </li>
+        {% endif %}
+        {% if not .user %}
+        <li>
+          <a href="{% url 'login' from 'moya.auth' %}">
+            <i class="fa fa-user"></i> Sign In
+          </a>
+        </li>
+        {% endif %}
         {#
         <li><button class="btn btn-round btn-neutral"><i class="fa fa-edit"></i> Post</button></li>
         #}
