@@ -2,53 +2,56 @@
 
 {% block "bodycontainer" %}
 
-<div class="timelines event-view section section-gray">
-	<div class="container timeline-container">
+<div class="body-content">
 
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="pull-right">
-					{% if previous_event %}
-					<a title="Previous event" data-placement="bottom" data-toggle="tooltip" class="previous-event" href="{% url 'event' with event_id=previous_event.uuid %}">
-						<i class="fa fa-chevron-left"></i>
-					</a>
-					{% endif %}
-					{% if next_event %}
-					<a title="Next event" data-placement="bottom" data-toggle="tooltip" class="next-event" href="{% url 'event' with event_id=next_event.uuid %}">
-						<i class="fa fa-chevron-right"></i>
-					</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="clear-both">
-				{% render sections.event with new_event=yes %}
-				</div>
-			</div>
-		</div>
+    <div class="timelines event-view section section-gray">
+    	<div class="container timeline-container">
 
-	</div>
-</div>
+    		<div class="row">
+    			<div class="col-md-8 col-md-offset-2">
+    				<div class="pull-right">
+    					{% if previous_event %}
+    					<a title="Previous event" data-placement="bottom" data-toggle="tooltip" class="previous-event" href="{% url 'event' with event_id=previous_event.uuid %}">
+    						<i class="fa fa-chevron-left"></i>
+    					</a>
+    					{% endif %}
+    					{% if next_event %}
+    					<a title="Next event" data-placement="bottom" data-toggle="tooltip" class="next-event" href="{% url 'event' with event_id=next_event.uuid %}">
+    						<i class="fa fa-chevron-right"></i>
+    					</a>
+    					{% endif %}
+    				</div>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-md-8 col-md-offset-2">
+    				<div class="clear-both">
+    				{% render sections.event with new_event=yes %}
+    				</div>
+    			</div>
+    		</div>
 
-<div class="section section-gray">
-	<div class="container">
-		<div class="col-md-10 col-md-offset-1 text-muted">
-			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
-			published
-			${localize:event.time},
-			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
-		</div>
-	</div>
-</div>
+    	</div>
+    </div>
 
-<div class="section">
-	<div class="container">
-		<div class="col-md-10 col-md-offset-1">
-			{% render sections.comments %}
-		</div>
-	</div>
+    <div class="section section-gray">
+    	<div class="container">
+    		<div class="col-md-10 col-md-offset-1 text-muted">
+    			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
+    			published
+    			${localize:event.time},
+    			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="section">
+    	<div class="container">
+    		<div class="col-md-10 col-md-offset-1">
+    			{% render sections.comments %}
+    		</div>
+    	</div>
+    </div>
 </div>
 
 {% endblock %}

@@ -50,13 +50,13 @@ body.timeline-view
 .body-content
 {
     box-sizing: border-box;
-    margin-top:90px;
-    min-height:calc(100vh - 216px - 90px);
+    margin-top:70px;
+    min-height:calc(100vh - 216px - 70px);
 }
 
 .timelines
 {
-    margin-top:60px;
+    /* margin-top:60px;*/
 }
 
 .card.event
@@ -177,7 +177,7 @@ pre code.hljs *
     {
         position:fixed;
         width:220px;
-    }  
+    }
 
 }
 
@@ -187,7 +187,7 @@ pre code.hljs *
     {
         position:fixed;
         width:270px;
-    }    
+    }
 }
 
 .stream-info .card-user .content
@@ -212,7 +212,7 @@ pre code.hljs *
 .previous-event
 {
     height:100px;
-    
+
     overflow:hidden;
     position:relative;
 }
@@ -227,7 +227,7 @@ pre code.hljs *
 .next-event
 {
     height:100px;
-    
+
     overflow:hidden;
 }
 
@@ -260,5 +260,5 @@ pre code.hljs *
 .comment-body
 {
     margin-left:78px;
- 
+
 }
