@@ -47,6 +47,12 @@ body.timeline-view
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
 
+
+.margin-bottom-20
+{
+    margin-bottom:20px;
+}
+
 .body-content
 {
     box-sizing: border-box;
@@ -106,7 +112,7 @@ body.timeline-view
 
 .event-view .card
 {
-    margin-top:20px;
+    margin:0px;
 }
 
 .moya-comment-form-editor ul.nav

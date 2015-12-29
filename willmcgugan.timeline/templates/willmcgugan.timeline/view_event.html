@@ -7,7 +7,7 @@
     <div class="timelines event-view section section-gray">
     	<div class="container timeline-container">
 
-    		<div class="row">
+    		<div class="row hidden-lg margin-bottom-20">
     			<div class="col-md-8 col-md-offset-2">
     				<div class="pull-right">
     					{% if previous_event %}
@@ -23,12 +23,25 @@
     				</div>
     			</div>
     		</div>
+
     		<div class="row">
     			<div class="col-md-8 col-md-offset-2">
-    				<div class="clear-both">
     				{% render sections.event with new_event=yes %}
-    				</div>
     			</div>
+                <div class="col-md-2">
+                    <div class="visible-lg-block">
+                        {% if previous_event %}
+                        <a title="Previous event" data-placement="bottom" data-toggle="tooltip" class="previous-event" href="{% url 'event' with event_id=previous_event.uuid %}">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        {% endif %}
+                        {% if next_event %}
+                        <a title="Next event" data-placement="bottom" data-toggle="tooltip" class="next-event" href="{% url 'event' with event_id=next_event.uuid %}">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
     		</div>
 
     	</div>
