@@ -53,6 +53,11 @@ body.timeline-view
     margin-bottom:20px;
 }
 
+.margin-top-20
+{
+    margin-top:20px;
+}
+
 .body-content
 {
     box-sizing: border-box;
