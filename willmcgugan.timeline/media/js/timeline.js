@@ -78,15 +78,16 @@ function Stream(events, time)
 		}
 		$(self.event_stack).each(function(i, event_update){
 
-			var $event = $(event_update.html);
+			//var $event = $(event_update.html);
 			var $existing_event = $('#event-' + event_update.id);
 			if (!$existing_event.length)
 			{
 				var $timeline_container = $('.timeline-container');
-				$event.prependTo($timeline_container);
+				$(event_update.html).prependTo($timeline_container);
 				var $existing_event = $('#event-' + event_update.id);
 				$existing_event.addClass('new-event');
 			}
+            self.event_stack = [];
 		});
 		setTimeout(function(){
 			$('.event').removeClass('new-event');
