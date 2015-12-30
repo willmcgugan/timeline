@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block "title" %}${event.title}{% endblock %}
+
 {% block "bodycontainer" %}
 
 <div class="body-content">
@@ -47,14 +49,30 @@
     	</div>
     </div>
 
-    <div class="section section-gray">
+    <div class="section section-gray" id="event-info">
     	<div class="container">
     		<div class="col-md-10 col-md-offset-1 text-muted">
-    			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
-    			published
-    			${localize:event.time},
-    			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
+
+        			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
+                    {#
+        			published
+        			${localize:event.time}, #}
+        			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
+
+                <span class="pull-right">
+                    <button class="btn btn-simple btn-social btn-twitter" title="Tweet this" data-toggle="tooltip">
+                        <i class="fa fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-simple btn-social btn-facebook" title="Share on Facebook" data-toggle="tooltip">
+                        <i class="fa fa-facebook"></i>
+                    </button>
+                    <button class="btn btn-simple btn-social btn-reddit" title="Share on Reddit" data-toggle="tooltip">
+                        <i class="fa fa-reddit"></i>
+                    </button>
+                </span>
+
     		</div>
+
     	</div>
     </div>
 

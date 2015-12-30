@@ -211,6 +211,12 @@ pre code.hljs *
     margin-top:60px;
 }
 
+#event-info .btn-social
+{
+    margin:0px;
+    padding:0px;
+}
+
 .card .image-container
 {
     border-top-left-radius:6px;
