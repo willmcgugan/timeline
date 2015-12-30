@@ -206,7 +206,10 @@ pre code.hljs *
     min-height: auto;
 }
 
-
+.stream-info .card-user .image-plain
+{
+    margin-top:60px;
+}
 
 .card .image-container
 {

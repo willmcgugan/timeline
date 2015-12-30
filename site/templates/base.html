@@ -99,7 +99,7 @@
         {% endif %}
         {% if not .user %}
         <li>
-          <a href="{% url 'login' from 'moya.auth' %}">
+          <a href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
             <i class="fa fa-user"></i> Sign In
           </a>
         </li>
