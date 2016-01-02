@@ -41,23 +41,17 @@
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
 
             <let time="epoch:time"/>
-            <echo obj="time"/>
-            <let parse="partition:[events, '-']"
-                source="parse.0"
-                pk="parse.2" />
+            <let parse="partition:[events, '-']" source="parse.0" pk="parse.2" />
 
             <switch on="source">
                 <case>stream</case>
                 <db:get model="#Stream" let:id="pk" dst="stream"/>
                 <rpc:error code="unknown-stream" if="not stream"/>
-                <db:query model="#Event" dst="events"
-                    let:stream="stream" />
+                <db:query model="#Event" dst="events" let:stream="stream" />
 
                 <case>timeline</case>
                 <db:get model="#Timeline" let:id="pk" dst="timeline"/>
-                <db:query model="#Event" dst="events"
-                    filter="#Event.stream.id in timeline.streams"/>
-
+                <db:query model="#Event" dst="events" filter="#Event.stream.id in timeline.streams"/>
             </switch>
 
             <if test="new">
@@ -76,7 +70,6 @@
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
             <return-dict let:events="events_html" let:time="update_time"/>
-
         </rpc:method>
 
         <rpc:method name="subscribe" group="stream" description="unsubscribe from a stream">
