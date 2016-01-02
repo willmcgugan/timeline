@@ -212,3 +212,15 @@ $(function(){
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
+$(function(){
+
+    $('.window-link').click(function(e){
+        e.preventDefault()
+        $link = $(this);
+        var href = $link.attr('href');
+        var title = $link.attr('title');
+        window.open(href, title, "width=640, height=480");
+    });
+
+});

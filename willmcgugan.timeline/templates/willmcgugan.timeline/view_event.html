@@ -53,22 +53,22 @@
     	<div class="container">
     		<div class="col-md-10 col-md-offset-1 text-muted">
 
-        			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
-                    {#
-        			published
-        			${localize:event.time}, #}
-        			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
+    			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
+                {#
+    			published
+    			${localize:event.time}, #}
+    			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
 
                 <span class="pull-right">
-                    <button class="btn btn-simple btn-social btn-twitter" title="Tweet this" data-toggle="tooltip">
+                    <a href="https://twitter.com/intent/tweet?${urlencode:text=event.title + ' ' + .request.url, via='willmcgugan'}" class="btn btn-simple btn-social btn-twitter window-link" title="Tweet this" data-toggle="tooltip">
                         <i class="fa fa-twitter"></i>
-                    </button>
-                    <button class="btn btn-simple btn-social btn-facebook" title="Share on Facebook" data-toggle="tooltip">
+                    </a>
+                    <a href="//facebook.com/share.php?${urlencode:(u=.request.url)}" class="btn btn-simple btn-social btn-facebook window-link" title="Share on Facebook" data-toggle="tooltip">
                         <i class="fa fa-facebook"></i>
-                    </button>
-                    <button class="btn btn-simple btn-social btn-reddit" title="Share on Reddit" data-toggle="tooltip">
+                    </a>
+                    <a target="_blank" href="//reddit.com/submit?${urlencode:(url=.request.url,title=event.title)}" class="btn btn-simple btn-social btn-reddit" title="Share on Reddit" data-toggle="tooltip">
                         <i class="fa fa-reddit"></i>
-                    </button>
+                    </a>
                 </span>
 
     		</div>
@@ -93,4 +93,6 @@ $(function(){
 	$('.event').removeClass('new-event');
 });
 </script>
+
+
 {% endblock %}

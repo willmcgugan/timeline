@@ -1,7 +1,7 @@
 	<div class="footer">
 		<div class="author">Raspberry Pi</div>
 		<div class="stats pull-right">
-			<a href="{% url 'event' with event_id=event.uuid %}">
+			<a href="{% url 'event' with event_id=event.uuid %}#comments">
 				{% if event.numcomments %}
 				<i class="fa fa-comment"></i> ${event.numcomments}
 				{% endif %}
