@@ -95,13 +95,42 @@ function Stream(events, time)
 
 	}
 
+	self.check_append_events = function()
+	{
+		var $more_events = $('.more-events');
+
+		if($more_events.hasClass('loading'))
+		{
+			return;
+		}
+
+		var $events = $('.timeline-container .event');
+		var $last_event = $($events[$events.length - 1]);
+		var event_data = $last_event.data();
+		last_event_time = event_data.time;
+
+		$more_events.addClass('loading');
+
+		rpc.call(
+			'events.get_updates',
+			{'time': last_event_time, 'events': self.event_source, 'new': false},
+			function(result){
+				$more_events.removeClass('loading');
+				$(result.events).each(function(i, event){
+					if(!$('#event-' + result.uuid).length)
+					{
+						$more_events.before(event.html);
+					}
+				});
+			});
+	}
+
  	self.update = function()
 	{
 		rpc.call(
 			'events.get_updates',
 			{'time': self.time, 'events': self.event_source},
 			function(result){
-
 				self.update_events(result.time, result.events);
 			});
 	}
@@ -133,7 +162,7 @@ $(function(){
 	var data = $body.data();
 
 	rpc = new JSONRPC(data.rpc_url);
-	stream = new Stream(data.events, data.time)
+	stream = new Stream(data.events, data.time);
     stream_id = data.stream;
 
 	var $subscribe_button = $('.subscribe-button');
@@ -210,17 +239,41 @@ $(function(){
 });
 
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(function(){
 
     $('.window-link').click(function(e){
         e.preventDefault()
-        $link = $(this);
+        var $link = $(this);
         var href = $link.attr('href');
         var title = $link.attr('title');
         window.open(href, title, "width=640, height=480");
     });
 
+});
+
+
+$(function() {
+	var $more_events = $('.more-events');
+	var $window = $(window);
+	if (!$more_events.length)
+	{
+		return;
+	}
+	$(window).scroll(function(e){
+		var $more_events = $('.more-events');
+		var window_height = $(window).height();
+		var more_y = $more_events.offset().top;
+		var scroll_y = $(window).scrollTop();
+		
+		console.log(more_y);
+
+		if (more_y - (scroll_y + window_height) <= 0)
+		{
+			stream.check_append_events();
+		}
+
+	});
 });

@@ -38,8 +38,10 @@
         <rpc:method name="get_updates" group="events" description="Get updates to a stream">
             <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
             <rpc:parameter name="time" type="number" required="yes">update time</rpc:parameter>
+            <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
 
             <let time="epoch:time"/>
+            <echo obj="time"/>
             <let parse="partition:[events, '-']"
                 source="parse.0"
                 pk="parse.2" />
@@ -48,24 +50,31 @@
                 <case>stream</case>
                 <db:get model="#Stream" let:id="pk" dst="stream"/>
                 <rpc:error code="unknown-stream" if="not stream"/>
-                <db:query model="#Event" dst="events" maxresults="10"
-                    filter="#Event.added_time gte time" let:stream="stream" orderby="-time" />
+                <db:query model="#Event" dst="events"
+                    let:stream="stream" />
 
                 <case>timeline</case>
                 <db:get model="#Timeline" let:id="pk" dst="timeline"/>
-                <db:query model="#Event" dst="events" maxresults="10"
-                    filter="#Event.stream.id in timeline.streams" orderby="-time"/>
+                <db:query model="#Event" dst="events"
+                    filter="#Event.stream.id in timeline.streams"/>
 
             </switch>
-            
-            <let update_time="events.first.added_time.epoch"/>
 
+            <if test="new">
+                <db:query src="events" dst="events" maxresults="10" orderby="-time"
+                    filter="#Event.time gte time"/>
+            </if>
+            <else>
+                <db:query src="events" dst="events" maxresults="10" orderby="-time"
+                    filter="#Event.time lte time"/>
+            </else>
+            
+            <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
                 <tl:render-event event="event" dst="html"/>
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
-
             <return-dict let:events="events_html" let:time="update_time"/>
 
         </rpc:method>

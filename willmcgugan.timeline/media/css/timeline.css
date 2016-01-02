@@ -282,3 +282,13 @@ pre code.hljs *
     margin-left:78px;
 
 }
+
+.more-events
+{
+    visibility:hidden;
+}
+
+.more-events.loading
+{
+    visibility:visible;
+}

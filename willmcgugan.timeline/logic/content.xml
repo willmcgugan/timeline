@@ -47,6 +47,7 @@ It's designed to be used by automated systems. You should probably use the offic
     <content libname="content.stream" extends="#content.stream.base">
         <section name="main">
             <node template="fragments/events.html" let:events="events"/>
+            <node template="fragments/more-events.html"/>
         </section>
         <section name="side">
             <node template="stream_info.html" let:stream="stream"/>
@@ -56,6 +57,7 @@ It's designed to be used by automated systems. You should probably use the offic
     <content libname="content.timeline" extends="#content.stream.base">
         <section name="main">
             <node template="fragments/events.html" let:events="events"/>
+            <node template="fragments/more-events.html"/>
         </section>
         <section name="side">
 
