@@ -1,11 +1,11 @@
 
 <div id="${id}" {% data-attrib config %}>
-{% include "fragments/new-events.html" %}
+{% include "fragments/new_events.html" %}
 	<div class="events-container">
 	{%- for event in events %}
 	{% include "event.html" %}
 	{%- endfor %}
 	</div>
-{% include "fragments/more-events.html" %}
+{% include "fragments/more_events.html" %}
 </div>
 

@@ -14,9 +14,9 @@
         <h4 class="title">${event.title}</h4>
     </a>
 
-	{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
-        {% markup event.text as event.markup %}
-    {%- endextract %}
+	{%- include "fragments/card_description.html" -%}
+	
+	{%- include "fragments/expand_card.html" %}
 
 	{%- include "fragments/cardfooter.html" %}
 </div>

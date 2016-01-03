@@ -52,6 +52,7 @@ function Watcher(url, on_instructions)
     $.fn.inthingStream = function(config) {
 		var self = this;
 		var $stream = $(this);
+
 		var $events_container = $stream.find('.events-container')
 		var $new_events = $stream.find('.new-events');
 		var rpc = new JSONRPC(config.rpc_url);
@@ -105,7 +106,7 @@ function Watcher(url, on_instructions)
 			{
 				return;
 			}
-			for(var i=0; i<self.event_stack.length;i++)
+			for(var i=0; i < self.event_stack.length; i++)
 			{
 				if (event_update.id == self.event_stack[i].id)
 				{
@@ -149,7 +150,6 @@ function Watcher(url, on_instructions)
 			setTimeout(function(){
 				$('.event').removeClass('new-event');
 			}, 50);
-
 		}
 
 		self.check_append_events = function()
@@ -191,8 +191,22 @@ function Watcher(url, on_instructions)
         {
             highlight_code($event.find('pre'));
             $event.find('[data-toggle="tooltip"]').tooltip();
+
+            if($event.find('.event-content')[0].scrollHeight > 300)
+            {
+            	$event.find('.expand-card').addClass('expandable');
+            }
+            $event.find('.expand-card').click(function(e){
+            	e.preventDefault();
+            	$event.find('.event-content').toggleClass('expanded');
+            });
+
             return $event;
         }
+        $events_container.find('.event').each(function(i, el){
+			bind_event($(el));
+		});
+
 
 	 	self.update = function()
 		{
@@ -201,7 +215,8 @@ function Watcher(url, on_instructions)
 				{'time': self.time, 'events': self.event_source},
 				function(result){
 					self.update_events(result.time, result.events);
-				});
+				}
+			);
 		}
 
 

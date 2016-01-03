@@ -1,0 +1,5 @@
+<div class="event-content">
+{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
+    {% markup event.text as event.markup %}
+{%- endextract %}
+</div>

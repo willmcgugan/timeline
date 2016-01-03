@@ -3,16 +3,16 @@
 {% block "content" %}
 <div class="content">
 
-    {%- include "fragments/cardheader.html" -%}
+    {%- include "fragments/card_header.html" -%}
 
     <a class="card-link title-link" href="{% url 'event' with event_id=event.uuid %}">
         <h4 class="title">${event.title}</h4>
     </a>
 
-	{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
-        {% markup event.text as event.markup %}
-    {%- endextract %}
+    {%- include "fragments/card_description.html" %}
+
+    {%- include "fragments/expand_card.html" %}
 	
-	{%- include "fragments/cardfooter.html" %}
+	{%- include "fragments/card_footer.html" %}
 </div>
 {% endblock %}

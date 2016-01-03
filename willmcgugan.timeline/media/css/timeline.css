@@ -320,3 +320,49 @@ pre code.hljs *
     transform: scale(1);
     transition: opacity 0.2s, transform 0.3s;
 }
+
+.event-content
+{
+    max-height:300px;
+    overflow-y:auto;
+    padding-right:12px;
+    transition:height 3s;
+}
+
+.event-content.expanded
+{
+    max-height:none;
+    transition:height 3s;
+}
+
+.expand-card
+{
+    display:none;
+}
+
+.expand-card.expandable
+{
+    display:block;
+}
+
+.expand-card .more
+{
+    display:block;
+    padding:8px 0px 16px 0px;
+}
+
+.expand-card .less
+{
+    display:none;
+    padding:8px 0px 16px 0px;
+}
+
+.event-content.expanded + .expand-card .more
+{
+    display:none;
+}
+
+.event-content.expanded + .expand-card .less
+{
+    display:block;
+}
