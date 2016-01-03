@@ -53,8 +53,9 @@ function Watcher(url, on_instructions)
 		var self = this;
 		var rpc = new JSONRPC(config.rpc_url);
 
-		var $subscribe_button = $('.subscribe-button');
-		$('.subscribe-button').click(function(event){
+		var stream_id = config.stream_id;
+		var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
+		$subscribe_button.find('input').click(function(event){
 			if ($subscribe_button.hasClass('unsubscribed'))
 			{
 				rpc.call(

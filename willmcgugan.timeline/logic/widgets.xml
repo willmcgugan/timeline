@@ -5,11 +5,14 @@
 
     <widget name="stream" template="widgets/stream.html">
     	<signature>
+    		<attribute name="id" type="expression" default="'stream-' + token:10"/>
     		<attribute name="events" type="expression"/>
     		<attribute name="source" type="text"/>
+    		<attribute name="stream_id" type="expression" default="None"/>
     	</signature>
-    	<let stream_id=".content.id"/>
+    	
     	<dict dst="config"
+    		let:stream_id="stream_id"
     		let:source="source"
     		let:time="events.first.time.epoch"
     		let:watcherurl="slashjoin:[.app.settings.watcher_url, 'events', source]">
@@ -17,7 +20,7 @@
     	</dict>
     	<js>
             $(function(){
-                $('#${stream_id}').inthingStream(${json:config});
+                $('#${id}').inthingStream(${json:config});
             });
         </js>
     </widget>
