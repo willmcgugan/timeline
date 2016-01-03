@@ -99,7 +99,7 @@ function Stream(events, time)
 	{
 		var $more_events = $('.more-events');
 
-		if($more_events.hasClass('loading'))
+		if(!$more_events.length || $more_events.hasClass('loading'))
 		{
 			return;
 		}
@@ -116,6 +116,11 @@ function Stream(events, time)
 			{'time': last_event_time, 'events': self.event_source, 'new': false},
 			function(result){
 				$more_events.removeClass('loading');
+				if(!result.events.length)
+				{
+					$more_events.remove();
+					return;
+				}
 				$(result.events).each(function(i, event){
 					if(!$('#event-' + result.uuid).length)
 					{
@@ -268,12 +273,9 @@ $(function() {
 		var more_y = $more_events.offset().top;
 		var scroll_y = $(window).scrollTop();
 		
-		console.log(more_y);
-
 		if (more_y - (scroll_y + window_height) <= 0)
 		{
 			stream.check_append_events();
 		}
-
 	});
 });
