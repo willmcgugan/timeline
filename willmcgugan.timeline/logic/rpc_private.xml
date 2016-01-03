@@ -83,7 +83,6 @@
                 let:stream="stream" let:timeline="timeline"/>
 
             <return-dict let:status="'ok'" />
-
         </rpc:method>
 
         <rpc:method name="unsubscribe" group="stream" description="unsubscribe from a stream">
@@ -97,7 +96,6 @@
             <db:delete src="subscription"/>>
 
             <return-dict let:status="'ok'"/>
-
         </rpc:method>
 
         

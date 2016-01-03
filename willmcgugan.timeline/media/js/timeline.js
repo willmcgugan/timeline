@@ -161,7 +161,7 @@ function Watcher(url, on_instructions)
 				return;
 			}
 
-			var $events = $events_container.find('.event');
+			var $events = $stream.find('.event');
 			var $last_event = $($events[$events.length - 1]);
 			var event_data = $last_event.data();
 			var last_event_time = event_data.time;
