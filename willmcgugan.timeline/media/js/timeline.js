@@ -218,7 +218,7 @@ function Watcher(url, on_instructions)
 			var window_height = $(window).height();
 			var more_y = $more_events.offset().top;
 			var scroll_y = $(window).scrollTop();
-			
+
 			if (more_y - (scroll_y + window_height) <= 0)
 			{
 				self.check_append_events();
@@ -229,6 +229,11 @@ function Watcher(url, on_instructions)
 		self.watcher.connect();
 	}
 })(jQuery);
+
+$(function(){
+    var config = $('body').data();
+    rpc = new JSONRPC(config.rpc_url);
+});
 
 
 $(function(){
