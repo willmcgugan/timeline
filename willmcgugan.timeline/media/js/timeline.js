@@ -141,8 +141,8 @@ function Watcher(url, on_instructions)
 				{
 					$events_container.prepend(event_update.html);
 					var $existing_event = $('#event-' + event_update.id);
-					highlight_code($existing_event.find('pre'));
 					$existing_event.addClass('new-event');
+                    bind_event($existing_event);
 				}
 	            self.event_stack = [];
 			});
@@ -181,11 +181,18 @@ function Watcher(url, on_instructions)
 					$(result.events).each(function(i, event){
 						if(!$('#event-' + result.uuid).length)
 						{
-							$more_events.before(event.html);
+							$more_events.before(bind_event($(event.html)));
 						}
 					});
 				});
 		}
+
+        var bind_event = function($event)
+        {
+            highlight_code($event.find('pre'));
+            $event.find('[data-toggle="tooltip"]').tooltip();
+            return $event;
+        }
 
 	 	self.update = function()
 		{
