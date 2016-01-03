@@ -141,6 +141,7 @@ function Watcher(url, on_instructions)
 				{
 					$events_container.prepend(event_update.html);
 					var $existing_event = $('#event-' + event_update.id);
+					highlight_code($existing_event.find('pre'));
 					$existing_event.addClass('new-event');
 				}
 	            self.event_stack = [];
