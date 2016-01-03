@@ -8,7 +8,7 @@
 {%- endif %}
 <div class="content">
 
-	{% include "fragments/cardheader.html" %}
+	{%- include "fragments/cardheader.html" -%}
 
 	<a class="card-link title-link" href="{% url 'event' with event_id=event.uuid %}">
         <h4 class="title">${event.title}</h4>
@@ -18,6 +18,6 @@
         {% markup event.text as event.markup %}
     {%- endextract %}
 
-	{% include "fragments/cardfooter.html" %}
+	{%- include "fragments/cardfooter.html" %}
 </div>
 {% endblock %}

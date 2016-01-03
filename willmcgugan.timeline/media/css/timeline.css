@@ -306,3 +306,17 @@ pre code.hljs *
     cursor: pointer;
     margin:8px;
 }
+
+.new-events
+{
+    opacity:0;
+    transform: scale(0);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.new-events.pending-events
+{
+    opacity:1;
+    transform: scale(1);
+    transition: opacity 0.5s, transform 0.5s;
+}

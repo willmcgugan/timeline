@@ -1,9 +1,11 @@
-{% include "fragments/new-events.html" %}
 
-<div id="${stream_id}" {% data-attrib config %}>
-{% for event in events %}
-{% include "event.html" %}
-{% endfor %}
+<div id="${id}" {% data-attrib config %}>
+{% include "fragments/new-events.html" %}
+	<div class="events-container">
+	{%- for event in events %}
+	{% include "event.html" %}
+	{%- endfor %}
+	</div>
+{% include "fragments/more-events.html" %}
 </div>
 
-{% include "fragments/more-events.html" %}

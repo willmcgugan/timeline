@@ -51,6 +51,9 @@ function Watcher(url, on_instructions)
 (function($) {
     $.fn.inthingStream = function(config) {
 		var self = this;
+		var $stream = $(this);
+		var $events_container = $stream.find('.events-container')
+		var $new_events = $stream.find('.new-events');
 		var rpc = new JSONRPC(config.rpc_url);
 
 		var stream_id = config.stream_id;
@@ -81,6 +84,11 @@ function Watcher(url, on_instructions)
 
 		self.event_stack = [];
 
+		$new_events.click(function(e){
+			$("html, body").animate({ scrollTop: 0 }, "fast", function(){
+				self.check_updates();
+			});
+		});
 
 		self.update_events = function(time, events)
 		{
@@ -93,8 +101,20 @@ function Watcher(url, on_instructions)
 
 		self.add_event = function(event_update)
 		{
+			if($('#event-' + event_update.id).length)
+			{
+				return;
+			}
+			for(var i=0; i<self.event_stack.length;i++)
+			{
+				if (event_update.id == self.event_stack[i].id)
+				{
+					return;
+				}
+			}
 			self.event_stack.push(event_update);
 		}
+
 
 		self.check_updates = function()
 		{
@@ -108,18 +128,18 @@ function Watcher(url, on_instructions)
 
 			if (scroll_y > 100)
 			{
-				$('new-events').html('<b>' + self.event_stack.length + '</b> new events');
+				$new_events.addClass('pending-events');
+				$new_events.find('.count').text(self.event_stack.length);
+
 				return;
 			}
+			$new_events.removeClass('pending-events');
 
 			$(self.event_stack).each(function(i, event_update){
-
-				//var $event = $(event_update.html);
 				var $existing_event = $('#event-' + event_update.id);
 				if (!$existing_event.length)
 				{
-					var $timeline_container = $('.timeline-container');
-					$(event_update.html).prependTo($timeline_container);
+					$events_container.prepend(event_update.html);
 					var $existing_event = $('#event-' + event_update.id);
 					$existing_event.addClass('new-event');
 				}
@@ -133,14 +153,14 @@ function Watcher(url, on_instructions)
 
 		self.check_append_events = function()
 		{
-			var $more_events = $('.more-events');
+			var $more_events = $stream.find('.more-events');
 
 			if(!$more_events.length || $more_events.hasClass('loading'))
 			{
 				return;
 			}
 
-			var $events = $('.timeline-container .event');
+			var $events = $events_container.find('.event');
 			var $last_event = $($events[$events.length - 1]);
 			var event_data = $last_event.data();
 			last_event_time = event_data.time;
@@ -183,7 +203,7 @@ function Watcher(url, on_instructions)
 				var action = instruction.action;
 				if(action=='update-stream')
 				{
-					stream.update();
+					self.update();
 				}
 			});
 		}

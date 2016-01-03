@@ -10,7 +10,7 @@ import socket
 import json
 import logging
 
-log = logging.getLogger('moya.runtime')
+log = logging.getLogger('moya.runtime.notifier')
 
 
 class Notify(LogicElement):
@@ -24,6 +24,10 @@ class Notify(LogicElement):
 	def logic(self, context):
 		
 		path, action, data = self.get_parameters(context, 'path', 'action', 'data')
+
+		path = "/" + path.lstrip()
+		log.debug('notify path="%s", action="%s"', path, action)
+
 		params = self.get_parameters(context)
 		instruction = {
 			"action": action
