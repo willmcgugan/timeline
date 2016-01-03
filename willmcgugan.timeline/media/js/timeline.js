@@ -164,7 +164,7 @@ function Watcher(url, on_instructions)
 			var $events = $events_container.find('.event');
 			var $last_event = $($events[$events.length - 1]);
 			var event_data = $last_event.data();
-			last_event_time = event_data.time;
+			var last_event_time = event_data.time;
 
 			$more_events.addClass('loading');
 
