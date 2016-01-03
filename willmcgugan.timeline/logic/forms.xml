@@ -2,11 +2,17 @@
 <moya xmlns="http://moyaproject.com"
 	xmlns:w="http://moyaproject.com/widgets">
 
-    <!-- Forms know how to render and validate themselves -->
-    <form libname="form.getname" legend="Hello World Form" style="horizontal" xmlns="http://moyaproject.com/forms">
-        <input requiredmsg="Enter something here you numpty" name="name" label="What is your name?" class="input-xlarge" type="text" maxlength="30" required="yes"/>
-        <submit-button text="Submit" />
-    </form>
+    <choices libname="choices.markup">
+        <choice value="text" label="Text"/>
+        <choice value="bbcode" label="BBCode"/>
+        <choice value="markdown" label="Markdown"/>
+        <choice value="html" label="HTML"/>
+    </choices>
+
+    <choices libname="choices.event">
+        <choice value="text"/>
+        <choice value="image"/>
+    </choices>
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	
@@ -14,9 +20,16 @@
     	<input name="password" label="Password" placeholder="Stream password or API key"/>
         <input name="title" label="Title"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time"/>
-        <input name="type" maxlength="30" label="Event Type"/>
+        <select name="type" maxlength="30" label="Event Type">
+            <option value="text"/>
+            <option value="image"/>
+        </select>
         <input name="priority" label="Priority" initial="0" />
-        <input name="markup" maxlength="20" label="Markup" initial="'markdown'"/>
+        <select name="markup" maxlength="20" label="Markup" initial="'markdown'">
+            <option value="markdown"/>
+            <option value="text"/>
+            <option value="html"/>
+        </select>
         <text-area name="text" label="Text"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
