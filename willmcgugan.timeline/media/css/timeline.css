@@ -292,3 +292,17 @@ pre code.hljs *
 {
     visibility:visible;
 }
+
+.new-events
+{
+    text-align:center;
+    padding:12px;
+    background-color:#ff9500;
+    color:#fff;
+    border-radius:3px;
+    position:fixed;
+    z-index:10;
+    width:auto%;
+    cursor: pointer;
+    margin:8px;
+}

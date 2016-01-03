@@ -46,7 +46,7 @@
             <switch on="source">
                 <case>stream</case>
                 <db:get model="#Stream" let:id="pk" dst="stream"/>
-                <rpc:error code="unknown-stream" if="not stream"/>
+                <rpc:error code="unknown_stream" if="not stream"/>
                 <db:query model="#Event" dst="events" let:stream="stream" />
 
                 <case>timeline</case>

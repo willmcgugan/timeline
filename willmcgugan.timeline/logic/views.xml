@@ -33,13 +33,6 @@
         <db:get model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
         
-        <dict dst="config"
-            let:stream="stream.uuid"
-            let:events="sub:'stream-${stream.id}'"
-            let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
-            let:time="events.first.time.epoch">
-            <get-url name="jsonrpc_private" dst="rpc_url"/>
-        </dict>
     </view>
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
@@ -86,20 +79,11 @@
     </view>
 
     <view libname="view.timeline" content="#content.timeline">
-       
         <db:get-required model="moya.auth#User" let:username=".url.username" dst="user"/>
-       
         <tl:get-timeline let:user="user" dst="timeline"/>
         <get-url name="timeline" let:username="user.username" dst="watch_url"/>
         <db:query model="#Event" dst="events" maxresults="10"
             filter="#Event.stream.id in timeline.streams" orderby="-time"/>
-
-        <dict dst="config"
-            let:events="sub:'timeline-${timeline.id}'"
-            let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
-            let:time="events.first.time.epoch">
-            <get-url name="jsonrpc_private" dst="rpc_url"/>
-        </dict>
     </view>
 
     <view libname="view.event" content="#content.event">
@@ -116,10 +100,7 @@
         <let next_event="next_events.first"
             previous_event="previous_events.first"/>
 
-
         <dict dst="config"
-            let:events="''"
-            let:watcherurl="slashjoin:[.app.settings.watcher_url, watch_url]"
             let:time="events.first.time.epoch">
             <get-url name="jsonrpc_private" dst="rpc_url"/>
         </dict>

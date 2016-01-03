@@ -3,5 +3,23 @@
       xmlns:let="http://moyaproject.com/let">
     <!-- define your widgets here -->
 
+    <widget name="stream" template="widgets/stream.html">
+    	<signature>
+    		<attribute name="events" type="expression"/>
+    		<attribute name="source" type="text"/>
+    	</signature>
+    	<let stream_id=".content.id"/>
+    	<dict dst="config"
+    		let:source="source"
+    		let:time="events.first.time.epoch"
+    		let:watcherurl="slashjoin:[.app.settings.watcher_url, 'events', source]">
+    		<get-url name="jsonrpc_private" dst="rpc_url"/>
+    	</dict>
+    	<js>
+            $(function(){
+                $('#${stream_id}').inthingStream(${json:config});
+            });
+        </js>
+    </widget>
 
 </moya>

@@ -5,7 +5,8 @@
       xmlns:forms="http://moyaproject.com/forms"
       xmlns:html="http://moyaproject.com/html"
       xmlns:w="http://moyaproject.com/widgets"
-      xmlns:comments="http://moyaproject.com/comments">
+      xmlns:comments="http://moyaproject.com/comments"
+      xmlns:tl="http://willmcgugan.com/timeline">
 
     <!-- Content is a high level description of a page -->
     <content libname="content.base" template="base.html" final="yes">
@@ -46,8 +47,7 @@ It's designed to be used by automated systems. You should probably use the offic
 
     <content libname="content.stream" extends="#content.stream.base">
         <section name="main">
-            <node template="fragments/events.html" let:events="events"/>
-            <node template="fragments/more-events.html"/>
+            <tl:stream events="events" source="${'stream-' + str:stream.id}" />
         </section>
         <section name="side">
             <node template="stream_info.html" let:stream="stream"/>
@@ -56,8 +56,7 @@ It's designed to be used by automated systems. You should probably use the offic
 
     <content libname="content.timeline" extends="#content.stream.base">
         <section name="main">
-            <node template="fragments/events.html" let:events="events"/>
-            <node template="fragments/more-events.html"/>
+            <tl:stream events="events" source="${'timeline-' + str:stream.id}"/>
         </section>
         <section name="side">
 
