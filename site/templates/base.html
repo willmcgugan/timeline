@@ -75,10 +75,16 @@
         <li>
             <a href="#"><i class="fa fa-globe"></i> Discover</a>
         </li>
-        {% if .user %}
+
+        {%- if .user %}
+        <li{% if .urlname=='timeline' %} class="active"{% endif %}>
+            <a href="{% url 'timeline' from 'willmcgugan.timeline' with username=.user.username %}">
+                <i class="fa fa-user"></i> @${.user.username}
+            </a>
+        </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-user"></i> ${.user.username}
+                Account
             <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -96,7 +102,8 @@
               </li>
             </ul>
         </li>
-        {% endif %}
+        {%- endif %}
+
         {% if not .user %}
         <li>
           <a href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
@@ -104,9 +111,7 @@
           </a>
         </li>
         {% endif %}
-        {#
-        <li><button class="btn btn-round btn-neutral"><i class="fa fa-edit"></i> Post</button></li>
-        #}
+
        </ul>
 
     </div><!-- /.navbar-collapse -->
