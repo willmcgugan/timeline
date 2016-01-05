@@ -172,7 +172,7 @@ function Watcher(url, on_instructions)
 				'events.get_updates',
 				{'time': last_event_time, 'events': self.event_source, 'new': false},
 				function(result){
-					console.log(result);
+
 					$more_events.removeClass('loading');
 					if(!result.events.length)
 					{
@@ -191,8 +191,6 @@ function Watcher(url, on_instructions)
 
         var bind_event = function($event)
         {
-          
-            console.log($event);
             var $event_content = $event.find('.event-content');
             if($event_content.length)
 	        {

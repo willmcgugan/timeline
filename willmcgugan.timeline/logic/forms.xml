@@ -21,8 +21,9 @@
         <input name="title" label="Title"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
         <select name="type" maxlength="30" label="Event Type">
-            <option value="text"/>
-            <option value="image"/>
+            <m:for src="data:'event_types.json'" dst="type">
+                <option value="${type}"/>
+            </m:for>
         </select>
         <select name="priority" label="Priority" initial="0">
             <m:for src="(-10)..(10)" dst="p">
