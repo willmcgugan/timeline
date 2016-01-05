@@ -1,7 +1,4 @@
-body.timeline-view
-{
-    /*background-color:#E5E9ED;*/
-}
+
 
 /*
 .card
@@ -323,9 +320,14 @@ pre code.hljs *
 .event-content
 {
     max-height:300px;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding-right:12px;
     transition:height 3s;
+}
+
+#event-view .event-content
+{
+    max-height:inherit;
 }
 
 .event-content.expanded

@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block "title" %}${title}{% end %}</title>
 
-
-
-
     {% block "includecss" %}{% render include.css %}{% end %}
     {% block "css" %}{% render sections.css %}{% end %}
 
@@ -21,13 +18,12 @@
     <link href="{% media 'css/timeline.css' from 'timeline' %}" rel="stylesheet" type="text/css">
     <link href="{% media 'highlight/styles/github.css' from 'timeline' %}" rel="stylesheet" type="text/css">
 
-
     {% block "jshead" %}{% render sections.jshead %}{% end %}
     {% block "head" %}{% render sections.head %}{% end %}
 
 </head>
 
-<body class="timeline-view" {% data-attrib config or {} %}>
+<body id="${config.page_id or 'timeline-view'}" {% data-attrib config or {} %}>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -65,7 +61,6 @@
       </button>
 
       <a class="navbar-brand" href="/">inthing.io</a>
-
 
     </div>
 
@@ -135,8 +130,11 @@
 
   <script src="{% media 'js/jquery-1.10.2.js' from 'timeline' %}"></script>
   <script src="{% media 'js/bootstrap.min.js' from 'timeline' %}"></script>
+
+{#
   <script src="{% media 'js/gsdk-checkbox.js' from 'timeline' %}"></script>
   <script src="{% media 'js/gsdk-radio.js' from 'timeline' %}"></script>
+#}
   <script src="{% media 'js/get-shit-done.js' from 'timeline' %}"></script>
 
 {% block "includejs" %}{% render include.js %}{% endblock %}

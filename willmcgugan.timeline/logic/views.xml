@@ -116,6 +116,7 @@
             previous_event="previous_events.first"/>
 
         <dict dst="config"
+            let:page_id="'event-view'"
             let:time="events.first.time.epoch">
             <get-url name="jsonrpc_private" dst="rpc_url"/>
         </dict>

@@ -172,6 +172,7 @@ function Watcher(url, on_instructions)
 				'events.get_updates',
 				{'time': last_event_time, 'events': self.event_source, 'new': false},
 				function(result){
+					console.log(result);
 					$more_events.removeClass('loading');
 					if(!result.events.length)
 					{
@@ -179,9 +180,10 @@ function Watcher(url, on_instructions)
 						return;
 					}
 					$(result.events).each(function(i, event){
-						if(!$('#event-' + result.uuid).length)
+						if(!$('#event-' + result.id).length)
 						{
-							$more_events.before(bind_event($(event.html)));
+							$more_events.before($(event.html));
+							bind_event($('#event-' + event.id))
 						}
 					});
 				});
@@ -189,24 +191,32 @@ function Watcher(url, on_instructions)
 
         var bind_event = function($event)
         {
+          
+            console.log($event);
+            var $event_content = $event.find('.event-content');
+            if($event_content.length)
+	        {
+	            if($event_content[0].scrollHeight > 300)
+	            {
+	            	$event.find('.expand-card').addClass('expandable');
+	            }
+	            $event.find('.expand-card').click(function(e){
+	            	e.preventDefault();
+	            	$event_content.toggleClass('expanded');
+	            	if(!$event_content.hasClass('expanded') && $event_content[0].scrollIntoView)
+	            	{
+	            		$event[0].scrollIntoView();
+	            		window.scrollBy(0, -76);
+	            	}
+	            });
+	        }
+
+
             highlight_code($event.find('pre'));
             $event.find('[data-toggle="tooltip"]').tooltip();
 
-            if($event.find('.event-content')[0].scrollHeight > 300)
-            {
-            	$event.find('.expand-card').addClass('expandable');
-            }
-            $event.find('.expand-card').click(function(e){
-            	e.preventDefault();
-            	$event.find('.event-content').toggleClass('expanded');
-            });
-
             return $event;
         }
-        $events_container.find('.event').each(function(i, el){
-			bind_event($(el));
-		});
-
 
 	 	self.update = function()
 		{
@@ -249,6 +259,11 @@ function Watcher(url, on_instructions)
 
 		self.watcher = new Watcher(config.watcherurl, on_instructions);
 		self.watcher.connect();
+
+		$events_container.find('.event').each(function(i, el){
+			bind_event($(el));
+		});
+
 	}
 })(jQuery);
 
