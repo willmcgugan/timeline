@@ -27,11 +27,14 @@
 
     <content libname="content.stream.new_event">
     	<section name="body">
+            <html:pre if="result">${prettyjson:result}</html:pre>
     		<w:info>
     			<markdown>
-This for can be used to create events.
+This form can be used to create events.
 
 It's designed to be used by automated systems. You should probably use the official API.
+
+Add `?format=json` to the URL to return a JSON response
     			</markdown>
     		</w:info>
     		<render src="form"/>

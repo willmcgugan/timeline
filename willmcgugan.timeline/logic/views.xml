@@ -9,11 +9,12 @@
     xmlns:tn="http://moyaproject.com/thumbnail">
 
     <mountpoint name="main">
+        <!-- TODO: API page -->
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
+        <url route="/api/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
        
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
-        <url route="/s/{stream_id}/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/" methods="GET" view="#view.front" name="front"/>
@@ -36,46 +37,60 @@
     </view>
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
-        <forms:get form="#form.event" dst="form"/>
-        <forms:validate src="form">
-            <let data="form.data"/>
-            <tl:get-stream id="data.stream" dst="stream"/>
+        
+        <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
+        <if-post>
+            <forms:validate src="form">
+                <let data="form.data"/>
 
-            <try>
-                <db:create model="#Event" dst="event"
-                    let:stream="stream"
-                    let:time="data.time ? epoch:data.time : .now"
-                    let:type="data.type or 'text'"
-                    let:priority="int:data.priority"
-                    let:title="data.title"
-                    let:text="data.text"
-                    let:markup="data.markup"/>
+                <try>
+                    <tl:get-stream id="data.stream" dst="stream"/>
+                    <db:create model="#Event" dst="event"
+                        let:stream="stream"
+                        let:time="data.time ? epoch:data.time : .now"
+                        let:type="data.type or 'text'"
+                        let:priority="int:data.priority"
+                        let:title="data.title"
+                        let:text="data.text"
+                        let:markup="data.markup"/>
 
-                <if test="data.image">
-                    <let ext="ext:data.image.filename"/>
-                    <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
-                    <image:get-size file="data.image" dst="size"/>
-                    <db:create model="#Image" dst="img"
-                        let:event="event"
-                        let:path="path"
-                        let:filesize="len:data.image"
-                        let:width="size.width"
-                        let:height="size.height"/>
-                    <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
-                    <tn:generate thumbnails="#thumbnails" path="path" />
+                    <if test="data.image">
+                        <let ext="ext:data.image.filename"/>
+                        <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
+                        <image:get-size file="data.image" dst="size"/>
+                        <db:create model="#Image" dst="img"
+                            let:event="event"
+                            let:path="path"
+                            let:filesize="len:data.image"
+                            let:width="size.width"
+                            let:height="size.height"/>
+                        <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
+                        <tn:generate thumbnails="#thumbnails" path="path" />
+                    </if>
+                    <db:commit/>
+                </try>
+                <catch exception="*" dst="error">
+                    <dict dst="result" let:status="'error'" let:msg="error.msg"/>
+                </catch>
+                <if test="not result">
+                    <tl:notify-stream stream="stream"/>
+                    <let new_event="event"/>
+                    <dict dst="result" let:status="'ok'">
+                       <dict dst="event" let:id="new_event.uuid">
+                            <get-fq-url dst="url" name="event" let:event_id="new_event.uuid"/>
+                        </dict>
+                    </dict>
                 </if>
-                <db:commit/>
-            </try>
-            <catch exception="*" dst="error">
-                <set-header header="inthing-result" value="fail"/>
-                <set-header header="inthing-error" value="${error.msg}"/>
-                <done/> 
-            </catch>
 
-            <set-header header="inthing-event" value="${event.uuid}" />
-            <set-header header="inthing-result" value="ok" />
-            <tl:notify-stream stream="stream"/>
-        </forms:validate>
+            </forms:validate>
+            <if test="not form.ok">
+                <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
+                    <let error="form.error"/>
+                    <let field_errors="form.errors"/>
+                </dict>
+            </if>
+            <serve-json obj="result" if=".request.GET.format=='json'"/>
+        </if-post>
     </view>
 
     <view libname="view.timeline" content="#content.timeline">
