@@ -19,13 +19,13 @@
     	<input name="stream" label="Stream" placeholder="UUID or slug" required="yes"/>
     	<input name="password" label="Password" placeholder="Stream password or API key"/>
         <input name="title" label="Title"/>
-        <input name="time" label="Time" type="integer" placeholder="epoch time"/>
+        <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
         <select name="type" maxlength="30" label="Event Type">
             <option value="text"/>
             <option value="image"/>
         </select>
         <select name="priority" label="Priority" initial="0">
-            <m:for src="(-10)...(10)" dst="p">
+            <m:for src="(-10)..(10)" dst="p">
                 <option value="${p}"/>
             </m:for>
         </select>
