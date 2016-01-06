@@ -3,17 +3,16 @@
 {% block "content" %}
 {%- if event.image %}
 <div class="image-container">
+	{%- if link_event %}
+	<a href="{% url 'event' with event_id=event.uuid %}"><img src="${event.image.path|'thumbnail'(processor='large')}" /></a>
+	{%- else %}
 	<img src="${event.image.path|'thumbnail'(processor='large')}" />
+	{%- endif %}
 </div>
 {%- endif %}
 <div class="content">
-
 	{%- include "fragments/card_header.html" -%}
-
-	<a class="card-link title-link" href="{% url 'event' with event_id=event.uuid %}">
-        <h4 class="title">${event.title}</h4>
-    </a>
-
+	{%- include "fragments/card_title.html" -%}
 	{%- include "fragments/card_description.html" -%}
 	{%- include "fragments/expand_card.html" %}
 	{%- include "fragments/card_footer.html" %}

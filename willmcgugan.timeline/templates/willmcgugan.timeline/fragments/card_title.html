@@ -1,0 +1,8 @@
+{%- if link_event %}
+    <a class="card-link title-link" href="{% url 'event' with event_id=event.uuid %}">
+        <h4 class="title">${event.title}</h4>
+    </a>
+{%- else %}
+    <h4 class="title">${event.title}</h4>
+{%- endif %}
+

@@ -18,7 +18,7 @@
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	<input name="stream" label="Stream" placeholder="UUID or slug" required="yes"/>
     	<input name="password" label="Password" placeholder="Stream password or API key"/>
-        <input name="title" label="Title"/>
+        <input name="title" label="Title" placeholder="Descriptive title of this event"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
         <select name="type" maxlength="30" label="Event Type">
             <m:for src="data:'event_types.json'" dst="type">
@@ -35,6 +35,7 @@
             <option value="text"/>
             <option value="html"/>
         </select>
+        <input name="generator" label="Generator" placeholder="Name of device that generated this event"/>
         <text-area name="text" label="Text"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>

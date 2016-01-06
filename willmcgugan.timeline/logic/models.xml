@@ -43,6 +43,7 @@
     	<datetime name="added_time" auto="yes"/>
         <datetime name="expire_time" null="yes" blank="yes"/>
 
+        <string name="generator" length="100" blank="yes" null="yes" />
     	<string name="type" length="30"/>
     	<integer name="priority" default="0"/>
     	<string name="title" length="100" null="yes" blank="yes"/>

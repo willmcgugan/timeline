@@ -49,10 +49,10 @@ Add `?format=json` to the URL to return a JSON response
 
     <content libname="content.stream" extends="#content.stream.base">
         <section name="main">
-            <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" />
+            <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
         </section>
         <section name="side">
-            <node template="stream_info.html" let:stream="stream"/>
+            <node template="stream_info.html" let:stream="stream" let:subscription="subscription"/>
         </section>
     </content>
 
@@ -66,7 +66,7 @@ Add `?format=json` to the URL to return a JSON response
 
     <content libname="content.event" extends="#content.base" template="view_event.html">
         <section name="event">
-            <node template="event.html" let:event="event"/>
+            <node template="event.html" let:event="event" let:link_to_stream="yes"/>
         </section>
         <section name="comments">
             <comments:comments

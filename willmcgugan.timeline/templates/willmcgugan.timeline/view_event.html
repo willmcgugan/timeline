@@ -53,11 +53,7 @@
     	<div class="container">
     		<div class="col-md-10 col-md-offset-1 text-muted">
 
-    			<i class="fa fa-info-circle"></i> ${title:event.type} event &mdash;
-                {#
-    			published
-    			${localize:event.time}, #}
-    			in <a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a>
+    			<i class="fa fa-info-circle"></i> ${title:event.type} event
 
                 <span class="pull-right">
                     <a href="https://twitter.com/intent/tweet?${urlencode:text=event.title + ' ' + .request.url, via='willmcgugan'}" class="btn btn-simple btn-social btn-twitter window-link" title="Tweet this" data-toggle="tooltip">

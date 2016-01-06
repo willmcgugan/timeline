@@ -52,7 +52,8 @@
                         let:priority="int:data.priority"
                         let:title="data.title"
                         let:text="data.text"
-                        let:markup="data.markup"/>
+                        let:markup="data.markup"
+                        let:generator="data.generator"/>
 
                     <if test="data.image">
                         <let ext="ext:data.image.filename"/>

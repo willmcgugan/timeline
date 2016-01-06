@@ -9,8 +9,9 @@
     		<attribute name="events" type="expression"/>
     		<attribute name="source" type="text"/>
     		<attribute name="stream_id" type="expression" default="None"/>
+            <attribute name="link_to_stream" type="boolean" default="yes"/>
     	</signature>
-    	
+    	<true dst="link_event"/>
     	<dict dst="config"
     		let:stream_id="stream_id"
     		let:source="source"
