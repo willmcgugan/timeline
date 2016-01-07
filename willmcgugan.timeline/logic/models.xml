@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
-    xmlns:m="http://moyaproject.com">
+    xmlns:m="http://moyaproject.com"
+    xmlns:let="http://moyaproject.com/let">
 
 
     <model libname="Timeline" xmlns="http://moyaproject.com/db">
@@ -32,6 +33,15 @@
         <boolean name="public" default="yes" />
 
         <property name="name" expression="slug or uuid"/>
+
+        <property name="url">
+            <m:return if="object.user and object.slug">
+                <m:get-fq-url name="user_stream" let:username="object.user.username" let:stream_slug="object.slug"/>
+            </m:return>
+            <m:return>
+                <m:get-fq-url name="stream" let:stream_id="object.uuid"/>
+            </m:return>
+        </property>
     </model>
 
     <model libname="Event" xmlns="http://moyaproject.com/db">

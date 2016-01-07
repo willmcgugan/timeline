@@ -5,7 +5,7 @@
 		{%- if link_to_stream %}
 		<i class="text-muted fa fa-angle-double-right"></i>
 
-		<div class="author"><a href="{% url 'stream' with stream_id=event.stream.uuid %}">${event.stream.title}</a></div>
+		<div class="author"><a href="${event.stream.url}">${event.stream.title}</a></div>
 		{%- endif %}
 			
 		<div class="stats pull-right">

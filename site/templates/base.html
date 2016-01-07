@@ -73,9 +73,14 @@
         </li>
 
         {%- if .user %}
-        <li{% if .urlname=='timeline' %} class="active"{% endif %}>
-            <a href="{% url 'timeline' from 'willmcgugan.timeline' with username=.user.username %}">
-                <i class="fa fa-user"></i> @${.user.username}
+        <li>
+            <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}">
+              <i class="fa fa-bookmark-o"></i> Subscriptions
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'user_streams' from 'willmcgugan.timeline' with username=.user.username %}">
+                <i class="fa fa-home"></i> ${.user.username}
             </a>
         </li>
         <li class="dropdown">

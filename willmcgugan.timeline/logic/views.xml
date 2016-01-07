@@ -18,7 +18,19 @@
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/" methods="GET" view="#view.front" name="front"/>
-        <url route="/{username}/" methods="GET" view="#view.timeline" name="timeline"/>
+
+
+        <!-- twitter like conventions for username -->
+        <url route="/{username}/" methods="GET">
+            <redirect-to path="/${.url.username}"/>
+        </url>
+        <!-- user's streams -->
+        <url route="/{username}" methods="GET" view="#view.user.streams" name="user_streams" />
+        <!-- user's subscriptions -->
+        <url route="/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
+        <!-- individual stream -->
+        <url route="/{username}/{stream_slug}/" methods="GET" view="#view.user.stream" name="user_stream"/>
+
     </mountpoint>
 
     <view libname="view.front" template="front.html">
@@ -33,7 +45,36 @@
 
         <db:get model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
-        
+    </view>
+
+    <view libname="view.user.subscriptions" content="#content.user.subscriptions">
+        <db:get-required model="moya.auth#User" dst="user"
+            let:username=".url.username"/>
+        <tl:get-timeline let:user="user" dst="timeline"/>
+        <get-url name="user_subscriptions" let:username="user.username" dst="watch_url"/>
+        <db:query model="#Event" dst="events" maxresults="10"
+            filter="#Event.stream.id in timeline.streams" orderby="-time"/>
+    </view>
+
+    <view libname="view.user.streams" content="#content.user.streams">
+        <db:get-required model="moya.auth#User" dst="user"
+            let:username=".url.username"/>
+        <tl:get-timeline let:user="user" dst="timeline"/>
+        <get-url name="user_streams" let:username="user.username" dst="watch_url"/>
+        <db:query model="#Event" dst="events" maxresults="10"
+            filter="#Event.stream.user == user" orderby="-time"/>
+    </view>
+
+    <view libname="view.user.stream" content="#content.stream">
+        <db:get-required model="moya.auth#User" let:username=".user.username" dst="user"/>
+        <tl:get-stream-required user="user" id=".url.stream_slug" dst="stream"/>
+        <tl:get-timeline dst="timeline" />
+
+        <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
+        <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-added_time" dst="events"/>
+
+        <db:get model="#Subscription" dst="subscription"
+            let:stream="stream" let:timeline="timeline"/>
     </view>
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
@@ -94,13 +135,7 @@
         </if-post>
     </view>
 
-    <view libname="view.timeline" content="#content.timeline">
-        <db:get-required model="moya.auth#User" let:username=".url.username" dst="user"/>
-        <tl:get-timeline let:user="user" dst="timeline"/>
-        <get-url name="timeline" let:username="user.username" dst="watch_url"/>
-        <db:query model="#Event" dst="events" maxresults="10"
-            filter="#Event.stream.id in timeline.streams" orderby="-time"/>
-    </view>
+
 
     <view libname="view.event" content="#content.event">
         <db:get-required model="#Event" let:uuid=".url.event_id" dst="event"/>

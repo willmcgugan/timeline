@@ -49,9 +49,16 @@
                 <rpc:error code="unknown_stream" if="not stream"/>
                 <db:query model="#Event" dst="events" let:stream="stream" />
 
-                <case>timeline</case>
+                <case>subs</case>
                 <db:get model="#Timeline" let:id="pk" dst="timeline"/>
                 <db:query model="#Event" dst="events" filter="#Event.stream.id in timeline.streams"/>
+
+                <case>user</case>
+                <db:get model="moya.auth#user" let:id="pk" dst="user"/>
+                <db:query model="#Event" dst="events" filter="#Event.user == user" />
+
+                <default-case/>
+                <log-warn>Unknown update type in rpc method 'get_updates'!</log-warn>
             </switch>
 
             <if test="new">
