@@ -39,35 +39,27 @@
             <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
             <rpc:parameter name="time" type="number" required="yes">update time</rpc:parameter>
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
+            <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
 
             <let time="epoch:time"/>
-            <let parse="partition:[events, '-']" source="parse.0" pk="parse.2" />
 
-            <switch on="source">
-                <case>stream</case>
-                <db:get model="#Stream" let:id="pk" dst="stream"/>
-                <rpc:error code="unknown_stream" if="not stream"/>
-                <db:query model="#Event" dst="events" let:stream="stream" />
+            <tl:get-events source="events" dst="events"/>
 
-                <case>subs</case>
-                <db:get model="#Timeline" let:id="pk" dst="timeline"/>
-                <db:query model="#Event" dst="events" filter="#Event.stream.id in timeline.streams"/>
+            <db:query src="events" dst="events" if="filter_types"
+                filter="#Event.type in filter_types" />
 
-                <case>user</case>
-                <db:get model="moya.auth#user" let:id="pk" dst="user"/>
-                <db:query model="#Event" dst="events" filter="#Event.user == user" />
-
-                <default-case/>
-                <log-warn>Unknown update type in rpc method 'get_updates'!</log-warn>
-            </switch>
-
-            <if test="new">
-                <db:query src="events" dst="events" maxresults="10" orderby="-time"
-                    filter="#Event.time gte time"/>
+            <if test="not time">
+                <db:query src="events" dst="events" maxresults="10" orderby="-time"/>
             </if>
             <else>
-                <db:query src="events" dst="events" maxresults="10" orderby="-time"
-                    filter="#Event.time lte time"/>
+                <if test="new">
+                    <db:query src="events" dst="events" maxresults="10" orderby="-time"
+                        filter="#Event.time gte time"/>
+                </if>
+                <else>
+                    <db:query src="events" dst="events" maxresults="10" orderby="-time"
+                        filter="#Event.time lte time"/>
+                </else>
             </else>
             
             <let update_time="events.first.added_time.epoch or 0"/>

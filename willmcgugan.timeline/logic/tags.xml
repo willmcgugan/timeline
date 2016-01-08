@@ -47,6 +47,35 @@
     </tag>
 
 
+    <tag name="get-events">
+        <doc>Get events from a given source</doc>
+        <signature>
+            <attribute name="source" type="expression" required="yes">Source of events</attribute>
+        </signature>
+        <let parse="partition:[source, '-']" source="parse.0" pk="parse.2" />
+
+        <switch on="source">
+            <case>stream</case>
+            <db:get model="#Stream" let:id="pk" dst="stream"/>
+            <throw exception="timeline.get_events.unknown-stream" msg="no such stream" if="not stream"/>
+            <db:query model="#Event" dst="events" let:stream="stream" />
+
+            <case>subs</case>
+            <db:get model="#Timeline" let:id="pk" dst="timeline"/>
+            <db:query model="#Event" dst="events" filter="#Event.stream.id in timeline.streams"/>
+
+            <case>user</case>
+            <db:get model="moya.auth#User" let:id="pk" dst="user"/>
+            <db:query model="#Event" dst="events" filter="#Event.stream.user == user" />
+
+            <default-case/>
+            <log-warn>Unknown update type in rpc method 'get_updates'!</log-warn>
+        </switch>
+
+        <return value="events"/>
+    </tag>
+
+
     <tag name="render-event">
         <doc>Render an event object</doc>
         <signature>

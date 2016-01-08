@@ -58,6 +58,22 @@ function Watcher(url, on_instructions)
 		var rpc = new JSONRPC(config.rpc_url);
 
 		var stream_id = config.stream_id;
+
+		self.event_source = config.source;
+		self.time = config.time;
+		self.event_stack = [];
+		self.filter_types = [];
+
+		$('#filter_types input.stream-filter').change(function(){
+			var filter = [];
+			$('#filter_types input.stream-filter:checked').each(function(e, el){
+				filter.push($(el).data('filter'));
+			});
+			self.filter_types = filter;
+			self.refresh();
+		});
+
+
 		var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
 		$subscribe_button.find('input').click(function(event){
 			if ($subscribe_button.hasClass('unsubscribed'))
@@ -79,11 +95,6 @@ function Watcher(url, on_instructions)
 					});
 			}
 		});
-
-		self.event_source = config.source;
-		self.time = config.time;
-
-		self.event_stack = [];
 
 		$new_events.click(function(e){
 			$("html, body").animate({ scrollTop: 0 }, "fast", function(){
@@ -116,6 +127,13 @@ function Watcher(url, on_instructions)
 			self.event_stack.push(event_update);
 		}
 
+		self.refresh = function()
+		{
+			$stream.find('.event').remove();
+			self.event_stack = [];
+			self.time = 0;
+			self.update();
+		}
 
 		self.check_updates = function()
 		{
@@ -131,7 +149,6 @@ function Watcher(url, on_instructions)
 			{
 				$new_events.addClass('pending-events');
 				$new_events.find('.count').text(self.event_stack.length);
-
 				return;
 			}
 			$new_events.removeClass('pending-events');
@@ -162,21 +179,34 @@ function Watcher(url, on_instructions)
 			}
 
 			var $events = $stream.find('.event');
-			var $last_event = $($events[$events.length - 1]);
-			var event_data = $last_event.data();
-			var last_event_time = event_data.time;
+
+			if($events.length)
+			{
+				var $last_event = $($events[$events.length - 1]);
+				var event_data = $last_event.data();
+				var last_event_time = event_data.time;
+			}
+			else
+			{
+				var last_event_time = 0;
+			}
 
 			$more_events.addClass('loading');
 
 			rpc.call(
 				'events.get_updates',
-				{'time': last_event_time, 'events': self.event_source, 'new': false},
+				{
+					'time': last_event_time,
+					'events': self.event_source,
+					'new': false,
+					'filter_types': self.filter_types
+				},
 				function(result){
 
 					$more_events.removeClass('loading');
 					if(!result.events.length)
 					{
-						$more_events.remove();
+						/* $more_events.remove() */;
 						return;
 					}
 					$(result.events).each(function(i, event){
@@ -220,7 +250,11 @@ function Watcher(url, on_instructions)
 		{
 			rpc.call(
 				'events.get_updates',
-				{'time': self.time, 'events': self.event_source},
+				{
+					'time': self.time,
+					'events': self.event_source,
+					'filter_types': self.filter_types
+				},
 				function(result){
 					self.update_events(result.time, result.events);
 				}
