@@ -19,6 +19,9 @@
 
         <url route="/" methods="GET" view="#view.front" name="front"/>
 
+        <url route="/dash/" methods="GET" view="#view.dash" name="dash">
+
+        </url>
 
         <!-- twitter like conventions for username -->
         <url route="/{username}/" methods="GET">

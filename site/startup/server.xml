@@ -24,6 +24,7 @@
         <import py="moya.libs.recaptcha"/>
         <import py="moya.libs.thumbnail"/>
         <import py="moya.libs.faq"/>
+        <import py="moya.libs.tables"/>
         <import location="../willmcgugan.timeline" priority="5" templatepriority="5"/>
 
         <!-- The 'site' library, for non reusable content -->
@@ -54,6 +55,7 @@
         <install name="uploads" lib="moya.static" mount="/uploads/"/>
         <install name="faq" lib="moya.faq" mount="/faq/"/>
         <install name="timeline" lib="willmcgugan.timeline" mount="/"/>
+        <install name="tables" lib="moya.tables" />
 
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
         

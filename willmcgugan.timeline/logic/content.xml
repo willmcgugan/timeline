@@ -6,7 +6,8 @@
       xmlns:html="http://moyaproject.com/html"
       xmlns:w="http://moyaproject.com/widgets"
       xmlns:comments="http://moyaproject.com/comments"
-      xmlns:tl="http://willmcgugan.com/timeline">
+      xmlns:tl="http://willmcgugan.com/timeline"
+      xmlns:tables="http://moyaproject.com/tables">
 
     <content libname="content.base" template="base.html" final="yes">
         <!--
@@ -85,6 +86,40 @@ Add `?format=json` to the URL to return a JSON response
                 topic="event-${event.uuid}"
                 url="${.urls.timeline.event(event_id=event.uuid)}"/>
         </section>
+    </content>
+
+    <content libname="content.dash" extends="#content.base" template="dash_base.html">
+
+        <section name="side">
+            <node template="fragments/dash_sections.html"/>
+        </section>
+        <section name="main">
+            <html:h3>Dashboard</html:h3>
+        </section>
+
+    </content>
+
+    <content libname="content.dash.streams" extends="#content.dash" >
+
+        <section name="main">
+
+            <table class="table table-striped" xmlns="http://moyaproject.com/tables">
+                <columns>
+                    <header>Title</header>
+                    <header>Slug</header>
+                    <header>ID</header>
+                    <header>URL</header>
+                </columns>
+                <rows src="streams" dst="stream">
+                    <cell>${stream.title}</cell>
+                    <cell>${stream.slug}</cell>
+                    <cell>${stream.uuid}</cell>
+                    <cell><w:link url="${stream.url}">${stream.url}</w:link></cell>
+                </rows>
+            </table>
+
+        </section>
+
     </content>
 
 </moya>
