@@ -88,7 +88,7 @@
                 <let data="form.data"/>
 
                 <try>
-                    <tl:get-stream id="data.stream" dst="stream"/>
+                    <tl:get-stream id="data.stream" dst="stream" user=".user"/>
                     <db:create model="#Event" dst="event"
                         let:stream="stream"
                         let:time="data.time ? epoch:data.time : .now"
