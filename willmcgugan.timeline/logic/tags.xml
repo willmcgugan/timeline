@@ -83,7 +83,7 @@
         </signature>
         <str dst="template">event.html</str>
         <return>
-            <render-template template="${template}" let:event="event"/>
+            <render-template template="${template}" let:link_event="yes" let:event="event"/>
         </return>
     </tag>
 

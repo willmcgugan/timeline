@@ -129,10 +129,10 @@ function Watcher(url, on_instructions)
 
 		self.refresh = function()
 		{
-			$stream.find('.event').remove();
+			$stream.find('.event').addClass('fade-event');
 			self.event_stack = [];
 			self.time = 0;
-			self.update();
+			self.reset();
 		}
 
 		self.check_updates = function()
@@ -244,6 +244,22 @@ function Watcher(url, on_instructions)
             $event.find('[data-toggle="tooltip"]').tooltip();
 
             return $event;
+        }
+
+        self.reset = function()
+        {
+        	rpc.call(
+				'events.get_updates',
+				{
+					'time': self.time,
+					'events': self.event_source,
+					'filter_types': self.filter_types
+				},
+				function(result){
+					$stream.find('.event').remove();
+					self.update_events(result.time, result.events);
+				}
+			);
         }
 
 	 	self.update = function()

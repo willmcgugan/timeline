@@ -43,6 +43,15 @@
 {
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
+html
+{
+    background-color: #eee;
+}
+
+body
+{
+    overflow-x:hidden;
+}
 
 .margin-bottom-20
 {
@@ -83,6 +92,15 @@
     transform: perspective(1000px) rotateX(90deg);
     opacity: 0;
     transition: transform 1s, opacity 1s;
+}
+
+
+.fade-event
+{
+    
+
+    opacity:0;
+    transition: opacity 0.2s;
 }
 
 .section.event-view

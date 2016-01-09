@@ -56,13 +56,13 @@ Add `?format=json` to the URL to return a JSON response
             <node template="stream_info.html" let:stream="stream" let:subscription="subscription"/>
         </section>
         <section name="main">
-            <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
+            <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="yes" />
         </section>
     </content>
 
     <content libname="content.user.subscriptions" extends="#content.stream.base">
-        <section name="side">
-            <html:h3>User Subscriptions</html:h3>
+        <section name="side" merge="prepend">
+            
         </section>
         <section name="main">
             <tl:stream events="events" source="subs-${user.id}"/>
@@ -92,14 +92,12 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.dash" extends="#content.base" template="dash_base.html">
-
         <section name="side">
             <node template="fragments/dash_sections.html"/>
         </section>
         <section name="main">
             <html:h3>Dashboard</html:h3>
         </section>
-
     </content>
 
     <content libname="content.dash.streams" extends="#content.dash" >
@@ -108,18 +106,17 @@ Add `?format=json` to the URL to return a JSON response
 
             <table class="table table-striped" xmlns="http://moyaproject.com/tables">
                 <columns>
-                    <header>Title</header>
-                    <header>Slug</header>
-                    <header>ID</header>
-                    <header>URL</header>
+                    <sort-header name="title">Title</sort-header>
+                    <sort-header name="slug">Slug</sort-header>
+                    <sort-header name="id">ID</sort-header>
                 </columns>
                 <rows src="streams" dst="stream">
-                    <cell>${stream.title}</cell>
+                    <cell><w:link url="${stream.url}">${stream.title}</w:link></cell>
                     <cell>${stream.slug}</cell>
                     <cell>${stream.uuid}</cell>
-                    <cell><w:link url="${stream.url}">${stream.url}</w:link></cell>
                 </rows>
             </table>
+    
 
         </section>
 

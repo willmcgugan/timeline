@@ -10,6 +10,11 @@
     <view libname="view.dash" content="#content.dash.streams">
 
     	<db:query model="#Stream" filter="#Stream.user==.user" dst="streams"/>
+        <db:sort-map src="streams" dst="streams"
+            let:title="#Stream.title"
+            let:id="#Stream.uuid"
+            let:slug="#Stream.slug"/>
+
 
     </view>
 

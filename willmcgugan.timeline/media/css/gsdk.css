@@ -6409,3 +6409,15 @@ body > .navbar-collapse.collapse {
   padding: 0 0 3px;
   display: block;
 }
+
+
+.nav-stacked > li:first-child > a{
+    border-radius: 4px 4px 0 0;
+    margin-left: -1px;
+}
+.nav-stacked >li:last-child > a{
+    border-radius: 0 0 4px 4px;
+}
+.nav-stacked>li+li{
+    margin-top: -1px;
+}
