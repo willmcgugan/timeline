@@ -22,7 +22,7 @@
 
     <table xmlns="http://moyaproject.com/admin"
         libname="admintable.streams" slug="streams" title="Streams" model="#Stream" description="Streams"
-        search="#Stream.slug==q or #Stream.uuid=q">
+        search="#Stream.slug==q or #Stream.uuid==q">
         <column title="UUID" sort="uuid" link="yes">${object.uuid}</column>
         <column title="Slug" sort="slug">${object.slug}</column>
         <column title="User" sort="#User.username"><moya:render src="object.user"/></column> 
