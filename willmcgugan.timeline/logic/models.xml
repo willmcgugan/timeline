@@ -52,6 +52,7 @@
     	<datetime name="time" null="no" blank="no" /> 
     	<datetime name="added_time" auto="yes"/>
         <datetime name="expire_time" null="yes" blank="yes"/>
+        <float name="insert_seconds" default="0" null="no"/>
 
         <string name="generator" length="100" blank="yes" null="yes" />
     	<string name="type" length="30"/>

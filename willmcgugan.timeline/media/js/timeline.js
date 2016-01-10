@@ -173,10 +173,10 @@ function Watcher(url, on_instructions)
 		{
 			var $more_events = $stream.find('.more-events');
 
-			if(!$more_events.length || $more_events.hasClass('loading'))
-			{
-				return;
-			}
+			// if(!$more_events.length || $more_events.hasClass('loading'))
+			// {
+			// 	return;
+			// }
 
 			var $events = $stream.find('.event');
 
@@ -248,6 +248,7 @@ function Watcher(url, on_instructions)
 
         self.reset = function()
         {
+        	window.scrollTop = 0;
         	rpc.call(
 				'events.get_updates',
 				{
@@ -257,7 +258,7 @@ function Watcher(url, on_instructions)
 				},
 				function(result){
 					$stream.find('.event').remove();
-					self.update_events(result.time, result.events);
+					self.update_events(result.time, result.events.reverse());
 				}
 			);
         }

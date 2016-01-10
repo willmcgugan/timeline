@@ -72,6 +72,7 @@
             <log-warn>Unknown update type in rpc method 'get_updates'!</log-warn>
         </switch>
 
+        <db:query src="events" distinct="yes" dst="events" />
         <return value="events"/>
     </tag>
 

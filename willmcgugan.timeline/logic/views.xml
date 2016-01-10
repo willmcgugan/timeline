@@ -97,7 +97,8 @@
                         let:title="data.title"
                         let:text="data.text"
                         let:markup="data.markup"
-                        let:generator="data.generator"/>
+                        let:generator="data.generator"
+                        let:insert_seconds="round:[.time, 6]"/>
 
                     <if test="data.image">
                         <let ext="ext:data.image.filename"/>
