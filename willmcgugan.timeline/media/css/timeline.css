@@ -385,3 +385,33 @@ pre code.hljs *
 {
     display:block;
 }
+
+
+.subscribe-control .subscribed
+{
+    color:#FF9500;
+    opacity:0.5;
+    cursor:pointer;
+}
+
+.subscribe-control .not-subscribed
+{
+    color:#999;
+    cursor:pointer;
+}
+
+.subscribe-control.subscribed .not-subscribed
+{
+    display:none;
+}
+
+.subscribe-control.unsubscribed .subscribed
+{
+    display:none;
+}
+
+.stream-info .title
+{
+    margin-right:20px;
+    margin-left:20px;
+}

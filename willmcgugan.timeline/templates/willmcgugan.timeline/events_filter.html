@@ -9,10 +9,17 @@
 <div class="card card-refine">
 
   <div class="header">
-    <h4 class="title">Filter Events</h4>
+    <span class="category pull-right">
+      {% include "controls/subscribe.html" %}
+    </span>
+            
+    <h4 class="title text-center">${stream_title}</h4>
+
+    
   </div>
   <div class="content">
     <div class="panel-group">
+
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -43,6 +50,9 @@
 
         </div>
       </div>
+
+     
+
 
     </div>
   </div>

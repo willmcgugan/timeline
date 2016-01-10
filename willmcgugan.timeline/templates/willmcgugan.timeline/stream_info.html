@@ -1,27 +1,32 @@
-<div class="card card-user">
-    <div class="image image-plain"></div>
+<div class="card">
+
     <div class="content">
-        <div class="author">
-            <a href="#">
-            <img class="avatar" src="{% media 'img/rpi2.png' %}" alt="...">
 
-            <h4 class="title">${stream.title}
-            </h4>
-
-            </a>
-        </div>
+        <span class="category pull-right">
+            {% include "controls/subscribe.html" %}
+        </span>
+            
+        <h4 class="text-center title">
+            ${stream.title}
+        </h4>
+        
         <p class="description text-center">
-        	Live Streaming stuff!
+            Live Streaming stuff!
         </p>
+
+        {#
+        <div class="text-center">
+            {% if .user %}
+            <div data-stream="${stream.uuid}" {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
+                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="click to subscribe" data-toggle="tooltip"/>
+                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="click to unsubscribe" data-toggle="tooltip"/>
+            </div>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
+            {% endif %}
+        </div>
+        #}
+        
     </div>
-    <div class="footer text-center">
-        {% if .user %}
-        <div data-stream="${stream.uuid}" {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
-			<input class="btn btn-primary btn-subscribe" type="button" value="Subscribe" />
-			<input class="btn btn-success btn-unsubscribe" type="button" value="Unsubscribe" />
-		</div>
-        {% else %}
-        <a class="btn btn-primary" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
-        {% endif %}
-    </div>
+    
 </div>

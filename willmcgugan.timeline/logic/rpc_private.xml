@@ -41,6 +41,7 @@
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
             <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
 
+            <let is_stream="events ^= 'stream'"/>
             <tl:get-events source="events" dst="events"/>
 
             <db:query src="events" dst="events" if="filter_types"
@@ -62,7 +63,7 @@
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
-                <tl:render-event event="event" dst="html"/>
+                <tl:render-event event="event" dst="html" link="not is_stream"/>
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
             <return-dict let:events="events_html" let:time="update_time"/>

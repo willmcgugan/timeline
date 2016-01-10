@@ -74,8 +74,8 @@ function Watcher(url, on_instructions)
 		});
 
 
-		var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
-		$subscribe_button.find('input').click(function(event){
+		var $subscribe_button = $('.subscribe-control[data-stream=' + stream_id + ']');
+		$subscribe_button.click(function(event){
 			if ($subscribe_button.hasClass('unsubscribed'))
 			{
 				rpc.call(

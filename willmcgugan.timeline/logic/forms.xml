@@ -35,13 +35,13 @@
             <option value="text"/>
             <option value="html"/>
         </select>
-        <input name="generator" label="Generator" placeholder="Name of device that generated this event"/>
+        <input name="generator" label="Generator" placeholder="Name of device that generated this event" required="yes"/>
         <text-area name="text" label="Text"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
 
         <validate-field field="image">
-            <fail if="values.type=='image' and not value">Required for image type</fail>
+            <fail if="values.type=='image' and not bool:.request.FILES.image">Required for image type</fail>
         </validate-field>
     </form>
 

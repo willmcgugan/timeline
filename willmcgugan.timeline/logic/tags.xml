@@ -81,10 +81,10 @@
         <doc>Render an event object</doc>
         <signature>
             <attribute name="event" type="expression" missing="no">An #Event object</attribute>
+            <attribute name="link" type="boolean">Link event to stream?</attribute>
         </signature>
-        <str dst="template">event.html</str>
         <return>
-            <render-template template="${template}" let:link_event="yes" let:event="event"/>
+            <render-template template="event.html" let:link_event="link" let:event="event"/>
         </return>
     </tag>
 
