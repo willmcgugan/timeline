@@ -47,13 +47,13 @@ Add `?format=json` to the URL to return a JSON response
 
     <content libname="content.stream.base" extends="#content.base" template="stream_base.html">
         <section name="side">
-            <node template="events_filter.html" withscope="yes"/>
+            
         </section>
     </content>
 
     <content libname="content.stream" extends="#content.stream.base">
         <str dst="stream_title">${stream.title}</str>
-        <section name="side" merge="prepend">
+        <section name="side" >
             <node template="stream_info.html" let:stream="stream" let:subscription="subscription"/>
         </section>
         <section name="main">

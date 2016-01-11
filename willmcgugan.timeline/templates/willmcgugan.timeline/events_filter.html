@@ -6,14 +6,41 @@
 ]
 {% end-data %}
 
+{#
+                        <div class="card card-user card-plain">
+                            
+                            <div class="content">
+                                <div class="author">
+                                    <a href="#">
+                                  
+                                      <h4 class="title">Drake <br>
+                                         <small>Artist</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center"> "I got my eyes on you <br>
+    You're everything that I see <br>
+    I want your high love" <br>
+                                </p>
+                            </div>
+                             <div class="footer text-center">
+                                <a href="#" class="btn btn-info btn-round btn-fill btn-wd"> Following</a>
+                            </div>
+                        </div>
+#}
+
+
 <div class="card card-refine">
 
   <div class="header">
+    {% if stream %}
     <span class="category pull-right">
       {% include "controls/subscribe.html" %}
     </span>
+    {% endif %}
             
     <h4 class="title text-center">${stream_title}</h4>
+
 
     
   </div>

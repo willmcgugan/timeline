@@ -1,31 +1,28 @@
-<div class="card">
+<div class="card card-user card-plain">
 
     <div class="content">
-
-        <span class="category pull-right">
-            {% include "controls/subscribe.html" %}
-        </span>
-            
+         
         <h4 class="text-center title">
-            ${stream.title}
+            ${stream.title}<br>
+            <small>Raspberry Pi</small>
         </h4>
         
         <p class="description text-center">
             Live Streaming stuff!
         </p>
 
-        {#
+        {% if stream %}
         <div class="text-center">
             {% if .user %}
             <div data-stream="${stream.uuid}" {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
-                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="click to subscribe" data-toggle="tooltip"/>
-                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="click to unsubscribe" data-toggle="tooltip"/>
+                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="click to subscribe" data-toggle="tooltip" data-placement="bottom"/>
+                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="this stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
             </div>
             {% else %}
             <a class="btn btn-primary" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
             {% endif %}
         </div>
-        #}
+        {% end-if %}
         
     </div>
     
