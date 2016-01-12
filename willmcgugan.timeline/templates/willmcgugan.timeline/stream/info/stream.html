@@ -15,8 +15,8 @@
         <div class="text-center">
             {% if .user %}
             <div data-stream="${stream.uuid}" {% attrib class=["subscribe-button", subscription ? 'subscribed' : 'unsubscribed'] %}>
-                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="click to subscribe" data-toggle="tooltip" data-placement="bottom"/>
-                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="this stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
+                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="Click to subscribe" data-toggle="tooltip" data-placement="bottom"/>
+                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="This stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
             </div>
             {% else %}
             <a class="btn btn-primary" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>

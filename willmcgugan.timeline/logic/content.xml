@@ -54,7 +54,7 @@ Add `?format=json` to the URL to return a JSON response
     <content libname="content.stream" extends="#content.stream.base">
         <str dst="stream_title">${stream.title}</str>
         <section name="side" >
-            <node template="stream_info.html" let:stream="stream" let:subscription="subscription"/>
+            <node template="stream/info/stream.html" let:stream="stream" let:subscription="subscription"/>
         </section>
         <section name="main">
             <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
@@ -62,6 +62,7 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.user.subscriptions" extends="#content.stream.base">
+        <let-str menu="subscriptions"/>
         <section name="side" merge="prepend">
             
         </section>
@@ -71,6 +72,7 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.user.streams" extends="#content.stream.base">
+        <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             
         </section>
@@ -80,6 +82,7 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.event" extends="#content.base" template="view_event.html">
+        <let-str menu="event"/>
         <section name="event">
             <node template="event.html" let:event="event" let:link_to_stream="yes"/>
         </section>
@@ -93,6 +96,7 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.dash" extends="#content.base" template="dash_base.html">
+        <let menu="dash"/>
         <section name="side">
             <node template="fragments/dash_sections.html"/>
         </section>
