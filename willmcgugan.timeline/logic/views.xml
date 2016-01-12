@@ -57,15 +57,16 @@
         <get-url name="user_subscriptions" let:username="user.username" dst="watch_url"/>
         <db:query model="#Event" dst="events" maxresults="10"
             filter="#Event.stream.id in timeline.streams" orderby="-time"/>
+        <db:query model="#Subscription" let:timeline="timeline" dst="subscriptions"/>
     </view>
 
     <view libname="view.user.streams" content="#content.user.streams">
-        <db:get-required model="moya.auth#User" dst="user"
+        <db:get-required model="moya.auth#User" dst="owner"
             let:username=".url.username"/>
-        <tl:get-timeline let:user="user" dst="timeline"/>
-        <get-url name="user_streams" let:username="user.username" dst="watch_url"/>
+        <tl:get-timeline let:user="owner" dst="timeline"/>
+        <get-url name="user_streams" let:username="owner.username" dst="watch_url"/>
         <db:query model="#Event" dst="events" maxresults="10"
-            filter="#Event.stream.user == user" orderby="-time"/>
+            filter="#Event.stream.user == owner" orderby="-time"/>
     </view>
 
     <view libname="view.user.stream" content="#content.stream">
@@ -138,8 +139,6 @@
             <serve-json obj="result" if=".request.GET.format=='json'"/>
         </if-post>
     </view>
-
-
 
     <view libname="view.event" content="#content.event">
         <db:get-required model="#Event" let:uuid=".url.event_id" dst="event"/>
