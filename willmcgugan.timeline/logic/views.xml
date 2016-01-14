@@ -13,7 +13,7 @@
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
         <url route="/api/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
-       
+
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
@@ -50,7 +50,7 @@
             let:stream="stream" let:timeline="timeline"/>
     </view>
 
-    <view libname="view.user.subscriptions" content="#content.user.subscriptions">
+    <view libname="view.user.subscriptions" content="#content.user.subscriptions" requires=".user">
         <db:get-required model="moya.auth#User" dst="user"
             let:username=".url.username"/>
         <tl:get-timeline let:user="user" dst="timeline"/>
@@ -82,7 +82,7 @@
     </view>
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
-        
+
         <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
         <if-post>
             <forms:validate src="form">

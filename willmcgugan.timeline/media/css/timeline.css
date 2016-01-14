@@ -97,7 +97,7 @@ body
 
 .fade-event
 {
-    
+
 
     opacity:0;
     transition: opacity 0.2s;
@@ -412,6 +412,16 @@ pre code.hljs *
 
 .stream-info .title
 {
-    margin-right:20px;
     margin-left:20px;
+    margin-right:20px;
+}
+
+.stream-actions-button .btn
+{
+    border:0px;
+}
+
+.stream-actions-button
+{
+    float:left;
 }
