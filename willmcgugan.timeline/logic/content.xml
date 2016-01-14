@@ -58,6 +58,37 @@ Add `?format=json` to the URL to return a JSON response
             <node template="stream/info/stream.html" let:stream="stream" let:subscription="subscription"/>
         </section>
         <section name="main">
+
+            <tl:modal id="code_modal" title="Get the Code">
+                <markdown>
+
+Use any of the following methods to post events to your stream...
+
+##### Inthing App
+
+```bash
+pip install inthing
+INTHING_STREAM=${stream.uuid}
+INTHING_PASSWORD=${stream.password}
+inthing event --title "New Event" --text "Hello, *World*!"
+```
+
+##### Python
+
+```python
+import inthing
+stream = inthing.Stream(id="${stream.uuid}", password="${stream.password}")
+stream.text_event(title="New Event", text="Hello, *World*!")
+```
+
+##### CURL
+
+```
+curl 
+```
+                </markdown>
+            </tl:modal>
+
             <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
         </section>
     </content>

@@ -26,4 +26,14 @@
         </js>
     </widget>
 
+    <widget name="card" template="widgets/card.html">
+    </widget>
+
+    <widget name="modal" template="widgets/modal.html">
+        <signature>
+            <attribute name="id" type="text"/>
+            <attribute name="title" type="text"/>
+        </signature>
+    </widget>
+
 </moya>
