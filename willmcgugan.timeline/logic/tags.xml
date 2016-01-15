@@ -12,6 +12,7 @@
     		<attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
             <attribute name="user" type="expression" missing="no" required="no">A user</attribute>
     	</signature>
+
     	<if test="id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
             <db:get model="#Stream" let:uuid="id" dst="stream" />
         </if>
