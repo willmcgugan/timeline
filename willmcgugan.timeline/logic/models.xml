@@ -28,7 +28,7 @@
         <string name="slug" length="100" blank="yes" null="yes" unique="yes"/>
         <string name="ip" length="45" null="yes"/>
         <uuid name="uuid" unique="yes"/>
-        <integer name="retention" default="24" null="yes" blank="yes"/>
+        <integer name="retention" default="None" null="yes" blank="yes"/>
         <string name="password" length="100" blank="yes" null="yes"/>
         <boolean name="public" default="yes" />
 

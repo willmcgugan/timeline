@@ -46,8 +46,9 @@
     </form>
 
 
-    <form libname="form.stream.new" legend="New Stream" style="horizontal" xmlns="http://moyaproject.com/forms">
+    <form libname="form.stream.new" style="horizontal" xmlns="http://moyaproject.com/forms">
         <input name="title" label="Title"/>
+        <text-area name="description" maxlength="100" help="max 100 characters"/>
         <submit-button text="Create Stream"/>
     </form>
 

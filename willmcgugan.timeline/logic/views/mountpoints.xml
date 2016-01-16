@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:forms="http://moyaproject.com/forms"
+    xmlns:tl="http://willmcgugan.com/timeline"
+    xmlns:fs="http://moyaproject.com/fs"
+    xmlns:image="http://moyaproject.com/image"
+    xmlns:tn="http://moyaproject.com/thumbnail">
+
+   <mountpoint name="main">
+        <!-- TODO: API page -->
+        <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
+        <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />
+        <url route="/api/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
+
+        <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
+        <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
+
+        <url route="/" methods="GET" view="#view.front" name="front"/>
+        <url route="/dash/" mount="#mountpoint.dash"/>
+
+        <!-- twitter like conventions for username -->
+        <url route="/{username}/" methods="GET">
+            <redirect-to path="/${.url.username}"/>
+        </url>
+        <!-- user's streams -->
+        <url route="/{username}" methods="GET" view="#view.user.streams" name="user_streams" />
+        <!-- user's subscriptions -->
+        <url route="/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
+        <!-- individual stream -->
+        <url route="/{username}/{stream_slug}/" methods="GET" view="#view.user.stream" name="user_stream"/>
+
+    </mountpoint>
+
+
+    <mountpoint name="dash" libname="mountpoint.dash">
+
+    	<url route="/" methods="GET" view="#view.dash" name="dash"/>
+        <url route="/streams/" view="#view.dash.streams" name="dash_streams"/>
+    	<url route="/streams/new/" view="#view.dash.stream.new" name="new_stream"/>
+
+    </mountpoint>
+</moya>

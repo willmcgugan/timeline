@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
+      xmlns:m="http://moyaproject.com"
       xmlns:let="http://moyaproject.com/let"
       xmlns:db="http://moyaproject.com/db"
       xmlns:forms="http://moyaproject.com/forms"
@@ -49,6 +50,9 @@ Add `?format=json` to the URL to return a JSON response
         <section name="side">
         </section>
         <section name="main">
+            <w:breadcrumbs>
+                <w:link name="dash"/>
+            </w:breadcrumbs>
         </section>
     </content>
 
@@ -131,17 +135,47 @@ curl
     <content libname="content.dash" extends="#content.base" template="dash_base.html">
         <let menu="dash"/>
         <section name="side">
-            <node template="fragments/dash_sections.html"/>
+            <scope-node template="dash/nav.html"/>
         </section>
         <section name="main">
             <html:h3>Dashboard</html:h3>
         </section>
     </content>
 
+    <content libname="content.dash.stream.new" extends="#content.dash">
+        <str dst="dash_view">streams</str>
+        <section name="main">
+            <w:breadcrumbs>
+                <w:link name="dash">Dash</w:link>
+                <w:link name="dash_streams">Streams</w:link>
+                <w:link name="new_stream">New</w:link>
+            </w:breadcrumbs>
+            <tl:card>
+                <render src="form"/>
+            </tl:card>
+        </section>
+    </content>
+
     <content libname="content.dash.streams" extends="#content.dash" >
+
+        <str dst="dash_view">streams</str>
 
         <section name="main">
 
+            <w:breadcrumbs>
+                <w:link name="dash">Dash</w:link>
+                <w:link name="dash_streams">Streams</w:link>
+            </w:breadcrumbs>
+
+            <node template="dash/streams_container.html">
+                
+                <!-- <w:button-link name="new_stream" icon="star">New Stream</w:button-link> -->
+                <m:for src="streams" dst="stream">
+                    <node template="dash/stream.html" let:stream="stream"/>
+                </m:for>
+            </node>
+
+            <!--
             <table class="table table-striped" xmlns="http://moyaproject.com/tables">
                 <columns>
                     <sort-header name="title">Title</sort-header>
@@ -154,8 +188,8 @@ curl
                     <cell>${stream.uuid}</cell>
                 </rows>
             </table>
+            -->
     
-
         </section>
 
     </content>

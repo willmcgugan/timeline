@@ -425,3 +425,13 @@ pre code.hljs *
 {
     float:left;
 }
+
+.dash-streams .card
+{
+  
+}
+
+.form-group:last-child
+{
+    margin-bottom:0px;
+}

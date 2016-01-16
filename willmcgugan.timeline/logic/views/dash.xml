@@ -7,15 +7,33 @@
     xmlns:image="http://moyaproject.com/image"
     xmlns:tn="http://moyaproject.com/thumbnail">
 
-    <view libname="view.dash" content="#content.dash.streams">
+    <view libname="view.dash" content="#content.dash">
 
-    	<db:query model="#Stream" filter="#Stream.user==.user" dst="streams"/>
+
+
+
+    </view>
+
+    <view libname="view.dash.streams" content="#content.dash.streams">
+        <db:query model="#Stream" filter="#Stream.user==.user" dst="streams"/>
         <db:sort-map src="streams" dst="streams"
             let:title="#Stream.title"
             let:id="#Stream.uuid"
             let:slug="#Stream.slug"/>
+    </view>
 
-
+    <view libname="view.dash.stream.new" content="#content.dash.stream.new">
+        <forms:get form="#form.stream.new" dst="form"/>
+        <forms:validate src="form">
+            <let data="form.data"/>
+            <db:create model="#Stream" dst="stream"
+                let:user=".user"
+                let:password="token:8"
+                let:ip=".request.client_addr"
+                let:title="data.title"
+                let:description="data.description"/>
+            <redirect name="stream" let:stream_id="stream.uuid" />
+        </forms:validate>
     </view>
 
 </moya>
