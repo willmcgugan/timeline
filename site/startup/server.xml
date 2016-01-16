@@ -46,7 +46,7 @@
         <install name="links" lib="moya.links"/>
         <install name="favicon" lib="moya.favicon" mount="/"/>
         <install name="comments" lib="moya.comments" mount="/comments/"/>
-        <install name="pages" lib="moya.pages" mount="/" />
+        <install name="pages" lib="moya.pages" mount="/"/>
         <install name="feedback" lib="moya.feedback" mount="/feedback/"/>
         <install name="jsonrpc" lib="moya.jsonrpc"/>
         <install name="wysihtml5" lib="moya.wysihtml5"/>
@@ -55,10 +55,10 @@
         <install name="uploads" lib="moya.static" mount="/uploads/"/>
         <install name="faq" lib="moya.faq" mount="/faq/"/>
         <install name="timeline" lib="willmcgugan.timeline" mount="/"/>
-        <install name="tables" lib="moya.tables" />
+        <install name="tables" lib="moya.tables"/>
 
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
-        
-</server>
+
+    </server>
 
 </moya>

@@ -26,6 +26,7 @@
         <foreign-key name="user" model="moya.auth#User" backref="streams" null="yes" blank="yes" picker="moya.auth#admintable.users" owned="yes"/>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes" unique="yes"/>
+        <text name="description" default="" null="no" />
         <string name="ip" length="45" null="yes"/>
         <uuid name="uuid" unique="yes"/>
         <integer name="retention" default="None" null="yes" blank="yes"/>

@@ -7,16 +7,22 @@
     <i class="glyphicon glyphicon-wrench text-info"></i>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="#" data-toggle="modal" data-target="#code_modal"><i class="fa fa-code"></i> Get the Code</a></li>
+    <li><a href="#" data-toggle="modal" data-target="#code_modal"><i class="fa fa-code"></i> Get the Code!</a></li>
+    <li></li>
+    <li>
+        <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> Edit</a>
+    </li>
+    <li>
+        <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New</a>
+    </li>
   </ul>
 </div>
 
         <h4 class="text-center title">
-            ${stream.title}<br>
-            <small>Raspberry Pi</small>
+            ${stream.title}
         </h4>
         <p class="description text-center">
-            Live Streaming stuff!
+            ${stream.description}
         </p>
 
         {% if stream %}
