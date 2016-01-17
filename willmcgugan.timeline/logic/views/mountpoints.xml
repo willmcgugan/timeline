@@ -29,7 +29,7 @@
         <!-- user's subscriptions -->
         <url route="/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
         <!-- individual stream -->
-        <url route="/{username}/{stream_slug}/" methods="GET" view="#view.user.stream" name="user_stream"/>
+        <url route="/{username}/{stream_slug}/" view="#view.user.stream" name="user_stream"/>
 
     </mountpoint>
 

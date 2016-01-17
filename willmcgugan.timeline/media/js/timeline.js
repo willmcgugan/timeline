@@ -384,6 +384,10 @@ $(function(){
         window.open(href, title, "width=640, height=480");
     });
 
+    $('.hide-button').click(function(e){
+    	var hide = $(this).data('hide');
+    	$(hide).fadeOut('fast');
+    });
 });
 
 

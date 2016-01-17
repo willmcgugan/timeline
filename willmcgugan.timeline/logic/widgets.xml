@@ -27,6 +27,13 @@
     </widget>
 
     <widget name="card" template="widgets/card.html">
+        <signature>
+            <attribute name="title" type="text" default="" />
+            <attribute name="id" type="text" default=""/>
+            <attribute name="dismiss" default="no"/>
+            <attribute name="hidden" default="no"/>
+        </signature>
+        <let id="token:8" if="not id"/>
     </widget>
 
     <widget name="modal" template="widgets/modal.html">

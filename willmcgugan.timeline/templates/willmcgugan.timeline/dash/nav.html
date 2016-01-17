@@ -1,0 +1,9 @@
+
+<ul class="nav nav-pills nav-stacked">
+	<li{% if dash_view=='streams' %} class="active"{% endif %} role="presentation">
+		<a href="{% url 'dash_streams' %}">Streams</a>
+	</li>
+	<li role="presentation">
+		<a href="{% url 'dash_streams' %}">Subscriptions</a>
+	</li>
+</ul>

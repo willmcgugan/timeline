@@ -52,4 +52,10 @@
         <submit-button text="Create Stream"/>
     </form>
 
+    <form libname="form.stream.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
+        <hidden-input name="action" initial="'edit'"/>
+        <input src="title" dst="title" name="title" label="Title" required="yes"/>
+        <text-area src="description" dst="description" name="description" label="Description" maxlength="100" help="max 100 characters"/>
+        <submit-button class="btn btn-round" text="Save"/>
+    </form>
 </moya>
