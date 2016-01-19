@@ -2,6 +2,33 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav navbar-right">
+
+      {%- if .permissions.admin %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i class="glyphicon glyphicon-wrench"></i> Admin
+            <b class="caret"></b>
+            </a>
+
+            <ul class="dropdown-menu">
+              {%- for renderable in sections.admin_links %}
+              {%- if renderable.url -%}
+              <li>{% render renderable %}</li>
+              {%- else %}
+              <li class="divider"/>
+              {%- endif %}
+              {%- endfor %}
+              {% if .apps.admin %}
+              {%- if sections.admin_links %}
+              <li class="divider"/>
+              {%- endif %}
+              <li><a href="{% url 'front' from 'admin' %}">Moya Admin</a></li>
+              {% endif %}
+            </ul>
+        </li>
+      {%- endif %}
+
+
         <li>
             <a href="#"><i class="fa fa-globe"></i> Discover</a>
         </li>
