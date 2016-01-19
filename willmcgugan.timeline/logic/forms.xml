@@ -54,8 +54,9 @@
 
     <form libname="form.stream.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
         <hidden-input name="action" initial="'edit'"/>
-        <input src="title" dst="title" name="title" label="Title" required="yes"/>
-        <text-area src="description" dst="description" name="description" label="Description" maxlength="100" help="max 100 characters"/>
+        <input name="title" label="Title" required="yes"/>
+        <input name="password" label="Password" help="Used by the API (leave blank to disable password access)"/>
+        <text-area name="description" label="Description" maxlength="100" help="max 100 characters"/>
         <submit-button class="btn btn-round" text="Save"/>
     </form>
 </moya>

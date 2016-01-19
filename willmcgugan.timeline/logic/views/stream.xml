@@ -8,7 +8,7 @@
     xmlns:image="http://moyaproject.com/image"
     xmlns:tn="http://moyaproject.com/thumbnail">
 
- 
+
 
     <view libname="view.front" template="front.html">
 
@@ -61,6 +61,8 @@
                 <let data="edit_form.data"/>
                 <if test="data.action=='edit'">
                     <forms:apply src="edit_form" dst="stream"/>
+                    <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
+                    <forms:get form="#form.stream.edit" dst="edit_form" src="stream" bind="None"/>
                 </if>
             </forms:validate>
         </if-post>

@@ -50,7 +50,7 @@
     	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes"/>
 
         <uuid name="uuid" unique="yes"/>
-    	<datetime name="time" null="no" blank="no" /> 
+    	<datetime name="time" null="no" blank="no" />
     	<datetime name="added_time" auto="yes"/>
         <datetime name="expire_time" null="yes" blank="yes"/>
         <float name="insert_seconds" default="0" null="no"/>
@@ -76,6 +76,12 @@
         <integer name="filesize"/>
         <integer name="width"/>
         <integer name="height"/>
+    </model>
+
+    <model libname="UserMessage" xmlns="http://moyaproject.com/db">
+        <foreign-key name="user" model="moya.auth#User" null="no"/>
+        <string name="type" choices="['warning', 'success', 'danger']" default="success" length="20"/>
+        <text name="text" null="no"/>
     </model>
 
 </moya>

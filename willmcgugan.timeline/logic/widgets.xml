@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
-      xmlns:let="http://moyaproject.com/let">
+      xmlns:let="http://moyaproject.com/let"
+      xmlns:tl="http://willmcgugan.com/timeline">
     <!-- define your widgets here -->
 
     <widget name="stream" template="widgets/stream.html">
@@ -40,6 +41,12 @@
         <signature>
             <attribute name="id" type="text"/>
             <attribute name="title" type="text"/>
+        </signature>
+    </widget>
+
+    <widget name="message" template="widgets/message.html">
+        <signature>
+            <attribute name="type" type="text"/>
         </signature>
     </widget>
 

@@ -63,6 +63,8 @@ Add `?format=json` to the URL to return a JSON response
         </section>
         <section name="main">
 
+            <tl:render-user-message/>
+
             <tl:card title="Edit Stream" id="stream-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
                 <render src="edit_form"/>
             </tl:card>
@@ -160,8 +162,7 @@ curl
         </section>
     </content>
 
-    <content libname="content.dash.streams" extends="#content.dash" >
-
+    <content libname="content.dash.streams" extends="#content.dash">
         <str dst="dash_view">streams</str>
 
         <section name="main">
