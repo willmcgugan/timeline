@@ -54,18 +54,22 @@
         <db:get model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
 
-        <forms:get form="#form.stream.edit" dst="edit_form" src="stream"/>
+        <if test="stream.user == .user">
 
-        <if-post>
-            <forms:validate src="edit_form">
-                <let data="edit_form.data"/>
-                <if test="data.action=='edit'">
-                    <forms:apply src="edit_form" dst="stream"/>
-                    <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
-                    <forms:get form="#form.stream.edit" dst="edit_form" src="stream" bind="None"/>
-                </if>
-            </forms:validate>
-        </if-post>
+            <forms:get form="#form.stream.edit" dst="edit_form" src="stream"/>
+            <if-post>
+                <forms:validate src="edit_form" let:stream="stream">
+                    <let data="edit_form.data"/>
+                    <if test="data.action=='edit'">
+                        <forms:apply src="edit_form" dst="stream"/>
+                        <let stream.slug="slug:stream.title"/>
+                        <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
+                        <redirect name="user_stream" let:username="stream.user.username" let:stream_slug="stream.slug"/>
+                    </if>
+                </forms:validate>
+            </if-post>
+
+        </if>
     </view>
 
     <view libname="view.stream.upload" content="#content.stream.new_event">

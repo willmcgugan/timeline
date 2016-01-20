@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
 	xmlns:w="http://moyaproject.com/widgets"
-    xmlns:m="http://moyaproject.com">
+    xmlns:m="http://moyaproject.com"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:let="http://moyaproject.com/let">
 
     <choices libname="choices.markup">
         <choice value="text" label="Text"/>
@@ -58,5 +60,15 @@
         <input name="password" label="Password" help="Used by the API (leave blank to disable password access)"/>
         <text-area name="description" label="Description" maxlength="100" help="max 100 characters"/>
         <submit-button class="btn btn-round" text="Save"/>
+
+        <validate-field field="title">
+            <db:get model="#Stream" dst="_stream"
+                let:user="stream.user" let:slug="slug:value" filter="#Stream.id != stream.id"/>
+
+            <fail if="_stream">This title doesn't generate a unique slug</fail>
+            <fail if="not slug:value">
+                Can't make a slug out of this title
+            </fail>
+        </validate-field>
     </form>
 </moya>

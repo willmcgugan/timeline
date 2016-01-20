@@ -32,7 +32,9 @@
         </signature>
 
         <tl:get-stream id="id" user="user" dst="stream"/>
-        <not-found if="not stream"/>
+        <catch exception="willmcgugan.timeline.missing.stream">
+            <not-found/>
+        </catch>
         <return value="stream"/>
     </tag>
 
