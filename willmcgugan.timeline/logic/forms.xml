@@ -47,25 +47,35 @@
         </validate-field>
     </form>
 
-
     <form libname="form.stream.new" style="horizontal" xmlns="http://moyaproject.com/forms">
-        <input name="title" label="Title"/>
-        <text-area name="description" maxlength="100" help="max 100 characters"/>
+        <input name="title" label="Title" required="yes"
+            placeholder="Title of the stream (used to generate a URL)"/>
+        <text-area name="description" label="Description" 
+            placeholder="What will go in this stream?"/>
         <submit-button text="Create Stream"/>
+        <validate-field field="title">
+            <db:if-exists model="#Stream" 
+                let:user="user" let:slug="slug:value">
+                <fail>This title exists, please pick another</fail>
+            </db:if-exists>
+            <fail if="not slug:value">
+                Can't make a slug out of this title
+            </fail>
+        </validate-field>
     </form>
 
     <form libname="form.stream.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
         <hidden-input name="action" initial="'edit'"/>
         <input name="title" label="Title" required="yes"/>
         <input name="password" label="Password" help="Used by the API (leave blank to disable password access)"/>
-        <text-area name="description" label="Description" maxlength="100" help="max 100 characters"/>
+        <text-area name="description" label="Description"/>
         <submit-button class="btn btn-round" text="Save"/>
 
         <validate-field field="title">
-            <db:get model="#Stream" dst="_stream"
-                let:user="stream.user" let:slug="slug:value" filter="#Stream.id != stream.id"/>
-
-            <fail if="_stream">This title doesn't generate a unique slug</fail>
+            <db:if-exists model="#Stream"
+                let:user="stream.user" let:slug="slug:value" filter="#Stream.id != stream.id">
+                <fail if="_stream">This title exists, please pick another</fail>
+            </db:if-exists>
             <fail if="not slug:value">
                 Can't make a slug out of this title
             </fail>

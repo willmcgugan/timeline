@@ -29,6 +29,7 @@
 
     <widget name="card" template="widgets/card.html">
         <signature>
+            <attribute name="close" type="boolean" default="yes"/>
             <attribute name="title" type="text" default="" />
             <attribute name="id" type="text" default=""/>
             <attribute name="dismiss" default="no"/>

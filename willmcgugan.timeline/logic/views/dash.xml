@@ -10,8 +10,6 @@
     <view libname="view.dash" content="#content.dash">
 
 
-
-
     </view>
 
     <view libname="view.dash.streams" content="#content.dash.streams">
@@ -24,15 +22,17 @@
 
     <view libname="view.dash.stream.new" content="#content.dash.stream.new">
         <forms:get form="#form.stream.new" dst="form"/>
-        <forms:validate src="form">
+        <forms:validate src="form" let:user=".user">
             <let data="form.data"/>
             <db:create model="#Stream" dst="stream"
                 let:user=".user"
                 let:password="token:8"
                 let:ip=".request.client_addr"
                 let:title="data.title"
+                let:slug="slug:data.title"
                 let:description="data.description"/>
-            <redirect name="stream" let:stream_id="stream.uuid" />
+            <redirect name="user_stream"
+                let:username=".user.username" let:stream_slug="stream.slug" />
         </forms:validate>
     </view>
 

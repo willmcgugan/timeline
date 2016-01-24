@@ -1,4 +1,11 @@
-
+<ul class="nav nav-pills">
+    <li role="presentation">
+        <a href="/dash/streams/">Streams</a>
+    </li>
+    <li role="presentation">
+        <a href="/dash/streams/">Events</a>
+    </li>
+</ul>
 
 
 <div class="card card-user card-plain">
@@ -10,7 +17,7 @@
   </button>
   <ul class="dropdown-menu">
     <li>
-        <a href="#">
+        <a href="{% url 'new_stream' %}">
             <i class="fa fa-star"></i> New Stream
         </a>
     </li>

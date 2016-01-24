@@ -156,7 +156,7 @@ curl
                 <w:link name="dash_streams">Streams</w:link>
                 <w:link name="new_stream">New</w:link>
             </w:breadcrumbs>
-            <tl:card>
+            <tl:card title="New Stream" close="no">
                 <render src="form"/>
             </tl:card>
         </section>

@@ -1,17 +1,18 @@
-<div {% attrib (class='card', id=self.id) %} {% if self.hidden %}style="display:none;"{% endif %}>
+<div {% attrib (class='card', id=self.id, style=self.hidden ? 'displat:none;': '') %}>
 
 <div class="modal-header">
 
+{%- if self.close %}
 <button type="button" class="close hide-button" data-hide="#${self.id}" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+{%- endif %}
 
-{% if self.title %}
+{%- if self.title %}
 <h4 class="title">${self.title}</h4>
-{% endif %}
+{%- endif %}
 
 </div>
 
 <div class="content">
-
-{% children %}
+{%- children -%}
 </div>
 </div>

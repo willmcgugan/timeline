@@ -66,8 +66,8 @@ body
 .body-content
 {
     box-sizing: border-box;
-    margin-top:60px;
-    min-height:calc(100vh - 216px - 60px);
+    margin-top:70px;
+    min-height:calc(100vh - 216px - 70px);
 }
 
 .timelines
