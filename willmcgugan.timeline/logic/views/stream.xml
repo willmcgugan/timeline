@@ -41,6 +41,7 @@
         <get-url name="user_streams" let:username="owner.username" dst="watch_url"/>
         <db:query model="#Event" dst="events" maxresults="10"
             filter="#Event.stream.user == owner" orderby="-time"/>
+        <let user=".user"/>
     </view>
 
     <view libname="view.user.stream" content="#content.stream">

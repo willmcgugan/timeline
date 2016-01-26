@@ -102,10 +102,11 @@
 
         <db:query columns="#Timeline" filter="#Subscription.stream==stream" dst="timelines"/>
         <for src="timelines" dst="timeline" filter="timeline.user">
-
             <let watch_path="slashjoin:['events', 'timeline-' + str:timeline.id]"/>
             <tl:notify path="watch_path" action="update-stream"/>
         </for>
+        <tl:notify if="stream.user"
+            path="slashjoin:['events', 'user-' + str:stream.user.id]" action="update-stream"/>
     </tag>
 
     <filter name="addpclass" value="markup">

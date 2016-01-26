@@ -109,7 +109,7 @@ body
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
 }
 
-#timeline-view .body-content
+#timeline-view .section-stream
 {
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
 }
@@ -433,7 +433,7 @@ pre code.hljs *
 
 .dash-streams .card
 {
-  
+    height:130px;
 }
 
 .form-group:last-child
