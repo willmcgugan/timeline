@@ -16,7 +16,7 @@ log = logging.getLogger('moya.runtime.notifier')
 class Notify(LogicElement):
 	xmlns = "http://willmcgugan.com/timeline"
 
-	path = Attribute("Path to update", type="expression")
+	path = Attribute("Path to update", type="text")
 	action = Attribute("Action to send", type="text", required="yes")
 	data = Attribute("Data associated with the action", type="expression", default=None)
 	failsilently = Attribute("Ignore connectivity errors?", type="boolean", default=True)
@@ -25,7 +25,7 @@ class Notify(LogicElement):
 		
 		path, action, data = self.get_parameters(context, 'path', 'action', 'data')
 
-		path = "/" + path.lstrip()
+		path = "/" + path.lstrip('/')
 		log.debug('notify path="%s", action="%s"', path, action)
 
 		params = self.get_parameters(context)

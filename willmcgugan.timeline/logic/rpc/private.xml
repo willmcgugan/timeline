@@ -63,7 +63,7 @@
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
-                <tl:render-event event="event" dst="html" link="not is_stream"/>
+                <tl:render-event event="event" dst="html" link_to_stream="not is_stream"/>
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
             <return-dict let:events="events_html" let:time="update_time"/>

@@ -110,7 +110,7 @@ curl
         </section>
         <section name="main">
             <node template="copy/no_subscriptions.html" withscope="yes" if="not timeline.streams"/>
-            <tl:stream events="events" source="subs-${user.id}"/>
+            <tl:stream events="events" source="timeline-${timeline.id}"/>
         </section>
     </content>
 
@@ -139,7 +139,7 @@ curl
     </content>
 
     <content libname="content.dash" extends="#content.base" template="dash_base.html">
-        <let menu="dash"/>
+        <let-str menu="dash"/>
         <section name="side">
             <scope-node template="dash/nav.html"/>
         </section>

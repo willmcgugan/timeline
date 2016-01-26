@@ -20,6 +20,7 @@
     		let:watcherurl="slashjoin:[.app.settings.watcher_url, 'events', source]">
     		<get-url name="jsonrpc_private" dst="rpc_url"/>
     	</dict>
+        <let link_title="yes"/>
     	<js>
             $(function(){
                 $('#${id}').inthingStream(${json:config});
