@@ -3,6 +3,7 @@
     <!-- Initialize a server -->
     <server docname="main">
 
+        <import location="external/moya.widgets.extra"/>
         <import location="external/moya.logins" priority="3"/>
         <import py="moya.libs.debug" if=".debug"/>
         <import py="moya.libs.diagnostics" if="not .debug"/>
@@ -56,9 +57,8 @@
         <install name="faq" lib="moya.faq" mount="/faq/"/>
         <install name="timeline" lib="willmcgugan.timeline" mount="/"/>
         <install name="tables" lib="moya.tables"/>
-
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
-
+        <install name="widgetsextra" lib="moya.widgets.extra"/>
     </server>
 
 </moya>

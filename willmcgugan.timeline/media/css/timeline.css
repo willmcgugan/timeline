@@ -109,6 +109,11 @@ body
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
 }
 
+#timeline-view .body-content
+{
+    background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
+}
+
 .timeline-container .card .image
 {
     height:auto;
