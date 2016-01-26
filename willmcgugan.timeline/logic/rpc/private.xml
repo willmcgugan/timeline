@@ -37,7 +37,7 @@
 
         <rpc:method name="get_updates" group="events" description="Get updates to a stream">
             <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
-            <rpc:parameter name="time" type="number" required="yes">update time</rpc:parameter>
+            <rpc:parameter name="time" type="number" null="yes" required="yes">update time</rpc:parameter>
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
             <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
 
@@ -71,7 +71,7 @@
 
         <rpc:method name="subscribe" group="stream" description="unsubscribe from a stream">
             <rpc:parameter name="stream" type="string">stream to subscribe to</rpc:parameter>
-       
+
             <rpc:error code="login_required" if="not .user"/>
             <tl:get-stream id="stream" dst="stream"/>
             <db:get-or-create model="#Timeline" dst="timeline"
@@ -95,7 +95,6 @@
             <return-dict let:status="'ok'"/>
         </rpc:method>
 
-        
         <rpc:method name="preview_comment" description="Preview comment">
             <rpc:parameter name="comment" type="string" required="yes">Comment text</rpc:parameter>
             <rpc:parameter name="markup" type="string" required="yes">Markup type</rpc:parameter>
