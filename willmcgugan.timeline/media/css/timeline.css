@@ -80,14 +80,14 @@ body
     margin-bottom:12px;
 }
 
-.card
+.card.event
 {
     transform: perspective(1000px) rotateX(0deg);
     opacity: 1;
     transition: transform 1s, opacity 1s;
 }
 
-.new-event
+.event.new-event
 {
     transform: perspective(1000px) rotateX(90deg);
     opacity: 0;

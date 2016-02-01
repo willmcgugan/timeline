@@ -49,7 +49,6 @@
         </return>
     </tag>
 
-
     <tag name="get-events">
         <doc>Get events from a given source</doc>
         <signature>
@@ -78,7 +77,6 @@
         <db:query src="events" distinct="yes" dst="events" />
         <return value="events"/>
     </tag>
-
 
     <tag name="render-event">
         <doc>Render an event object</doc>
