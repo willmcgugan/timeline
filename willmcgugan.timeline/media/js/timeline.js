@@ -56,6 +56,7 @@ function Watcher(url, on_instructions)
 		var $events_container = $stream.find('.events-container')
 		var $new_events = $stream.find('.new-events');
 		var rpc = new JSONRPC(config.rpc_url);
+        var stream_end = false;
 
 		var stream_id = config.stream_id;
 
@@ -172,11 +173,10 @@ function Watcher(url, on_instructions)
 		self.check_append_events = function()
 		{
 			var $more_events = $stream.find('.more-events');
-
-			// if(!$more_events.length || $more_events.hasClass('loading'))
-			// {
-			// 	return;
-			// }
+            if(stream_end)
+            {
+                return;
+            }
 
 			var $events = $stream.find('.event');
 
@@ -206,7 +206,7 @@ function Watcher(url, on_instructions)
 					$more_events.removeClass('loading');
 					if(!result.events.length)
 					{
-						/* $more_events.remove() */;
+                        stream_end = true;
 						return;
 					}
 					$(result.events).each(function(i, event){
@@ -291,8 +291,12 @@ function Watcher(url, on_instructions)
 		}
 
 		$(window).scroll(function(e){
+            if(stream_end)
+            {
+                return;
+            }
 			var $more_events = $('.more-events');
-			if(!$more_events.length)
+			if($more_events.hasClass('loading'))
 			{
 				return;
 			}
