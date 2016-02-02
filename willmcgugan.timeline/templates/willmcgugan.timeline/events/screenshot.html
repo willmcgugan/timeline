@@ -1,0 +1,20 @@
+{% extends "../stream/card.html" %}
+
+{% block "content" %}
+{%- if event.image %}
+<div class="image-container">
+    {%- if link_title %}
+    <a href="{% url 'event' with event_id=event.uuid %}"><img src="${event.image.path|'thumbnail'(processor='large')}" /></a>
+    {%- else %}
+    <img src="${event.image.path|'thumbnail'(processor='large')}" />
+    {%- endif %}
+</div>
+{%- endif %}
+<div class="content">
+    {%- include "fragments/card_header.html" -%}
+    {%- include "fragments/card_title.html" -%}
+    {%- include "fragments/card_description.html" -%}
+    {%- include "fragments/expand_card.html" %}
+    {%- include "fragments/card_footer.html" %}
+</div>
+{% endblock %}

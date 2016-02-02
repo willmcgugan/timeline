@@ -9,4 +9,15 @@
     	<db:update src="event" let:numcomments="signal.data.commentobject.count"/>
     </handle>
 
+    <handle signal="moya.auth.post-login">
+        <let user="signal.data.user"/>
+        <db:atomic>
+            <if test="not user.account">
+                <log-debug>Creating a user account</log-debug>
+                <db:get-or-create model="#Account" let:user="user" dst="account"/>
+                <log-debug>Creating an imagelib</log-debug>
+                <db:create model="moya.imagelib#Collection" dst="account.imgcollection"/>
+            </if>
+        </db:atomic>
+    </handle>
 </moya>

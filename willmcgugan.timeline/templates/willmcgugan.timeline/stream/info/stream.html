@@ -1,28 +1,32 @@
-<div class="card card-user">
+<div class="card card-user with-image">
 
     <div class="content">
 
-<div class="btn-group stream-actions-button">
-  <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="glyphicon glyphicon-wrench text-info"></i>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#" data-toggle="modal" data-target="#code_modal">
-        <i class="fa fa-code"></i> Get the Code!</a>
-    </li>
-    <li role="separator" class="divider"></li>
-    <li>
-        <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit</a>
-    </li>
-    <li>
-        <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New</a>
-    </li>
-  </ul>
-</div>
+        <div class="btn-group stream-actions-button">
+          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-wrench text-info"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" data-toggle="modal" data-target="#code_modal">
+                <i class="fa fa-code"></i> Get the Code!</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit</a>
+            </li>
+            <li>
+                <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New</a>
+            </li>
+          </ul>
+        </div>
 
-        <h4 class="text-center title">
-            ${stream.title}
-        </h4>
+        <div class="author">
+            <a href="#">
+            <img class="avatar" src="/static/stream.jpg" alt="...">
+                <h4 class="title">${stream.title}</h4>
+            </a>
+        </div>
+
         <p class="description text-center">
             ${stream.description}
         </p>

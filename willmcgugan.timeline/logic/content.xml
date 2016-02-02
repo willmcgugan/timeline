@@ -8,7 +8,8 @@
       xmlns:w="http://moyaproject.com/widgets"
       xmlns:comments="http://moyaproject.com/comments"
       xmlns:tl="http://willmcgugan.com/timeline"
-      xmlns:tables="http://moyaproject.com/tables">
+      xmlns:tables="http://moyaproject.com/tables"
+      xmlns:imglib="http://moyaproject.com/imagelib">
 
     <content libname="content.base" template="base.html" final="yes">
         <!--
@@ -68,6 +69,9 @@ Add `?format=json` to the URL to return a JSON response
             <tl:card title="Edit Stream" id="stream-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
                 <render src="edit_form"/>
             </tl:card>
+
+            <breakpoint />
+            <imglib:manager collection=".user.account.imgcollection" />
 
             <tl:modal id="code_modal" title="Get the Code">
                 <markdown>

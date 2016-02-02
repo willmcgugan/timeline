@@ -3,11 +3,17 @@
     xmlns:m="http://moyaproject.com"
     xmlns:let="http://moyaproject.com/let">
 
+
+    <model libname="Account" xmlns="http://moyaproject.com/db">
+        <one-to-one name="user" backref="account" model="moya.auth#User" />
+        <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" />
+    </model>
+
     <model libname="Timeline" xmlns="http://moyaproject.com/db">
         <doc>A timeline is a collection of events from subscriptions</doc>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes"/>
-        <uuid name="uuid" unique="yes"/>
+        <uuid name="uuid" unique="yes"/>        
     	<foreign-key name="user" model="moya.auth#User" backref="timeline" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
     	<integer name="update" default="0"/>
         <many-to-many name="streams" model="#Stream" through="#Subscription"/>

@@ -45,7 +45,7 @@
     </view>
 
     <view libname="view.user.stream" content="#content.stream">
-        <db:get-required model="moya.auth#User" let:username=".user.username" dst="user"/>
+        <db:get-required model="moya.auth#User" let:username=".url.username" dst="user"/>
         <tl:get-stream-required user="user" id=".url.stream_slug" dst="stream"/>
         <tl:get-timeline dst="timeline" />
 
@@ -78,11 +78,10 @@
     </view>
 
     <view libname="view.stream.upload.post" content="#content.stream.new_event">
-
         <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
+
         <forms:validate src="form">
             <let data="form.data"/>
-
             <try>
                 <tl:get-stream id="data.stream" dst="stream" user=".user"/>
                 <db:create model="#Event" dst="event"
@@ -123,8 +122,8 @@
                     </dict>
                 </dict>
             </if>
-
         </forms:validate>
+
         <if test="not form.ok">
             <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
                 <let error="form.error"/>

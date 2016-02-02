@@ -3,6 +3,7 @@
     <!-- Initialize a server -->
     <server docname="main">
 
+        <import location="external/moya.imagelib"/>
         <import location="external/moya.widgets.extra"/>
         <import location="external/moya.logins" priority="3"/>
         <import py="moya.libs.debug" if=".debug"/>
@@ -59,6 +60,7 @@
         <install name="tables" lib="moya.tables"/>
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
         <install name="widgetsextra" lib="moya.widgets.extra"/>
-    </server>
+        <install name="imagelib" lib="moya.imagelib" mount="/imglib/"/>
+</server>
 
 </moya>

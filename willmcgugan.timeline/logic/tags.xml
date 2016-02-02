@@ -115,7 +115,6 @@
         </return>
     </filter>
 
-
     <tag name="user-message">
         <doc>Associate a message with the current message</doc>
         <signature>
@@ -135,7 +134,6 @@
         <db:delete src="user_message" if="user_message"/>
         <return value="user_message or None"/>
     </tag>
-
 
     <tag name="render-user-message">
         <tl:get-user-message dst="message"/>

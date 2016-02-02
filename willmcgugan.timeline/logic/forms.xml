@@ -81,4 +81,10 @@
             </fail>
         </validate-field>
     </form>
+
+    <form libname="form.stream.image.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
+        <field label="current">
+            
+        </field>
+    </form>
 </moya>
