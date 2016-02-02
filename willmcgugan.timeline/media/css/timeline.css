@@ -53,6 +53,10 @@ body
     overflow-x:hidden;
 }
 
+*:focus {
+    outline: none;
+}
+
 .margin-bottom-20
 {
     margin-bottom:20px;
@@ -72,7 +76,7 @@ body
 
 .modal-wide
 {
-    width:90%;
+    width:80%;
 }
 
 .timelines

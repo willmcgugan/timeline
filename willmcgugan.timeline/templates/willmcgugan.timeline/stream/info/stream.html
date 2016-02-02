@@ -21,7 +21,7 @@
         </div>
 
         <div class="author">
-            <a href="#" data-toggle="modal" data-target="#img_modal">
+            <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
             <img class="avatar" src="/static/stream.jpg" alt="...">
                 <h4 class="title">${stream.title}</h4>
             </a>
