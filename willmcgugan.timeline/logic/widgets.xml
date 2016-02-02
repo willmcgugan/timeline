@@ -43,6 +43,7 @@
         <signature>
             <attribute name="id" type="text"/>
             <attribute name="title" type="text"/>
+            <attribute name="class" type="text" default="">Additional class for modal</attribute>
         </signature>
     </widget>
 

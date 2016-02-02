@@ -42,6 +42,7 @@
         <install name="signup" lib="moya.signup" mount="/signup/"/>
         <install name="admin" lib="moya.admin" mount="/admin/"/>
         <install name="media" lib="moya.static" mount="/static/"/>
+        <install name="imagelib" lib="moya.imagelib" mount="/imglib/"/>
         <install name="debug" lib="moya.debug" mount="/debug/" if=".debug"/>
         <install name="diagnostics" lib="moya.diagnostics" if="not .debug"/>
         <install name="bootstrap" lib="moya.twitter.bootstrap"/>
@@ -60,7 +61,8 @@
         <install name="tables" lib="moya.tables"/>
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
         <install name="widgetsextra" lib="moya.widgets.extra"/>
-        <install name="imagelib" lib="moya.imagelib" mount="/imglib/"/>
-</server>
+        
+
+    </server>
 
 </moya>

@@ -70,6 +70,11 @@ body
     min-height:calc(100vh - 216px - 70px);
 }
 
+.modal-wide
+{
+    width:90%;
+}
+
 .timelines
 {
     /* margin-top:60px;*/

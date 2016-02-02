@@ -62,6 +62,7 @@ Add `?format=json` to the URL to return a JSON response
         <section name="side" >
             <node template="stream/info/stream.html" let:stream="stream" let:subscription="subscription"/>
         </section>
+
         <section name="main">
 
             <tl:render-user-message/>
@@ -70,8 +71,9 @@ Add `?format=json` to the URL to return a JSON response
                 <render src="edit_form"/>
             </tl:card>
 
-            <breakpoint />
-            <imglib:manager collection=".user.account.imgcollection" />
+            <tl:modal id="img_modal" title="Image Manager" class="modal-wide">
+                <imglib:manager collection=".user.account.imgcollection" />
+            </tl:modal>
 
             <tl:modal id="code_modal" title="Get the Code">
                 <markdown>
