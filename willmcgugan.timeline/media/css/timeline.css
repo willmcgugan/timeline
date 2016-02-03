@@ -444,6 +444,7 @@ pre code.hljs *
 .stream-actions-button
 {
     float:left;
+    position:absolute;
 }
 
 .dash-streams .card

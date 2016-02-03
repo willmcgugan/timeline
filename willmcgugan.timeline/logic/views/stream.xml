@@ -9,7 +9,6 @@
     xmlns:tn="http://moyaproject.com/thumbnail">
 
 
-
     <view libname="view.front" template="front.html">
 
     </view>
@@ -71,67 +70,6 @@
             </if-post>
 
         </if>
-    </view>
-
-    <view libname="view.stream.upload" content="#content.stream.new_event">
-        <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
-    </view>
-
-    <view libname="view.stream.upload.post" content="#content.stream.new_event">
-        <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
-
-        <forms:validate src="form">
-            <let data="form.data"/>
-            <try>
-                <tl:get-stream id="data.stream" dst="stream" user=".user"/>
-                <db:create model="#Event" dst="event"
-                    let:stream="stream"
-                    let:time="data.time ? epoch:data.time : .now"
-                    let:type="data.type or 'text'"
-                    let:priority="int:data.priority"
-                    let:title="data.title"
-                    let:text="data.text"
-                    let:markup="data.markup"
-                    let:generator="data.generator"
-                    let:insert_seconds="round:[.time, 6]"/>
-
-                <if test="data.image">
-                    <let ext="ext:data.image.filename"/>
-                    <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
-                    <image:get-size file="data.image" dst="size"/>
-                    <db:create model="#Image" dst="img"
-                        let:event="event"
-                        let:path="path"
-                        let:filesize="len:data.image"
-                        let:width="size.width"
-                        let:height="size.height"/>
-                    <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
-                    <tn:generate thumbnails="#thumbnails" path="path" />
-                </if>
-                <db:commit/>
-            </try>
-            <catch exception="*" dst="error">
-                <dict dst="result" let:status="'error'" let:msg="error.msg"/>
-            </catch>
-            <if test="not result">
-                <tl:notify-stream stream="stream"/>
-                <let new_event="event"/>
-                <dict dst="result" let:status="'ok'">
-                   <dict dst="event" let:id="new_event.uuid">
-                        <get-fq-url dst="url" name="event" let:event_id="new_event.uuid"/>
-                    </dict>
-                </dict>
-            </if>
-        </forms:validate>
-
-        <if test="not form.ok">
-            <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
-                <let error="form.error"/>
-                <let field_errors="form.errors"/>
-            </dict>
-        </if>
-        <serve-json obj="result" if=".request.GET.format=='json'"/>
-        
     </view>
 
     <view libname="view.event" content="#content.event">
