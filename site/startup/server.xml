@@ -61,7 +61,6 @@
         <install name="tables" lib="moya.tables"/>
         <install name="logins" lib="moya.logins" mount="/sign-in/"/>
         <install name="widgetsextra" lib="moya.widgets.extra"/>
-        
 
     </server>
 

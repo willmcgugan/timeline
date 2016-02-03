@@ -14,6 +14,11 @@
         <tn:processor name="large" quality="70">
             <img:resize-to-fit width="750"/>
         </tn:processor>
+
+        <tn:processor name="stream_info" quality="70">
+            <img:square/>
+            <img:resize-to-fit width="245"/>
+        </tn:processor>
     
     </tn:thumbnails>
 

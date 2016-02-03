@@ -50,6 +50,10 @@ function FileUploader(url, file, callbacks)
             console.log(uuid, selected);
             callback();
         }
+        function default_on_select(uuid)
+        {
+            console.log(uuid);
+        }
 
         function default_on_change(uuid)
         {
@@ -57,6 +61,7 @@ function FileUploader(url, file, callbacks)
         }
 
         var on_pick = options.on_pick || default_picker;
+        var on_select = options.on_select || default_on_select;
         var on_change = options.on_change || default_on_change;
 
         var $manager = $(this);
@@ -65,6 +70,8 @@ function FileUploader(url, file, callbacks)
         var $edit_button = $manager.find('button.moya-imglib-action-edit');
         var $form = $manager.find('.moya-imglib-image-form');
         var data = $manager.data();
+        var single = data['single']
+        var edit = data['edit'];
         var collection_uuid = data['collection'];
         var upload_url = data['upload_url'];
         var rpc_url = data['rpc_url']
@@ -110,6 +117,10 @@ function FileUploader(url, file, callbacks)
             else
             {
                 $edit_button.attr('disabled', 'disabled');
+            }
+            if(!selected_count)
+            {
+                on_select(null);
             }
         }
 
@@ -181,15 +192,15 @@ function FileUploader(url, file, callbacks)
             {
                 pick_selected();
             }
-
             return false;
         });
 
         $manager.on('click', '.moya-imglib-image', function(e){
             var $img = $(this);
+            var image_data = $img.data();
             if(!is_touch_device())
             {
-                if(!e.shiftKey && !$img.hasClass('selected') )
+                if(single || (!e.shiftKey && !$img.hasClass('selected')) )
                 {
                     $images.find('.moya-imglib-image').removeClass('selected');
                 }
@@ -197,6 +208,7 @@ function FileUploader(url, file, callbacks)
             $img.toggleClass('selected');
             $header.removeClass('confirm-delete');
             update_selection();
+            on_select(image_data.uuid);
         });
 
         $manager.find('button[name=upload]').click(function(e){
@@ -205,7 +217,6 @@ function FileUploader(url, file, callbacks)
             $file_input.click();
             return false;
         });
-
 
         $form.on('click', 'button[name=cancel]', function(){
             $manager.removeClass('edit-image');
@@ -252,7 +263,6 @@ function FileUploader(url, file, callbacks)
                         set_tooltip($new_image);
                         update_selection();
                         on_change(collection_uuid);
-                        /*$new_image.addClass('selected');*/
                     }
                 }
             )
@@ -293,7 +303,8 @@ function FileUploader(url, file, callbacks)
         {
             var params = {
                 "collection": collection_uuid,
-                "image": image
+                "image": image,
+                "edit": edit
             }
             rpc.call(
                 'image.manager_form',
@@ -350,7 +361,12 @@ function FileUploader(url, file, callbacks)
         {
           var $progress = $(progress_template);
           $images.prepend($progress);
-          var uploader = new FileUploader(upload_url, file,
+          var image_upload_url = upload_url;
+          if(edit)
+          {
+            image_upload_url += '?edit=yes'
+          }
+          var uploader = new FileUploader(image_upload_url, file,
           {
               "progress": function(progress)
               {
@@ -403,7 +419,8 @@ function FileUploader(url, file, callbacks)
         {
             $el.tooltip({html:true, placement:'top', delay:300});
         }
-        set_tooltip($manager.find("[data-toggle='tooltip']"))
+        set_tooltip($manager.find("[data-toggle='tooltip']"));
+        update_selection();
 
     }
 

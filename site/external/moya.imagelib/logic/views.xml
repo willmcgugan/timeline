@@ -23,8 +23,8 @@
     <view libname="view.picker.upload">
         <db:get-required model="#Collection" let:uuid=".url.collection" dst="collection"/>
         <get-enum enum="#enum.image.type" dst="ImageType"/>
-
         <let
+            edit=".request.GET.edit == 'yes'"
             file=".request.FILES.image"
             image_uuid="uuid:1"
             filename="file.filename"
@@ -103,7 +103,8 @@
         <str dst="thumb_url">${image.file|'thumbnail'(processor='manager_tile')}</str>
 
         <render-template template="widgets/manager/manager_image.html" dst="image_html"
-            let:image="image"/>
+            let:image="image"
+            let:edit="edit"/>
         <dict dst="result"
             let:success="True"
             let:image_html="image_html"

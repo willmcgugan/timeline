@@ -72,7 +72,8 @@ Add `?format=json` to the URL to return a JSON response
             </tl:card>
 
             <tl:modal id="img_modal" title="Image Manager" class="modal-wide">
-                <imglib:manager collection=".user.account.imgcollection" />
+                <imglib:manager collection=".user.account.imgcollection"
+                    single="yes" edit="no" select="stream.image ? [stream.image.uuid] : []"/>
             </tl:modal>
 
             <tl:modal id="code_modal" title="Get the Code">

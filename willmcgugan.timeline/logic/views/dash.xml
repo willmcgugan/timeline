@@ -12,7 +12,7 @@
 
     </view>
 
-    <view libname="view.dash.streams" content="#content.dash.streams">
+    <view libname="view.dash.streams" content="#content.dash.streams" requires=".user">
         <db:query model="#Stream" filter="#Stream.user==.user" dst="streams"/>
         <db:sort-map src="streams" dst="streams"
             let:title="#Stream.title"
@@ -20,7 +20,7 @@
             let:slug="#Stream.slug"/>
     </view>
 
-    <view libname="view.dash.stream.new" content="#content.dash.stream.new">
+    <view libname="view.dash.stream.new" content="#content.dash.stream.new" requires=".user">
         <forms:get form="#form.stream.new" dst="form"/>
         <forms:validate src="form" let:user=".user">
             <let data="form.data"/>

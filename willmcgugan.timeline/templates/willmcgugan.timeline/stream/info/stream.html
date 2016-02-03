@@ -22,9 +22,15 @@
 
         <div class="author">
             <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
+            {% if stream.image %}
+            <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                <h4 class="title">${stream.title}</h4>
+            </a>
+            {% else %}
             <img class="avatar" src="/static/stream.jpg" alt="...">
                 <h4 class="title">${stream.title}</h4>
             </a>
+            {% endif %}
         </div>
 
         <p class="description text-center">

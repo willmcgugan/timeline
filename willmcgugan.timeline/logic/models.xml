@@ -38,6 +38,8 @@
         <string name="password" length="100" blank="yes" null="yes"/>
         <boolean name="public" default="yes" />
 
+        <foreign-key name="image" model="moya.imagelib#Image" null="yes" blank="yes"/>
+
         <property name="name" expression="slug or uuid"/>
 
         <property name="url">

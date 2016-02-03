@@ -43,6 +43,7 @@
                 </for>
             </w:select>
             <imglib:manager collection="collection" picker="yes"/>
+            <imglib:manager collection="collection" single="yes" edit="no" select="[collection.images.0.uuid]"/>
         </section>
     </content>
 </moya>

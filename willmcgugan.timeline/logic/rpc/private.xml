@@ -107,6 +107,13 @@
             </catch>
         </rpc:method>
 
+        <rpc:method name="set_image" group="stream" description="set the image for a stream">
+            <rpc:parameter name="stream" type="string">Stream</rpc:parameter>
+            <rpc:parameter name="image_uuid" type="string">Image UUID</rpc:parameter>
+            <tl:get-stream id="stream" dst="stream"/>
+
+        </rpc:method>
+
     </rpc:interface>
 
 </moya>
