@@ -30,12 +30,12 @@
             }
         </css>
         <let managerid=".content.id" />
-        <if test="on_pick">
-            <js>$("#${managerid}").imgmanager({on_pick:${on_pick}});</js>
-        </if>
-        <else>
-            <js>$("#${managerid}").imgmanager({});</js>
-        </else>
+        <js>
+$("#${managerid}").imgmanager({
+    on_pick: ${on_pick or 'null'},
+    on_selection: ${on_selection or 'null'}
+});
+        </js>
         <!-- <js>$("#${managerid} [data-toggle='tooltip']").tooltip({html:true, placement:'top', delay:500});</js> -->
         <get-url name="picker_upload" dst="upload_url" let:collection="collection.uuid" />
         <db:query src="collection.images" model="#Image" orderby="-uploaded_time" dst="images" />

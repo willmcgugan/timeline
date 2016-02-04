@@ -2,16 +2,17 @@
 <div class="col-sm-4">
 
 	<div class="card">
-
+	
 		<div class="content">
 			<a class="card-link title-link" href="${stream.url}">
+				<img class="avatar pull-left" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
 				<h4 class="title">${stream.title}</h4>
 			</a>
 			<p class="description">
 				${stream.description}
 			</p>
-
 		</div>
+	
 
 	</div>
 </div>

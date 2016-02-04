@@ -1,6 +1,6 @@
 "path","md5","auth md5"
 "/__init__.py",e54925e1ed3818adfd6c00bffa62f89d,07f2dead3bac69c65db162b2f4aba71c
-"/lib.ini",8a90d801c36324cc39988515be3e2210,24a43a10b1a5703d93dc5647c686b503
+"/lib.ini",73e8866e2ac4da6067a2da4108987e2c,36081def6aa58f651bba0a1c41600312
 "/templates/moya.imagelib/base.html",2a1af9c87fffe8bc2ebf710dfc14f133,574401a6d0c7ac8f895eaa32dd6fbfdc
 "/templates/moya.imagelib/emptyoption.html",1357827c4a575bbed3baf5ac4bbcf445,89b2bcf992c9a61f125229c1148495e9
 "/templates/moya.imagelib/imglist.html",06136f372508f942f8dabc3e39dc8470,c766f3e1f4bf523a02e6cf1fa3a2eaa3
@@ -12,12 +12,12 @@
 "/templates/moya.imagelib/widgets/manager/manager.html",377524320ce9d32d3eb7d65c4a583672,de3fad7df89b7fe690759199eb54be20
 "/templates/moya.imagelib/widgets/manager/manager_image.html",8e4091c0322a1f6ffb39175ebb2f3999,af54639390e98e1d5b500c0fc9865083
 "/media/readme.txt",ca958e537f29bc260e179537ce151dba,77e93fe2d9cd8aa606d603a8dbe35e93
-"/media/js/imglib.js",2f851ea1847c7bf95a336541216fd083,6fe58bc4ce840025d64ec2b2cb0196ce
+"/media/js/imglib.js",ee7c0485707f6032a1f7bb4f1009095a,2d20788dc05869f31e4d88897e4a3d84
 "/media/img/shade.png",1438aecffe8e9e6293165a3449332b71,68d9390d8aaade540b7ca482b0ab2290
 "/media/img/transparent.png",b94fff9f5d1e04324e3a735acfbe055e,640daccbafb6ab6434d18cebf7875b74
 "/media/css/imglib.css",978e1c78497a950f82a5d9850870262f,9f4bb6a287c342e07d6e84556ad22b4e
 "/logic/admin.xml",cbc6f9850de8d872d14607057d296816,34170083bced7e7152a56f97de053638
-"/logic/content.xml",bbee114e631329def093d56ae7c02343,6cce951f719c56ba63a6865ab7c1a76d
+"/logic/content.xml",2e4187b60326f7d994fa318b4c5742ba,1184ac083f4b1064054da582f5b28ba1
 "/logic/forms.xml",6d485cf3ef4bf8a112039924790e3a82,dd8d7c6d76abe5bbd716f4ec323df151
 "/logic/models.xml",5038841e1621c5c9644a7c640ce25007,b2875df082c141bea93530311044b950
 "/logic/mountpoints.xml",b8ff59ae6892650f08b17399c06fd71b,c40c78739b8b2638a2d67a66e1537ef5
@@ -27,7 +27,7 @@
 "/logic/tags.xml",1c9ee51cf107d6d9e691fbe08c215757,9813084b4864bf0daa03d4c445df3f91
 "/logic/thumbs.xml",9c9f20834302ce45a03f13f85506b20a,addbce2eb8c2ad38ae5ef00325cec34c
 "/logic/views.xml",ea61396385b441ec90d2fd236dd5376f,fc2d7245ce4b26ad8ab10c23f3697731
-"/logic/widgets.xml",6f8d0eee48c569476523d3a18e07d54e,56b9639678fb0dbbb88f7b42fdcc3c0c
+"/logic/widgets.xml",9ea8a4b73a6ffa752bac1060ccf90d64,f4d4a45543470976935eb601539f61de
 "/locale/readme.txt",06c4fce01453459edb43d2857ebcc873,c44a09c4f28517782589988dd758c62e
 "/docs/index.txt",2926e71550f30306db43f40a43ceb630,3e6a1c51300e932fa2a9f4a19027c6aa
 "/docs/introduction.txt",8e48d5aefc2650742816b7a2076dc6d4,bb782cca5c7a095fea2e040ad905a458

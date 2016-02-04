@@ -109,9 +109,16 @@
 
         <rpc:method name="set_image" group="stream" description="set the image for a stream">
             <rpc:parameter name="stream" type="string">Stream</rpc:parameter>
-            <rpc:parameter name="image_uuid" type="string">Image UUID</rpc:parameter>
+            <rpc:parameter name="image_uuid" type="string" null="yes">Image UUID</rpc:parameter>
             <tl:get-stream id="stream" dst="stream"/>
-
+            <db:get model="moya.imagelib#Image" let:uuid="image_uuid" dst="image"/>
+            <let stream.image="image"/>
+            <dict dst="html">
+                <render dst="side">
+                    <tl:stream-info stream="stream"/>
+                </render>
+            </dict>
+            <return-dict let:status="'success'" let:html="html"/>
         </rpc:method>
 
     </rpc:interface>

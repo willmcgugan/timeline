@@ -456,3 +456,10 @@ pre code.hljs *
 {
     margin-bottom:0px;
 }
+
+.stream-icon
+{
+    width:32px;
+    height:32px;
+    border-radius:100%;
+}

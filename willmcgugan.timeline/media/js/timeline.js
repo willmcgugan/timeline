@@ -47,7 +47,7 @@ function Watcher(url, on_instructions)
 	return self;
 }
 
-
+streams = {};
 (function($) {
     $.fn.inthingStream = function(config) {
 		var self = this;
@@ -59,6 +59,7 @@ function Watcher(url, on_instructions)
         var stream_end = false;
 
 		var stream_id = config.stream_id;
+        streams[stream_id] = self;
 
 		self.event_source = config.source;
 		self.time = config.time;
@@ -74,9 +75,10 @@ function Watcher(url, on_instructions)
 			self.refresh();
 		});
 
-
-		var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
-		$subscribe_button.click(function(event){
+		//var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
+		//$subscribe_button.on('click', function(event){
+        $(document).on('click', '.subscribe-button[data-stream=' + stream_id + ']', function(){
+            var $subscribe_button = $(this);
 			if ($subscribe_button.hasClass('unsubscribed'))
 			{
 				rpc.call(
@@ -102,6 +104,18 @@ function Watcher(url, on_instructions)
 				self.check_updates();
 			});
 		});
+
+        self.on_new_image = function(uuid)
+        {
+            rpc.call('stream.set_image',
+            {
+                stream: stream_id,
+                image_uuid: uuid
+            }, function(result)
+            {
+                $('.stream-info').html($(result.html.side));
+            });
+        }
 
 		self.update_events = function(time, events)
 		{
@@ -319,6 +333,12 @@ function Watcher(url, on_instructions)
 
 	}
 })(jQuery);
+
+function on_image_selection(stream_id, uuid)
+{
+    var stream = streams[stream_id];
+    stream.on_new_image(uuid);
+}
 
 $(function(){
     var config = $('body').data();

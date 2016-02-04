@@ -22,15 +22,16 @@
 
         <div class="author">
             <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
-            {% if stream.image %}
-            <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
-                <h4 class="title">${stream.title}</h4>
+                {% if stream.image %}
+                <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                {% else %}
+                <img class="avatar" src="/static/stream.jpg" alt="...">
+                {% endif %}
             </a>
-            {% else %}
-            <img class="avatar" src="/static/stream.jpg" alt="...">
-                <h4 class="title">${stream.title}</h4>
-            </a>
-            {% endif %}
+            <h4 class="title">
+                <a href="{% url 'user_streams' with username=stream.user.username %}">${stream.user.username}</a> <span class="text-muted">/</span> ${stream.title}
+            </h4>
+           
         </div>
 
         <p class="description text-center">

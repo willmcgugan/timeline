@@ -59,8 +59,14 @@ Add `?format=json` to the URL to return a JSON response
 
     <content libname="content.stream" extends="#content.stream.base">
         <str dst="stream_title">${stream.title}</str>
+
         <section name="side" >
-            <node template="stream/info/stream.html" let:stream="stream" let:subscription="subscription"/>
+            <tl:stream-info stream="stream"/>
+            <!--
+            <node template="stream/info/stream.html"
+                let:stream="stream"
+                let:subscription="subscription"/>
+            -->
         </section>
 
         <section name="main">
@@ -73,6 +79,7 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:modal id="img_modal" title="Image Manager" class="modal-wide">
                 <imglib:manager collection=".user.account.imgcollection"
+                    on_selection="function(uuid){on_image_selection('${stream.uuid}', uuid)}"
                     single="yes" edit="no" select="stream.image ? [stream.image.uuid] : []"/>
             </tl:modal>
 
@@ -106,7 +113,7 @@ curl
                 </markdown>
             </tl:modal>
 
-            <tl:stream events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
+            <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
         </section>
     </content>
 

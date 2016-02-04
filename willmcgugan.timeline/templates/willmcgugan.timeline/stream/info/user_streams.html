@@ -1,31 +1,93 @@
+{% data as filter_types %}
+[
+  ["image", "Images", "fa-camera"],
+  ["meta", "Meta", "fa-info-circle"],
+  ["text", "Text" ,"fa-file-text-o"]
+]
+{% end-data %}
 
-<div class="card card-user">
-    <div class="content">
-
-<div class="btn-group stream-actions-button">
-  <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="glyphicon glyphicon-wrench text-info"></i>
-  </button>
-  <ul class="dropdown-menu">
-    <li>
-        <a href="{% url 'new_stream' %}">
-            <i class="fa fa-star"></i> New Stream
-        </a>
-    </li>
-  </ul>
-</div>
-
-    <!-- Single button -->
+<div class="card card-refine">
+    <div class="header">
+        <div class="btn-group stream-actions-button">
+          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-wrench text-info"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+                <a href="{% url 'new_stream' %}">
+                    <i class="fa fa-star"></i> New Stream
+                </a>
+            </li>
+          </ul>
+        </div>
         <h4 class="text-center title">
             ${owner.display_name}'s streams
         </h4>
-
-        {#
-        <p class="description text-center">
-            Your subscriptions
-        </p>
-        #}
-
     </div>
+    <div class="content">
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h6 class="panel-title">
+                    <a data-toggle="collapse" href="#refine-stream" aria-expanded="false" class="collapsed">
+                      Streams
+                      <i class="fa fa-caret-up pull-right"></i>
+                    </a>
+                  </h6>
+                </div>
+                <div id="refine-stream" class="panel-collapse collapse out" aria-expanded="true">
+                  <div class="panel-body panel-scroll">
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" value="*" data-toggle="checkbox">
+                        All Streams
+                    </label>
+                    {% for stream in .user.streams %}
+                    <label class="checkbox">
+                        <input type="checkbox" value="${stream.pk}" data-toggle="checkbox">
+                        ${stream.title}
+                        {# <a href="{% url 'stream' with stream_id=stream.uuid %}"><i class="fa fa-link"></i></a> #}
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+       
+
+
+            <div class="panel panel-default">
+            <div class="panel-heading">
+              <h6 class="panel-title">
+                  <a data-toggle="collapse" href="#filter_types" class="collapsed">
+                      Filter by Type
+                      <i class="fa fa-caret-up pull-right"></i>
+                  </a>
+              </h6>
+            </div>
+
+            <div id="filter_types" class="panel-collapse collapse out">
+              <div class="panel-body panel-scroll">
+              
+              {% for type, type_label, icon in filter_types %}
+
+                <label class="checkbox unchecked">
+                  <span class="icons">
+                    <span class="first-icon fa fa-square-o"></span>
+                    <span class="second-icon fa fa-check-square-o"></span>
+                  </span>
+                  <input type="checkbox" name="${type}" class="stream-filter" data-filter="${type}" value="" data-toggle="checkbox">
+                  {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
+                </label>
+
+              {% endfor %}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+     </div>
 
 </div>

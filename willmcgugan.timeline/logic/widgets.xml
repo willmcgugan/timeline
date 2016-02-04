@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
       xmlns:let="http://moyaproject.com/let"
-      xmlns:tl="http://willmcgugan.com/timeline">
+      xmlns:tl="http://willmcgugan.com/timeline"
+      xmlns:db="http://moyaproject.com/db">
     <!-- define your widgets here -->
 
     <widget name="stream" template="widgets/stream.html">
     	<signature>
-    		<attribute name="id" type="expression" default="'stream-' + token:10"/>
+    		<attribute name="id" type="text" default="stream-${token:10}"/>
     		<attribute name="events" type="expression"/>
     		<attribute name="source" type="text"/>
     		<attribute name="stream_id" type="expression" default="None"/>
@@ -53,4 +54,12 @@
         </signature>
     </widget>
 
+    <widget name="stream-info" template="widgets/stream_info.html">
+        <signature>
+            <attribute name="stream" type="expression"/>
+        </signature>
+        <tl:get-timeline dst="timeline" />
+        <db:get model="#Subscription" dst="subscription"
+            let:stream="stream" let:timeline="timeline"/>
+    </widget>
 </moya>
