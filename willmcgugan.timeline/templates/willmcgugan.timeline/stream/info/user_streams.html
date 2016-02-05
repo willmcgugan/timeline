@@ -27,64 +27,60 @@
     <div class="content">
 
         <div class="panel-group">
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                   <h6 class="panel-title">
-                    <a data-toggle="collapse" href="#refine-stream" aria-expanded="false" class="collapsed">
+                    <a data-toggle="collapse" href="#filter-streams" aria-expanded="false" class="collapsed">
                       Streams
                       <i class="fa fa-caret-up pull-right"></i>
                     </a>
                   </h6>
                 </div>
-                <div id="refine-stream" class="panel-collapse collapse out" aria-expanded="true">
+                <div id="filter-streams" class="panel-collapse collapse out" aria-expanded="true">
                   <div class="panel-body panel-scroll">
-                    
-                    <label class="checkbox">
-                        <input type="checkbox" value="*" data-toggle="checkbox">
-                        All Streams
-                    </label>
+
                     {% for stream in .user.streams %}
-                    <label class="checkbox">
-                        <input type="checkbox" value="${stream.pk}" data-toggle="checkbox">
+                    <label class="checkbox" title="${stream.title}" data-toggle="tooltip">
+                        <input type="checkbox" value="${stream.pk}" class="stream-id-filter" data-toggle="checkbox" data-filter="${stream.id}">
                         ${stream.title}
                         {# <a href="{% url 'stream' with stream_id=stream.uuid %}"><i class="fa fa-link"></i></a> #}
                     </label>
                     {% endfor %}
+
                   </div>
                 </div>
             </div>
-       
-
 
             <div class="panel panel-default">
-            <div class="panel-heading">
-              <h6 class="panel-title">
-                  <a data-toggle="collapse" href="#filter_types" class="collapsed">
-                      Filter by Type
-                      <i class="fa fa-caret-up pull-right"></i>
-                  </a>
-              </h6>
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <a data-toggle="collapse" href="#filter-types" class="collapsed">
+                            Filter by Type
+                            <i class="fa fa-caret-up pull-right"></i>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="filter-types" class="panel-collapse collapse out">
+                    <div class="panel-body panel-scroll">
+
+                        {% for type, type_label, icon in filter_types %}
+                        <label class="checkbox unchecked">
+                            <span class="icons">
+                                <span class="first-icon fa fa-square-o"></span>
+                                <span class="second-icon fa fa-check-square-o"></span>
+                            </span>
+                            <input type="checkbox" name="${type}" class="event-type" data-filter="${type}" value="" data-toggle="checkbox">
+                            {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
+                        </label>
+                        {% endfor %}
+                        
+                    </div>
+
+                </div>
             </div>
 
-            <div id="filter_types" class="panel-collapse collapse out">
-              <div class="panel-body panel-scroll">
-              
-              {% for type, type_label, icon in filter_types %}
-
-                <label class="checkbox unchecked">
-                  <span class="icons">
-                    <span class="first-icon fa fa-square-o"></span>
-                    <span class="second-icon fa fa-check-square-o"></span>
-                  </span>
-                  <input type="checkbox" name="${type}" class="stream-filter" data-filter="${type}" value="" data-toggle="checkbox">
-                  {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
-                </label>
-
-              {% endfor %}
-              </div>
-
-            </div>
-          </div>
 
         </div>
 

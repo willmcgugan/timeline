@@ -65,18 +65,31 @@ streams = {};
 		self.time = config.time;
 		self.event_stack = [];
 		self.filter_types = [];
+        self.filter_streams = [];
 
-		$('#filter_types input.stream-filter').change(function(){
+		$('#filter-types input.event-type').change(function(){
 			var filter = [];
-			$('#filter_types input.stream-filter:checked').each(function(e, el){
+			$('#filter-types input.event-type:checked').each(function(e, el){
 				filter.push($(el).data('filter'));
 			});
 			self.filter_types = filter;
 			self.refresh();
 		});
 
-		//var $subscribe_button = $('.subscribe-button[data-stream=' + stream_id + ']');
-		//$subscribe_button.on('click', function(event){
+        var $filter_streams = $('#filter-streams');
+        $filter_streams.find('input.stream-id-filter').change(function(){
+            var filter = [];
+            $filter_streams.find('input.stream-id-filter:checked').each(function(e, el){
+                var stream_pk = $(el).data('filter');
+                if(stream_pk)
+                {
+                    filter.push(stream_pk);
+                }
+            });
+            self.filter_streams = filter;
+            self.refresh();
+        });
+
         $(document).on('click', '.subscribe-button[data-stream=' + stream_id + ']', function(){
             var $subscribe_button = $(this);
 			if ($subscribe_button.hasClass('unsubscribed'))
@@ -268,7 +281,8 @@ streams = {};
 				{
 					'time': self.time,
 					'events': self.event_source,
-					'filter_types': self.filter_types
+					'filter_types': self.filter_types,
+                    'filter_streams': self.filter_streams
 				},
 				function(result){
 					$stream.find('.event').remove();
