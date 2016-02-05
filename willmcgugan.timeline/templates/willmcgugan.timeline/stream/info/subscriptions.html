@@ -1,5 +1,5 @@
-<div class="card card-user">
-    <div class="content">
+<div class="card card-refine">
+    <div class="header">
         <h4 class="text-center title">
             Timeline
         </h4>
@@ -7,15 +7,20 @@
             {%- compact %}
             {% with count=len:subscriptions %}
             {% if count == 0 %}
-            	No subscriptions
+                No subscriptions
             {% elif count == 1 %}
-            	1 subscription
+                1 subscription
             {% else %}
-            	${count} subscriptios
+                ${count} subscriptions
             {% endif %}
             {% end-with %}
             {%- end-compact %}
         </p>
+    </div>
+    <div class="content">
+        <div class="panel-group">
+            {% include "fragments/filter/event_type.html" %}
+        </div>
     </div>
     
 </div>

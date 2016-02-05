@@ -1,0 +1,36 @@
+{% data as filter_types %}
+[
+  ["image", "Images", "fa-camera"],
+  ["meta", "Meta", "fa-info-circle"],
+  ["text", "Text" ,"fa-file-text-o"]
+]
+{% end-data %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h6 class="panel-title">
+            <a data-toggle="collapse" href="#filter-types" class="collapsed">
+                Filter by Type
+                <i class="fa fa-caret-up pull-right"></i>
+            </a>
+        </h6>
+    </div>
+
+    <div id="filter-types" class="panel-collapse collapse out">
+        <div class="panel-body panel-scroll">
+
+            {% for type, type_label, icon in filter_types %}
+            <label class="checkbox unchecked">
+                <span class="icons">
+                    <span class="first-icon fa fa-square-o"></span>
+                    <span class="second-icon fa fa-check-square-o"></span>
+                </span>
+                <input type="checkbox" name="${type}" class="event-type" data-filter="${type}" value="" data-toggle="checkbox">
+                {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
+            </label>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
