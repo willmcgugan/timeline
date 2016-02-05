@@ -5,7 +5,9 @@
 	
 		<div class="content">
 			<a class="card-link title-link" href="${stream.url}">
+				{% if stream.image.file %}
 				<img class="avatar pull-left" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+				{% endif %}
 				<h4 class="title">${stream.title}</h4>
 			</a>
 			<p class="description">
@@ -13,6 +15,5 @@
 			</p>
 		</div>
 	
-
 	</div>
 </div>
