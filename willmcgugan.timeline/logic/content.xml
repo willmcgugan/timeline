@@ -26,6 +26,14 @@
         <include-css path="css/timeline.css"/>
         <include-css path="highlight/styles/github.css"/>
     -->
+
+        <section name="main" merge="append">
+            <if test="not .user">
+                <include-css path="css/login-register.css"/>
+                <node template="forms/login.html"/>
+            </if>
+        </section>
+
     </content>
 
     <content libname="content.stream.new_event">
@@ -48,13 +56,6 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.stream.base" extends="#content.base" template="stream_base.html">
-        <section name="side">
-        </section>
-        <section name="main">
-            <w:breadcrumbs>
-                <w:link name="dash"/>
-            </w:breadcrumbs>
-        </section>
     </content>
 
     <content libname="content.stream" extends="#content.stream.base">
@@ -72,7 +73,7 @@ Add `?format=json` to the URL to return a JSON response
                 <render src="edit_form"/>
             </tl:card>
 
-            <tl:modal id="img_modal" title="Image Manager" class="modal-wide">
+            <tl:modal id="img_modal" title="Image Manager" class="modal-wide" if="stream and stream|'can_manage_stream'">
                 <imglib:manager collection=".user.account.imgcollection"
                     on_selection="function(uuid){on_image_selection('${stream.uuid}', uuid)}"
                     single="yes" edit="no" select="stream.image ? [stream.image.uuid] : []"/>

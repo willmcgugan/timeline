@@ -2,6 +2,7 @@
 
     <div class="content">
 
+        {% if stream|'can_manage_stream' %}
         <div class="btn-group stream-actions-button">
           <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-wrench text-info"></i>
@@ -19,8 +20,10 @@
             </li>
           </ul>
         </div>
+        {% endif %}
 
         <div class="author">
+            {% if stream|'can_manage_stream' %}
             <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
                 {% if stream.image %}
                 <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
@@ -28,6 +31,13 @@
                 <img class="avatar" src="/static/stream.jpg" alt="...">
                 {% endif %}
             </a>
+            {% else %}
+            {% if stream.image %}
+                <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                {% else %}
+                <img class="avatar" src="/static/stream.jpg" alt="...">
+                {% endif %}
+            {% endif %}
             <h4 class="title">
                 <a href="{% url 'user_streams' with username=stream.user.username %}">${stream.user.username}</a> <span class="text-muted">/</span> ${stream.title}
             </h4>
@@ -46,7 +56,7 @@
                 <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="This stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
             </div>
             {% else %}
-            <a class="btn btn-primary" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
+            <a class="btn btn-primary" onclick="$('#login_modal').modal();return false;" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
             {% endif %}
         </div>
         {% end-if %}

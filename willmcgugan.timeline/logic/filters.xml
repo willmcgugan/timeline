@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:tl="http://willmcgugan.com/timeline">
+
+    <filter name="can_manage_stream" value="stream">
+        <return value=".user and stream.user == .user"/>
+    </filter>
+
+</moya>
