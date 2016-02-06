@@ -432,11 +432,13 @@ pre code.hljs *
     display:none;
 }
 
+/*
 .stream-info .title
 {
     margin-left:20px;
     margin-right:20px;
 }
+*/
 
 .stream-actions-button .btn
 {
@@ -468,13 +470,14 @@ pre code.hljs *
 
 .stream-card
 {
-    margin-top:20px;
+    margin-top:60px;
 }
 
 .stream-info-footer
 {
-    margin:-20px 0px 10px 0px;
-    padding:10px 15px 0px 15px;
+    margin:-20px 15px 10px 15px;
+    padding:15px 15px 0px 15px;
+    border-top:1px solid #e8e8e8;
 }
 
 .stream-info-footer a.btn-social
@@ -486,4 +489,9 @@ pre code.hljs *
 .stream-info-footer:hover a.btn-social
 {
     opacity:1;
+}
+
+.panel-group:last-child .panel
+{
+    border-bottom:none;
 }

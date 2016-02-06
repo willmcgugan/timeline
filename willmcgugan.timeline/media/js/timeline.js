@@ -55,7 +55,6 @@ streams = {};
 
 		var $events_container = $stream.find('.events-container')
 		var $new_events = $stream.find('.new-events');
-		var rpc = new JSONRPC(config.rpc_url);
         var stream_end = false;
 
 		var stream_id = config.stream_id;
@@ -89,28 +88,6 @@ streams = {};
             self.filter_streams = filter;
             self.refresh();
         });
-
-        $(document).on('click', '.subscribe-button[data-stream=' + stream_id + ']', function(){
-            var $subscribe_button = $(this);
-			if ($subscribe_button.hasClass('unsubscribed'))
-			{
-				rpc.call(
-					'stream.subscribe',
-					{'stream': stream_id},
-					function(result){
-						$subscribe_button.removeClass('unsubscribed').addClass('subscribed');
-					});
-			}
-			else
-			{
-				rpc.call(
-					'stream.unsubscribe',
-					{'stream': stream_id},
-					function(result){
-						$subscribe_button.removeClass('subscribed').addClass('unsubscribed');
-					});
-			}
-		});
 
 		$new_events.click(function(e){
 			$("html, body").animate({ scrollTop: 0 }, "fast", function(){
@@ -356,7 +333,7 @@ function on_image_selection(stream_id, uuid)
 
 $(function(){
     var config = $('body').data();
-    rpc = new JSONRPC(config.rpc_url);
+    rpc = new JSONRPC(config.rpcurl);
 });
 
 
@@ -410,7 +387,32 @@ $(function(){
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="popover"]').popover()
+
+    $(document).on('click', '.subscribe-button', function(){
+        var $subscribe_button = $(this);
+        var stream_id = $subscribe_button.data('stream');
+        if ($subscribe_button.hasClass('unsubscribed'))
+        {
+            rpc.call(
+                'stream.subscribe',
+                {'stream': stream_id},
+                function(result){
+                    $subscribe_button.removeClass('unsubscribed').addClass('subscribed');
+                }
+            );
+        }
+        else
+        {
+            rpc.call(
+                'stream.unsubscribe',
+                {'stream': stream_id},
+                function(result){
+                    $subscribe_button.removeClass('subscribed').addClass('unsubscribed');
+                }
+            );
+        }
+    });
+
 });
 
 $(function(){

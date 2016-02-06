@@ -38,13 +38,14 @@
                 <img class="avatar" src="/static/stream.jpg" alt="...">
                 {% endif %}
             {% endif %}
+            
             <h4 class="title">
-                <a href="{% url 'user_streams' with username=stream.user.username %}">${stream.user.username}</a> <span class="text-muted">/</span> ${stream.title}
+                ${stream.title}
             </h4>
 
         </div>
 
-        <p class="description text-center">
+        <p class="description text-center text-muted">
             ${stream.description}
         </p>
 

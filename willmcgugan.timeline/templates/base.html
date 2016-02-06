@@ -25,7 +25,7 @@
 
 </head>
 
-<body id="${config.page_id or 'timeline-view'}" {% data-attrib config or {} %}>
+<body id="${config.page_id or 'timeline-view'}" data-rpcurl="{% url 'jsonrpc_private' %}" {% data-attrib config or {} %}>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">

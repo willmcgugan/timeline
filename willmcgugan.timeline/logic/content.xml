@@ -123,11 +123,10 @@ curl
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             <node template="stream/info/user_streams.html" withscope="yes"/>
-            <for src="streams" dst="stream">
-                <node template="components/stream_card.html" let:stream="stream"/>
-            </for>
+            
         </section>
         <section name="main">
+            <node template="list_streams.html" let:streams="streams" let:timeline="timeline"/>
             <tl:stream events="events" source="user-${user.id}"/>
         </section>
     </content>

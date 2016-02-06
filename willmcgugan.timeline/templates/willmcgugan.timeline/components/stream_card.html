@@ -1,0 +1,37 @@
+
+<div class="card card-user with-image stream-card">
+
+    <div class="content">
+
+        <div class="author">
+            {%- if stream.image %}
+            <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+            {%- else %}
+            <img class="avatar" src="/static/stream.jpg" alt="...">
+            {%- endif %}
+            <h4 class="title">
+                <a href="{% url 'user_stream' with username=stream.user.username, stream_slug=stream.slug %}">${stream.title}</a>
+            </h4>
+        </div>
+
+        <p class="description text-center">
+            ${stream.description}
+        </p>
+
+        {% if stream %}
+        <div class="text-center">
+            {% if .user %}
+            <div data-stream="${stream.uuid}" {% attrib class=["subscribe-button", stream in timeline.streams ? 'subscribed' : 'unsubscribed'] %}>
+                <input class="btn btn-round btn-primary btn-subscribe" type="button" value="Subscribe" title="Click to subscribe" data-toggle="tooltip" data-placement="bottom"/>
+                <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="This stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
+            </div>
+            {% else %}
+            <a class="btn btn-primary" onclick="$('#login_modal').modal();return false;" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
+            {% endif %}
+        </div>
+        {% end-if %}
+        
+    </div>
+    
+</div>
+
