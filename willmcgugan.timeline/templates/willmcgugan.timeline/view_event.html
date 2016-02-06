@@ -56,15 +56,7 @@
     			<i class="fa fa-info-circle"></i> ${title:event.type} event
 
                 <span class="pull-right">
-                    <a href="https://twitter.com/intent/tweet?${urlencode:text=event.title + ' ' + .request.url, via='willmcgugan'}" class="btn btn-simple btn-social btn-twitter window-link" title="Tweet this" data-toggle="tooltip">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="//facebook.com/share.php?${urlencode:(u=.request.url)}" class="btn btn-simple btn-social btn-facebook window-link" title="Share on Facebook" data-toggle="tooltip">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a target="_blank" href="//reddit.com/submit?${urlencode:(url=.request.url,title=event.title)}" class="btn btn-simple btn-social btn-reddit" title="Share on Reddit" data-toggle="tooltip">
-                        <i class="fa fa-reddit"></i>
-                    </a>
+                    {% with title=event.title %}{% include "fragments/social.html" %}{% endif %}
                 </span>
 
     		</div>

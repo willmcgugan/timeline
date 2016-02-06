@@ -463,3 +463,20 @@ pre code.hljs *
     height:32px;
     border-radius:100%;
 }
+
+.stream-info-footer
+{
+    margin:-20px 0px 10px 0px;
+    padding:10px 15px 0px 15px;
+}
+
+.stream-info-footer a.btn-social
+{
+    padding-top:0px;
+    opacity:0.5;
+}
+
+.stream-info-footer:hover a.btn-social
+{
+    opacity:1;
+}

@@ -51,6 +51,7 @@ Add `?format=json` to the URL to return a JSON response
     </content>
 
     <content libname="content.stream" extends="#content.stream.base">
+        <title>${stream.title}</title>
         <str dst="stream_title">${stream.title}</str>
 
         <section name="side" >
