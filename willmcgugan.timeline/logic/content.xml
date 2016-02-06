@@ -26,14 +26,6 @@
         <include-css path="css/timeline.css"/>
         <include-css path="highlight/styles/github.css"/>
     -->
-
-        <section name="main" merge="append">
-            <if test="not .user">
-                <include-css path="css/login-register.css"/>
-                <node template="forms/login.html"/>
-            </if>
-        </section>
-
     </content>
 
     <content libname="content.stream.new_event">

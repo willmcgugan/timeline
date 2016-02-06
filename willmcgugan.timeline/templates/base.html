@@ -17,6 +17,7 @@
     <link href="{% media 'css/pe-icon-7-stroke.css' from 'timeline' %}" rel="stylesheet" type="text/css">
     <link href="{% media 'css/timeline.css' from 'timeline' %}" rel="stylesheet" type="text/css">
     <link href="{% media 'css/events.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/login-register.css' from 'timeline' %}" rel="stylesheet" type="text/css">
     <link href="{% media 'highlight/styles/github.css' from 'timeline' %}" rel="stylesheet" type="text/css">
 
     {% block "jshead" %}{% render sections.jshead %}{% end %}
@@ -57,6 +58,10 @@
 <br>
 {% endblock %}
 </div>
+
+{% if not .user %}
+{% include "forms/login.html" from "willmcgugan.timeline" %}
+{% endif %}
 
 {% block "footer" %}
 {% include "footer.html" from "timeline" %}
