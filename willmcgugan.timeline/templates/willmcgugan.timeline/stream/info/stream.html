@@ -41,7 +41,7 @@
             <h4 class="title">
                 <a href="{% url 'user_streams' with username=stream.user.username %}">${stream.user.username}</a> <span class="text-muted">/</span> ${stream.title}
             </h4>
-           
+
         </div>
 
         <p class="description text-center">
@@ -60,7 +60,7 @@
             {% endif %}
         </div>
         {% end-if %}
-        
+
     </div>
 
     <div class="card-refine">
@@ -68,7 +68,11 @@
             {% include "fragments/filter/event_type.html" %}
         </div>
     </div>
-    
+
+    <div class="stream-info-footer text-center">
+        {% with title=stream.title %}{% include "fragments/social.html" %}{% endwith %}
+    </div>
+
 </div>
 
 
