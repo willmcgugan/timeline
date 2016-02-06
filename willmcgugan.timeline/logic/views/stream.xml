@@ -41,6 +41,10 @@
         <db:query model="#Event" dst="events" maxresults="10"
             filter="#Event.stream.user == owner" orderby="-time"/>
         <let user=".user"/>
+
+        <db:query model="#Stream" src=".user.streams" orderby="title" dst="streams"/>
+        
+
     </view>
 
     <view libname="view.user.stream" content="#content.stream">

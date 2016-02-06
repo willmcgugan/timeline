@@ -211,6 +211,7 @@ pre code.hljs *
     overflow:hidden;
 }
 
+/*
 @media (min-width: 992px) {
     .stream-info
     {
@@ -228,6 +229,7 @@ pre code.hljs *
         width:270px;
     }
 }
+*/
 
 .stream-info .card-user .content
 {
@@ -462,4 +464,9 @@ pre code.hljs *
     width:32px;
     height:32px;
     border-radius:100%;
+}
+
+.stream-card
+{
+    margin-top:20px;
 }
