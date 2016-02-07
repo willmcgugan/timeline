@@ -75,6 +75,17 @@ streams = {};
 			self.refresh();
 		});
 
+        $('.switch-cards input').change(function(e){
+            if($(this).is(':checked'))
+            {
+                $('#list-stream-cards').addClass('show');
+            }
+            else
+            {
+                $('#list-stream-cards').removeClass('show');
+            }
+        });
+
         var $filter_streams = $('#filter-streams');
         $filter_streams.find('input.stream-id-filter').change(function(){
             var filter = [];

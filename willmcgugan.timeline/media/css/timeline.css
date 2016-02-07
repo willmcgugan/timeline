@@ -470,7 +470,7 @@ pre code.hljs *
 
 .stream-card
 {
-    margin-top:60px;
+    margin-top:70px;
 }
 
 .stream-info-footer
@@ -494,4 +494,19 @@ pre code.hljs *
 .panel-group:last-child .panel
 {
     border-bottom:none;
+}
+
+#list-stream-cards
+{
+    display:none;
+}
+
+#list-stream-cards.show
+{
+    display:inline-block;
+}
+
+#list-stream-cards .row
+{
+
 }

@@ -4,11 +4,13 @@
     <div class="content">
 
         <div class="author">
+            <a href="{% url 'user_stream' with username=stream.user.username, stream_slug=stream.slug %}">
             {%- if stream.image %}
             <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
             {%- else %}
             <img class="avatar" src="/static/stream.jpg" alt="...">
             {%- endif %}
+            </a>
             <h4 class="title">
                 <a href="{% url 'user_stream' with username=stream.user.username, stream_slug=stream.slug %}">${stream.title}</a>
             </h4>
