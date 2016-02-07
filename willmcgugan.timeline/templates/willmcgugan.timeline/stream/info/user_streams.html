@@ -14,7 +14,16 @@
             </li>
           </ul>
         </div>
-        <h4 class="text-center title">
+        <div class="pull-right">
+
+            <div class="switch" data-toggle="tooltip" title="Show stream cards?"
+                data-on-label="<i class='fa fa-check'></i>"
+                data-off-label="<i class='fa fa-times'></i>">
+                <input type="checkbox"/>
+            </div>
+
+        </div>
+        <h4 class="text-center title" style="clear:both">
             ${owner.display_name}'s streams
         </h4>
     </div>
@@ -24,7 +33,7 @@
             {% include "fragments/filter/event_type.html" %}
         </div>
      </div>
-     <div class="stream-info-footer">
-      
-      </div>
+    <div class="stream-info-footer text-center">
+        {% with title=stream.title %}{% include "fragments/social.html" %}{% endwith %}
+    </div>
 </div>

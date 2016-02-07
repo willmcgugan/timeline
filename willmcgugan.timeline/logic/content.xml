@@ -103,6 +103,7 @@ curl
             </tl:modal>
 
             <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
+
         </section>
     </content>
 
@@ -123,7 +124,7 @@ curl
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             <node template="stream/info/user_streams.html" withscope="yes"/>
-            
+
         </section>
         <section name="main">
             <node template="list_streams.html" let:streams="streams" let:timeline="timeline"/>
