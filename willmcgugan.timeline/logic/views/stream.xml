@@ -44,6 +44,14 @@
 
         <db:query model="#Stream" src=".user.streams" orderby="title" dst="streams"/>
 
+        <if test=".user == owner">
+            <forms:get form="#form.account.edit" src=".user.account" dst="edit_form" />
+            <forms:validate src="edit_form">
+                <forms:apply src="edit_form" dst=".user.account"/>
+                <tl:user-message>**Success** Thanks for sharing!</tl:user-message>
+                <redirect name="user_streams" let:username=".user.username"/>
+            </forms:validate>
+        </if>
     </view>
 
     <view libname="view.user.stream" content="#content.stream">
@@ -58,20 +66,16 @@
             let:stream="stream" let:timeline="timeline"/>
 
         <if test="stream.user == .user">
-
             <forms:get form="#form.stream.edit" dst="edit_form" src="stream"/>
-            <if-post>
-                <forms:validate src="edit_form" let:stream="stream">
-                    <let data="edit_form.data"/>
-                    <if test="data.action=='edit'">
-                        <forms:apply src="edit_form" dst="stream"/>
-                        <let stream.slug="slug:stream.title"/>
-                        <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
-                        <redirect name="user_stream" let:username="stream.user.username" let:stream_slug="stream.slug"/>
-                    </if>
-                </forms:validate>
-            </if-post>
-
+            <forms:validate src="edit_form" let:stream="stream">
+                <let data="edit_form.data"/>
+                <if test="data.action=='edit'">
+                    <forms:apply src="edit_form" dst="stream"/>
+                    <let stream.slug="slug:stream.title"/>
+                    <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
+                    <redirect name="user_stream" let:username="stream.user.username" let:stream_slug="stream.slug"/>
+                </if>
+            </forms:validate>
         </if>
     </view>
 

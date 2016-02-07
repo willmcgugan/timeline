@@ -25,7 +25,7 @@
             <redirect-to path="/${.url.username}"/>
         </url>
         <!-- user's streams -->
-        <url route="/{username}" methods="GET" view="#view.user.streams" name="user_streams" />
+        <url route="/{username}" methods="GET,POST" view="#view.user.streams" name="user_streams" />
         <!-- user's subscriptions -->
         <url route="/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
         <!-- individual stream -->

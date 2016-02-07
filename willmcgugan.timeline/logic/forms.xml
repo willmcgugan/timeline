@@ -83,6 +83,11 @@
         </validate-field>
     </form>
 
+    <form libname="form.account.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
+        <text-area name="about" label="about" help="Shown on your streams page"/>
+        <submit-button class="btn btn-round" text="Save"/>
+    </form>
+
     <form libname="form.stream.image.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
         <field label="current">
 

@@ -2,10 +2,15 @@
 <div class="card card-refine">
     <div class="header">
         <div class="btn-group stream-actions-button">
-          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-wrench text-info"></i>
-          </button>
-          <ul class="dropdown-menu">
+            <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="glyphicon glyphicon-wrench text-info"></i>
+            </button>
+            <ul class="dropdown-menu">
+            <li>
+                <a href="#" onclick="event.preventDefault(); $('#account-edit').fadeIn(); return false;">
+                    <i class="fa fa-edit"></i> Account Info
+                </a>
+            </li>
             <li>
                 <a href="{% url 'new_stream' %}">
                     <i class="fa fa-star"></i> New Stream
@@ -25,6 +30,9 @@
         <h4 class="text-center title" style="clear:both">
             ${owner.display_name}'s streams
         </h4>
+        <p class="description text-center">
+            ${owner.account.about}
+        </p>
     </div>
     <div class="content">
         <div class="panel-group">

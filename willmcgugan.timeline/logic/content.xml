@@ -74,11 +74,9 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:modal id="code_modal" title="Get the Code">
                 <markdown>
-You can post events to your stream(s) from virtually any Internet connected device.
+You can post events to your stream(s) from virtually any Internet connected device. See the following tabs for ways to post events.
 
-See the following tabs for ways to post events:
-
-#### How to Post Events
+#### Posting Events
                 </markdown>
                 <w:tab-panel>
 
@@ -137,22 +135,21 @@ curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username
                     <w:tab title="WGET">
                         <markdown>
 
-You can post an event with WGET, which is available on most Linux based Platdowms:
+You can post an event with WGET, which is available on most Linux based Platforms:
 
 ```
 wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --post-data password=${stream.password}\&amp;generator=wget\&amp;title="New%20Event"\&amp;text=Hello,%20*World*!
 ```
                         </markdown>
                     </w:tab>
+
+                    <w:tab title="Other">
+                        <markdown>
+Even if your favorite language isn't listed here, you can add support with any language that can make POST requests (which is virtualy all of them).
+                        </markdown>
+                    </w:tab>
                 </w:tab-panel>
 
-                <markdown>
-
-#### Other Methods
-
-Even if your favorite language isn't listed here, you can add support with any language that can make POST requests (which is virtualy all of them).
-
-                </markdown>
             </tl:modal>
 
             <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
@@ -166,10 +163,8 @@ Even if your favorite language isn't listed here, you can add support with any l
             <node template="stream/info/subscriptions.html" withscope="yes" />
         </section>
         <section name="main">
-
             <node template="copy/no_subscriptions.html" withscope="yes" if="not timeline.streams"/>
             <tl:stream events="events" source="timeline-${timeline.id}"/>
-
         </section>
     </content>
 
@@ -177,9 +172,12 @@ Even if your favorite language isn't listed here, you can add support with any l
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             <node template="stream/info/user_streams.html" withscope="yes"/>
-
         </section>
         <section name="main">
+            <tl:render-user-message/>
+            <tl:card title="Your Info" id="account-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
+                <render src="edit_form"/>
+            </tl:card>
             <node template="list_streams.html" let:streams="streams" let:timeline="timeline"/>
             <tl:stream events="events" source="user-${user.id}"/>
         </section>
