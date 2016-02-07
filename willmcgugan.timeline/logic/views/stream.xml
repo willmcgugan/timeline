@@ -43,7 +43,6 @@
         <let user=".user"/>
 
         <db:query model="#Stream" src=".user.streams" orderby="title" dst="streams"/>
-        
 
     </view>
 

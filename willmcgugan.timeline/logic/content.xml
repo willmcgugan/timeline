@@ -74,19 +74,24 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:modal id="code_modal" title="Get the Code">
                 <markdown>
+You can post events to your stream(s) from virtually any Internet connected device.
 
-Use any of the following methods to post events to your stream...
+See the following tabs for ways to post events:
 
-##### Inthing App
+#### How to Post Events
+                </markdown>
+                <w:tab-panel>
+
+                    <w:tab title="Python">
+                        <markdown>
+
+First install (required) inthing with the following:
 
 ```bash
 pip install inthing
-export INTHING_STREAM=${stream.uuid}
-export INTHING_STREAM_PASSWORD=${stream.password}
-inthing event --title "New Event" --text "Hello, *World*\!"
 ```
 
-##### Python
+You can then post events to your stream with the following:
 
 ```python
 import inthing
@@ -94,11 +99,59 @@ stream = inthing.Stream(id="${stream.uuid}", password="${stream.password}")
 stream.text_event(title="New Event", text="Hello, *World*!")
 ```
 
-##### CURL
+                        </markdown>
+                    </w:tab>
+
+                    <w:tab title="Inthing App">
+                        <markdown>
+The Inthing Application is installed along with the Python module, and can be installed with PIP:
+
+```bash
+pip install inthing
+```
+
+Then set the stream credentials as environment variables:
+
+```bash
+export INTHING_STREAM=${stream.uuid}
+export INTHING_STREAM_PASSWORD=${stream.password}
+```
+
+You can now post an event from the command line:
 
 ```
-curl
+inthing event --title "New Event" --text "Hello, *World*\!"
 ```
+                        </markdown>
+                    </w:tab>
+
+                    <w:tab title="CURL">
+                        <markdown>
+You can post an event with CURL, which is available on most Linux based platforms:
+
+```
+curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --form password=${stream.password} --form generator=curl --form title="New Event" --form text="Hello, *World*!"
+```
+                        </markdown>
+                    </w:tab>
+                    <w:tab title="WGET">
+                        <markdown>
+
+You can post an event with WGET, which is available on most Linux based Platdowms:
+
+```
+wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --post-data password=${stream.password}\&amp;generator=wget\&amp;title="New%20Event"\&amp;text=Hello,%20*World*!
+```
+                        </markdown>
+                    </w:tab>
+                </w:tab-panel>
+
+                <markdown>
+
+#### Other Methods
+
+Even if your favorite language isn't listed here, you can add support with any language that can make POST requests (which is virtualy all of them).
+
                 </markdown>
             </tl:modal>
 

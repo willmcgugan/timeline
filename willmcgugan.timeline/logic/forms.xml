@@ -19,7 +19,7 @@
     </choices>
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
-    	<input name="stream" label="Stream" placeholder="UUID or slug" required="yes"/>
+    	<input name="stream" label="Stream" placeholder="UUID" required="yes"/>
     	<input name="password" label="Password" placeholder="Stream password or API key"/>
         <input name="title" label="Title" placeholder="Descriptive title of this event"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
@@ -51,11 +51,11 @@
     <form libname="form.stream.new" style="horizontal" xmlns="http://moyaproject.com/forms">
         <input name="title" label="Title" required="yes"
             placeholder="Title of the stream (used to generate a URL)"/>
-        <text-area name="description" label="Description" 
+        <text-area name="description" label="Description"
             placeholder="What will go in this stream?"/>
         <submit-button text="Create Stream"/>
         <validate-field field="title">
-            <db:if-exists model="#Stream" 
+            <db:if-exists model="#Stream"
                 let:user="user" let:slug="slug:value">
                 <fail>This title exists, please pick another</fail>
             </db:if-exists>
@@ -85,7 +85,7 @@
 
     <form libname="form.stream.image.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
         <field label="current">
-            
+
         </field>
     </form>
 

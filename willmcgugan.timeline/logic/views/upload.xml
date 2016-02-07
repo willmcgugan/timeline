@@ -8,13 +8,14 @@
     xmlns:image="http://moyaproject.com/image"
     xmlns:tn="http://moyaproject.com/thumbnail">
 
-
     <view libname="view.stream.upload" content="#content.stream.new_event">
-        <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
-    </view>
-
-    <view libname="view.stream.upload.post" content="#content.stream.new_event">
-        <forms:get form="#form.event" dst="form" action=".?${.request.query_string}"/>
+        <dict dst="initial"/>
+        <if test=".url.username and .url.stream_slug">
+            <db:get-required model="#Stream" dst="stream"
+                filter="#Stream.user.username==.url.username and #Stream.slug==.url.stream_slug"/>
+            <let initial.stream="stream.uuid"/>
+        </if>
+        <forms:get form="#form.event" src="initial" dst="form"/>
 
         <forms:validate src="form">
             <let data="form.data"/>
@@ -67,7 +68,7 @@
             </dict>
         </if>
         <serve-json obj="result" if=".request.GET.format=='json'"/>
-        
+
     </view>
 
 </moya>
