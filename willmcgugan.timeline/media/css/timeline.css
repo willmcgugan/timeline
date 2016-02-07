@@ -473,6 +473,11 @@ pre code.hljs *
     margin-top:70px;
 }
 
+.stream-card:last-child
+{
+    margin-bottom:0px;
+}
+
 .stream-info-footer
 {
     margin:-20px 15px 10px 15px;
@@ -506,7 +511,7 @@ pre code.hljs *
     display:inline-block;
 }
 
-#list-stream-cards .row
+#list-stream-cards
 {
-
+    margin-bottom:20px;
 }
