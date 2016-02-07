@@ -39,7 +39,10 @@
                 {% endif %}
             {% endif %}
 
+
             <h4 class="title">
+                
+                <br>
                 ${stream.title}
             </h4>
 
@@ -47,6 +50,9 @@
 
         <p class="description text-center text-muted">
             ${stream.description}
+        </p>
+        <p class="description text-center">
+            <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i>${stream.user.username}</a>
         </p>
 
         {% if stream %}
