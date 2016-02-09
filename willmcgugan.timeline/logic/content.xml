@@ -74,16 +74,21 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:modal id="code_modal" title="Get the Code">
                 <markdown>
-You can post events to your stream(s) from virtually any Internet connected device. See the following tabs for ways to post events.
+
+Your stream ID is `${stream.uuid}`.
+
+Your stream password is `${stream.password}`.
 
 #### Posting Events
+
+You can post events to your stream with any of the following methods:
                 </markdown>
                 <w:tab-panel>
 
                     <w:tab title="Python">
                         <markdown>
 
-First install (required) inthing with the following:
+You can install the inthing Python module with PIP as follows:
 
 ```bash
 pip install inthing
@@ -93,7 +98,8 @@ You can then post events to your stream with the following:
 
 ```python
 import inthing
-stream = inthing.Stream(id="${stream.uuid}", password="${stream.password}")
+stream = inthing.Stream(id="${stream.uuid}",
+                        password="${stream.password}")
 stream.text_event(title="New Event", text="Hello, *World*!")
 ```
 
