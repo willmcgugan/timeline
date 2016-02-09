@@ -29,9 +29,11 @@
             </m:for>
         </select>
         <select name="priority" label="Priority" initial="0">
-            <m:for src="(-10)..(10)" dst="p">
-                <option value="${p}"/>
-            </m:for>
+            <option value="-2">verbose (-2)</option>
+            <option value="-1">informative (-1)</option>
+            <option value="0">default priority (0)</option>
+            <option value="+1">important (+1)</option>
+            <option value="+2">urgent (+2)</option>
         </select>
         <select name="markup" maxlength="20" label="Markup" initial="'markdown'">
             <option value="markdown"/>

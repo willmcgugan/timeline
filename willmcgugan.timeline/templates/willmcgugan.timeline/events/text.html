@@ -2,10 +2,6 @@
 
 {% block "content" %}
 <div class="content">
-    {%- include "fragments/card_header.html" -%}
-	{%- include "fragments/card_title.html" -%}
-    {%- include "fragments/card_description.html" %}
-    {%- include "fragments/expand_card.html" %}
-	{%- include "fragments/card_footer.html" %}
+{% include "fragments/card/common.html" %}
 </div>
 {% endblock %}
