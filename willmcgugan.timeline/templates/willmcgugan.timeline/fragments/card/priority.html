@@ -1,9 +1,9 @@
-{% if event.priority == -2 %}
-<p class="category text-danger" title="Urgent">
+{% if event.priority == +2 %}
+<p class="category text-danger">
     <i class="fa fa-fire"></i> Urgent
 </p>
-{% elif event.priority == -1 %}
-<p class="category text-warning" title="Important">
+{% elif event.priority == +1 %}
+<p class="category text-warning">
     <i class="fa fa-fire"></i> Important
 </p>
 {% elif event.priority == 0 %}
