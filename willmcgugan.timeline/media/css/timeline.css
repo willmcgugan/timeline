@@ -515,3 +515,8 @@ pre code.hljs *
 {
     margin-bottom:20px;
 }
+
+.event.no-text h4.title
+{
+    margin-bottom:0px;
+}

@@ -3,6 +3,13 @@
     xmlns:m="http://moyaproject.com"
     xmlns:let="http://moyaproject.com/let">
 
+    <enum libname="enum.priority">
+        <value id="-2" name="verbose"/>
+        <value id="-1" name="informative"/>
+        <value id="0" name="default"/>
+        <value id="+1" name="important"/>
+        <value id="+2" name="urgent"/>
+    </enum>
 
     <model libname="Account" xmlns="http://moyaproject.com/db">
         <one-to-one name="user" backref="account" model="moya.auth#User" />
@@ -72,7 +79,9 @@
     	<text name="info_json" null="yes" blank="yes"/>
         <integer name="update" default="0"/>
         <integer name="numcomments" default="0"/>
+
         <property name="info" expression="info_json ? {} : json:info_json" />
+        <property name="priority_name" expression=".app.enum['enum.priority'][priority].name"/>
 
     </model>
 
