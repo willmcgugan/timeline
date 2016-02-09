@@ -523,7 +523,7 @@ pre code.hljs *
 
 .event.event-priority-informative, .event.event-priority-verbose
 {
-    background-color:rgba(255, 255, 255, 0.7);
+    background-color:rgba(255, 255, 255, 0.85);
 }
 
 .event p.category
