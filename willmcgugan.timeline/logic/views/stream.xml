@@ -42,7 +42,7 @@
             filter="#Event.stream.user == owner" orderby="-time"/>
         <let user=".user"/>
 
-        <db:query model="#Stream" src=".user.streams" orderby="title" dst="streams"/>
+        <db:query model="#Stream" src="owner.streams" orderby="title" dst="streams"/>
 
         <if test=".user == owner">
             <forms:get form="#form.account.edit" src=".user.account" dst="edit_form" />
