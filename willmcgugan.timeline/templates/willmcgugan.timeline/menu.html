@@ -28,7 +28,6 @@
         </li>
       {%- endif %}
 
-
         <li>
             <a href="#"><i class="fa fa-globe"></i> Discover</a>
         </li>
@@ -36,7 +35,7 @@
         {%- if .user %}
         <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
             <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}">
-              <i class="fa fa-bookmark-o"></i> Timeline
+              <i class="fa fa-bookmark-o"></i> Subscriptions
             </a>
         </li>
         <li{% if menu == 'user_streams' %} class="active"{% endif %}>

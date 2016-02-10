@@ -47,6 +47,7 @@ function Watcher(url, on_instructions)
 	return self;
 }
 
+
 streams = {};
 (function($) {
     $.fn.inthingStream = function(config) {
@@ -105,6 +106,36 @@ streams = {};
 				self.check_updates();
 			});
 		});
+
+        function update_times($el)
+        {
+            $el.each(function(i, el){
+
+                var units = [
+                    [60 * 60 * 24, 'day', 'days'],
+                    [60 * 60, 'hour', 'hours'],
+                    [60, 'minute', 'minutes'],
+                    [1, 'second', 'seconds'],
+                ];
+
+                var event_time = $(el).data('time');
+                var T = (new Date).getTime() / 1000.0;
+                var time_passed = Math.floor(T - event_time);
+
+                var time_string = 'just now';
+                for (i=0; i<units.length; i++)
+                {
+                    var divisable = units[i][0];
+                    var unit = Math.floor(time_passed / divisable);
+                    if(unit)
+                    {
+                        time_string = unit + " " + units[i][unit <= 1 ? 1 : 2] + ' ago';
+                        break;
+                    }
+                }
+                $(el).text(time_string);
+            });
+        }
 
         self.on_new_image = function(uuid)
         {
@@ -253,9 +284,8 @@ streams = {};
 	            	}
 	            });
 	        }
-
-
             highlight_code($event.find('pre'));
+            update_times($event.find('.time-ago'));
             $event.find('[data-toggle="tooltip"]').tooltip();
 
             return $event;
@@ -294,7 +324,6 @@ streams = {};
 			);
 		}
 
-
 		var on_instructions = function(instructions)
 		{
 			$(instructions).each(function(i, instruction){
@@ -325,6 +354,14 @@ streams = {};
 				self.check_append_events();
 			}
 		});
+
+        self.update_times = function()
+        {
+            update_times($stream.find('.time-ago'));
+        }
+
+        setInterval(self.update_times, 1000);
+        self.update_times();
 
 		self.watcher = new Watcher(config.watcherurl, on_instructions);
 		self.watcher.connect();

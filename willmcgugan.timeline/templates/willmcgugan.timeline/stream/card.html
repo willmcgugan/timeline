@@ -1,4 +1,4 @@
-{%- cache for 24h key [event.uuid, event.update] if not .debug -%}
+{%- cache for 24h key [event.uuid, event.update] -%}
 {% compact %}
 <div id="event-${event.uuid}" 
 {% attrib class=['card', 'event', 'event-priority-' + event.priority_name, 'event-' + event.type, new_event and 'new-event', event.text ? None : 'no-text'] %}
