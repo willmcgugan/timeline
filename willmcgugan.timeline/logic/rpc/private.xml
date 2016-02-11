@@ -53,7 +53,7 @@
                 filter="#Event.stream.id in filter_streams"/>
 
             <if test="not time">
-                <db:query src="events" dst="events" maxresults="10" orderby="-insert_seconds" distinct="yes"/>
+                <db:query src="events" dst="events"/>
             </if>
             <else>
                 <if test="new">
