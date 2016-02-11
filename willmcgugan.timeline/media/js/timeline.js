@@ -1,3 +1,39 @@
+function link_hashtags($container)
+{
+    $container.find('p.description').each(function(i, el){
+
+        function do_highlight(el)
+        {
+            var count = el.childNodes.length;
+            for (i=0; i<count; i++)
+            {
+                var node = el.childNodes[i];
+                if(node.nodeType != 3)
+                {
+                    if(node.nodeName != 'A')
+                    {
+                        do_highlight(node);
+                    }
+                }
+                else
+                {
+                    var new_text = node.textContent.replace(
+                        /\#(\w+)/,
+                        function(match) {
+                            return '<a class="hashtag" href="#">' + match + '</a>';
+                        }
+                    );
+                    var replace_node = document.createElement('span');
+                    replace_node.innerHTML = new_text
+                    node.parentNode.insertBefore(replace_node, node);
+                    node.parentNode.removeChild(node);
+                }
+            }
+        }
+        do_highlight(el);
+    });
+    
+}
 
 function Watcher(url, on_instructions)
 {
@@ -8,8 +44,9 @@ function Watcher(url, on_instructions)
 
 	self.connect = function()
 	{
-		var ws = new WebSocket(url);
+        var ws = new WebSocket(url);
 		self.ws = ws;
+        
 		ws.onopen = function(event)
 		{
 
@@ -296,6 +333,7 @@ streams = {};
 	            });
 	        }
             highlight_code($event.find('pre'));
+            link_hashtags($event);
             update_times($event.find('.time-ago'));
             $event.find('[data-toggle="tooltip"]').tooltip();
 

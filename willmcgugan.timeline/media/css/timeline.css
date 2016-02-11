@@ -535,3 +535,8 @@ pre code.hljs *
 {
     clear:both;
 }
+
+a.hashtag
+{
+    font-weight:bold;
+}
