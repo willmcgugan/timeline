@@ -107,7 +107,7 @@ streams = {};
 			});
 		});
 
-        function update_times($el)
+        function update_times($el, recent_only)
         {
             $el.each(function(i, el){
 
@@ -121,6 +121,14 @@ streams = {};
                 var event_time = $(el).data('time');
                 var T = (new Date).getTime() / 1000.0;
                 var time_passed = Math.floor(T - event_time);
+
+                /*
+                If recent_only is true, then skip times greater than a day
+                */
+                if(recent_only && time_passed > 60 * 60 * 24)
+                {
+                    return false;
+                }
 
                 var time_string = 'just now';
                 for (i=0; i<units.length; i++)
@@ -231,10 +239,12 @@ streams = {};
 				var $last_event = $($events[$events.length - 1]);
 				var event_data = $last_event.data();
 				var last_event_time = event_data.time;
+                var last_event_order = event_data.order;
 			}
 			else
 			{
 				var last_event_time = 0;
+                var last_event_order = null;
 			}
 
 			$more_events.addClass('loading');
@@ -243,6 +253,7 @@ streams = {};
 				'events.get_updates',
 				{
 					'time': last_event_time,
+                    'order': last_event_order,
 					'events': self.event_source,
 					'new': false,
 					'filter_types': self.filter_types
@@ -311,10 +322,20 @@ streams = {};
 
 	 	self.update = function()
 		{
+            var $first = $stream.find('.event:first');
+            if ($first.length)
+            {
+                var order = $first.data('order');
+            }
+            else
+            {
+                var order = null;
+            }
 			rpc.call(
 				'events.get_updates',
 				{
 					'time': self.time,
+                    'order': order,
 					'events': self.event_source,
 					'filter_types': self.filter_types
 				},
@@ -355,12 +376,12 @@ streams = {};
 			}
 		});
 
-        self.update_times = function()
+        self.update_times = function(recent_only)
         {
-            update_times($stream.find('.time-ago'));
+            update_times($stream.find('.time-ago'), recent_only);
         }
 
-        setInterval(self.update_times, 1000);
+        setInterval(function(){self.update_times(true)}, 1000);
         self.update_times();
 
 		self.watcher = new Watcher(config.watcherurl, on_instructions);

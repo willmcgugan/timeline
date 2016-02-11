@@ -38,6 +38,7 @@
         <rpc:method name="get_updates" group="events" description="Get updates to a stream">
             <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
             <rpc:parameter name="time" type="number" null="yes" required="yes">update time</rpc:parameter>
+            <rpc:parameter name="order" type="number" null="yes" required="no">Order value</rpc:parameter>
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
             <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
             <rpc:parameter name="filter_streams" type="list" required="no" default="[]">List of stream PKs</rpc:parameter>
@@ -56,14 +57,18 @@
             </if>
             <else>
                 <if test="new">
-                    <db:query src="events" dst="events" maxresults="10" orderby="-insert_seconds" distinct="yes"
+                    <db:query src="events" dst="events"
                         filter="#Event.insert_seconds gt time and #Event.insert_seconds != time"/>
+                    <db:query src="events" dst="events" filter="#Event.id gt order" if="order"/>
+
                 </if>
                 <else>
-                    <db:query src="events" dst="events" maxresults="10" orderby="-insert_seconds" distinct="yes"
+                    <db:query src="events" dst="events"
                         filter="#Event.insert_seconds lt time and #Event.insert_seconds != time"/>
+                    <db:query src="events" dst="events" filter="#Event.id lt order" if="order"/>
                 </else>
             </else>
+            <db:query src="events" dst="events" orderby="-insert_seconds"  maxresults="10" distinct="yes"/>
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
