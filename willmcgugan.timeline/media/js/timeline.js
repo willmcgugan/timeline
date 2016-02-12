@@ -18,7 +18,7 @@ function link_hashtags($container)
                 else
                 {
                     var new_text = node.textContent.replace(
-                        /\#(\w+)/,
+                        /\#(\w+)/g,
                         function(match) {
                             return '<a class="hashtag" href="#">' + match + '</a>';
                         }

@@ -20,4 +20,9 @@
             </if>
         </db:atomic>
     </handle>
+
+    <handle signal="db.post-create" sender="willmcgugan.timeline#Event">
+        <let tags="signal.data.object.text_html|'hashtags'"/>
+        <echo obj="tags"/>
+    </handle>
 </moya>

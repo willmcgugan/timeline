@@ -83,6 +83,12 @@
         <property name="info" expression="info_json ? {} : json:info_json" />
         <property name="priority_name" expression=".app.enum['enum.priority'][priority].name"/>
 
+        <property name="text_html">
+            <m:return>
+                <m:process-markup src="object.text" type="${object.markup}"/>
+            </m:return>
+        </property>
+
     </model>
 
     <model libname="Image" xmlns="http://moyaproject.com/db">
@@ -99,6 +105,13 @@
         <foreign-key name="user" model="moya.auth#User" null="no"/>
         <string name="type" choices="['warning', 'success', 'danger']" default="success" length="20"/>
         <text name="text" null="no"/>
+    </model>
+
+    <model xmlns="http://moyaproject.com/db" libname="Tag" repr="${name}">
+        <string name="name" length="100" null="no" />
+        <string name="slug" length="100" null="no" />
+        <integer name="count" null="no" default="0" />
+        <many-to-many model="#Event" name="events" backref="tags" picker="#admintable.events"/>
     </model>
 
 </moya>
