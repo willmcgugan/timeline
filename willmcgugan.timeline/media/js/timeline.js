@@ -20,7 +20,7 @@ function link_hashtags($container)
                     var new_text = node.textContent.replace(
                         /\#(\w+)/g,
                         function(match) {
-                            return '<a class="hashtag" href="#">' + match + '</a>';
+                            return '<a class="hashtag" href="#">#' + match.substr(1) + '</a>';
                         }
                     );
                     var replace_node = document.createElement('span');
@@ -536,6 +536,8 @@ $(function(){
     	var hide = $(this).data('hide');
     	$(hide).fadeOut('fast');
     });
+
+    link_hashtags($('.event-view .event'));
 });
 
 
