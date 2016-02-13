@@ -18,7 +18,9 @@
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/" methods="GET" view="#view.front" name="front"/>
-        <url route="/dash/" mount="#mountpoint.dash"/>
+        <url route="/dash/" mount="#mountpoint.dash">
+            <forbidden if="not .user"/>
+        </url>
 
         <url route="/tag/{tag_name}/" view="#view.tag.stream" name="tag_stream">
             <!-- Redirect if tag name is not in canonical form -->
@@ -46,7 +48,7 @@
 
     	<url route="/" methods="GET" view="#view.dash" name="dash"/>
         <url route="/streams/" view="#view.dash.streams" name="dash_streams"/>
-    	<url route="/streams/new/" view="#view.dash.stream.new" name="new_stream"/>
+    	<url route="/new-stream/" view="#view.dash.stream.new" name="new_stream"/>
 
     </mountpoint>
 </moya>

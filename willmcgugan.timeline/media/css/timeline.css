@@ -43,6 +43,12 @@
 {
     background-image:url(/static/timeline-media/img/img1.jpg);
 }*/
+
+.login .social .circle .fa
+{
+    vertical-align: middle;
+}
+
 html
 {
     background-color: #eee;

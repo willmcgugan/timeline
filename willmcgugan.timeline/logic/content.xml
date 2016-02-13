@@ -33,9 +33,9 @@
             <html:pre if="result">${prettyjson:result}</html:pre>
     		<w:info>
     			<markdown>
-This form can be used to create events.
+Use this form to add new events.
 
-It's designed to be used by automated systems. You should probably use the official API.
+It's designed to be used by automated systems. See the *Get the Code* link on your stream for more information.
 
 Add `?format=json` to the URL to return a JSON response
     			</markdown>
@@ -100,7 +100,7 @@ You can then post events to your stream with the following:
 import inthing
 stream = inthing.Stream(id="${stream.uuid}",
                         password="${stream.password}")
-stream.text_event(title="New Event", text="Hello, *World*!")
+stream.text_event(title="New Event", text="Hello, World! #helloworld")
 ```
 
                         </markdown>
@@ -124,7 +124,7 @@ export INTHING_STREAM_PASSWORD="${stream.password}"
 You can now post an event from the command line:
 
 ```
-inthing event --title "New Event" --text "Hello, *World*\!"
+inthing event --title "New Event" --text "Hello, World\! #helloworld"
 ```
                         </markdown>
                     </w:tab>
@@ -134,7 +134,7 @@ inthing event --title "New Event" --text "Hello, *World*\!"
 You can post an event with CURL, which is available on most Linux based platforms:
 
 ```
-curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --form password=${stream.password} --form generator=curl --form title="New Event" --form text="Hello, *World*!"
+curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --form password="${stream.password}" --form generator=curl --form title="New Event" --form text="Hello, World! #helloworld"
 ```
                         </markdown>
                     </w:tab>
@@ -144,7 +144,7 @@ curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username
 You can post an event with WGET, which is available on most Linux based Platforms:
 
 ```
-wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --post-data password=${stream.password}\&amp;generator=wget\&amp;title="New%20Event"\&amp;text=Hello,%20*World*!
+wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --post-data password=${urlquote:stream.password}\&amp;generator=wget\&amp;title=New+Event\&amp;text=Hello,+World\!+#helloworld
 ```
                         </markdown>
                     </w:tab>
@@ -227,14 +227,19 @@ Even if your favorite language isn't listed here, you can add support with any l
     <content libname="content.dash.stream.new" extends="#content.dash">
         <str dst="dash_view">streams</str>
         <section name="main">
+            <!--
             <w:breadcrumbs>
                 <w:link name="dash">Dash</w:link>
                 <w:link name="dash_streams">Streams</w:link>
                 <w:link name="new_stream">New</w:link>
             </w:breadcrumbs>
+        -->
             <tl:card title="New Stream" close="no">
                 <render src="form"/>
             </tl:card>
+        </section>
+        <section name="side">
+            <node template="copy/new_stream.html"/>
         </section>
     </content>
 

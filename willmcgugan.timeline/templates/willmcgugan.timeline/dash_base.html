@@ -2,7 +2,7 @@
 
 {% block "bodycontainer" %}
 
-<div class="section section-gray body-content">
+<div class="section section-stream body-content">
 	<div class="container">
 
 		<div class="row">
@@ -15,13 +15,20 @@
 			</div>
 		#}
 
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<div class="timelines">
 					<div class="timeline-container">
 					{% block 'main' %}{% render sections.main %}{% endblock %}
 					</div>
 				</div>
 			</div>
+
+            <div class="col-md-4">
+                <div class="stream-info">
+                    {% block 'side' %}{% render sections.side %}{% endblock %}
+                </div>
+            </div>
+
 		</div>
 	</div>
 </div>

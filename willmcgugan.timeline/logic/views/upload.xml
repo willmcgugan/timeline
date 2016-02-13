@@ -9,13 +9,19 @@
     xmlns:tn="http://moyaproject.com/thumbnail">
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
-        <dict dst="initial"/>
+        <let initial="dict:.request.GET"/>
         <if test=".url.username and .url.stream_slug">
             <db:get-required model="#Stream" dst="stream"
                 filter="#Stream.user.username==.url.username and #Stream.slug==.url.stream_slug"/>
             <let initial.stream="stream.uuid"/>
         </if>
-        <forms:get form="#form.event" src="initial" dst="form"/>
+        <if test=".request.GET.format">
+            <str dst="action">.?format=${.request.GET.format}</str>
+        </if>
+        <else>
+            <str dst="action">.</str>
+        </else>
+        <forms:get form="#form.event" src="initial" dst="form" action="${action}"/>
 
         <forms:validate src="form">
             <let data="form.data"/>
@@ -29,7 +35,7 @@
                     let:title="data.title"
                     let:text="data.text"
                     let:markup="data.markup"
-                    let:generator="data.generator"
+                    let:generator="data.generator or 'inthing api'"
                     let:insert_seconds="round:[.time, 6]"/>
 
                 <if test="data.image">
@@ -61,13 +67,15 @@
             </if>
         </forms:validate>
 
-        <if test="not form.ok">
-            <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
-                <let error="form.error"/>
-                <let field_errors="form.errors"/>
-            </dict>
-        </if>
-        <serve-json obj="result" if=".request.GET.format=='json'"/>
+        <if-post>
+            <if test="form.bound and not form.ok">
+                <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
+                    <let error="form.error"/>
+                    <let field_errors="form.errors"/>
+                </dict>
+            </if>
+            <serve-json obj="result" if=".request.GET.format=='json'"/>
+        </if-post>
 
     </view>
 
