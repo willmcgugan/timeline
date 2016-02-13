@@ -28,9 +28,11 @@
         </li>
       {%- endif %}
 
+        {#
         <li>
             <a href="#"><i class="fa fa-globe"></i> Discover</a>
         </li>
+        #}
 
         {%- if .user %}
         <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
@@ -49,11 +51,13 @@
             <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              {#
               <li>
                 <a href="{% url 'dash' from 'willmcgugan.timeline' %}">
                   <i class="fa fa-dashboard"></i> Dashboard
                 </a>
               </li>
+              #}
               <li>
                 <a href="{% url 'user_edit' from 'moya.auth' %}">
                   <i class="fa fa-toggle-on"></i> Settings
