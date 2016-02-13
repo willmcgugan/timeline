@@ -33,7 +33,46 @@ function link_hashtags($container)
         }
         do_highlight(el);
     });
-    
+
+}
+
+
+function update_times($el, recent_only)
+{
+    $el.each(function(i, el){
+
+        var units = [
+            [60 * 60 * 24, 'day', 'days'],
+            [60 * 60, 'hour', 'hours'],
+            [60, 'minute', 'minutes'],
+            [1, 'second', 'seconds'],
+        ];
+
+        var event_time = $(el).data('time');
+        var T = (new Date).getTime() / 1000.0;
+        var time_passed = Math.floor(T - event_time);
+
+        /*
+        If recent_only is true, then skip times greater than a day
+        */
+        if(recent_only && time_passed > 60 * 60 * 24)
+        {
+            return false;
+        }
+
+        var time_string = 'just now';
+        for (i=0; i<units.length; i++)
+        {
+            var divisable = units[i][0];
+            var unit = Math.floor(time_passed / divisable);
+            if(unit)
+            {
+                time_string = unit + " " + units[i][unit <= 1 ? 1 : 2] + ' ago';
+                break;
+            }
+        }
+        $(el).text(time_string);
+    });
 }
 
 function Watcher(url, on_instructions)
@@ -47,7 +86,7 @@ function Watcher(url, on_instructions)
 	{
         var ws = new WebSocket(url);
 		self.ws = ws;
-        
+
 		ws.onopen = function(event)
 		{
 
@@ -144,44 +183,6 @@ streams = {};
 				self.check_updates();
 			});
 		});
-
-        function update_times($el, recent_only)
-        {
-            $el.each(function(i, el){
-
-                var units = [
-                    [60 * 60 * 24, 'day', 'days'],
-                    [60 * 60, 'hour', 'hours'],
-                    [60, 'minute', 'minutes'],
-                    [1, 'second', 'seconds'],
-                ];
-
-                var event_time = $(el).data('time');
-                var T = (new Date).getTime() / 1000.0;
-                var time_passed = Math.floor(T - event_time);
-
-                /*
-                If recent_only is true, then skip times greater than a day
-                */
-                if(recent_only && time_passed > 60 * 60 * 24)
-                {
-                    return false;
-                }
-
-                var time_string = 'just now';
-                for (i=0; i<units.length; i++)
-                {
-                    var divisable = units[i][0];
-                    var unit = Math.floor(time_passed / divisable);
-                    if(unit)
-                    {
-                        time_string = unit + " " + units[i][unit <= 1 ? 1 : 2] + ' ago';
-                        break;
-                    }
-                }
-                $(el).text(time_string);
-            });
-        }
 
         self.on_new_image = function(uuid)
         {
@@ -539,6 +540,7 @@ $(function(){
     });
 
     link_hashtags($('.event-view .event'));
+    update_times($('.event-view .event .time-ago'));
 });
 
 

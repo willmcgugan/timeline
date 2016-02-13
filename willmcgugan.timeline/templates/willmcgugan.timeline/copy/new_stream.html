@@ -1,0 +1,22 @@
+<div class="card">
+
+    <div class="content">
+    <h6 class="category text-center">
+    What's in a stream?
+    </h6>
+    <br>
+{% markup-block as 'markdown' %}
+
+Post *events* from any Internet enabled device.
+
+ * Text (plain text, html or markdown)
+ * Photos
+ * Screenshots
+
+Use the command line application, Python module, CURL, or WGET. More languages coming soon.
+
+Or *roll your own*; its just a POST request to [this form]({% url 'stream_upload' %}).
+
+{% end-markupblock %}
+    </div>
+</div>

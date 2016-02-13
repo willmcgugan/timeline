@@ -1,4 +1,9 @@
 
+.login .social .circle .fa
+{
+    vertical-align: middle;
+}
+
 html
 {
     background-color: #eee;
