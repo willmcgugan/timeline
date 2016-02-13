@@ -1,5 +1,14 @@
 	<div class="footer">
 
+	{#
+		<div class="author">
+			<a href="{% url 'user_streams' with username=event.stream.user.username %}">
+				<i class="fa fa-male"></i>${event.stream.user.username}
+			</a>
+		</div>
+		<i class="text-muted fa fa-angle-double-right"></i>
+	#}
+
 		<div class="author">${event.generator or '?'}</div>
 
 		<i class="text-muted fa fa-angle-double-right"></i>
