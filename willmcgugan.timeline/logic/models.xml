@@ -111,7 +111,8 @@
         <string name="name" length="100" null="no" />
         <string name="slug" length="100" null="no" />
         <integer name="count" null="no" default="0" />
-        <many-to-many model="#Event" name="events" backref="tags" picker="#admintable.events"/>
+        <many-to-many model="#Event" name="events" backref="tags"
+            picker="#admintable.events" backpicker="#admintable.tags"/>
     </model>
 
 </moya>

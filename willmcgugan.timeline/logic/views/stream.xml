@@ -100,5 +100,9 @@
         </dict>
     </view>
 
+    <view libname="view.tag.stream" content="#content.tag.stream">
+        <db:get-required model="#Tag" let:name="lower:.url.tag_name" dst="tag"/>
+
+    </view>
 
 </moya>

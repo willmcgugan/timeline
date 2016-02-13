@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
     xmlns:let="http://moyaproject.com/let"
-    xmlns:db="http://moyaproject.com/db">
+    xmlns:db="http://moyaproject.com/db"
+    xmlns:tl="http://willmcgugan.com/timeline">
 
     <handle signal="moya.comments.new-comment">
     	<let event_uuid="(partition:[signal.data.commentobject.object, '-'])[-1]"/>
@@ -22,7 +23,8 @@
     </handle>
 
     <handle signal="db.post-create" sender="willmcgugan.timeline#Event">
-        <let tags="signal.data.object.text_html|'hashtags'"/>
-        <echo obj="tags"/>
+        <let event="signal.data.object"/>
+        <let tags="event.text_html|'hashtags'"/>
+        <tl:update-tags event="event" tags="tags"/>
     </handle>
 </moya>

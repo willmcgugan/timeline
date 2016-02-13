@@ -20,6 +20,8 @@
         <url route="/" methods="GET" view="#view.front" name="front"/>
         <url route="/dash/" mount="#mountpoint.dash"/>
 
+        <url route="/tag/{slug:tag_name}/" view="#view.tag.stream" name="tag_stream"/>
+
         <!-- twitter like conventions for username -->
         <url route="/{username}/" methods="GET">
             <redirect-to path="/${.url.username}"/>

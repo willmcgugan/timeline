@@ -11,6 +11,7 @@
         <link to="#admintable.timelines" title="Timelines"/>
         <link to="#admintable.streams" title="Streams"/>
         <link to="#admintable.events" title="Events"/>
+        <link to="#admintable.tags" title="Tags"/>
     </module>
 
     <table xmlns="http://moyaproject.com/admin"
@@ -35,6 +36,15 @@
         <column title="Type" sort="type">${object.type}</column>
         <column title="Added" sort="added">${localize:object.added_time}</column>
         <column title="Time" sort="time">${localize:object.time}</column>
+    </table>
+
+    <table xmlns="http://moyaproject.com/admin"
+        libname="admintable.tags" slug="tags" title="Tags" model="#Tag" description="Tags"
+        search="#Tag.name == q">
+
+        <column title="Name" link="yes">#${object.name}</column>
+        <column title="Count">${object.count}</column>
+
     </table>
 
 </moya>

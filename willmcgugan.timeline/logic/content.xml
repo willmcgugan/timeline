@@ -118,7 +118,7 @@ Then set the stream credentials as environment variables:
 
 ```bash
 export INTHING_STREAM=${stream.uuid}
-export INTHING_STREAM_PASSWORD=${stream.password}
+export INTHING_STREAM_PASSWORD="${stream.password}"
 ```
 
 You can now post an event from the command line:
@@ -189,6 +189,15 @@ Even if your favorite language isn't listed here, you can add support with any l
         </section>
     </content>
 
+    <content libname="content.tag.stream" extends="#content.stream.base">
+        <let-str menu="tag_stream"/>
+        <section name="side" merge="append">
+            <node template="stream/info/tag.html" withscope="yes"/>
+        </section>
+
+
+    </content>
+
     <content libname="content.event" extends="#content.base" template="view_event.html">
         <let-str menu="event"/>
         <section name="event">
@@ -242,7 +251,6 @@ Even if your favorite language isn't listed here, you can add support with any l
                     <node template="dash/stream.html" let:stream="stream"/>
                 </m:for>
             </node>
-
         </section>
 
     </content>
