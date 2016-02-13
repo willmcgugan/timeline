@@ -81,14 +81,14 @@ class NotifyHandler(websocket.WebSocketHandler):
         if not watching:
             self.close()
             return
-        log.info('notifying %s watcher(s) of %s', len(watching), path)
+        
         for handler in watching:
             try:
                 handler.write_message(instruction)
             except:
                 pass
             else:
-                log.debug(' notified %r', handler)
+                log.debug('  %r', handler)
         self.close()
 
     def on_close(self):
