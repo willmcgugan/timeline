@@ -100,11 +100,7 @@ You can then post events to your stream with the following:
 import inthing
 stream = inthing.Stream(id="${stream.uuid}",
                         password="${stream.password}")
-<<<<<<< HEAD
 stream.text("Hello, World! #helloworld", title="New Event")
-=======
-stream.text_event(title="New Event", text="Hello, World! #helloworld")
->>>>>>> eee005bdc1dbbcbcaa8a3548a7526f13a6c9bd8e
 ```
 
                         </markdown>
