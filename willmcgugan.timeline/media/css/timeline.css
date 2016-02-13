@@ -1,48 +1,4 @@
 
-
-/*
-.card
-{
-    border-radius:4px;
-    background-color:#fff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
-    margin:8px 0px;
-    overflow:hidden;
-
-    transform: perspective(600px) rotateX(0deg);
-    opacity: 1;
-    transition: transform 1s, opacity 1s;
-}
-
-.card .content
-{
-    padding: 10px 20px 20px;
-}
-
-.card .footer
-{
-    border-top:1px solid #E5E9ED;
-    margin-top:8px;
-}
-
-.card img.content-image
-{
-    width:100%;
-}
-
-.new-event
-{
-	transform: perspective(600px) rotateX(90deg);
-    opacity: 0;
-	transition: transform 1s, opacity 1s;
-}
-*/
-
-/*
-.stream-info
-{
-    background-image:url(/static/timeline-media/img/img1.jpg);
-}*/
 html
 {
     background-color: #eee;
@@ -210,6 +166,15 @@ pre code.hljs *
 {
     overflow:hidden;
 }
+
+
+    .new-events
+    {
+        position:absolute;
+        top:90px;
+    }
+
+
 
 /*
 @media (min-width: 992px) {

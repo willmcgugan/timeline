@@ -85,7 +85,7 @@
 
         <property name="text_html">
             <m:return>
-                <m:process-markup src="object.text" type="${object.markup}"/>
+                <m:process-markup src="object.text or ''" type="${object.markup}"/>
             </m:return>
         </property>
 

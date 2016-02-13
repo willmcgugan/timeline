@@ -100,7 +100,7 @@ You can then post events to your stream with the following:
 import inthing
 stream = inthing.Stream(id="${stream.uuid}",
                         password="${stream.password}")
-stream.text_event(title="New Event", text="Hello, *World*!")
+stream.text("Hello, World! #helloworld", title="New Event")
 ```
 
                         </markdown>
@@ -124,7 +124,7 @@ export INTHING_STREAM_PASSWORD="${stream.password}"
 You can now post an event from the command line:
 
 ```
-inthing event --title "New Event" --text "Hello, *World*\!"
+inthing text "Hello, World! #helloworld" --title "New Event"
 ```
                         </markdown>
                     </w:tab>
