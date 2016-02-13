@@ -67,25 +67,29 @@ class NotifyHandler(websocket.WebSocketHandler):
 
     def on_message(self, message_json):
         try:
-            path, instruction = json.loads(message_json)
+            notify_list = json.loads(message_json)
         except:
             log.exception('failed to decode message')
             self.close()
-        else:
+
+        for path, instruction in notify_list:
             self.notify(path, instruction)
 
     def notify(self, path, instruction):
         log.debug('notify %s', path)
         watching = WatchHandler.watching[path]
-        log.info('notifying %s watchers of %s', len(watching), path)
+        if not watching:
+            self.close()
+            return
+        log.info('notifying %s watcher(s) of %s', len(watching), path)
         for handler in watching:
-
             try:
                 handler.write_message(instruction)
             except:
                 pass
             else:
                 log.debug(' notified %r', handler)
+        self.close()
 
     def on_close(self):
         log.debug('%s left', self.request.remote_ip)
@@ -113,6 +117,6 @@ def make_app(secret, api_url):
     app = web.Application([
         (r'^/watch/(?P<path>.*?)$', WatchHandler),
         (r'^/notify/$', NotifyHandler, {'secret': secret}),
-        (r'^/api/$', APIHandler, {'api_url': api_url})
+        #(r'^/api/$', APIHandler, {'api_url': api_url})
     ])
     return app

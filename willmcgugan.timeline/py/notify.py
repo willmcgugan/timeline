@@ -14,6 +14,7 @@ log = logging.getLogger('moya.runtime.notifier')
 
 
 class Notify(LogicElement):
+	"""Add a notification to the queue"""
 	xmlns = "http://willmcgugan.com/timeline"
 
 	path = Attribute("Path to update", type="text")
@@ -39,28 +40,39 @@ class Notify(LogicElement):
 			instruction.update(let_map)
 		instruction_json = json.dumps([instruction])
 
+		notifications = context.set_new_call('.notifier_queue', list)
+		notifications.append([path, instruction_json])
+
+
+class SendNotifications(LogicElement):
+	"""Send queued notifications"""
+	xmlns = "http://willmcgugan.com/timeline"
+
+	def logic(self, context):
+		notifications = context.get('.notifier_queue', None)
+		if notifications is None:
+			return
+
+		log.debug('sending %s queued notifications', len(notifications))
+
 		timeline_app = self.archive.find_app('willmcgugan.timeline')
 		ws_url_base = timeline_app.settings['notifier_url']
 		notifier_secret = timeline_app.settings['notifier_secret']
 		ws_url = "{}?secret={}".format(ws_url_base, notifier_secret)
 
-		ws = context.get('.notify_ws', None)
-		if ws is None:
-			try:
-				ws = create_connection(ws_url,
-									   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
-			except Exception as e:
-				msg = 'unable to connect to notifier server ({})'.format(text_type(e))
-				if params.failsilently:
-					log.warn(msg)
-					return
-				else:
-					self.throw('notifier.connect-fail',
-							   msg,
-							   error=e)
-			context['.notify_ws'] = ws
+		packet_json = json.dumps(notifications)
+		del context['.notifier_queue']
 
-		packet = [path, instruction_json]
-		packet_json = json.dumps(packet)
-		ws.send(packet_json)
-		#ws.close()
+		try:
+			ws = create_connection(ws_url,
+								   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+		except Exception as e:
+			log.warn('unable to connect to notifier ({})'.format(text_type(e)))
+			return
+
+		try:
+			ws.send(packet_json)
+		finally:
+			ws.close()
+
+

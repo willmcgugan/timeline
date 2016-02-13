@@ -27,4 +27,10 @@
         <let tags="event.text_html|'hashtags'"/>
         <tl:update-tags event="event" tags="tags"/>
     </handle>
+
+    <handle signal="request.end">
+        <thread>
+            <tl:send-notifications/>
+        </thread>
+    </handle>
 </moya>
