@@ -20,7 +20,11 @@
         <url route="/" methods="GET" view="#view.front" name="front"/>
         <url route="/dash/" mount="#mountpoint.dash"/>
 
-        <url route="/tag/{slug:tag_name}/" view="#view.tag.stream" name="tag_stream"/>
+        <url route="/tag/{tag_name}/" view="#view.tag.stream" name="tag_stream">
+            <!-- Redirect if tag name is not in canonical form -->
+            <redirect name="tag_stream" let:tag_name="slug:.url.tag_name"
+                if="slug:.url.tag_name != .url.tag_name"/>
+        </url>
 
         <!-- twitter like conventions for username -->
         <url route="/{username}/" methods="GET">

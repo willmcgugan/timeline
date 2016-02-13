@@ -194,8 +194,10 @@ Even if your favorite language isn't listed here, you can add support with any l
         <section name="side" merge="append">
             <node template="stream/info/tag.html" withscope="yes"/>
         </section>
-
-
+        <section name="main">
+            <tl:render-user-message/>
+            <tl:stream events="events" source="tag-${tag.slug}"/>
+        </section>
     </content>
 
     <content libname="content.event" extends="#content.base" template="view_event.html">

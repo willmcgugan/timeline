@@ -20,7 +20,8 @@ function link_hashtags($container)
                     var new_text = node.textContent.replace(
                         /\#(\w+)/g,
                         function(match) {
-                            return '<a class="hashtag" href="#">#' + match.substr(1) + '</a>';
+                            var tag = match.substr(1);
+                            return '<a class="hashtag" href="/tag/' + tag + '/">#' + tag + '</a>';
                         }
                     );
                     var replace_node = document.createElement('span');
