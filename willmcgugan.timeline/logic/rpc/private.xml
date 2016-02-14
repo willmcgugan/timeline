@@ -42,6 +42,7 @@
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
             <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
             <rpc:parameter name="filter_streams" type="list" required="no" default="[]">List of stream PKs</rpc:parameter>
+            <rpc:parameter name="filter_hashtags" type="string" required="no" default="''">Hashtag search text</rpc:parameter>
 
             <let is_stream="events ^= 'stream'"/>
             <tl:get-events source="events" dst="events"/>
@@ -52,6 +53,13 @@
             <db:query src="events" dst="events" if="filter_streams"
                 filter="#Event.stream.id in filter_streams"/>
 
+            <let hashtags="split:filter_hashtags"/>
+            <for src="hashtags" dst="tagname">
+                <db:get model="#Tag" let:slug="slug:tagname" dst="tag"/>
+                <let tag_events="tag.events ? tag.events : []"/>
+                <db:query src="events" dst="events" filter="#Event.id in tag_events"/>
+            </for>
+
             <if test="not time">
                 <db:query src="events" dst="events"/>
             </if>
@@ -60,7 +68,6 @@
                     <db:query src="events" dst="events"
                         filter="#Event.insert_seconds gt time and #Event.insert_seconds != time"/>
                     <db:query src="events" dst="events" filter="#Event.id gt order" if="order"/>
-
                 </if>
                 <else>
                     <db:query src="events" dst="events"

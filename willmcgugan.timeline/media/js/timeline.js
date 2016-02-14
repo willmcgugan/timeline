@@ -143,6 +143,7 @@ streams = {};
 		self.event_stack = [];
 		self.filter_types = [];
         self.filter_streams = [];
+        self.filter_hashtags = '';
 
 		$('#filter-types input.event-type').change(function(){
 			var filter = [];
@@ -175,6 +176,11 @@ streams = {};
                 }
             });
             self.filter_streams = filter;
+            self.refresh();
+        });
+        var $filter_hashtags = $('#filter-hashtags');
+        $filter_hashtags.find('input.filter-hashtags').keyup(function(){
+            self.filter_hashtags = $(this).val();
             self.refresh();
         });
 
@@ -295,7 +301,9 @@ streams = {};
                     'order': last_event_order,
 					'events': self.event_source,
 					'new': false,
-					'filter_types': self.filter_types
+					'filter_types': self.filter_types,
+                    'filter_streams': self.filter_streams,
+                    'filter_hashtags': self.filter_hashtags
 				},
 				function(result){
 
@@ -351,7 +359,8 @@ streams = {};
 					'time': self.time,
 					'events': self.event_source,
 					'filter_types': self.filter_types,
-                    'filter_streams': self.filter_streams
+                    'filter_streams': self.filter_streams,
+                    'filter_hashtags': self.filter_hashtags
 				},
 				function(result){
 					$stream.find('.event').remove();
@@ -377,7 +386,9 @@ streams = {};
 					'time': self.time,
                     'order': order,
 					'events': self.event_source,
-					'filter_types': self.filter_types
+                    'filter_types': self.filter_types,
+                    'filter_streams': self.filter_streams,
+                    'filter_hashtags': self.filter_hashtags
 				},
 				function(result){
 					self.update_events(result.time, result.events);
