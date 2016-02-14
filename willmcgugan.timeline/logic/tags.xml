@@ -182,4 +182,29 @@
         </for>
     </tag>
 
+    <tag name="rate-limit">
+        <doc>
+Manage rate limiting.
+
+Will execute the enclosed block if the rate limit check fails.
+        </doc>
+        <signature>
+            <attribute name="resource" type="text" required="yes">
+                a string indicating the resource
+            </attribute>
+            <attribute name="span" required="yes" default="60">span in seconds</attribute>
+            <attribute name="max" required="yes">max number of requests</attribute>
+        </signature>
+
+        <let start="int:floor:(.time / span) * span" />
+        <db:get-or-create model="#RateBucket" dst="bucket"
+            let:resource="resource" let:start="start" let:span="span"/>
+        <inc dst="bucket.count"/>
+        <if test="bucket.count gt max">
+            <log-debug>rate limited '${resource}', ${bucket.count} requests in ${span} seconds (max ${max})</log-debug>
+            <yield/>
+        </if>
+
+    </tag>
+
 </moya>

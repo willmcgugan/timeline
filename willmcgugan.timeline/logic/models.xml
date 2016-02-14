@@ -15,6 +15,7 @@
         <one-to-one name="user" backref="account" model="moya.auth#User" />
         <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" />
         <text name="about" default="" />
+        <integer name="max_streams" default="10"/>
     </model>
 
     <model libname="Timeline" xmlns="http://moyaproject.com/db">
@@ -44,7 +45,7 @@
         <uuid name="uuid" unique="yes"/>
         <integer name="retention" default="None" null="yes" blank="yes"/>
         <string name="password" length="100" blank="yes" null="yes"/>
-        <boolean name="public" default="yes" />
+        <boolean name="private" default="no" />
 
         <foreign-key name="image" model="moya.imagelib#Image" null="yes" blank="yes"/>
 
@@ -107,12 +108,22 @@
         <text name="text" null="no"/>
     </model>
 
-    <model xmlns="http://moyaproject.com/db" libname="Tag" repr="${name}">
+    <model libname="Tag" repr="tag ${name}" xmlns="http://moyaproject.com/db">
         <string name="name" length="100" null="no" />
         <string name="slug" length="100" null="no" />
         <integer name="count" null="no" default="0" />
+        <text name="description" null="no" default="" />
         <many-to-many model="#Event" name="events" backref="tags"
             picker="#admintable.events" backpicker="#admintable.tags"/>
+    </model>
+
+    <model libname="RateBucket" xmlns="http://moyaproject.com/db">
+        <unique-together>
+            <string name="resource" length="100" null="no"/>
+            <integer name="start" null="no"/>
+            <integer name="span" null="no"/>
+        </unique-together>
+        <integer name="count" default="0"/>
     </model>
 
 </moya>

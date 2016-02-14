@@ -23,51 +23,58 @@
         </else>
         <forms:get form="#form.event" src="initial" dst="form" action="${action}"/>
 
-        <forms:validate src="form">
-            <let data="form.data"/>
-            <try>
-                <tl:get-stream id="data.stream" dst="stream" user=".user"/>
-                <db:create model="#Event" dst="event"
-                    let:stream="stream"
-                    let:time="data.time ? epoch:data.time : .now"
-                    let:type="data.type or 'text'"
-                    let:priority="int:data.priority"
-                    let:title="data.title"
-                    let:text="data.text"
-                    let:markup="data.markup"
-                    let:generator="data.generator or 'inthing api'"
-                    let:insert_seconds="round:[.time, 6]"/>
-
-                <if test="data.image">
-                    <let ext="ext:data.image.filename"/>
-                    <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
-                    <image:get-size file="data.image" dst="size"/>
-                    <db:create model="#Image" dst="img"
-                        let:event="event"
-                        let:path="path"
-                        let:filesize="len:data.image"
-                        let:width="size.width"
-                        let:height="size.height"/>
-                    <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
-                    <tn:generate thumbnails="#thumbnails" path="path" />
-                </if>
-                <db:commit/>
-            </try>
-            <catch exception="*" dst="error">
-                <dict dst="result" let:status="'error'" let:msg="error.msg"/>
-            </catch>
-            <if test="not result">
-                <tl:notify-stream stream="stream"/>
-                <let new_event="event"/>
-                <dict dst="result" let:status="'ok'">
-                   <dict dst="event" let:id="new_event.uuid">
-                        <get-fq-url dst="url" name="event" let:event_id="new_event.uuid"/>
-                    </dict>
-                </dict>
-            </if>
-        </forms:validate>
-
         <if-post>
+            <forms:validate src="form">
+                <let data="form.data"/>
+                
+                <tl:rate-limit resource="stream-${data.stream}" span="60" max="3">
+                    <dict dst="result" let:status="'ratelimited'"/>
+                    <str dst="result.msg">You are posting too quickly!</str>
+                    <serve-json obj="result"/>
+                </tl:rate-limit>
+
+                <try>
+                    <tl:get-stream id="data.stream" dst="stream" user=".user"/>
+
+                    <db:create model="#Event" dst="event"
+                        let:stream="stream"
+                        let:time="data.time ? epoch:data.time : .now"
+                        let:type="data.type or 'text'"
+                        let:priority="int:data.priority"
+                        let:title="data.title"
+                        let:text="data.text"
+                        let:markup="data.markup"
+                        let:generator="data.generator or 'inthing api'"
+                        let:insert_seconds="round:[.time, 6]"/>
+
+                    <if test="data.image">
+                        <let ext="ext:data.image.filename"/>
+                        <str dst="path">${stream.uuid}/${event.uuid}.${ext}</str>
+                        <image:get-size file="data.image" dst="size"/>
+                        <db:create model="#Image" dst="img"
+                            let:event="event"
+                            let:path="path"
+                            let:filesize="len:data.image"
+                            let:width="size.width"
+                            let:height="size.height"/>
+                        <fs:set-contents fs="uploads" path="${path}" contents="data.image"/>
+                        <tn:generate thumbnails="#thumbnails" path="path" />
+                    </if>
+                    <db:commit/>
+                </try>
+                <catch exception="*" dst="error">
+                    <dict dst="result" let:status="'error'" let:msg="error.msg"/>
+                </catch>
+                <if test="not result">
+                    <tl:notify-stream stream="stream"/>
+                    <let new_event="event"/>
+                    <dict dst="result" let:status="'ok'">
+                       <dict dst="event" let:id="new_event.uuid">
+                            <get-fq-url dst="url" name="event" let:event_id="new_event.uuid"/>
+                        </dict>
+                    </dict>
+                </if>
+            </forms:validate>
             <if test="form.bound and not form.ok">
                 <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
                     <let error="form.error"/>
