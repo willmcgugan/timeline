@@ -1,0 +1,5 @@
+{# This exists because the gsdk theme messes up checkboxes #}
+<label class="checkbox" for="${field.id}">
+    <input id="${field.id}" name="${field.name}" type="checkbox" data-toggle="checkbox"
+        {% if field.value %}checked="checked"{% endif %} {% if field.disabled %} disabled{% endif %} value="${field.on}"/>${field.text}
+</label>

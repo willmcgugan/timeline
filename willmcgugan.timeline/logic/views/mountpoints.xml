@@ -35,18 +35,14 @@
                 if="slug:.url.tag_name != .url.tag_name"/>
         </url>
 
-        <!-- twitter like conventions for username -->
-        <url route="/{username}/" methods="GET">
-            <redirect-to path="/${.url.username}"/>
-        </url>
         <!-- user's streams -->
-        <url route="/{username}" methods="GET,POST" view="#view.user.streams" name="user_streams" />
+        <url route="/u/{username}/" methods="GET,POST" view="#view.user.streams" name="user_streams" />
         <!-- user's subscriptions -->
-        <url route="/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
+        <url route="/u/{username}/subs/" methods="GET" view="#view.user.subscriptions" name="user_subscriptions"/>
         <!-- individual stream -->
-        <url route="/{username}/{stream_slug}/" view="#view.user.stream" name="user_stream"/>
+        <url route="/u/{username}/{stream_slug}/" view="#view.user.stream" name="user_stream"/>
         <!-- URL to POST events to -->
-        <url route="/{username}/{stream_slug}/add/" view="#view.stream.upload" name="user_stream_upload"/>
+        <url route="/u/{username}/{stream_slug}/add/" view="#view.stream.upload" name="user_stream_upload"/>
 
     </mountpoint>
 

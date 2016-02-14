@@ -55,6 +55,11 @@
             placeholder="Title of the stream (used to generate a URL)"/>
         <text-area name="description" label="Description"
             placeholder="What will go in this stream?"/>
+        <field>
+            <m:bbcode>[url ${.request.host_url}${.urls.pages.showpage(pagename='tc')}]Terms and Conditions[/url]</m:bbcode>
+        </field>
+        <checkbox name="tc" text="I agree" required="yes"/>
+
         <submit-button text="Create Stream"/>
         <validate-field field="title">
             <db:if-exists model="#Stream"
