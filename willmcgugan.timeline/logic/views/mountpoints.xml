@@ -18,6 +18,13 @@
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/" methods="GET" view="#view.front" name="front"/>
+
+        <url route="/home/" name="home">
+            <!-- redirect to users streams if logged in, otherwise home page -->
+            <redirect name="user_streams" let:username=".user.username" if=".user"/>
+            <redirect-to path="/"/>
+        </url>
+
         <url route="/dash/" mount="#mountpoint.dash">
             <forbidden if="not .user"/>
         </url>
