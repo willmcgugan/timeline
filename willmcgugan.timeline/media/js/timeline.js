@@ -180,8 +180,12 @@ streams = {};
         });
         var $filter_hashtags = $('#filter-hashtags');
         $filter_hashtags.find('input.filter-hashtags').keyup(function(){
-            self.filter_hashtags = $(this).val();
-            self.refresh();
+            var filter_hashtags = $(this).val();
+            if(filter_hashtags != self.filter_hashtags)
+            {
+                self.filter_hashtags = filter_hashtags;
+                self.refresh();
+            }
         });
 
 		$new_events.click(function(e){

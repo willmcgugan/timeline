@@ -44,7 +44,6 @@
             <rpc:parameter name="filter_streams" type="list" required="no" default="[]">List of stream PKs</rpc:parameter>
             <rpc:parameter name="filter_hashtags" type="string" required="no" default="''">Hashtag search text</rpc:parameter>
 
-            <let is_stream="events ^= 'stream'"/>
             <tl:get-events source="events" dst="events"/>
 
             <db:query src="events" dst="events" if="filter_types"
@@ -53,17 +52,13 @@
             <db:query src="events" dst="events" if="filter_streams"
                 filter="#Event.stream.id in filter_streams"/>
 
-            <let hashtags="split:filter_hashtags"/>
-            <for src="hashtags" dst="tagname">
+            <for src="split:filter_hashtags" dst="tagname">
                 <db:get model="#Tag" let:slug="slug:tagname" dst="tag"/>
                 <let tag_events="tag.events ? tag.events : []"/>
                 <db:query src="events" dst="events" filter="#Event.id in tag_events"/>
             </for>
 
-            <if test="not time">
-                <db:query src="events" dst="events"/>
-            </if>
-            <else>
+            <if test="time">
                 <if test="new">
                     <db:query src="events" dst="events"
                         filter="#Event.insert_seconds gt time and #Event.insert_seconds != time"/>
@@ -74,12 +69,12 @@
                         filter="#Event.insert_seconds lt time and #Event.insert_seconds != time"/>
                     <db:query src="events" dst="events" filter="#Event.id lt order" if="order"/>
                 </else>
-            </else>
+            </if>
             <db:query src="events" dst="events" orderby="-insert_seconds"  maxresults="10" distinct="yes"/>
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
-                <tl:render-event event="event" dst="html" link_to_stream="not is_stream"/>
+                <tl:render-event event="event" dst="html" link_to_stream="events ^= 'stream'"/>
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
             <return-dict let:events="events_html" let:time="update_time"/>
