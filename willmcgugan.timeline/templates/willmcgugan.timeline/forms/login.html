@@ -1,4 +1,4 @@
-        {% with login_redirect = .request.path == '/' ? .urls.timeline.home : request.path %}
+        {% with login_redirect = .request.path == '/' ? .urls.timeline.home : .request.path %}
             <div id="login_modal" class="modal fade" data-width="300">
                 <div class="modal-dialog login animated modal-sm">
                   <div class="modal-content">

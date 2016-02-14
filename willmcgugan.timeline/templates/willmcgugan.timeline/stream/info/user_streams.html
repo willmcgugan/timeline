@@ -1,6 +1,7 @@
 
 <div class="card card-refine">
     <div class="header">
+        {% if owner == .user %}
         <div class="btn-group stream-actions-button">
             <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="glyphicon glyphicon-wrench text-info"></i>
@@ -18,6 +19,7 @@
             </li>
           </ul>
         </div>
+        {% end-if %}
         <div class="pull-right">
 
             <div class="switch switch-cards" data-toggle="tooltip" title="Show stream cards?"
