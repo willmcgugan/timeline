@@ -36,15 +36,16 @@
         </rpc:method>
 
         <rpc:method name="get_updates" group="events" description="Get updates to a stream">
-            <rpc:parameter name="events" type="string" required="yes">events source</rpc:parameter>
+            <rpc:parameter name="source" type="string" required="yes">events source</rpc:parameter>
             <rpc:parameter name="time" type="number" null="yes" required="yes">update time</rpc:parameter>
-            <rpc:parameter name="order" type="number" null="yes" required="no">Order value</rpc:parameter>
+            <rpc:parameter name="order" type="number" null="yes" required="no">order value</rpc:parameter>
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
-            <rpc:parameter name="filter_types" type="list" required="no" default="[]">List of types to filter</rpc:parameter>
-            <rpc:parameter name="filter_streams" type="list" required="no" default="[]">List of stream PKs</rpc:parameter>
-            <rpc:parameter name="filter_hashtags" type="string" required="no" default="''">Hashtag search text</rpc:parameter>
+            <rpc:parameter name="filter_types" type="list" required="no" default="[]">list of types to filter</rpc:parameter>
+            <rpc:parameter name="filter_streams" type="list" required="no" default="[]">list of stream PKs</rpc:parameter>
+            <rpc:parameter name="filter_hashtags" type="string" required="no" default="''">hashtag query text</rpc:parameter>
+            <rpc:parameter name="request_index" type="number" default="0">an integer that will be returned in the response</rpc:parameter>
 
-            <tl:get-events source="events" dst="events"/>
+            <tl:get-events source="source" dst="events"/>
 
             <db:query src="events" dst="events" if="filter_types"
                 filter="#Event.type in filter_types" />
@@ -74,10 +75,10 @@
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
-                <tl:render-event event="event" dst="html" link_to_stream="events ^= 'stream'"/>
+                <tl:render-event event="event" dst="html" link_to_stream="not (source ^= 'stream')"/>
                 <append src="events_html" value="{'html': html, 'id': event.uuid}"/>
             </for>
-            <return-dict let:events="events_html" let:time="update_time"/>
+            <return-dict let:events="events_html" let:time="update_time" let:request_index="request_index"/>
         </rpc:method>
 
         <rpc:method name="subscribe" group="stream" description="unsubscribe from a stream">

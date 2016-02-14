@@ -134,7 +134,7 @@ streams = {};
 		var $events_container = $stream.find('.events-container')
 		var $new_events = $stream.find('.new-events');
         var stream_end = false;
-
+        var request_index = 0;
 		var stream_id = config.stream_id;
         streams[stream_id] = self;
 
@@ -194,6 +194,30 @@ streams = {};
 			});
 		});
 
+        self.query_events = function(query, on_result)
+        {
+            var params = {
+                'source': self.event_source,
+                'filter_types': self.filter_types,
+                'fiter_streams': self.filter_streams,
+                'filter_hashtags': self.filter_hashtags
+            };
+            var params = jQuery.extend(params, query); /* oh Javascript */
+            request_index += 1;
+            params.request_index = request_index;
+            rpc.call(
+                'events.get_updates',
+                params,
+                function(result)
+                {
+                    if (result.request_index == request_index)
+                    {
+                        on_result(result);
+                    }
+                }
+            );
+        }
+
         self.on_new_image = function(uuid)
         {
             rpc.call('stream.set_image',
@@ -206,13 +230,17 @@ streams = {};
             });
         }
 
-		self.update_events = function(time, events)
+		self.update_events = function(time, events, reset)
 		{
+            if(reset)
+            {
+                $stream.find('.event').remove();
+            }
 			self.time = time;
 			$(events).each(function(i, event_update){
 				self.add_event(event_update);
 			});
-			self.check_updates();
+			self.check_updates(reset);
 		}
 
 		self.add_event = function(event_update)
@@ -239,22 +267,25 @@ streams = {};
 			self.reset();
 		}
 
-		self.check_updates = function()
+		self.check_updates = function(reset)
 		{
 			if(!self.event_stack.length)
 			{
 				return;
 			}
 
-			$window = $(window);
-			var scroll_y = $window.scrollTop();
+            if(!reset)
+            {
+    			var $window = $(window);
+    			var scroll_y = $window.scrollTop();
 
-			if (scroll_y > 100)
-			{
-				$new_events.addClass('pending-events');
-				$new_events.find('.count').text(self.event_stack.length);
-				return;
-			}
+    			if (scroll_y > 100)
+    			{
+    				$new_events.addClass('pending-events');
+    				$new_events.find('.count').text(self.event_stack.length);
+    				return;
+    			}
+            }
 			$new_events.removeClass('pending-events');
 
 			$(self.event_stack).each(function(i, event_update){
@@ -298,16 +329,11 @@ streams = {};
 
 			$more_events.addClass('loading');
 
-			rpc.call(
-				'events.get_updates',
+			self.query_events(
 				{
 					'time': last_event_time,
                     'order': last_event_order,
-					'events': self.event_source,
-					'new': false,
-					'filter_types': self.filter_types,
-                    'filter_streams': self.filter_streams,
-                    'filter_hashtags': self.filter_hashtags
+					'new': false
 				},
 				function(result){
 
@@ -357,18 +383,13 @@ streams = {};
         self.reset = function()
         {
         	window.scrollTop = 0;
-        	rpc.call(
-				'events.get_updates',
+        	self.query_events(
 				{
-					'time': self.time,
-					'events': self.event_source,
-					'filter_types': self.filter_types,
-                    'filter_streams': self.filter_streams,
-                    'filter_hashtags': self.filter_hashtags
+					'time': self.time
 				},
 				function(result){
-					$stream.find('.event').remove();
-					self.update_events(result.time, result.events.reverse());
+
+					self.update_events(result.time, result.events.reverse(), true);
 				}
 			);
         }
@@ -384,15 +405,10 @@ streams = {};
             {
                 var order = null;
             }
-			rpc.call(
-				'events.get_updates',
+			self.query_events(
 				{
 					'time': self.time,
-                    'order': order,
-					'events': self.event_source,
-                    'filter_types': self.filter_types,
-                    'filter_streams': self.filter_streams,
-                    'filter_hashtags': self.filter_hashtags
+                    'order': order
 				},
 				function(result){
 					self.update_events(result.time, result.events);
