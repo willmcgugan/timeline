@@ -12,8 +12,8 @@
     </enum>
 
     <model libname="Account" xmlns="http://moyaproject.com/db">
-        <one-to-one name="user" backref="account" model="moya.auth#User" />
-        <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" />
+        <one-to-one name="user" backref="account" model="moya.auth#User" picker="moya.auth#admintable.users"/>
+        <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" picker="moya.imagelib#admintable.collections"/>
         <text name="about" default="" />
         <integer name="max_streams" default="10"/>
     </model>

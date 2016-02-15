@@ -12,6 +12,7 @@
         <link to="#admintable.streams" title="Streams"/>
         <link to="#admintable.events" title="Events"/>
         <link to="#admintable.tags" title="Tags"/>
+        <link to="#admintable.accounts" title="Accounts"/>
     </module>
 
     <table xmlns="http://moyaproject.com/admin"
@@ -41,10 +42,14 @@
     <table xmlns="http://moyaproject.com/admin"
         libname="admintable.tags" slug="tags" title="Tags" model="#Tag" description="Tags"
         search="#Tag.name == q">
-
         <column title="Name" link="yes">#${object.name}</column>
         <column title="Count">${object.count}</column>
+    </table>
 
+    <table xmlns="http://moyaproject.com/admin"
+        libname="admintable.accounts" slug="accounts" title="Accounts" model="#Account" description="Accounts"
+        search="#Acount.user.username == q">
+        <column title="User" link="yes">${object.user}</column>
     </table>
 
 </moya>

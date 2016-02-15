@@ -207,4 +207,15 @@ Will execute the enclosed block if the rate limit check fails.
 
     </tag>
 
+    <tag name="subscribe">
+        <doc>Subscribe to a stream</doc>
+        <signature>
+            <attribute name="stream" required="yes"/>
+            <attribute name="user" default=".user"/>
+        </signature>
+        <db:get-or-create model="#Timeline" dst="timeline"
+            let:user=".user" let:slug="'default'"/>
+        <db:get-or-create model="#Subscription" dst="subscription"
+            let:stream="stream" let:timeline="timeline"/>
+    </tag>
 </moya>

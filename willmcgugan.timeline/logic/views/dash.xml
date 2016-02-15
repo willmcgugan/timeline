@@ -31,6 +31,7 @@
                 let:title="data.title"
                 let:slug="slug:data.title"
                 let:description="data.description"/>
+            <tl:subscribe stream="stream"/>
             <redirect name="user_stream"
                 let:username=".user.username" let:stream_slug="stream.slug" />
         </forms:validate>
