@@ -85,7 +85,7 @@
         <validate-field field="title">
             <db:if-exists model="#Stream"
                 let:user="stream.user" let:slug="slug:value" filter="#Stream.id != stream.id">
-                <fail if="_stream">This title exists, please pick another</fail>
+                <fail>This title exists, please pick another</fail>
             </db:if-exists>
             <fail if="not slug:value">
                 Can't make a slug out of this title
