@@ -1,12 +1,21 @@
+
 <div class="card">
-	<div class="content">
-{% markup-block as 'markdown' %}
-# Welcome, ${.user.display_name}!
+    <div class="content">
 
-This is your *timeline*.
+        <p class="category text-warning"><i class="fa fa-info-circle"></i> no subscriptions</p>
+        <h4 class="title">Welcome, ${.user.display_name}!</h4>
 
-Here you will see events from streams you have subscribed to. You aren't currently subscribed to any streams.
+        {% markup-block as 'markdown' %}
 
-{% end-markupblock %}
-	</div>
+You don't have any subscriptions yet.
+
+If you find a stream you like, subscribe to it, and the events will appear here.
+
+See **[#helloworld](${.urls.timeline.tag_stream(tag_slug='helloworld')})** for freshly minted streams.
+
+
+        {% end-markupblock %}
+
+
+    </div>
 </div>

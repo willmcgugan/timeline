@@ -38,7 +38,9 @@
     </div>
     <div class="content">
         <div class="panel-group">
+        {%- if len:streams gt 1 %}
             {% include "fragments/filter/stream_id.html" %}
+        {%- end-if %}
             {% include "fragments/filter/event_type.html" %}
             {% include "fragments/filter/hashtag.html" %}
         </div>

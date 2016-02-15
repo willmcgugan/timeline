@@ -29,10 +29,10 @@
             <forbidden if="not .user"/>
         </url>
 
-        <url route="/tag/{tag_name}/" view="#view.tag.stream" name="tag_stream">
+        <url route="/tag/{tag_slug}/" view="#view.tag.stream" name="tag_stream">
             <!-- Redirect if tag name is not in canonical form -->
-            <redirect name="tag_stream" let:tag_name="slug:.url.tag_name"
-                if="slug:.url.tag_name != .url.tag_name"/>
+            <redirect name="tag_stream" let:tag_name="slug:.url.tag_slug"
+                if="slug:.url.tag_slug != .url.tag_slug"/>
         </url>
 
         <!-- user's streams -->

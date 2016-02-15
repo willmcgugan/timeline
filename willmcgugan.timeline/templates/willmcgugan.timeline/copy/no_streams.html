@@ -1,7 +1,7 @@
 <div class="card">
     <div class="content">
 
-        <p class="category">Introduction</p>
+        <p class="category text-warnng"><i class="fa fa-info-circle"></i> introduction</p>
         <h4 class="title">Let's create some Streams!</h2>
 
         {% markup-block as 'markdown' %}
@@ -13,7 +13,9 @@ You can post events from any Internet enabled device, with virtually any languag
         {% end-markupblock %}
 
         <p class="text-center">
-            <a href="{% url 'new_stream' %}" class="btn btn-xlg btn-fill btn-round btn-info">New Stream</a>
+            <a href="{% url 'new_stream' %}" class="btn btn-xlg btn-fill btn-round btn-info">
+                <i class="fa fa-star"></i> New Stream
+            </a>
         </p>
 
     </div>
