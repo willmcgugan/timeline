@@ -49,7 +49,7 @@
 
             <db:query src="events" dst="events" if="filter_types"
                 filter="#Event.type in filter_types" />
-
+            
             <db:query src="events" dst="events" if="filter_streams"
                 filter="#Event.stream.id in filter_streams"/>
 

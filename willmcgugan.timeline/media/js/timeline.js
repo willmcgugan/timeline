@@ -168,7 +168,7 @@ streams = {};
         var $filter_streams = $('#filter-streams');
         $filter_streams.find('input.stream-id-filter').change(function(){
             var filter = [];
-            $filter_streams.find('input.stream-id-filter:checked').each(function(e, el){
+            $filter_streams.find(':checked').each(function(e, el){
                 var stream_pk = $(el).data('filter');
                 if(stream_pk)
                 {
@@ -199,7 +199,7 @@ streams = {};
             var params = {
                 'source': self.event_source,
                 'filter_types': self.filter_types,
-                'fiter_streams': self.filter_streams,
+                'filter_streams': self.filter_streams,
                 'filter_hashtags': self.filter_hashtags
             };
             var params = jQuery.extend(params, query); /* oh Javascript */
