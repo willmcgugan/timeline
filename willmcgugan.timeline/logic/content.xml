@@ -220,9 +220,22 @@ Even if your favorite language isn't listed here, you can add support with any l
     <content libname="content.dash.stream.new" extends="#content.dash">
         <str dst="dash_view">streams</str>
         <section name="main">
-            <tl:card title="New Stream" close="no">
-                <render src="form"/>
-            </tl:card>
+            <if test="len:.user.streams gte .user.account.max_streams">
+                <tl:card title="New Stream">
+                    <markdown>
+    **Maximum streams reached!**
+
+    Your account has a maximum of ${.user.account.max_streams} streams.
+
+    The limit is purely a precaution against abuse. If you could use a greater limit, please [contact us](${.urls.pages.showpage(pagename='contact')}) and we will increase it for you!
+                    </markdown>
+                </tl:card>
+            </if>
+            <else>
+                <tl:card title="New Stream" close="no">
+                    <render src="form"/>
+                </tl:card>
+            </else>
         </section>
         <section name="side">
             <node template="copy/new_stream.html"/>

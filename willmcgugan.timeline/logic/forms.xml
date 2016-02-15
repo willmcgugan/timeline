@@ -62,6 +62,9 @@
 
         <submit-button text="Create Stream"/>
         <validate-field field="title">
+            <error if="len:.user.streams gte .user.account.max_streams">
+                Unable to create this stream, you have reached your limit
+            </error>
             <db:if-exists model="#Stream"
                 let:user="user" let:slug="slug:value">
                 <fail>This title exists, please pick another</fail>

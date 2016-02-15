@@ -468,7 +468,10 @@ streams = {};
 function on_image_selection(stream_id, uuid)
 {
     var stream = streams[stream_id];
-    stream.on_new_image(uuid);
+    if(stream)
+    {
+        stream.on_new_image(uuid);
+    }
 }
 
 $(function(){
