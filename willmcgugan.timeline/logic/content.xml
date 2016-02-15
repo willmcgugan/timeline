@@ -181,6 +181,7 @@ Even if your favorite language isn't listed here, you can add support with any l
         </section>
         <section name="main">
             <tl:render-user-message/>
+            <node template="copy/no_streams.html" if="not streams and .user == owner"/>
             <tl:card title="Your Info" id="account-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
                 <render src="edit_form"/>
             </tl:card>
