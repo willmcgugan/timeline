@@ -12,20 +12,9 @@
       xmlns:imglib="http://moyaproject.com/imagelib">
 
     <content libname="content.base" template="base.html" final="yes">
-        <!--
-        <include-js path="js/jquery.js" from="moya.twitter.bootstrap"/>
-        <include-js path="js/bootstrap.min.js" from="moya.twitter.bootstrap"/>
-    -->
         <include-js path="js/jsonrpc.js" from="moya.jsonrpc"/>
         <include-js path="js/timeline.js"/>
         <include-js path="highlight/highlight.pack.js"/>
-
-
-        <!--
-        <include-css path="css/bootstrap.min.css" from="moya.twitter.bootstrap"/>
-        <include-css path="css/timeline.css"/>
-        <include-css path="highlight/styles/github.css"/>
-    -->
     </content>
 
     <content libname="content.stream.new_event">
@@ -175,6 +164,7 @@ Even if your favorite language isn't listed here, you can add support with any l
     </content>
 
     <content libname="content.user.streams" extends="#content.stream.base">
+        <title>${owner.username}'s Streams</title>
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             <node template="stream/info/user_streams.html" withscope="yes"/>
@@ -191,13 +181,15 @@ Even if your favorite language isn't listed here, you can add support with any l
     </content>
 
     <content libname="content.tag.stream" extends="#content.stream.base">
+        <title>Events tagged with #${tag_slug}</title>
         <let-str menu="tag_stream"/>
         <section name="side" merge="append">
             <node template="stream/info/tag.html" withscope="yes"/>
         </section>
         <section name="main">
             <tl:render-user-message/>
-            <tl:stream events="events" source="tag-${tag.slug}"/>
+            <node template="copy/no_tag.html" withscope="yes" if="not tag"/>
+            <tl:stream events="events" source="tag-${tag_slug}"/>
         </section>
     </content>
 
@@ -228,13 +220,6 @@ Even if your favorite language isn't listed here, you can add support with any l
     <content libname="content.dash.stream.new" extends="#content.dash">
         <str dst="dash_view">streams</str>
         <section name="main">
-            <!--
-            <w:breadcrumbs>
-                <w:link name="dash">Dash</w:link>
-                <w:link name="dash_streams">Streams</w:link>
-                <w:link name="new_stream">New</w:link>
-            </w:breadcrumbs>
-        -->
             <tl:card title="New Stream" close="no">
                 <render src="form"/>
             </tl:card>
