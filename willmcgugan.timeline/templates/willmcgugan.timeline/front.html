@@ -1,5 +1,28 @@
 {% extends "/base.html" %}
 
-{% block "body" %}
-<h1>Welcome to inthing.io</h1>
+{% block "bodycontainer" %}
+<div class="body-content" style="margin-top:0px;">
+
+    <div class="section" style="background-image:url({% media 'img/background.jpg' %}">
+        <div class="container">
+
+            <h1>Inthing.io</h1>
+
+        </div>
+
+    </div>
+
+    <div class="section section-stream">
+        <div class="container">
+            Streams
+        </div>
+    </div>
+
+    <div class="section section-grey">
+        <div class="container">
+
+
+        </div>
+    </div>
+</div>
 {% endblock %}
