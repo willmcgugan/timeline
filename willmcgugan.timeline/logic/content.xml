@@ -153,6 +153,7 @@ Even if your favorite language isn't listed here, you can add support with any l
     </content>
 
     <content libname="content.user.subscriptions" extends="#content.stream.base">
+        <title>Subscriptions</title>
         <let-str menu="subscriptions"/>
         <section name="side" merge="prepend">
             <node template="stream/info/subscriptions.html" withscope="yes" />
@@ -164,7 +165,7 @@ Even if your favorite language isn't listed here, you can add support with any l
     </content>
 
     <content libname="content.user.streams" extends="#content.stream.base">
-        <title>${owner.username}'s Streams</title>
+        <title>${title:owner.username}'s Streams</title>
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
             <node template="stream/info/user_streams.html" withscope="yes"/>

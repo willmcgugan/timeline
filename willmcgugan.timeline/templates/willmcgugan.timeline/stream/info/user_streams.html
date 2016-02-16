@@ -13,8 +13,19 @@
                 </a>
             </li>
             <li>
+                <a href="{% url 'user_edit' from 'moya.auth' %}">
+                    <i class="fa fa-toggle-on"></i> Settings
+                </a>
+            </li>
+            <li>
                 <a href="{% url 'new_stream' %}">
                     <i class="fa fa-star"></i> New Stream
+                </a>
+            </li>
+            <li class="divider"/>
+            <li>
+                <a href="{% url 'logout' from 'moya.auth' %}">
+                    <i class="fa fa-sign-out"></i> Sign Out
                 </a>
             </li>
           </ul>
