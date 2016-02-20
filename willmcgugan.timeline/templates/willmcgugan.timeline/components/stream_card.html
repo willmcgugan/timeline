@@ -8,7 +8,7 @@
             {%- if stream.image %}
             <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
             {%- else %}
-            <img class="avatar" src="/static/stream.jpg" alt="...">
+            <img class="avatar" src="{% media 'img/defaultstream.jpg' %}" alt="...">
             {%- endif %}
             </a>
             <h4 class="title">

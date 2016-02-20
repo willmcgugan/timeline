@@ -1,3 +1,5 @@
+
+{% let can_manage=stream|'can_manage_stream' %}
 <div class="card card-user with-image">
 
     <div class="content">
@@ -23,20 +25,16 @@
         {% endif %}
 
         <div class="author">
-            {% if stream|'can_manage_stream' %}
+            {% if can_manage %}
             <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
+            {% endif %}
                 {% if stream.image %}
                 <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
                 {% else %}
-                <img class="avatar" src="/static/stream.jpg" alt="...">
+                <img class="avatar" src="{% media 'img/defaultstream.jpg' %}" alt="...">
                 {% endif %}
+            {% if can_manage %}
             </a>
-            {% else %}
-            {% if stream.image %}
-                <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
-                {% else %}
-                <img class="avatar" src="/static/stream.jpg" alt="...">
-                {% endif %}
             {% endif %}
 
             <h4 class="title">
