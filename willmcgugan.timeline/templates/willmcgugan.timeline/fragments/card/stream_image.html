@@ -1,0 +1,18 @@
+
+        <div class="stream-image author"{% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
+            {% if can_manage %}
+            <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
+            {% endif %}
+                {% if stream.image %}
+                <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                {% else %}
+                <img class="avatar" src="{% media 'img/defaultstream.jpg' %}" alt="...">
+                {% endif %}
+            {% if can_manage %}
+            </a>
+            {% endif %}
+
+            <h4 class="title">
+                ${stream.title}
+            </h4>
+        </div>

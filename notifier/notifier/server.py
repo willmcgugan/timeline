@@ -75,16 +75,17 @@ class NotifyHandler(websocket.WebSocketHandler):
         for path, instruction in notify_list:
             self.notify(path, instruction)
 
+    @gen.coroutine
     def notify(self, path, instruction):
         log.debug('notify %s', path)
         watching = WatchHandler.watching[path]
         if not watching:
             self.close()
             return
-        
+
         for handler in watching:
             try:
-                handler.write_message(instruction)
+                yield handler.write_message(instruction)
             except:
                 pass
             else:

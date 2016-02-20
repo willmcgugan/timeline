@@ -1,0 +1,44 @@
+{%- if stream|'can_manage_stream' %}
+<div class="card" id="no-events">
+    <div class="content">
+
+        <button type="button" class="close hide-button" data-hide="#no-events" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <p class="category text-warning"><i class="fa fa-info-circle"></i> no events</p>
+        <h4 class="title">Your Stream is Empty</h2>
+
+        {% markup-block as 'markdown' %}
+
+Events will appear here in realtime, as you post them!
+
+        {% end-markupblock %}
+
+        <p class="text-center">
+            <a href="#" class="btn btn-xlg btn-fill btn-round btn-info" data-toggle="modal" data-target="#code_modal">
+                <i class="fa fa-code"></i> Get The Code!
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{%- else %}
+
+<div class="card" id="no-events">
+    <div class="content">
+
+        <button type="button" class="close hide-button" data-hide="#no-events" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <p class="category text-warning"><i class="fa fa-info-circle"></i> no events</p>
+        <h4 class="title">Empty Stream</h2>
+
+        {% markup-block as 'markdown' %}
+
+No events yet, but when we get any, you will be the first to know!
+
+        {% end-markupblock %}
+
+    </div>
+</div>
+
+{%- endif %}

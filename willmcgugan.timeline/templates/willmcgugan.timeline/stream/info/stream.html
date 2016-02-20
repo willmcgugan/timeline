@@ -28,28 +28,12 @@
         </div>
         {% endif %}
 
-        <div class="author"{% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
-            {% if can_manage %}
-            <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
-            {% endif %}
-                {% if stream.image %}
-                <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
-                {% else %}
-                <img class="avatar" src="{% media 'img/defaultstream.jpg' %}" alt="...">
-                {% endif %}
-            {% if can_manage %}
-            </a>
-            {% endif %}
-
-            <h4 class="title">
-                ${stream.title}
-            </h4>
-
-        </div>
+        {% include "fragments/card/stream_image.html" %}
 
         <p class="description text-center text-muted">
             ${stream.description}
         </p>
+
         <p class="description text-center">
             <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i>${stream.user.username}</a>
         </p>

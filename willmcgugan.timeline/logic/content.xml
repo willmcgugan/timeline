@@ -55,7 +55,7 @@ Add `?format=json` to the URL to return a JSON response
                 <render src="edit_form"/>
             </tl:card>
 
-            <tl:modal id="img_modal" title="Stream Image" class="modal-md" if="stream and stream|'can_manage_stream'">
+            <tl:modal id="img_modal" title="Change Stream Photo" class="modal-md" if="stream and stream|'can_manage_stream'">
                 <node template="modals/stream_image_dialog.html">
                     <imglib:uploader collection="stream.imgcollection"
                         on_change="function(uuid){on_image_selection('${stream.uuid}', uuid)}"
@@ -149,6 +149,7 @@ Even if your favorite language isn't listed here, you can add support with any l
 
             </tl:modal>
 
+            <node template="copy/no_events.html" let:stream="stream" if="not events"/>
             <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
 
         </section>

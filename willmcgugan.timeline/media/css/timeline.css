@@ -515,3 +515,8 @@ a.hashtag
 {
    font-weight:bold;
 }
+
+.stream-image .avatar
+{
+    margin-right:0px;
+}

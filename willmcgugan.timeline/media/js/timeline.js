@@ -145,7 +145,8 @@ streams = {};
         self.filter_streams = [];
         self.filter_hashtags = '';
 
-		$('#filter-types input.event-type').change(function(){
+        var $document = $(document);
+		$document.on('change', '#filter-types input.event-type', function(){
 			var filter = [];
 			$('#filter-types input.event-type:checked').each(function(e, el){
 				filter.push($(el).data('filter'));
@@ -154,7 +155,7 @@ streams = {};
 			self.refresh();
 		});
 
-        $('.switch-cards input').change(function(e){
+        $document.on('change', '.switch-cards input', function(e){
             if($(this).is(':checked'))
             {
                 $('#list-stream-cards').addClass('show');
@@ -166,7 +167,7 @@ streams = {};
         });
 
         var $filter_streams = $('#filter-streams');
-        $filter_streams.find('input.stream-id-filter').change(function(){
+        $filter_streams.on('change', 'input.stream-id-filter', function(){
             var filter = [];
             $filter_streams.find(':checked').each(function(e, el){
                 var stream_pk = $(el).data('filter');
@@ -179,7 +180,7 @@ streams = {};
             self.refresh();
         });
         var $filter_hashtags = $('#filter-hashtags');
-        $filter_hashtags.find('input.filter-hashtags').keyup(function(){
+        $document.on('keyup', '#filter-hashtags input.filter-hashtags', function(){
             var filter_hashtags = $(this).val();
             if(filter_hashtags != self.filter_hashtags)
             {
@@ -226,7 +227,7 @@ streams = {};
                 image_uuid: uuid
             }, function(result)
             {
-                $('.stream-info').html($(result.html.side));
+                $('.stream-info .stream-image').html($(result.html.side).find('.stream-image'));
             });
         }
 
