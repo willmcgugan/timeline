@@ -4,7 +4,7 @@
 
     <div class="content">
 
-        {% if stream|'can_manage_stream' %}
+        {% if can_manage %}
         <div class="btn-group stream-actions-button">
           <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon glyphicon-wrench text-info"></i>
@@ -15,10 +15,14 @@
             </li>
             <li role="separator" class="divider"></li>
             <li>
-                <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit</a>
+                <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit stream</a>
             </li>
             <li>
-                <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New</a>
+                <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;"><i class="fa fa-photo"></i> Change photo</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New stream</a>
             </li>
           </ul>
         </div>
