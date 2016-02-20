@@ -28,7 +28,7 @@
         </div>
         {% endif %}
 
-        <div class="author">
+        <div class="author"{% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
             {% if can_manage %}
             <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
             {% endif %}
