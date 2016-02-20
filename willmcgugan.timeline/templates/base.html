@@ -27,6 +27,7 @@
 
 <body id="${config.page_id or 'timeline-view'}" data-rpcurl="{% url 'jsonrpc_private' from 'willmcgugan.timeline' %}" {% data-attrib config or {} %}>
 
+{% block "navar" %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,6 +51,7 @@
 
   </div><!-- /.container-fluid -->
 </nav>
+{% endblock %}
 
 {% block "bodycontainer" %}
 <div class="container body-content">

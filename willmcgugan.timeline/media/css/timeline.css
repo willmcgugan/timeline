@@ -1,8 +1,36 @@
+#iothing-front .section-titles
+{
+    height: 450px;
+    background-size:cover;
+    background-position:center center;
+    background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
+    position:relative;
+}
+
+
+#iothing-front .titles
+{
+    font-family: "Helvetica Neue","Open Sans",Arial,sans-serif;
+    text-align: center;
+    color:#fff;
+    margin:0 auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width:100%;
+
+}
+
+#iothing-front .titles p
+{
+    font-size:150%;
+}
+
+
 form.form-horizontal label.checkbox
 {
     padding-top:0px
 }
-
 
 .login .social .circle .fa
 {
