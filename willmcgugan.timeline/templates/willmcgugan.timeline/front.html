@@ -35,7 +35,7 @@
        
         <div class="titles">
             <div class="container">
-                <h2>built for <b>makers</b> and <b>sharers</b></h2>
+                <h2>for <b>makers</b> and <b>sharers</b></h2>
                 
                 {% markup-block as 'markdown' %}
 The *quickest* and *simplest* way to get your devices and services online
@@ -72,7 +72,7 @@ $(function(){
     var $titles = $('#iothing-front .section-titles');
     function anim_background()
     {
-        window.requestAnimationFrame(anim_background);
+        setTimeout(function(){window.requestAnimationFrame(anim_background);}, 50);
         var t = (new Date().getTime() / 1000.0) - start;
         var rotate = (t * 45) % 360;
         var background = 'linear-gradient(' + Math.round(rotate) + 'deg, rgba(72,131,220,0.85) 0%, #943bea 100%)';

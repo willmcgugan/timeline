@@ -15,9 +15,9 @@
             <img:resize-to-fit width="750"/>
         </tn:processor>
 
-        <tn:processor name="stream_info" quality="70">
+        <tn:processor name="stream_info" version="2" quality="70">
             <img:square/>
-            <img:resize-to-fit width="245"/>
+            <img:resize-to-fit width="124"/>
         </tn:processor>
     
     </tn:thumbnails>
