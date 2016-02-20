@@ -55,10 +55,12 @@ Add `?format=json` to the URL to return a JSON response
                 <render src="edit_form"/>
             </tl:card>
 
-            <tl:modal id="img_modal" title="Image Manager" class="modal-wide" if="stream and stream|'can_manage_stream'">
-                <imglib:manager collection=".user.account.imgcollection"
-                    on_selection="function(uuid){on_image_selection('${stream.uuid}', uuid)}"
-                    single="yes" edit="no" select="stream.image ? [stream.image.uuid] : []"/>
+            <tl:modal id="img_modal" class="modal-md" if="stream and stream|'can_manage_stream'">
+                <node template="modals/stream_image_dialog.html">
+                    <imglib:uploader collection="stream.imgcollection"
+                        on_change="function(uuid){on_image_selection('${stream.uuid}', uuid)}"
+                        slug="card"/>
+                </node>
             </tl:modal>
 
             <tl:modal id="code_modal" title="Get the Code">

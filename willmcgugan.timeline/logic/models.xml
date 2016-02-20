@@ -46,10 +46,15 @@
         <integer name="retention" default="None" null="yes" blank="yes"/>
         <string name="password" length="100" blank="yes" null="yes"/>
         <boolean name="private" default="no" />
-
-        <foreign-key name="image" model="moya.imagelib#Image" null="yes" blank="yes"/>
-
+        <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" picker="moya.imagelib#admintable.collections"/>
+    
         <property name="name" expression="slug or uuid"/>
+
+        <property name="image">
+            <m:return if="object.imgcollection">
+                <get model="moya.imagelib#Image" let:collection="object.imgcollection" let:slug="'card'"/>
+            </m:return>
+        </property>
 
         <property name="url">
             <m:return if="object.user and object.slug">

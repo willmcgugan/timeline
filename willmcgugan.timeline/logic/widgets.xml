@@ -43,7 +43,7 @@
     <widget name="modal" template="widgets/modal.html">
         <signature>
             <attribute name="id" type="text"/>
-            <attribute name="title" type="text"/>
+            <attribute name="title" type="text" default=""/>
             <attribute name="class" type="text" default="">Additional class for modal</attribute>
         </signature>
     </widget>

@@ -24,8 +24,11 @@
         <forms:get form="#form.stream.new" dst="form"/>
         <forms:validate src="form" let:user=".user">
             <let data="form.data"/>
+            <db:create model="moya.imagelib#Collection" dst="imgcollection"
+                let:owner=".user" />
             <db:create model="#Stream" dst="stream"
                 let:user=".user"
+                let:imgcollection="imgcollection"
                 let:password="token:8"
                 let:ip=".request.client_addr"
                 let:title="data.title"
