@@ -1,10 +1,10 @@
         {% with login_redirect = .request.path == '/' ? .urls.timeline.home : .request.path %}
-            <div id="login_modal" class="modal fade" data-width="300">
-                <div class="modal-dialog login animated modal-sm">
+            <div id="login_modal" class="modal fade login">
+                <div class="modal-dialog login animated">
                   <div class="modal-content">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Sign In</h4>
+                        <h5 class="modal-title">Sign in with</h5>
                     </div>
                     <div class="modal-body">
                         <div class="box">
@@ -29,8 +29,8 @@
                                 <div class="form loginBox">
                                     <form method="post" action="{% url 'login' from 'moya.auth' %}" accept-charset="UTF-8">
                                     <input type="hidden" name="fwd" value="${login_redirect}"/>
-                                    <input id="email" class="form-control" type="text" placeholder="Email or username" name="username">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                    <input id="email" class="form-control" type="text" placeholder="email or username" name="username">
+                                    <input id="password" class="form-control" type="password" placeholder="password" name="password">
                                     <input class="btn btn-default btn-login" type="submit" value="Sign In">
                                     </form>
                                 </div>
@@ -42,11 +42,6 @@
                             <span>Looking to
                                  <a href="{% url 'signup' from 'signup' %}">create an account</a>
                             ?</span>
-                        </div>
-                        <div class="forgot login-footer">
-                            <span>
-                                 Have you <a href="{% url 'forgot_password' from 'moya.auth' %}">forgotten your password</a>?
-                            </span>
                         </div>
                     </div>
                   </div>
