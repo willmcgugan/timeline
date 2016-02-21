@@ -65,6 +65,7 @@ class NotifyHandler(websocket.WebSocketHandler):
                 log.debug('secret key invalid')
                 self.close()
 
+    @gen.coroutine
     def on_message(self, message_json):
         try:
             notify_list = json.loads(message_json)
@@ -73,24 +74,22 @@ class NotifyHandler(websocket.WebSocketHandler):
             self.close()
 
         for path, instruction in notify_list:
-            self.notify(path, instruction)
+            yield self.notify(path, instruction)
 
     @gen.coroutine
     def notify(self, path, instruction):
         log.debug('notify %s', path)
         watching = WatchHandler.watching[path]
-        if not watching:
+        try:
+            for handler in watching:
+                try:
+                    yield handler.write_message(instruction)
+                except:
+                    pass
+                else:
+                    log.debug('  %r', handler)
+        finally:
             self.close()
-            return
-
-        for handler in watching:
-            try:
-                yield handler.write_message(instruction)
-            except:
-                pass
-            else:
-                log.debug('  %r', handler)
-        self.close()
 
     def on_close(self):
         log.debug('%s left', self.request.remote_ip)

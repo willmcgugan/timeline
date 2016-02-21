@@ -36,30 +36,18 @@
 <div id="iothing-front" class="body-content" style="margin-top:0px;">
 
     <div class="section section-titles">
-       
+
         <div class="titles">
             <div class="container">
                 <h2>for <b>makers</b> and <b>sharers</b></h2>
-                
+
                 {% markup-block as 'markdown' %}
 The **quickest** and **simplest** way to get your **devices** and **apps** online
 
 Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup> simple API
 
                 {% end %}
-                <div class="sign-in-links">
 
-                    <a class="btn btn-social btn-github btn-fill btn-round" href="{% url 'login' from 'logins' with provider='github' query fwd=.urls.timeline.home %}">
-                        <i class="fa fa-github"></i><span class="sign-in-text hidden-xs"> Sign in with GitHub</span>
-                    </a>
-                    <a class="btn btn-social btn-google btn-fill btn-round" href="{% url 'login' from 'logins' with provider='google' query fwd=.urls.timeline.home %}">
-                        <i class="fa fa-google"></i><span class="sign-in-text hidden-xs"> Sign in with Google</span>
-                    </a>
-                    <a class="btn btn-social btn-facebook btn-fill btn-round" href="{% url 'login' from 'logins' with provider='facebook' query fwd=.urls.timeline.home %}">
-                        <i class="fa fa-facebook"></i><span class="sign-in-text hidden-xs"> Sign in with Facebook</span>
-                    </a>
-
-                </div>
             </div>
         </div>
 
@@ -112,16 +100,79 @@ Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup
     <div class="section section-gray">
         <div class="container">
 
-        Yadda Yadda
+            <div class="text-center">
+                <a class="btn btn-social btn-github btn-fill btn-round" href="{% url 'login' from 'logins' with provider='github' query fwd=.urls.timeline.home %}" title="Sign in with GitHub" data-toggle="tooltip">
+                    <i class="fa fa-github"></i><span class="sign-in-text hidden-xs"> Sign in with GitHub</span>
+                </a>
+                <a class="btn btn-social btn-google btn-fill btn-round" href="{% url 'login' from 'logins' with provider='google' query fwd=.urls.timeline.home %}" title="Sign in with Google" data-toggle="tooltip">
+                    <i class="fa fa-google"></i><span class="sign-in-text hidden-xs"> Sign in with Google</span>
+                </a>
+                <a class="btn btn-social btn-facebook btn-fill btn-round" href="{% url 'login' from 'logins' with provider='facebook' query fwd=.urls.timeline.home %}" title="Sign in with Facebook" data-toggle="tooltip">
+                    <i class="fa fa-facebook"></i><span class="sign-in-text hidden-xs"> Sign in with Facebook</span>
+                </a>
+            </div>
 
         </div>
     </div>
+
+    <div class="section section-stream stream-info">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="card card-user with-image">
+
+                        <div class="content">
+                            {% include "fragments/card/stream_image.html" %}
+                            <p class="description text-center text-muted">
+                                Espresso machine plugged in to my Raspberry Pi
+                            </p>
+                            <p class="description text-center text-muted">
+                                This is a mock-up, but why not?!
+                            </p>
+                        </div>
+
+
+                        <div class="card-refine">
+                            <div class="panel-group card-refine">
+                            {#
+                                {% include "fragments/filter/event_type.html" %}
+                                {% include "fragments/filter/hashtag.html" %}
+                            #}
+                            </div>
+                        </div>
+
+
+                        <div class="stream-info-footer text-center">
+                            {% with title='inthing.io' %}{% include "fragments/social.html" %}{% endwith %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-9">
+                    {% include "front/mock_card3.html" %}
+                    {% include "front/mock_card2.html" %}
+                    {% include "front/mock_card1.html" %}
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 
-{% block "js" %}
+{% block "js" append %}
 <script>
 $(function(){
+    $('[data-toggle="tooltip"]').tooltip();
     var start = new Date().getTime() / 1000.0;
     var $titles = $('#iothing-front .section-titles');
     var $window = $(window);
@@ -140,10 +191,13 @@ $(function(){
         var background = 'linear-gradient(' + Math.round(rotate) + 'deg, rgba(72,131,220,0.85) 0%, #943bea 100%)';
         $titles.css('background', background);
     }
-    /*setInterval(anim_background, 200);*/
     window.requestAnimationFrame(anim_background);
 
     var $nav = $('nav.navbar');
+    var $mock_card = $('#mock-card-3');
+    var show_card_y = $('#mock-card-2').offset().top + 300;
+    var window_height = $window.height();
+    console.log(show_card_y);
     $window.scroll(function(){
         var y = $window.scrollTop();
         if (y > 150)
@@ -153,6 +207,14 @@ $(function(){
         else
         {
             $nav.addClass('navbar-transparent');
+        }
+        if(y > show_card_y - window_height)
+        {
+            if(!$mock_card.is(':visible'))
+            {
+                $mock_card.show();
+                $mock_card.removeClass('new-event');
+            }
         }
     });
 });

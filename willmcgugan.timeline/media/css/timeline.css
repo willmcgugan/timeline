@@ -1,7 +1,7 @@
 #iothing-front .section-titles
 {
     min-height: 450px;
-    height: 100vh;
+    height: 70vh;
     background-size:cover;
     background-position:center center;
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
@@ -29,7 +29,7 @@
 
 #iothing-front .sign-in-links
 {
-    margin-top:30px;
+    margin-top:60px;
 }
 
 #iothing-front .btn-social

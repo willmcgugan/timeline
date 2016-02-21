@@ -4,6 +4,12 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% with theme_color=color:[72,131,220] * 0.85 %}
+    <meta name="theme-color" content="${theme_color}">
+    <meta name="msapplication-navbutton-color" content="${theme_color}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="${theme_color}">
+    {% end-with %}
+
     <title>{% block "title" %}${title}{% end %}</title>
 
     {% block "includecss" %}{% render include.css %}{% end %}
