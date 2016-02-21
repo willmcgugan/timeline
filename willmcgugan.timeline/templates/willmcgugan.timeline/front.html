@@ -1,5 +1,9 @@
 {% extends "/base.html" %}
 
+{% block "css" %}
+<link rel="stylsheet" href="{% media 'css/logins.css' from 'moya.logins' %}" type="text/css"/>
+
+{% endblock %}
 
 {% block "navar" %}
 <nav class="navbar navbar-inverse navbar-transparent navbar-fixed-top" role="navigation">
@@ -43,7 +47,19 @@ The **quickest** and **simplest** way to get your **devices** and **apps** onlin
 Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup> simple API
 
                 {% end %}
-                
+                <div class="sign-in-links">
+
+                    <a class="btn btn-social btn-github btn-fill btn-round" href="{% url 'login' from 'logins' with provider='github' query fwd=.urls.timeline.home %}">
+                        <i class="fa fa-github"></i><span class="sign-in-text hidden-xs"> Sign in with GitHub</span>
+                    </a>
+                    <a class="btn btn-social btn-google btn-fill btn-round" href="{% url 'login' from 'logins' with provider='google' query fwd=.urls.timeline.home %}">
+                        <i class="fa fa-google"></i><span class="sign-in-text hidden-xs"> Sign in with Google</span>
+                    </a>
+                    <a class="btn btn-social btn-facebook btn-fill btn-round" href="{% url 'login' from 'logins' with provider='facebook' query fwd=.urls.timeline.home %}">
+                        <i class="fa fa-facebook"></i><span class="sign-in-text hidden-xs"> Sign in with Facebook</span>
+                    </a>
+
+                </div>
             </div>
         </div>
 

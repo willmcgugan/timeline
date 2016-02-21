@@ -1,6 +1,7 @@
 #iothing-front .section-titles
 {
-    height: 450px;
+    min-height: 450px;
+    height: 100vh;
     background-size:cover;
     background-position:center center;
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
@@ -26,6 +27,15 @@
     font-size:150%;
 }
 
+#iothing-front .sign-in-links
+{
+    margin-top:30px;
+}
+
+#iothing-front .btn-social
+{
+    margin:8px;
+}
 
 form.form-horizontal label.checkbox
 {
