@@ -1,7 +1,7 @@
 #iothing-front .section-titles
 {
     min-height: 450px;
-    height: 70vh;
+    height: 75vh;
     background-size:cover;
     background-position:center center;
     background: linear-gradient(135deg, rgba(72,131,220,0.85) 0%, #943bea 100%);
