@@ -38,9 +38,9 @@
                 <h2>for <b>makers</b> and <b>sharers</b></h2>
                 
                 {% markup-block as 'markdown' %}
-The *quickest* and *simplest* way to get your devices and services online
+The **quickest** and **simplest** way to get your **devices** and **apps** online
 
-Create and share streams of realtime events with our stupidly<sup>&trade;</sup> simple API
+Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup> simple API
 
                 {% end %}
                 
@@ -70,16 +70,37 @@ Create and share streams of realtime events with our stupidly<sup>&trade;</sup> 
 $(function(){
     var start = new Date().getTime() / 1000.0;
     var $titles = $('#iothing-front .section-titles');
+    var $window = $(window);
     function anim_background()
     {
-        setTimeout(function(){window.requestAnimationFrame(anim_background);}, 50);
+        window.requestAnimationFrame(anim_background);
+
+        var y = $window.scrollTop();
+        if(y>100)
+        {
+            return;
+        }
+
         var t = (new Date().getTime() / 1000.0) - start;
-        var rotate = (t * 45) % 360;
+        var rotate = (t * 90) % 360;
         var background = 'linear-gradient(' + Math.round(rotate) + 'deg, rgba(72,131,220,0.85) 0%, #943bea 100%)';
         $titles.css('background', background);
     }
     /*setInterval(anim_background, 200);*/
     window.requestAnimationFrame(anim_background);
+
+    var $nav = $('nav.navbar');
+    $window.scroll(function(){
+        var y = $window.scrollTop();
+        if (y > 150)
+        {
+            $nav.removeClass('navbar-transparent');
+        }
+        else
+        {
+            $nav.addClass('navbar-transparent');
+        }
+    });
 });
 </script>
 {% end-block %}
