@@ -22,6 +22,11 @@
 
 }
 
+#iothing-front .navbar-transparent .navbar-header
+{
+    padding-bottom:15px !important;
+}
+
 #iothing-front .titles p
 {
     font-size:150%;

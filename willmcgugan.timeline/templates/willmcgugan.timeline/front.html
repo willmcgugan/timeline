@@ -1,5 +1,7 @@
 {% extends "/base.html" %}
 
+{% block 'bodyid' %}iothing-front{% end-block %}
+
 {% block "css" %}
 <link rel="stylsheet" href="{% media 'css/logins.css' from 'moya.logins' %}" type="text/css"/>
 
@@ -33,7 +35,7 @@
 
 
 {% block "bodycontainer" %}
-<div id="iothing-front" class="body-content" style="margin-top:0px;">
+<div class="body-content" style="margin-top:0px;">
 
     <div class="section section-titles">
 
@@ -115,54 +117,53 @@ Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup
         </div>
     </div>
 
-    <div class="section section-stream stream-info">
-        <div class="container">
+    <div id="timeline-view">
+        <div class="section section-stream stream-info">
+            <div class="container">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-md-3">
+                    <div class="col-md-3">
 
-                    <div class="card card-user with-image">
+                        <div class="card card-user with-image">
 
-                        <div class="content">
-                            {% include "fragments/card/stream_image.html" %}
-                            <p class="description text-center text-muted">
-                                Espresso machine plugged in to my Raspberry Pi
-                            </p>
-                            <p class="description text-center text-muted">
-                                This is a mock-up, but why not?!
-                            </p>
-                        </div>
-
-
-                        <div class="card-refine">
-                            <div class="panel-group card-refine">
-                            {#
-                                {% include "fragments/filter/event_type.html" %}
-                                {% include "fragments/filter/hashtag.html" %}
-                            #}
+                            <div class="content">
+                                {% include "fragments/card/stream_image.html" %}
+                                <p class="description text-center text-muted">
+                                    Espresso machine plugged in to my Raspberry Pi
+                                </p>
+                                <p class="description text-center text-muted">
+                                    This is a mock-up, but why not?!
+                                </p>
                             </div>
-                        </div>
 
 
-                        <div class="stream-info-footer text-center">
-                            {% with title='inthing.io' %}{% include "fragments/social.html" %}{% endwith %}
+                            <div class="card-refine">
+                                <div class="panel-group card-refine">
+                                {#
+                                    {% include "fragments/filter/event_type.html" %}
+                                    {% include "fragments/filter/hashtag.html" %}
+                                #}
+                                </div>
+                            </div>
+
+
+                            <div class="stream-info-footer text-center">
+                                {% with title='inthing.io' %}{% include "fragments/social.html" %}{% endwith %}
+                            </div>
+
                         </div>
 
                     </div>
 
+                    <div class="col-md-9">
+                        {% include "front/mock_card3.html" %}
+                        {% include "front/mock_card2.html" %}
+                        {% include "front/mock_card1.html" %}
+                    </div>
+
                 </div>
-
-                <div class="col-md-9">
-                    {% include "front/mock_card3.html" %}
-                    {% include "front/mock_card2.html" %}
-                    {% include "front/mock_card1.html" %}
-
-                </div>
-
-
             </div>
-
         </div>
     </div>
 
