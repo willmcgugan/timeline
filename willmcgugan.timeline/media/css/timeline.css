@@ -28,7 +28,7 @@
     padding:6px;
 }
 
-#iothing-front .section-titles
+#inthing-front .section-titles
 {
     min-height: 450px;
     height: 75vh;
@@ -39,7 +39,7 @@
 }
 
 
-#iothing-front .titles
+#inthing-front .titles
 {
     font-family: "Helvetica Neue","Open Sans",Arial,sans-serif;
     text-align: center;
@@ -52,22 +52,22 @@
 
 }
 
-#iothing-front .navbar-transparent .navbar-header
+#inthing-front .navbar-transparent .navbar-header
 {
     padding-bottom:15px !important;
 }
 
-#iothing-front .titles p
+#inthing-front .titles p
 {
     font-size:150%;
 }
 
-#iothing-front .sign-in-links
+#inthing-front .sign-in-links
 {
     margin-top:60px;
 }
 
-#iothing-front .btn-social
+#inthing-front .btn-social
 {
     margin:8px;
 }
