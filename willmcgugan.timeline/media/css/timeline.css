@@ -54,7 +54,7 @@
 
 #inthing-front .navbar-transparent .navbar-header
 {
-    padding-bottom:15px !important;
+    margin-bottom:15px;
 }
 
 #inthing-front .titles p
