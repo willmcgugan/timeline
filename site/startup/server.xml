@@ -1,8 +1,9 @@
-<moya xmlns="http://moyaproject.com">
+<moya xmlns="http://moyaproject.com" xmlns:let="http://moyaproject.com/let">
 
     <!-- Initialize a server -->
     <server docname="main">
 
+        
         <import location="external/moya.imagelib"/>
         <import location="external/moya.widgets.extra"/>
         <import location="external/moya.logins" priority="3"/>
@@ -13,7 +14,6 @@
         <import py="moya.libs.signup"/>
         <import py="moya.libs.admin"/>
         <import py="moya.libs.static"/>
-        <import py="moya.libs.favicon"/>
         <import py="moya.libs.links"/>
         <import py="moya.libs.bootstrap"/>
         <import py="moya.libs.forms"/>
@@ -27,6 +27,7 @@
         <import py="moya.libs.thumbnail"/>
         <import py="moya.libs.faq"/>
         <import py="moya.libs.tables"/>
+        <import py="moya.libs.blog"/>
         <import location="../willmcgugan.timeline" priority="5" templatepriority="5"/>
 
         <!-- The 'site' library, for non reusable content -->
@@ -34,34 +35,35 @@
         <install name="site" lib="site.timeline" mount="/"/>
 
         <!-- Install applications (instances of a library) -->
+        <install name="blog" lib="moya.blog" mount="/in/blog/"/>
+
         <install name="forms" lib="moya.forms"/>
         <install name="widgets" lib="moya.widgets"/>
-        <install name="auth" lib="moya.auth" mount="/auth/"/>
+        <install name="auth" lib="moya.auth" mount="/in/auth/"/>
         <mount app="auth" mountpoint="middleware" url="/"/>
         <install name="session" lib="moya.session" mount="/"/>
-        <install name="signup" lib="moya.signup" mount="/signup/"/>
-        <install name="admin" lib="moya.admin" mount="/admin/"/>
-        <install name="media" lib="moya.static" mount="/static/"/>
-        <install name="imagelib" lib="moya.imagelib" mount="/imglib/"/>
+        <install name="signup" lib="moya.signup" mount="/in/signup/"/>
+        <install name="admin" lib="moya.admin" mount="/in/admin/"/>
+        <install name="media" lib="moya.static" mount="/in/static/"/>
+        <install name="imagelib" lib="moya.imagelib" mount="/in/imglib/"/>
         <install name="debug" lib="moya.debug" mount="/debug/" if=".debug"/>
         <install name="diagnostics" lib="moya.diagnostics" if="not .debug"/>
         <install name="bootstrap" lib="moya.twitter.bootstrap"/>
         <install name="links" lib="moya.links"/>
-        <install name="favicon" lib="moya.favicon" mount="/"/>
-        <install name="comments" lib="moya.comments" mount="/comments/"/>
-        <install name="pages" lib="moya.pages" mount="/"/>
-        <install name="feedback" lib="moya.feedback" mount="/feedback/"/>
+        <install name="comments" lib="moya.comments" mount="/in/comments/"/>
+        <install name="pages" lib="moya.pages" mount="/in/pages/"/>
+        <install name="feedback" lib="moya.feedback" mount="/in/feedback/"/>
         <install name="jsonrpc" lib="moya.jsonrpc"/>
         <install name="wysihtml5" lib="moya.wysihtml5"/>
         <install name="recaptcha" lib="moya.google.recaptcha"/>
         <install name="thumbnail" lib="moya.thumbnail"/>
-        <install name="uploads" lib="moya.static" mount="/uploads/"/>
-        <install name="faq" lib="moya.faq" mount="/faq/"/>
+        <install name="uploads" lib="moya.static" mount="/in/uploads/"/>
+        <install name="faq" lib="moya.faq" mount="/in/faq/"/>
         <install name="timeline" lib="willmcgugan.timeline" mount="/"/>
         <install name="tables" lib="moya.tables"/>
-        <install name="logins" lib="moya.logins" mount="/sign-in/"/>
+        <install name="logins" lib="moya.logins" mount="/in/sign-in/"/>
         <install name="widgetsextra" lib="moya.widgets.extra"/>
 
-    </server>
+</server>
 
 </moya>

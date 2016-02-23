@@ -28,8 +28,8 @@
     <link rel="icon" type="image/png" href="{% media 'img/favicons/android-chrome-192x192.png' from 'timeline' %}" sizes="192x192">
     <link rel="icon" type="image/png" href="{% media 'img/favicons/favicon-96x96.png' from 'timeline' %}" sizes="96x96">
     <link rel="icon" type="image/png" href="{% media 'img/favicons/favicon-16x16.png' from 'timeline' %}" sizes="16x16">
-    <link rel="manifest" href="{% media 'img/favicons/manifest.json">
-    <link rel="mask-icon" href="{% media 'img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="manifest" href="{% media 'img/favicons/manifest.json' %}">
+    <link rel="mask-icon" href="{% media 'img/favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
@@ -100,7 +100,6 @@
 
   <script src="{% media 'js/jquery-1.10.2.js' from 'timeline' %}"></script>
   <script src="{% media 'js/bootstrap.min.js' from 'timeline' %}"></script>
-
   <script src="{% media 'js/gsdk-checkbox.js' from 'timeline' %}"></script>
   <script src="{% media 'js/gsdk-bootstrapswitch.js' from 'timeline' %}"></script>
   <script src="{% media 'js/gsdk-radio.js' from 'timeline' %}"></script>
@@ -108,7 +107,7 @@
 
 {% block "includejs" %}{% render include.js %}{% endblock %}
 {% block "js" %}{% render sections.js unique %}{% endblock %}
-{% block "jsfoot" %}{% render sections.jsfoot unique%}{% endblock %}
+{% block "jsfoot" %}{% render sections.jsfoot unique %}{% endblock %}
 
 <body>
 <html>

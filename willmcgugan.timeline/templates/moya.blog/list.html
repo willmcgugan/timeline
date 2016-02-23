@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block "bodycontainer" %}
+<div class="body-content">
+    <div class="section section-stream">
+        <div class="container">
+            <div class="row">
+      
+                <div class="col-md-8 col-md-offset-2">
+
+                    {% render sections.posts %}
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
