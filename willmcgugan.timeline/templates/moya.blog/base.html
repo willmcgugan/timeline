@@ -31,7 +31,7 @@
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navigation">
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-right">
 
       {%- if .permissions.admin %}
         <li class="dropdown">
@@ -59,8 +59,27 @@
       {%- endif %}
 
 
+        {%- if .user %}
+        <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
+            <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}">
+              <i class="fa fa-bookmark-o"></i> Subs
+            </a>
+        </li>
+        <li{% if menu == 'user_streams' %} class="active"{% endif %}>
+            <a href="{% url 'user_streams' from 'willmcgugan.timeline' with username=.user.username %}">
+                <i class="fa fa-user"></i> ${.user.username}
+            </a>
+        </li>
+                 
+        {%- endif %}
 
-
+        {% if not .user %}
+        <li>
+          <a onclick="$('#login_modal').modal();return false;" href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
+            <i class="fa fa-user"></i> Sign In
+          </a>
+        </li>
+        {% endif %}
 
        </ul>
 
