@@ -9,13 +9,16 @@
       xmlns:comments="http://moyaproject.com/comments"
       xmlns:tl="http://willmcgugan.com/timeline"
       xmlns:tables="http://moyaproject.com/tables"
+      xmlns:blog="http://moyaproject.com/blog"
       xmlns:imglib="http://moyaproject.com/imagelib">
 
-    <content libname="content.base" template="base.html" final="yes">
+    <content libname="content.base" template="base.html">
         <include-js path="js/jsonrpc.js" from="moya.jsonrpc"/>
         <include-js path="js/timeline.js"/>
         <include-js path="highlight/highlight.pack.js"/>
     </content>
+
+    <content libname="content.front" template="front.html"/>
 
     <content libname="content.stream.new_event">
     	<section name="body">

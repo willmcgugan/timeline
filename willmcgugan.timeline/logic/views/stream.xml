@@ -9,7 +9,7 @@
     xmlns:tn="http://moyaproject.com/thumbnail">
 
 
-    <view libname="view.front" template="front.html">
+    <view libname="view.front" content="#content.front">
 
     </view>
 

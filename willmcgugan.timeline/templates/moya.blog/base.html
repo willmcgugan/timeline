@@ -1,5 +1,10 @@
 {% extends '/base.html' %}
 
+{% block 'js' append %}
+<script src="{% media 'js/jsonrpc.js' from 'moya.jsonrpc' %}"></script>
+<script src="{% media 'js/timeline.js' from 'timeline' %}"></script>
+{% endblock %}
+
 {% block "navar" %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -15,7 +20,7 @@
 
       <a class="navbar-brand" href="/">
       <img src="{% media 'img/thing.svg' from 'timeline' %}" width="32" class="pull-left" style="opacity:0.5;margin-right:1em;"/>
-        inthing.io blog
+        inthing.io
       </a>
 
 

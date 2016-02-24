@@ -1,12 +1,22 @@
+{% cache for 1h if not .debug %}
 <footer class="footer footer-big footer-black">
 	<div class="container">
 
 		<div class="row">
 
 			<div class="col-md-3">
-			</div>
-
-			<div class="col-md-3">
+                <h5 class="title">News</h5>
+                <nav>
+                    <ul>
+                    {% for news in recent_news %}
+                    <li>
+                        <a href="{% url 'showpost' from 'blog' with slug=news.slug %}">
+                            ${news.title}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                </nav>
 			</div>
 
 			<div class="col-md-3">
@@ -20,6 +30,9 @@
 					</ul>
 				</nav>
 			</div>
+
+            <div class="col-md-3">
+            </div>
 
 			<div class="col-md-3">
 				<h5 class="title">Social</h5>
@@ -61,3 +74,4 @@
 		</div>
 	</div>
 </footer>
+{% end-cache %}

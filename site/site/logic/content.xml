@@ -1,10 +1,10 @@
 <moya xmlns="http://moyaproject.com"
       xmlns:links="http://moyaproject.com/links"
-      xmlns:html="http://moyaproject.com/html">
-
+      xmlns:html="http://moyaproject.com/html"
+      xmlns:blog="http://moyaproject.com/blog">
  
     <content libname="content.base">
-       
+       <blog:get-recent count="4" dst="recent_news"/>
     </content>
 
 </moya>

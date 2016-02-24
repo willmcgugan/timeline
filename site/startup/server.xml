@@ -35,7 +35,7 @@
         <install name="site" lib="site.timeline" mount="/"/>
 
         <!-- Install applications (instances of a library) -->
-        <install name="blog" lib="moya.blog" mount="/in/blog/"/>
+        <install name="blog" lib="moya.blog" mount="/in/news/"/>
 
         <install name="forms" lib="moya.forms"/>
         <install name="widgets" lib="moya.widgets"/>

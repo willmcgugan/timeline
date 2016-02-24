@@ -15,10 +15,17 @@
 
 
 
-<div class="card">
+<div class="card event">
 
     <div class="content">
 
+        <p class="category pull-right" title="${localize:event.time}" data-toggle="tooltip" data-placement="bottom">
+            <i class="fa fa-clock-o"></i> {% if post.published_date %}${localize:(.now - post.published_date)} ago{% endif %}
+        </p>
+
+        <p class="category text-active">
+            <i class="fa fa-newspaper-o"></i> News
+        </p>
         <h4 class="title">
         {%- if linktitle %}
         <a href="{% url "showpost" with slug=post.slug %}">${post.title}</a>
@@ -33,12 +40,16 @@
         {% cache for 1d key [post.id, post.updated_date, post.published_date] %}
         {% markup post.content as self.app.settings.default_markup %}
         {% endcache %}
-        <div class="post-info">
-        {%- if numcomments %}
-        <a class="comment-count" href="{% url "showpost" with slug=post.slug %}#comments">{% if numcomments == 1 %}1 comment{% else %}${numcomments} comments{% endif %}</a>
-        {%- endif %}
+
+        <div class="author">
+
         </div>
 
+        {% if numcomments %}
+        <div class="stats text-right">
+            <i class="fa fa-comment"></i> ${numcomments}
+        </div>
+        {% endif %}
 
     </div>
 </div>
