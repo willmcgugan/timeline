@@ -46,8 +46,6 @@ class SendNotifications(LogicElement):
 		notifications = context.get('.notifier_queue', None)
 		if notifications is None:
 			return
-		del context['.notifier_queue']
-
 		log.debug('sending %s queued notifications', len(notifications))
 
 		timeline_app = self.archive.find_app('willmcgugan.timeline')
@@ -67,3 +65,4 @@ class SendNotifications(LogicElement):
 				ws.send(packet_json)
 			finally:
 				ws.close()
+		del context['.notifier_queue']
