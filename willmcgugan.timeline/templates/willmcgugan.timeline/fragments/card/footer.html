@@ -1,37 +1,19 @@
 	<div class="footer">
-
-	{#
-		<div class="author">
-			<a href="{% url 'user_streams' with username=event.stream.user.username %}">
-				<i class="fa fa-male"></i>${event.stream.user.username}
-			</a>
-		</div>
-		<i class="text-muted fa fa-angle-double-right"></i>
-	#}
-
 		<div class="author">${event.generator or '?'}</div>
-
 		<i class="text-muted fa fa-angle-double-right"></i>
-
-		{% compact %}
+		{%- compact %}
 		<div class="author">
-
 		{%- if link_to_stream %}<a href="${event.stream.url}">{% endif %}
-
-		${event.stream.title}
-
+			${event.stream.title}
 		{% if link_to_stream %}</a>{% endif %}
-
 		</div>
-		{% end-compact %}
+		{%- end-compact %}
 			
 		<div class="stats pull-right">
-
-			{% if event.numcomments %}
+			{%- if event.numcomments %}
 			<a href="{% url 'event' with event_id=event.uuid %}#comments">
 				<i class="fa fa-comment"></i> ${event.numcomments}
 			</a>
-			{% endif %}
-
+			{%- endif %}
         </div>
 	</div>
