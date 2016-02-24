@@ -22,7 +22,7 @@
         <doc>A timeline is a collection of events from subscriptions</doc>
         <string name="title" length="100" blank="yes" null="yes"/>
         <string name="slug" length="100" blank="yes" null="yes"/>
-        <uuid name="uuid" unique="yes"/>        
+        <uuid name="uuid" unique="yes"/>
     	<foreign-key name="user" model="moya.auth#User" backref="timeline" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
     	<integer name="update" default="0"/>
         <many-to-many name="streams" model="#Stream" through="#Subscription"/>
@@ -47,7 +47,7 @@
         <string name="password" length="100" blank="yes" null="yes"/>
         <boolean name="private" default="no" />
         <one-to-one name="imgcollection" model="moya.imagelib#Collection" owner="yes" picker="moya.imagelib#admintable.collections"/>
-    
+
         <property name="name" expression="slug or uuid"/>
 
         <property name="image">
@@ -63,6 +63,11 @@
             <m:return>
                 <m:get-fq-url name="stream" let:stream_id="object.uuid"/>
             </m:return>
+        </property>
+
+        <property name="empty">
+            <query src="object.events" filter="#Event.type != 'meta'" dst="non_meta_events"/>
+            <m:return value="not non_meta_events.exists"/>
         </property>
     </model>
 

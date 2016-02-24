@@ -152,7 +152,7 @@ Even if your favorite language isn't listed here, you can add support with any l
 
             </tl:modal>
 
-            <node template="copy/no_events.html" let:stream="stream" if="not events"/>
+            <node template="copy/no_events.html" let:stream="stream" if="stream.empty"/>
             <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
 
         </section>

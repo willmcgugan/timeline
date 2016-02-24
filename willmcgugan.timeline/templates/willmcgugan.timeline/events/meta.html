@@ -1,7 +1,10 @@
 {% extends "../stream/event.html" %}
 
 {% block "content" %}
-<div class="content text-success">
-    {% markup event.text as event.markup %}	
+<div class="content">
+    <p class="category pull-right" title="${localize:event.time}" data-toggle="tooltip" data-placement="bottom">
+        <i class="fa fa-clock-o"></i> <span class="time-ago" data-time="${event.time.epoch}"></span>
+    </p>
+    {% markup event.text as event.markup %}
 </div>
 {% endblock %}
