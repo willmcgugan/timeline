@@ -4,7 +4,10 @@
       xmlns:blog="http://moyaproject.com/blog">
  
     <content libname="content.base">
-       <blog:get-recent count="4" dst="recent_news"/>
+        <blog:get-recent count="4" dst="recent_news"/>
+        <include-js path="js/jsonrpc.js" from="moya.jsonrpc"/>
+        <include-js path="js/timeline.js" from="timeline"/>
+        <include-js path="highlight/highlight.pack.js" from="timeline"/>
     </content>
 
 </moya>

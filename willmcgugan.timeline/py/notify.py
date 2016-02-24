@@ -25,19 +25,13 @@ class Notify(LogicElement):
 	def logic(self, context):
 		
 		path, action, data = self.get_parameters(context, 'path', 'action', 'data')
-
 		path = "/" + path.lstrip('/')
 		log.debug('notify path="%s", action="%s"', path, action)
 
-		params = self.get_parameters(context)
-		instruction = {
-			"action": action
-		}
+		instruction = {"action": action}
 		if data:
 			instruction.update(data)
-		let_map = self.get_let_map(context)
-		if let_map:
-			instruction.update(let_map)
+		instruction.update(self.get_let_map(context))
 		instruction_json = json.dumps([instruction])
 
 		notifications = context.set_new_call('.notifier_queue', list)
@@ -52,6 +46,7 @@ class SendNotifications(LogicElement):
 		notifications = context.get('.notifier_queue', None)
 		if notifications is None:
 			return
+		del context['.notifier_queue']
 
 		log.debug('sending %s queued notifications', len(notifications))
 
@@ -61,18 +56,14 @@ class SendNotifications(LogicElement):
 		ws_url = "{}?secret={}".format(ws_url_base, notifier_secret)
 
 		packet_json = json.dumps(notifications)
-		del context['.notifier_queue']
-
+		
+		sockopt = ((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),)
 		try:
-			ws = create_connection(ws_url,
-								   sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
+			ws = create_connection(ws_url, sockopt=sockop)
 		except Exception as e:
 			log.warn('unable to connect to notifier ({})'.format(text_type(e)))
-			return
-
-		try:
-			ws.send(packet_json)
-		finally:
-			ws.close()
-
-
+		else:
+			try:
+				ws.send(packet_json)
+			finally:
+				ws.close()

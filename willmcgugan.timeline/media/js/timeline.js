@@ -477,7 +477,10 @@ function on_image_selection(stream_id, uuid)
 
 $(function(){
     var config = $('body').data();
-    rpc = new JSONRPC(config.rpcurl);
+    if(config)
+    {
+        rpc = new JSONRPC(config.rpcurl);
+    }
 });
 
 

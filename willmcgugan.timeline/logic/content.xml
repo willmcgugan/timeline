@@ -18,7 +18,7 @@
         <include-js path="highlight/highlight.pack.js"/>
     </content>
 
-    <content libname="content.front" template="front.html"/>
+    <content libname="content.front" extends="#content.base" template="front.html"/>
 
     <content libname="content.stream.new_event">
     	<section name="body">

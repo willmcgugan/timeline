@@ -1,10 +1,5 @@
 {% extends '/base.html' %}
 
-{% block 'js' append %}
-<script src="{% media 'js/jsonrpc.js' from 'moya.jsonrpc' %}"></script>
-<script src="{% media 'js/timeline.js' from 'timeline' %}"></script>
-{% endblock %}
-
 {% block "navar" %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -23,11 +18,7 @@
         inthing.io
       </a>
 
-
-
     </div>
-
-
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navigation">
