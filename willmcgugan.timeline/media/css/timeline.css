@@ -140,8 +140,6 @@ body
 
 .fade-event
 {
-
-
     opacity:0;
     transition: opacity 0.2s;
 }
@@ -205,8 +203,6 @@ pre
     font-family:monospace;
 }
 
-
-
 pre code.hljs
 {
     background: #f8f8f8 !important;
@@ -246,33 +242,12 @@ pre code.hljs *
 }
 
 
-    .new-events
-    {
-        position:absolute;
-        top:90px;
-    }
-
-
-
-/*
-@media (min-width: 992px) {
-    .stream-info
-    {
-        position:fixed;
-        width:220px;
-    }
-
+.new-events
+{
+    position:absolute;
+    top:90px;
 }
 
-@media (min-width:1200px) {
-
-    .stream-info
-    {
-        position:fixed;
-        width:270px;
-    }
-}
-*/
 
 .stream-info .card-user .content
 {
@@ -475,14 +450,6 @@ pre code.hljs *
     display:none;
 }
 
-/*
-.stream-info .title
-{
-    margin-left:20px;
-    margin-right:20px;
-}
-*/
-
 .stream-actions-button .btn
 {
     border:0px;
@@ -557,11 +524,6 @@ pre code.hljs *
 #list-stream-cards
 {
     margin-bottom:20px;
-}
-
-.event.no-text h4.title
-{
-    /* margin-bottom:0px; */
 }
 
 .event.event-priority-informative, .event.event-priority-verbose
