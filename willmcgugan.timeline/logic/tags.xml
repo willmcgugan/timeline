@@ -194,14 +194,10 @@
 
     <tag name="rate-limit">
         <doc>
-Manage rate limiting.
-
-Will execute the enclosed block if the rate limit check fails.
+            Manage rate limiting. Will execute the enclosed block if the rate limit check fails.
         </doc>
         <signature>
-            <attribute name="resource" type="text" required="yes">
-                a string indicating the resource
-            </attribute>
+            <attribute name="resource" type="text" required="yes">resource identitider</attribute>
             <attribute name="span" required="yes" default="60">span in seconds</attribute>
             <attribute name="max" required="yes">max number of requests</attribute>
         </signature>
@@ -211,10 +207,10 @@ Will execute the enclosed block if the rate limit check fails.
             let:resource="resource" let:start="start" let:span="span"/>
         <inc dst="bucket.count"/>
         <if test="bucket.count gt max">
-            <log-debug>rate limited '${resource}', ${bucket.count} requests in ${span} seconds (max ${max})</log-debug>
-            <yield/>
+            <str dst="msg">you have exceeded the maximum of ${max} requests in ${span} seconds</str>
+            <log-debug>rate limited '${resource}', ${msg}</log-debug>
+            <yield let:rate_msg="msg"/>
         </if>
-
     </tag>
 
     <tag name="subscribe">

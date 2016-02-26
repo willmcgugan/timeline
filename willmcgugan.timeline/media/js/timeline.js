@@ -190,7 +190,8 @@ streams = {};
         });
 
 		$new_events.click(function(e){
-			$("html, body").animate({ scrollTop: 0 }, "fast", function(){
+            var event_top = $('.events-container').offset().top - 90;
+			$("html, body").animate({ scrollTop: event_top }, "fast", function(){
 				self.check_updates();
 			});
 		});
@@ -279,8 +280,10 @@ streams = {};
             {
     			var $window = $(window);
     			var scroll_y = $window.scrollTop();
+                var container_y = $('.events-container').offset().top;
+                var window_height = $(window).height();
 
-    			if (scroll_y > 100)
+    			if (container_y + 100 < scroll_y)
     			{
     				$new_events.addClass('pending-events');
     				$new_events.find('.count').text(self.event_stack.length);
