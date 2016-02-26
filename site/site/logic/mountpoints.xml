@@ -7,6 +7,9 @@
                 <denied if="[username, password] != [.settings.basic_auth_username, .settings.basic_auth_password]"/>
             </auth-check>
         </url>
+        <url route="/in/news/">
+            <str dst=".session.seen_news">yes</str>
+        </url>
     </mountpoint>
 
 </moya>

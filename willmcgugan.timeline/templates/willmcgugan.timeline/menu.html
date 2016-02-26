@@ -34,14 +34,20 @@
         </li>
         #}
 
-        {%- if .user %}
+        <li> 
+          <a href="{% url 'showpost' from 'moya.blog' with slug=recent_news.first.slug %}" title="Inthing news" data-toggle="tooltip" data-placement="bottom">
+          News {% if new_news_count and .session.seen_news!='yes' %}<span class="badge bg-danger">${new_news_count}</span>{% endif %}
+          </a>
+        </li> 
+        
+        {%- if .user %}       
         <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
-            <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}">
+            <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}" title="Your stream subscriptions" data-toggle="tooltip" data-placement="bottom">
               <i class="fa fa-bookmark-o"></i> Subs
             </a>
         </li>
         <li{% if menu == 'user_streams' %} class="active"{% endif %}>
-            <a href="{% url 'user_streams' from 'willmcgugan.timeline' with username=.user.username %}">
+            <a href="{% url 'user_streams' from 'willmcgugan.timeline' with username=.user.username %}" title="Your streams" data-toggle="tooltip" data-placement="bottom">
                 <i class="fa fa-user"></i> ${.user.username}
             </a>
         </li>

@@ -41,16 +41,12 @@
         {% markup post.content as self.app.settings.default_markup %}
         {% endcache %}
 
-        <div class="author">
-
-        </div>
-
         {% if numcomments %}
-        <div class="stats text-right">
+        <div class="stats pull-right">
             <i class="fa fa-comment"></i> ${numcomments}
         </div>
         {% endif %}
-
+        <div class="clearfix"></div>
     </div>
 </div>
 
