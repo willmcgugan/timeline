@@ -9,6 +9,7 @@ from lxml.html import fragment_fromstring
 
 re_hashtags = re.compile(r'#(\w+)', re.UNICODE)
 
+
 @moya.expose.filter('hashtags')
 def hashtags_filter(html, max_length=100):
     """Extract all the #hashtags from html fragment"""
