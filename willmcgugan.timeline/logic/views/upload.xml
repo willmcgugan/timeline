@@ -78,7 +78,7 @@
             </forms:validate>
             <if test="form.bound and not form.ok">
                 <dict dst="result" let:status="'fail'" let:msg="'failed to validate'">
-                    <let error="form.error"/>
+                    <let error="form.error or 'One or more fields failed to validate'"/>
                     <let field_errors="form.errors"/>
                 </dict>
             </if>

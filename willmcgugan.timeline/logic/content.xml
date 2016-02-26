@@ -23,7 +23,7 @@
     <content libname="content.stream.new_event">
     	<section name="body">
             <html:pre if="result">${prettyjson:result}</html:pre>
-    		<w:info>
+    		<w:info if="not result">
     			<markdown>
 Use this form to add new events.
 
