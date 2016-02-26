@@ -48,6 +48,13 @@
         <validate-field field="image">
             <fail if="values.type=='image' and not bool:.request.FILES.image">Required for image type</fail>
         </validate-field>
+        <validate-field field="password">
+            <db:get model="#Stream" dst="stream"
+                let:uuid="values.stream" let:password="values.password"/>
+            <fail if="not stream">
+                password failed
+            </fail>
+        </validate-field>
     </form>
 
     <form libname="form.stream.new" style="horizontal" xmlns="http://moyaproject.com/forms">
