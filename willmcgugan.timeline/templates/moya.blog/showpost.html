@@ -20,6 +20,20 @@
             </div>
         </div>
     </div>
+    <div class="section section-gray" id="event-info">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 text-muted">
+
+                <i class="fa fa-info-circle"></i> iothing news
+
+                <span class="pull-right">
+                    {% with title=post.title %}{% include "fragments/social.html" from "timeline" %}{% endwith %}
+                </span>
+
+            </div>
+
+        </div>
+    </div>
     <div class="section">
         <div class="container">
             <div class="row">
