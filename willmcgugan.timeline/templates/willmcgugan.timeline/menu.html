@@ -43,7 +43,7 @@
         {%- if .user %}       
         <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
             <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}" title="Your stream subscriptions" data-toggle="tooltip" data-placement="bottom">
-              <i class="fa fa-bookmark-o"></i> Subs
+              {# <i class="fa fa-bookmark-o"></i> #} Subs
             </a>
         </li>
         <li{% if menu == 'user_streams' %} class="active"{% endif %}>
