@@ -1,2 +1,4 @@
 moya==0.6.7
 requests_oauthlib==0.6.1
+websocket-client==0.32.0
+
