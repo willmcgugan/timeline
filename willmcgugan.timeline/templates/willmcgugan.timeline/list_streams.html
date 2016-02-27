@@ -1,12 +1,12 @@
 
 <div id="list-stream-cards">
 
-    {%- for streams in groupsof:[streams,3] %}
+    {%- for streams in groupsof:[streams,2] %}
 
     <div class="row">
 
     {% for stream in streams %}
-    <div class="col-md-4">
+    <div class="col-md-6">
     {% include "components/stream_card.html" %}
     </div>
     {% endfor %}   
