@@ -147,7 +147,7 @@ wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.use
 
                     <w:tab title="Other">
                         <markdown>
-Alternatively, just make a POST request to [${add_event_url}](${add_event_url}) with your favorite language.
+Alternatively, make a POST request to [${add_event_url}](${add_event_url}) with your favorite language.
                         </markdown>
                     </w:tab>
                 </w:tab-panel>
