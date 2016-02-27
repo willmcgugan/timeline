@@ -3,7 +3,7 @@
 
     <mountpoint name="main">
         <url route="/*">
-            <auth-check if=".settings.basic_auth_username">
+            <auth-check if=".settings.basic_auth_username" realm="${.settings.basic_auth_realm}">
                 <denied if="[username, password] != [.settings.basic_auth_username, .settings.basic_auth_password]"/>
             </auth-check>
         </url>
