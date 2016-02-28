@@ -28,6 +28,11 @@
     padding:6px;
 }
 
+.well p:last-child
+{
+    margin-bottom:0px;
+}
+
 #inthing-front .section-titles
 {
     min-height: 450px;

@@ -69,23 +69,25 @@ Add `?format=json` to the URL to return a JSON response
             <get-fq-url name="user_stream_upload" dst="add_event_url"
                 let:username=".user.username" let:stream_slug="stream.slug"/>
             <tl:modal id="code_modal" class="modal-wide" title="Get the Code">
-                <markdown>
-
+                <w:well>
+                    <markdown>
 Your stream ID is `${stream.uuid}`.
 
 Your stream password is `${stream.password}`.
-
+                    </markdown>
+                </w:well>
+                <markdown>
 #### Adding Events
 
-You can add events with virtually any techbology.
-
+You can add events with virtually any technology.
                 </markdown>
+
                 <w:tab-panel>
 
                     <w:tab title="Python">
                         <markdown>
 
-You can install the inthing Python module with PIP as follows:
+Install the inthing Python module with PIP as follows:
 
 ```bash
 pip install inthing
