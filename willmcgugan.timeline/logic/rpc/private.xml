@@ -76,7 +76,7 @@
 
             For old reults, we want just enough for the user to scroll through.s
             -->
-            <db:query src="events" dst="events" orderby="-insert_seconds"  maxresults="new ? 50 : 10" distinct="yes"/>
+            <db:query src="events" dst="events" orderby="-insert_seconds,id"  maxresults="new ? 50 : 10" distinct="yes"/>
             <let update_time="events.first.added_time.epoch or 0"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
