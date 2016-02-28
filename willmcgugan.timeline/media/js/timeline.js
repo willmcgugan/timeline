@@ -322,7 +322,7 @@ streams = {};
 			{
 				var $last_event = $($events[$events.length - 1]);
 				var event_data = $last_event.data();
-				var last_event_time = event_data.time;
+				var last_event_time = parseFloat(event_data.time);
                 var last_event_order = event_data.order;
 			}
 			else
