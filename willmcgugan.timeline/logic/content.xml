@@ -132,7 +132,7 @@ inthing text "Hello, World! #helloworld" --title "New Event"
 You can post an event with CURL, which is available on most Linux based platforms:
 
 ```
-curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --form password="${stream.password}" --form generator=curl --form title="New Event" --form text="Hello, World! #helloworld"
+curl ${add_event_url}?format=json --form password="${stream.password}" --form generator=curl --form title="New Event" --form text="Hello, World! #helloworld"
 ```
                         </markdown>
                     </w:tab>
@@ -142,7 +142,7 @@ curl ${.request.host}${.appurls.user_stream_upload(username=stream.user.username
 You can post an event with WGET, which is available on most Linux based Platforms:
 
 ```
-wget -O - ${.request.host}${.appurls.user_stream_upload(username=stream.user.username, stream_slug=stream.slug)}?format=json --post-data password=${urlquote:stream.password}\&amp;generator=wget\&amp;title=New+Event\&amp;text=Hello,+World\!+#helloworld
+wget -O - ${add_event_url}?format=json --post-data password=${urlquote:stream.password}\&amp;generator=wget\&amp;title=New+Event\&amp;text=Hello,+World\!+#helloworld
 ```
                         </markdown>
                     </w:tab>
