@@ -28,6 +28,16 @@
     padding:6px;
 }
 
+.event-meta .content a
+{
+    color:white;
+}
+
+.event-meta .content p
+{
+    display:inline-block;
+}
+
 .well p:last-child
 {
     margin-bottom:0px;
