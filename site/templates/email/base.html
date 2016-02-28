@@ -1,6 +1,4 @@
-{#
-Base template for emails
-#}
+{% premailer -%}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -28,6 +26,7 @@ body {
     -webkit-text-size-adjust: none;
     width: 100%!important;
     height: 100%;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
 
@@ -264,3 +263,4 @@ pre
 
 </body>
 </html>
+{%- end-premailer %}
