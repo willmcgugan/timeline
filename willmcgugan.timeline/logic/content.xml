@@ -187,7 +187,7 @@ Alternatively, make a POST request to [${add_event_url}](${add_event_url}) with 
             </tl:card>
             <node template="copy/no_streams.html" if="not streams and .user == owner"/>
             <node template="list_streams.html" let:streams="streams" let:timeline="timeline"/>
-            <tl:stream events="events" source="user-${user.id}"/>
+            <tl:stream events="events" source="user-${owner.id}"/>
         </section>
     </content>
 
