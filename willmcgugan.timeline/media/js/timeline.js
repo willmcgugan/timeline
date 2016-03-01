@@ -350,7 +350,7 @@ streams = {};
 					$(result.events).each(function(i, event){
 						if(!$('#event-' + result.id).length)
 						{
-							$more_events.before($(event.html));
+							$events_container.append($(event.html));
 							bind_event($('#event-' + event.id))
 						}
 					});
