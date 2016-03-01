@@ -1,6 +1,6 @@
 "path","md5","auth md5"
 "/__init__.py",e54925e1ed3818adfd6c00bffa62f89d,07f2dead3bac69c65db162b2f4aba71c
-"/lib.ini",163ba4af642b526309a416e40eda02a2,c5050463a73a81b11a8ce2fba57e03c2
+"/lib.ini",6d8815afd105560c328b0efc6a16433c,21c1cad3e837c666f23075a2ef542ec9
 "/requirements.txt",7e884370b0e2a0ab8c9fdc227405e790,477b6dfc20b435cc8849723a9c183796
 "/templates/moya.logins/base.html",0f3c46b7373f1018ecaa41ab521e6136,a58dcf2f024a88e5a7f12c0f2b8aa3a2
 "/templates/moya.logins/widgets/login-button.html",8efe52bfe98e51f5a2c520b63a47a996,e5262d3b06f3e1acd7dd48eb0e11c65f
@@ -28,4 +28,4 @@
 "/locale/readme.txt",06c4fce01453459edb43d2857ebcc873,c44a09c4f28517782589988dd758c62e
 "/docs/index.txt",2d6f33ca2002229c98a7f0d92a2628fd,430a4759a4904ceb35e72bd18162f333
 "/docs/introduction.txt",269a742568a78aad837000fd73f0d04f,0aaec8429cf00d086f76227e0e0c61fe
-"/data/moya.logins/providers.json",fd0f0b3e8ba408bc87e16b80c04d0aef,0ab79db20fab26536ff7ea9cf5c71fc1
+"/data/moya.logins/providers.json",bcff393490581dfd06cc2e270ac7ed87,6bdff65d595a54feb2d8225223c48a8b
