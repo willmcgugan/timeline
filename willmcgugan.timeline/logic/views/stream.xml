@@ -15,7 +15,6 @@
 
     <view libname="view.stream" content="#content.stream">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
-
         <redirect name="user_stream"  if="stream.slug and stream.user"
             let:stream_slug="stream.slug" let:username="stream.user.username"/>
 
@@ -25,6 +24,12 @@
 
         <db:get model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
+    </view>
+
+    <view libname="view.stream.claim" content="#content.stream">
+        <tl:get-stream-required id=".url.stream_id" dst="stream"/>
+        
+
     </view>
 
     <view libname="view.user.subscriptions" content="#content.user.subscriptions" requires=".user">
