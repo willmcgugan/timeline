@@ -20,7 +20,7 @@
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	<input name="stream" label="Stream" placeholder="Stream ID" required="yes"/>
-    	<password name="password" required="yes" label="Password" placeholder="Stream password"/>
+    	<password name="password" required="no" label="Password" placeholder="Stream password"/>
         <input name="title" label="Title" required="yes" placeholder="Descriptive title of this event"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
         <select name="type" maxlength="30" label="Event Type">
@@ -49,9 +49,11 @@
             <fail if="values.type=='image' and not bool:.request.FILES.image">Required for image type</fail>
         </validate-field>
         <validate-field field="password">
-            <db:get model="#Stream" dst="stream"
-                let:uuid="values.stream" let:password="values.password"/>
-            <fail if="not stream">
+            <db:get model="#Stream" dst="stream" let:uuid="values.stream"/>
+            <fail if="stream.user and not values.password">
+                this stream requires a password
+            </fail>
+            <fail if="stream.user and stream.password != values.password">
                 password failed
             </fail>
         </validate-field>

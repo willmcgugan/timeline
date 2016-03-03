@@ -1,0 +1,19 @@
+{% markup-block as 'markdown' %}
+Install the inthing Python module with PIP as follows:
+
+```bash
+pip install inthing
+```
+
+You can then post events to your stream with the following:
+
+```python
+import inthing
+{%- if stream.password %}
+stream = inthing.Stream(id="${stream.uuid}", password="${stream.password}")
+{%- else %}
+stream = inthing.Stream(id="${stream.uuid}")
+{%- endif %}
+stream.text("Hello, World! #helloworld", title="New Event")
+```
+{% end-markup-block %}

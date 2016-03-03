@@ -30,9 +30,11 @@
 
         <rpc:method name="new" group="stream" description="create a new anonymous stream">
             <db:create model="#Stream" dst="stream"
-                let:password=""
+                let:password="None"
                 let:ip=".request.client_addr"
                 let:retention="24"/>
+            <let stream.title="stream.uuid"/>
+            <tl:add-stream-meta stream="stream">New stream created</tl:add-stream-meta>
             <return-dict let:status="'ok'" let:id="stream.uuid" let:slug="stream.slug" let:password="password">
                 <get-fq-url dst="url" name="stream" let:stream_id="stream.slug or stream.uuid" />
             </return-dict>

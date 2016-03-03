@@ -1,0 +1,23 @@
+
+<div class="card" id="unclaimed-stream">
+    <div class="content">
+
+        <button type="button" class="close hide-button" data-hide="#unclaimed-stream" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+        <p class="category text-warning"><i class="fa fa-info-circle"></i> unclaimed stream</p>
+        <h4 class="title">Claim this Stream?</h2>
+
+        {% markup-block as 'markdown' %}
+
+Until this stream is claimed, anyone may post events to it.
+
+        {% end-markupblock %}
+
+        <p class="text-center">
+            <a href="#" class="btn btn-xlg btn-fill btn-round btn-info btn-primary">
+                <i class="fa fa-code"></i> Claim this Stream!
+            </a>
+        </p>
+
+    </div>
+</div>

@@ -17,6 +17,8 @@
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
+        <url route="/s/{stream_slug}/add/" methods="GET,POST" view="#view.stream.upload" let:username="''" name="stream_upload"/>
+
         <url route="/" methods="GET" view="#view.front" name="front"/>
 
         <url route="/home/" name="home">

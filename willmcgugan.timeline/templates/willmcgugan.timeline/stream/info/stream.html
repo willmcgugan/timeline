@@ -34,9 +34,11 @@
             ${stream.description}
         </p>
 
+        {% if stream.user %}
         <p class="description text-center">
             <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i>${stream.user.username}</a>
         </p>
+        {% endif %}
 
         {% if stream %}
         <div class="text-center">

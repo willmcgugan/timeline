@@ -1,0 +1,20 @@
+{% markup-block as 'markdown' %}
+The Inthing Application is installed along with the Python module, and can be installed with PIP:
+
+```bash
+pip install inthing
+```
+
+Then set the stream credentials as environment variables:
+
+```bash
+export INTHING_STREAM=${stream.uuid}
+export INTHING_STREAM_PASSWORD="${stream.password or ''}"
+```
+
+You can now post an event from the command line:
+
+```
+inthing text "Hello, World! #helloworld" --title "New Event"
+```
+{% end %}

@@ -1,0 +1,7 @@
+{% markup-block as 'markdown' %}
+You can post an event with CURL, which is available on most Linux based platforms:
+
+```
+curl ${add_event_url}?format=json {% if stream.password %}--form password="${stream.password}" {% endif %}--form generator=curl --form title="New Event" --form text="Hello, World! #helloworld"
+```
+{% end-markup-block %}
