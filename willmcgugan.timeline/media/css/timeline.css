@@ -1,3 +1,8 @@
+#code_modal .bash.hljs
+{
+    white-space: pre-wrap;
+}
+
 .login input::-moz-placeholder
 {
     color:#999;

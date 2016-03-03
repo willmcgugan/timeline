@@ -55,7 +55,7 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:render-user-message/>
 
-            <node template="copy/unclaimed.html"/>
+            <node template="copy/unclaimed.html" if="not stream.user"/>
 
             <tl:card title="Edit Stream" id="stream-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
                 <render src="edit_form"/>
@@ -78,7 +78,10 @@ Add `?format=json` to the URL to return a JSON response
                     <get-fq-url name="stream_upload" dst="add_event_url"
                         let:stream_slug="stream.uuid"/>
                 </else>
-                <w:warning>
+                <w:info if="stream.user">
+                    <markdown>Post away, ${.user.username}! It's your stream.</markdown>
+                </w:info>
+                <w:warning if="not stream.user">
                     <markdown>This stream is unclaimed, anyone may post to it!</markdown>
                 </w:warning>
                 <w:well>

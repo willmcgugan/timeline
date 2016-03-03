@@ -10,21 +10,20 @@
 
     <view libname="view.stream.upload" content="#content.stream.new_event">
         <let initial="dict:.request.GET"/>
-        <if test=".url.username">
+        <if test=".url.username and .url.stream_slug">
             <db:get-required model="#Stream" dst="stream"
                 filter="#Stream.user.username==.url.username and #Stream.slug==.url.stream_slug"/>
             <let initial.password="stream.password" if="stream.user==.user"/>
+            <let initial.stream="stream.uuid"/>
         </if>
         <else if=".url.stream_slug">
             <db:get-required model="#Stream" dst="stream"
                 let:uuid=".url.stream_slug" />
+            <let initial.stream="stream.uuid"/>
         </else>
-        <let initial.stream="stream.uuid"/>
-
-        <str dst="action">.</str>
-        <str dst="action" if=".request.GET.format">.?format=${.request.GET.format}</str>
         
-        <forms:get form="#form.event" src="initial" dst="form" action="${action}"/>
+        <str dst="action" if=".request.GET.format">.?format=${.request.GET.format}</str>
+        <forms:get form="#form.event" src="initial" dst="form" action="${action or '.'}"/>
 
         <if-post>
             <forms:validate src="form">

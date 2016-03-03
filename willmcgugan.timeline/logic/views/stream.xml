@@ -15,6 +15,10 @@
 
     <view libname="view.stream" content="#content.stream">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
+
+        <redirect name="user_stream"  if="stream.slug and stream.user"
+            let:stream_slug="stream.slug" let:username="stream.user.username"/>
+
         <tl:get-timeline dst="timeline" />
         <get-url name="stream" let:stream_id="stream.uuid" dst="watch_url"/>
         <db:query model="#Event" let:stream="stream" maxresults="10" orderby="-added_time" dst="events"/>

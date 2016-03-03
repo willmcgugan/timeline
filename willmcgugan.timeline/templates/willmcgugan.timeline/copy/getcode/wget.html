@@ -2,7 +2,7 @@
 
 You can post an event with WGET, which is available on most Linux based Platforms:
 
-```
-wget -O - ${add_event_url}?format=json --post-data {% if stream.password %}password=${urlquote:stream.password}\&amp;{% endif %}generator=wget\&amp;title=New+Event\&amp;text=Hello,+World\!+#helloworld
+```bash
+wget -O - ${add_event_url}?format=json --post-data {% if stream.password %}password=${urlquote:stream.password}\&{% endif %}generator=wget\&title=New+Event\&text=Hello,+World\!+#helloworld
 ```
 {% end-markup-block %}
