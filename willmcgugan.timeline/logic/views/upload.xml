@@ -31,7 +31,7 @@
                 <let data="form.data"/>
 
                 <!-- Rate limit 1 -->
-                <tl:rate-limit resource="stream-${data.stream}" span="60" max="30">
+                <tl:rate-limit resource="stream-${data.stream}" span="60" max="20">
                     <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
                 </tl:rate-limit>
                 <!-- Rate limit 2 -->
@@ -42,10 +42,17 @@
                 <try>
                     <tl:get-stream id="data.stream" dst="stream"/>
 
-                    <tl:rate-limit resource="stream-${data.stream}" span="60" max="5" if="not stream.user">
-                        <str dst="rate_msg">Unclaimed streams are rate-limited to 5 events a minute</str>
-                        <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
-                    </tl:rate-limit>
+                    <if test="not stream.user">
+                        <!-- More strict rate-limiting for unclaimed streams -->
+                        <tl:rate-limit resource="stream-${data.stream}" span="60" max="5">
+                            <str dst="rate_msg">Unclaimed streams are rate-limited to 5 events a minute</str>
+                            <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
+                        </tl:rate-limit>
+                        <tl:rate-limit resource="stream-${data.stream}" span="60 * 15" max="30">
+                            <str dst="rate_msg">Unclaimed streams are rate-limited to 30 events in 15 minutes</str>
+                            <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
+                        </tl:rate-limit>
+                    </if>
 
                     <db:create model="#Event" dst="event"
                         let:stream="stream"
