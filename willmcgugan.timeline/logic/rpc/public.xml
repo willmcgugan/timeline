@@ -30,7 +30,7 @@
 
         <rpc:method name="new" group="stream" description="create a new anonymous stream">
             <db:create model="#Stream" dst="stream"
-                let:password="token:8"
+                let:password=""
                 let:ip=".request.client_addr"
                 let:retention="24"/>
             <return-dict let:status="'ok'" let:id="stream.uuid" let:slug="stream.slug" let:password="password">
