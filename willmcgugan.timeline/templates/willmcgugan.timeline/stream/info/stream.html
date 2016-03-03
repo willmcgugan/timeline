@@ -13,6 +13,7 @@
             <li><a href="#" data-toggle="modal" data-target="#code_modal">
                 <i class="fa fa-code"></i> Get the Code!</a>
             </li>
+            {% if stream.user %}
             <li role="separator" class="divider"></li>
             <li>
                 <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit stream</a>
@@ -20,6 +21,7 @@
             <li>
                 <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;"><i class="fa fa-photo"></i> Change photo</a>
             </li>
+            {% endif %}
             <li role="separator" class="divider"></li>
             <li>
                 <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New stream</a>

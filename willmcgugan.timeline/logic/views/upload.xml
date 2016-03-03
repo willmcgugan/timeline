@@ -29,7 +29,7 @@
         <if-post>
             <forms:validate src="form">
                 <let data="form.data"/>
-                
+
                 <!-- Rate limit 1 -->
                 <tl:rate-limit resource="stream-${data.stream}" span="60" max="30">
                     <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
@@ -40,7 +40,12 @@
                 </tl:rate-limit>
 
                 <try>
-                    <tl:get-stream id="data.stream" dst="stream" user=".user"/>
+                    <tl:get-stream id="data.stream" dst="stream"/>
+
+                    <tl:rate-limit resource="stream-${data.stream}" span="60" max="5" if="not stream.user">
+                        <str dst="rate_msg">Unclaimed streams are rate-limited to 5 events a minute</str>
+                        <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
+                    </tl:rate-limit>
 
                     <db:create model="#Event" dst="event"
                         let:stream="stream"
