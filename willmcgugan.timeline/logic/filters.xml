@@ -5,7 +5,7 @@
     xmlns:tl="http://willmcgugan.com/timeline">
 
     <filter name="can_manage_stream" value="stream">
-        <return value=".user and stream.user == .user"/>
+        <return value=".user and stream.user == .user and stream.user"/>
     </filter>
 
 </moya>
