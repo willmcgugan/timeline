@@ -581,13 +581,17 @@ $(function(){
     });
 
     $('.sign-in-link').click(function(e){
-        e.preventDefault();
+        
         var $link = $(this);
         var fwd = $link.data('fwd');
         var href = fwd || $link.attr('href');
         var $login=$('#login_modal');
-        $login.find('input[name=fwd]').val(href);
-        $login.modal();
+        if($login.length)
+        {
+            e.preventDefault();
+            $login.find('input[name=fwd]').val(href);
+            $login.modal();
+        }
     })
 
     link_hashtags($('.event-view .event'));
