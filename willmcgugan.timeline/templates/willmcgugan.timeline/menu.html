@@ -57,7 +57,7 @@
 
         {% if not .user %}
         <li>
-          <a onclick="$('#login_modal').modal();return false;" href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
+          <a class="sign-in-link" data-fwd="{% url 'home' %}" href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
             <i class="fa fa-user"></i> Sign In
           </a>
         </li>

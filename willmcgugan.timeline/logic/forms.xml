@@ -87,7 +87,7 @@
     <form libname="form.stream.edit" style="horizontal" xmlns="http://moyaproject.com/forms">
         <hidden-input name="action" initial="'edit'"/>
         <input name="title" label="Title" required="yes"/>
-        <input name="password" label="Password" help="Used by the API (leave blank to disable password access)"/>
+        <input name="password" label="Password" help="The stream password is required in the API." required="yes"/>
         <text-area name="description" label="Description"/>
         <submit-button class="btn btn-round" text="Save"/>
 
@@ -113,4 +113,8 @@
         </field>
     </form>
 
+    <form libname="form.stream.claim" xmlns="http://moyaproject.com/forms">
+        <submit-button name="claim" clicked="yes" class="btn btn-round btn-block btn-primary btn-fill" text="Yes, make it mine"/>
+        <submit-button name="claim" clicked="no" class="btn btn-round btn-block btn-fill" text="No, I don't want it"/>
+    </form>
 </moya>

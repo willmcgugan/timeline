@@ -580,6 +580,16 @@ $(function(){
     	$(hide).fadeOut('fast');
     });
 
+    $('.sign-in-link').click(function(e){
+        e.preventDefault();
+        var $link = $(this);
+        var fwd = $link.data('fwd');
+        var href = fwd || $link.attr('href');
+        var $login=$('#login_modal');
+        $login.find('input[name=fwd]').val(href);
+        $login.modal();
+    })
+
     link_hashtags($('.event-view .event'));
     update_times($('.event-view .event .time-ago'));
 });

@@ -14,7 +14,7 @@ Until this stream is claimed, anyone may post events to it.
         {% end-markupblock %}
 
         <p class="text-center">
-            <a href="#" class="btn btn-xlg btn-fill btn-round btn-info btn-primary">
+            <a href="{% url 'stream_claim' with stream_id=stream.uuid %}" class="sign-in-link btn btn-xlg btn-fill btn-round btn-info btn-primary">
                  Claim Stream
             </a>
         </p>

@@ -136,7 +136,7 @@
         </signature>
         <if test=".user">
             <db:query model="#UserMessage" let:user=".user" action="delete"/>
-            <get-tag-text dst="text"/>
+            <get-tag-text dst="text" sub="yes"/>
             <db:create model="#UserMessage" let:user=".user" let:text="text"/>
         </if>
     </tag>

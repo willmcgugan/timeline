@@ -15,7 +15,7 @@
         <url route="/api/new-event/" methods="GET,POST" view="#view.stream.upload" name="stream_upload" />
 
         <url route="/s/{stream_id}/" methods="GET" view="#view.stream" name="stream" />
-        <url route="/s/{stream_id}/claim/" methods="GET,POST" view="#view.stream.claim" />
+        <url route="/s/{stream_id}/claim/" methods="GET,POST" view="#view.stream.claim" name="stream_claim"/>
         <url route="/e/{event_id}/" methods="GET" view="#view.event" name="event"/>
 
         <url route="/s/{stream_slug}/add/" methods="GET,POST" view="#view.stream.upload" let:username="''" name="stream_upload"/>

@@ -26,10 +26,32 @@
             let:stream="stream" let:timeline="timeline"/>
     </view>
 
-    <view libname="view.stream.claim" content="#content.stream">
+    <view libname="view.stream.claim" content="#content.stream.claim" requires=".user">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
-        
-
+        <forms:get form="#form.stream.claim" dst="form"/>
+        <forms:validate src="form">
+            <redirect name="stream" let:stream_id="stream.uuid" if="form.data.claim=='no'"/>
+            <if test="stream.user">
+                <forms:error src="form">
+                    Sorry, this stream has an owner.
+                </forms:error>
+                <done/>
+            </if>
+            <if test="len:.user.streams gte .user.account.max_streams">
+                <forms:error src="form">
+                    Unable to claim this stream, you have reached your limit.
+                </forms:error>
+                <done/>
+            </if>
+            <let stream.user=".user"
+                stream.password="token:8"
+                stream.imgcollection.user=".user"/>
+            <tl:subscribe stream="stream"/>
+            <tl:add-stream-meta stream="stream">**${.user.username}** claimed stream **${stream.title}**</tl:add-stream-meta>
+            <tl:user-message>**Success!** You now own stream *${stream.title}*</tl:user-message>
+            <redirect name="user_stream"
+                let:username=".user.username" let:stream_slug="stream.slug" />
+        </forms:validate>
     </view>
 
     <view libname="view.user.subscriptions" content="#content.user.subscriptions" requires=".user">
