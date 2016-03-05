@@ -64,6 +64,11 @@
         <db:query model="#Subscription" let:timeline="timeline" dst="subscriptions"/>
     </view>
 
+    <view libname="view.admin.meta" content="#content.admin.meta" requires="permission:'admin'">
+        <db:query model="#Event" dst="events" maxresults="100"
+            filter="#Event.type=='meta'" orderby="-time"/>
+    </view>
+
     <view libname="view.user.streams" content="#content.user.streams">
         <db:get-required model="moya.auth#User" dst="owner"
             let:username=".url.username"/>

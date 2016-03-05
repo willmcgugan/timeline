@@ -43,6 +43,8 @@
             <redirect name="user_streams" let:username=".url.username" />
         </url>
 
+        <!-- stream of meta for admin -->
+        <url route="/a/meta/" methods="GET" view="#view.admin.meta" name="admin_meta"/>
         <!-- user's streams -->
         <url route="/{username}" methods="GET,POST" view="#view.user.streams" name="user_streams" />
         <!-- user's subscriptions -->

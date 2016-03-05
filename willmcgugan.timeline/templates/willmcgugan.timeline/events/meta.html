@@ -5,6 +5,6 @@
     <p class="category pull-right" title="${localize:event.time}" data-toggle="tooltip" data-placement="bottom">
         <i class="fa fa-clock-o"></i> <span class="time-ago" data-time="${event.time.epoch}"></span>
     </p>
-    <a href="${event.url}">{% markup event.text as event.markup %}</a>
+    <a href="${event.stream.url}">{% markup event.text as event.markup %}</a>
 </div>
 {% endblock %}

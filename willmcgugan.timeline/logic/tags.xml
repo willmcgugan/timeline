@@ -84,6 +84,9 @@
             <db:get model="#Tag" let:slug="identity" dst="tag"/>
             <db:query src="tag.events" dst="events"/>
 
+            <case>admin</case>
+            <db:query model="#Event" let:type="'meta'" dst="events"/>
+
             <default-case/>
             <log-warn>Unknown update type in rpc method 'get_updates'!</log-warn>
         </switch>

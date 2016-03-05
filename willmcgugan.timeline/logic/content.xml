@@ -155,6 +155,16 @@ You can add events with virtually any technology.
         </section>
     </content>
 
+    <content libname="content.admin.meta" extends="#content.stream.base">
+        <title>Admin Meta</title>
+        <section name="side">
+            <scope-node template="stream/info/meta.html"/>
+        </section>
+        <section name="main">
+            <tl:stream events="events" source="admin-meta"/>
+        </section>
+    </content>
+
     <content libname="content.user.streams" extends="#content.stream.base">
         <title>${title:owner.username}'s Streams</title>
         <let-str menu="user_streams"/>
