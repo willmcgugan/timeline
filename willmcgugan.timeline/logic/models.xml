@@ -73,7 +73,7 @@
 
     <model libname="Event" xmlns="http://moyaproject.com/db">
         <doc>An event is an individual item in a stream</doc>
-    	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes"/>
+    	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes" picker="#admintable.events"/>
 
         <uuid name="uuid" unique="yes"/>
     	<datetime name="time" null="no" blank="no" />
