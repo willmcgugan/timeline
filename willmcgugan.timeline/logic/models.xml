@@ -25,7 +25,7 @@
         <uuid name="uuid" unique="yes"/>
     	<foreign-key name="user" model="moya.auth#User" backref="timeline" null="yes" blank="yes" owned="yes" picker="moya.auth#admintable.users"/>
     	<integer name="update" default="0"/>
-        <many-to-many name="streams" model="#Stream" through="#Subscription"/>
+        <many-to-many name="streams" model="#Stream" through="#Subscription" picker="#admintable.streams"/>
     </model>
 
     <model libname="Subscription" xmlns="http://moyaproject.com/db">
