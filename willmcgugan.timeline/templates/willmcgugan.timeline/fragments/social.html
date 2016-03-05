@@ -1,4 +1,4 @@
-<a href="https://twitter.com/intent/tweet?${urlencode:text=title or '' + ' ' + .request.url, via='willmcgugan'}" class="btn btn-simple btn-social btn-twitter window-link" title="Tweet this" data-toggle="tooltip">
+<a href="https://twitter.com/intent/tweet?${urlencode:text=(title or '') + ' ' + .request.url, via='willmcgugan'}" class="btn btn-simple btn-social btn-twitter window-link" title="Tweet this" data-toggle="tooltip">
     <i class="fa fa-twitter"></i>
 </a>
 <a href="//facebook.com/share.php?${urlencode:(u=.request.url)}" class="btn btn-simple btn-social btn-facebook window-link" title="Share on Facebook" data-toggle="tooltip">
