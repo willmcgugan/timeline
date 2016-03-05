@@ -24,6 +24,7 @@
         <let event="signal.data.object"/>
         <let tags="event.text_html|'hashtags'"/>
         <tl:update-tags event="event" tags="tags"/>
+        <tl:notify path="/events/admin-meta" action="update-stream" if="event.type=='meta'"/>
     </handle>
 
     <handle signal="request.end">

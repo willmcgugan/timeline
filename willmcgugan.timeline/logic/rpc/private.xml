@@ -37,7 +37,6 @@
 
         <rpc:method name="get_updates" group="events" description="Get updates to a stream">
             <rpc:parameter name="source" type="string" required="yes">events source</rpc:parameter>
-            <rpc:parameter name="time" type="number" null="yes" required="yes">update time</rpc:parameter>
             <rpc:parameter name="order" type="number" null="yes" required="no">order value</rpc:parameter>
             <rpc:parameter name="new" type="bool" required="no" default="yes">true for newer events, false for older</rpc:parameter>
             <rpc:parameter name="filter_types" type="list" required="no" default="[]">list of types to filter</rpc:parameter>
@@ -49,7 +48,7 @@
 
             <db:query src="events" dst="events" if="filter_types"
                 filter="#Event.type in filter_types" />
-            
+
             <db:query src="events" dst="events" if="filter_streams"
                 filter="#Event.stream.id in filter_streams"/>
 
@@ -59,22 +58,19 @@
                 <db:query src="events" dst="events" filter="#Event.id in tag_events"/>
             </for>
 
-            <if test="time">
+            <if test="order">
                 <if test="new">
-                    <db:query src="events" dst="events"
-                        filter="#Event.insert_seconds gt time and #Event.insert_seconds != time"/>
-                    <db:query src="events" dst="events" filter="#Event.id gt order" if="order"/>
+                    <db:query src="events" dst="events" filter="#Event.id gt order"/>
                 </if>
                 <else>
-                    <db:query src="events" dst="events"
-                        filter="#Event.insert_seconds lt time and #Event.insert_seconds != time"/>
-                    <db:query src="events" dst="events" filter="#Event.id lt order" if="order"/>
+                    <db:query src="events" dst="events" filter="#Event.id lt order"/>
                 </else>
             </if>
+
             <!--
             For new results, i.e. coming in at the top, we want a larger number of results so we don't risk losing any.
 
-            For old reults, we want just enough for the user to scroll through.s
+            For old results, we want just enough for the user to scroll through.
             -->
             <db:query src="events" dst="events" orderby="-insert_seconds,-id"  maxresults="new ? 50 : 10" distinct="yes"/>
             <let update_time="events.first.added_time.epoch or 0"/>

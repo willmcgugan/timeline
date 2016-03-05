@@ -139,7 +139,6 @@ streams = {};
         streams[stream_id] = self;
 
 		self.event_source = config.source;
-		self.time = config.time;
 		self.event_stack = [];
 		self.filter_types = [];
         self.filter_streams = [];
@@ -204,7 +203,7 @@ streams = {};
                 'filter_streams': self.filter_streams,
                 'filter_hashtags': self.filter_hashtags
             };
-            var params = jQuery.extend(params, query); /* oh Javascript */
+            var params = jQuery.extend(params, query);
             request_index += 1;
             params.request_index = request_index;
             rpc.call(
@@ -238,8 +237,7 @@ streams = {};
             {
                 $stream.find('.event').remove();
             }
-			self.time = time;
-			$(events).each(function(i, event_update){
+			$(events.reverse()).each(function(i, event_update){
 				self.add_event(event_update);
 			});
 			self.check_updates(reset);
@@ -265,7 +263,6 @@ streams = {};
 		{
 			$stream.find('.event').addClass('fade-event');
 			self.event_stack = [];
-			self.time = 0;
 			self.reset();
 		}
 
@@ -389,7 +386,6 @@ streams = {};
         	window.scrollTop = 0;
         	self.query_events(
 				{
-					'time': self.time
 				},
 				function(result){
 
@@ -411,7 +407,6 @@ streams = {};
             }
 			self.query_events(
 				{
-					'time': self.time,
                     'order': order
 				},
 				function(result){
@@ -581,7 +576,7 @@ $(function(){
     });
 
     $('.sign-in-link').click(function(e){
-        
+
         var $link = $(this);
         var fwd = $link.data('fwd');
         var href = fwd || $link.attr('href');
