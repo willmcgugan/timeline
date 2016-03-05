@@ -159,10 +159,6 @@
         </tl:message>
     </tag>
 
-    <filter name="can_manage_stream" value="stream">
-        <return value="stream.user is None or (.user and stream.user == .user)"/>
-    </filter>
-
     <tag name="update-tags">
         <signature>
             <attribute name="event" required="yes"/>
