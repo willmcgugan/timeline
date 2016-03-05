@@ -65,7 +65,7 @@
         <text-area name="description" label="Description"
             placeholder="What will go in this stream?"/>
         <field>
-            <m:bbcode>[url ${.request.host_url}${.urls.pages.showpage(pagename='tc')}]Terms and Conditions[/url]</m:bbcode>
+            <m:bbcode>[url ${.request.host_url}${.urls.pages.showpage(pagename='terms-and-conditions')}]Terms and Conditions[/url]</m:bbcode>
         </field>
         <checkbox name="tc" text="I agree" required="yes"/>
 
