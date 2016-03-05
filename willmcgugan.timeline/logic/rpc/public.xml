@@ -43,6 +43,7 @@
             </return-dict>
         </rpc:method>
 
+        <!-- 
         <rpc:method name="get" group="stream" description="get an existing stream">
             <rpc:parameter name="stream" type="string">A stream's UUID or slug</rpc:parameter>
             <rpc:parameter name="password" type="string">Password for a stream</rpc:parameter>
@@ -81,6 +82,7 @@
             <tl:notify-stream stream="stream"/>
             <return-dict let:ids="ids"/>
         </rpc:method>
+    -->
 
     </rpc:interface>
 
