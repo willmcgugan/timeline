@@ -90,7 +90,7 @@
         <submit-button text="Create Account" visual="success" block="yes"/>
 
         <validate-field field="username">
-            <m:let auth="app:'moya.auth'"/>
+            <moya:let auth="app:'moya.auth'"/>
             <fail if="len:value lt auth.settings.min_username_length.int">
                 Username should be at least ${auth.settings.min_username_length.int} characters
             </fail>

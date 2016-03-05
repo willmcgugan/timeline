@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moya xmlns="http://moyaproject.com"
-    xmlns:moya="http://moyaproject.com"
+    xmlns:m="http://moyaproject.com"
 	xmlns:w="http://moyaproject.com/widgets"
     xmlns:m="http://moyaproject.com"
     xmlns:db="http://moyaproject.com/db"
