@@ -2,7 +2,6 @@
 <moya xmlns="http://moyaproject.com"
     xmlns:m="http://moyaproject.com"
 	xmlns:w="http://moyaproject.com/widgets"
-    xmlns:m="http://moyaproject.com"
     xmlns:db="http://moyaproject.com/db"
     xmlns:let="http://moyaproject.com/let">
 
