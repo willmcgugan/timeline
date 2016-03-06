@@ -52,7 +52,7 @@ Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup
 
                 {% end %}
 
-                <a class="btn btn-social btn-github btn-fill btn-round" href="/in/sign-in/with/github/?fwd=%2Fhome%2F" title="" data-toggle="tooltip" data-original-title="Sign in with GitHub" style="margin-top:80px;">
+                <a class="btn btn-social btn-github btn-fill btn-round" rel="nofollow" href="/in/sign-in/with/github/?fwd=%2Fhome%2F" data-toggle="tooltip" title="Sign in with GitHub" style="margin-top:50px;">
                     <i class="fa fa-github"></i><span class="sign-in-text hidden-xs"> Sign in with GitHub</span>
                 </a>
 
@@ -109,13 +109,13 @@ Create and share *streams* of realtime events with our stupidly<sup>&trade;</sup
         <div class="container">
 
             <div class="text-center">
-                <a class="btn btn-social btn-github btn-fill btn-round" href="{% url 'login' from 'logins' with provider='github' query fwd=.urls.timeline.home %}" title="Sign in with GitHub" data-toggle="tooltip">
+                <a class="btn btn-social btn-github btn-fill btn-round" rel="nofollow" href="{% url 'login' from 'logins' with provider='github' query fwd=.urls.timeline.home %}" title="Sign in with GitHub" data-toggle="tooltip">
                     <i class="fa fa-github"></i><span class="sign-in-text hidden-xs"> Sign in with GitHub</span>
                 </a>
-                <a class="btn btn-social btn-google btn-fill btn-round" href="{% url 'login' from 'logins' with provider='google' query fwd=.urls.timeline.home %}" title="Sign in with Google" data-toggle="tooltip">
+                <a class="btn btn-social btn-google btn-fill btn-round" rel="nofollow" href="{% url 'login' from 'logins' with provider='google' query fwd=.urls.timeline.home %}" title="Sign in with Google" data-toggle="tooltip">
                     <i class="fa fa-google"></i><span class="sign-in-text hidden-xs"> Sign in with Google</span>
                 </a>
-                <a class="btn btn-social btn-facebook btn-fill btn-round" href="{% url 'login' from 'logins' with provider='facebook' query fwd=.urls.timeline.home %}" title="Sign in with Facebook" data-toggle="tooltip">
+                <a class="btn btn-social btn-facebook btn-fill btn-round" rel="nofollow" href="{% url 'login' from 'logins' with provider='facebook' query fwd=.urls.timeline.home %}" title="Sign in with Facebook" data-toggle="tooltip">
                     <i class="fa fa-facebook"></i><span class="sign-in-text hidden-xs"> Sign in with Facebook</span>
                 </a>
             </div>
