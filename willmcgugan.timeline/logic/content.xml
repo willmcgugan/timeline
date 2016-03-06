@@ -128,7 +128,8 @@ You can add events with virtually any technology.
                 <defer to="#macro.content.get-code.apis"/>
             </tl:card>
 
-            <tl:stream id="stream" events="events" source="stream-${stream.id}" stream_id="stream.uuid" link_to_stream="no" />
+            <tl:stream id="stream" source="stream-${stream.id}"
+                stream_id="stream.uuid" link_to_stream="no" />
 
         </section>
     </content>
@@ -151,7 +152,7 @@ You can add events with virtually any technology.
         </section>
         <section name="main">
             <node template="copy/no_subscriptions.html" withscope="yes" if="not timeline.streams"/>
-            <tl:stream events="events" source="timeline-${timeline.id}"/>
+            <tl:stream source="timeline-${timeline.id}"/>
         </section>
     </content>
 
@@ -161,7 +162,7 @@ You can add events with virtually any technology.
             <scope-node template="stream/info/meta.html"/>
         </section>
         <section name="main">
-            <tl:stream events="events" source="admin-meta"/>
+            <tl:stream source="admin-meta" size="50"/>
         </section>
     </content>
 
@@ -178,7 +179,7 @@ You can add events with virtually any technology.
             </tl:card>
             <node template="copy/no_streams.html" if="not streams and .user == owner"/>
             <node template="list_streams.html" let:streams="streams" let:timeline="timeline"/>
-            <tl:stream events="events" source="user-${owner.id}"/>
+            <tl:stream source="user-${owner.id}"/>
         </section>
     </content>
 
@@ -191,7 +192,7 @@ You can add events with virtually any technology.
         <section name="main">
             <tl:render-user-message/>
             <node template="copy/no_tag.html" withscope="yes" if="not tag"/>
-            <tl:stream events="events" source="tag-${tag_slug}"/>
+            <tl:stream source="tag-${tag_slug}"/>
         </section>
     </content>
 

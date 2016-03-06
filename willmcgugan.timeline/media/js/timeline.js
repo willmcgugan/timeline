@@ -319,20 +319,17 @@ streams = {};
 			{
 				var $last_event = $($events[$events.length - 1]);
 				var event_data = $last_event.data();
-				var last_event_time = parseFloat(event_data.time);
                 var last_event_order = event_data.order;
 			}
 			else
 			{
-				var last_event_time = 0;
-                var last_event_order = null;
+                var last_event_order = 0;
 			}
 
 			$more_events.addClass('loading');
 
 			self.query_events(
 				{
-					'time': last_event_time,
                     'order': last_event_order,
 					'new': false
 				},
@@ -385,11 +382,9 @@ streams = {};
         {
         	window.scrollTop = 0;
         	self.query_events(
-				{
-				},
+				{},
 				function(result){
-
-					self.update_events(result.time, result.events.reverse(), true);
+					self.update_events(result.time, result.events, true);
 				}
 			);
         }
@@ -397,18 +392,9 @@ streams = {};
 	 	self.update = function()
 		{
             var $first = $stream.find('.event:first');
-            if ($first.length)
-            {
-                var order = $first.data('order');
-            }
-            else
-            {
-                var order = null;
-            }
+            var order = $first.length ? $first.data('order') : 0;
 			self.query_events(
-				{
-                    'order': order
-				},
+				{'order': order},
 				function(result){
 					self.update_events(result.time, result.events);
 				}

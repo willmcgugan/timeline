@@ -62,7 +62,7 @@
     <tag name="get-events">
         <doc>Get events from a given source</doc>
         <signature>
-            <attribute name="source" type="expression" required="yes">Source of events</attribute>
+            <attribute name="source" type="text" required="yes">Source of events</attribute>
         </signature>
         <let parse="partition:[source, '-']" source="parse.0" identity="parse.2" />
 

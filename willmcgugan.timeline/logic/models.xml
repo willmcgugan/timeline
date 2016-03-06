@@ -71,7 +71,7 @@
         </property>
     </model>
 
-    <model libname="Event" xmlns="http://moyaproject.com/db">
+    <model libname="Event" xmlns="http://moyaproject.com/db" repr="event ${type} #${id}">
         <doc>An event is an individual item in a stream</doc>
     	<foreign-key name="stream" backref="events" model="#Stream" null="yes" blank="yes" picker="#admintable.events"/>
 
