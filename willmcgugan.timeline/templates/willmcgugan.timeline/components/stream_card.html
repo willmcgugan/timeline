@@ -28,12 +28,12 @@
                 <input class="btn btn-round btn-fill btn-success btn-unsubscribe" type="button" value="Subscribed" title="This stream will be shown in your timeline" data-toggle="tooltip" data-placement="bottom"/>
             </div>
             {% else %}
-            <a class="btn btn-primary sign-in-link" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
+            <a class="btn btn-primary sign-in-link" data-fwd="${.request.path}" href="{% url 'login' from 'moya.auth' %}?${urlencode:(fwd=.request.url)}">Subscribe</a>
             {% endif %}
         </div>
         {% end-if %}
-        
+
     </div>
-    
+
 </div>
 
