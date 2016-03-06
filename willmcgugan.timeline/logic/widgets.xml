@@ -15,7 +15,7 @@
     	</signature>
         <tl:get-events source="${source}" dst="events"/>
         <db:query src="events" dst="events"
-            orderby="-insert_seconds,-id"  maxresults="size" distinct="yes"/>
+            orderby="-id,-insert_seconds"  maxresults="size" distinct="yes"/>
     	<true dst="link_event"/>
     	<dict dst="config"
     		let:stream_id="stream_id"
