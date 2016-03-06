@@ -10,13 +10,13 @@
                         <div class="box">
                              <div class="content">
                                 <div class="social">
-                                    <a class="circle github" href="{% url 'login' from 'moya.logins' with provider='github' query fwd=login_redirect %}">
+                                    <a class="circle github" rel="nofollow" href="{% url 'login' from 'moya.logins' with provider='github' query fwd=login_redirect %}">
                                         <i class="fa fa-github fa-fw"></i>
                                     </a>
-                                    <a id="google_login" class="circle google" href="{% url 'login' from 'moya.logins' with provider='google' query fwd=login_redirect %}">
+                                    <a id="google_login" class="circle google" rel="nofollow" href="{% url 'login' from 'moya.logins' with provider='google' query fwd=login_redirect %}">
                                         <i class="fa fa-google-plus fa-fw"></i>
                                     </a>
-                                    <a id="facebook_login" class="circle facebook" href="{% url 'login' from 'moya.logins' with provider='facebook' query fwd=login_redirect %}">
+                                    <a id="facebook_login" class="circle facebook" rel="nofollow" href="{% url 'login' from 'moya.logins' with provider='facebook' query fwd=login_redirect %}">
                                         <i class="fa fa-facebook fa-fw"></i>
                                     </a>
                                 </div>

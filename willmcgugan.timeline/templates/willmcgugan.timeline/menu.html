@@ -35,14 +35,14 @@
         #}
 
         {% if recent_news.exists %}
-        <li{% if .url.app=='blog' %} class="active"{% endif %}> 
+        <li{% if .url.app=='blog' %} class="active"{% endif %}>
           <a href="{% url 'showpost' from 'moya.blog' with slug=recent_news.first.slug %}" title="Inthing news" data-toggle="tooltip" data-placement="bottom">
           News {% if new_news_count and .session.seen_news!='yes' %}<span class="badge bg-danger">${new_news_count}</span>{% endif %}
           </a>
-        </li> 
+        </li>
         {% endif %}
-        
-        {%- if .user %}       
+
+        {%- if .user %}
         <li{% if menu == 'subscriptions' %} class="active"{% endif %}>
             <a href="{% url 'user_subscriptions' from 'willmcgugan.timeline' with username=.user.username %}" title="Your stream subscriptions" data-toggle="tooltip" data-placement="bottom">
               {# <i class="fa fa-bookmark-o"></i> #} Subs
@@ -57,7 +57,7 @@
 
         {% if not .user %}
         <li>
-          <a class="sign-in-link" data-fwd="{% url 'home' %}" href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
+          <a class="sign-in-link" rel="nofollow" data-fwd="{% url 'home' %}" href="{% url 'login' from 'moya.auth' %}?fwd=${.request.path}">
             <i class="fa fa-user"></i> Sign In
           </a>
         </li>
