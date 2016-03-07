@@ -231,7 +231,7 @@ streams = {};
             });
         }
 
-		self.update_events = function(time, events, reset)
+		self.update_events = function(events, reset)
 		{
             if(reset)
             {
@@ -382,7 +382,7 @@ streams = {};
         	self.query_events(
 				{},
 				function(result){
-					self.update_events(result.time, result.events, true);
+					self.update_events(result.events, true);
 				}
 			);
         }
@@ -394,7 +394,7 @@ streams = {};
 			self.query_events(
 				{'order': order},
 				function(result){
-					self.update_events(result.time, result.events);
+					self.update_events(result.events);
 				}
 			);
 		}
