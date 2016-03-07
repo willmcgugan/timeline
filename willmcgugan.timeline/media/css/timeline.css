@@ -156,8 +156,8 @@ body
 
 @keyframes rotatein
 {
-    from {transform: perspective(1000px) rotateX(90deg);opacity:0;}
-    to {transform: perspective(1000px) rotateX(0deg);opacity:1;}
+    from {transform: perspective(1000px) rotateX(90deg); opacity:0;}
+    to {transform: perspective(1000px) rotateX(0deg); opacity:1;}
 }
 
 .fade-event

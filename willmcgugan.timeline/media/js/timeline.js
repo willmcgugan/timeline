@@ -297,10 +297,11 @@ streams = {};
 					var $existing_event = $('#event-' + event_update.id);
 					$existing_event.addClass('new-event');
                     bind_event($existing_event);
+                    $existing_event.hide().slideDown('fast');
 				}
 	            self.event_stack = [];
 			});
-    
+
 		}
 
 		self.check_append_events = function()
