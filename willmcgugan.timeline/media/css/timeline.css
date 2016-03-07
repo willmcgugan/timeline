@@ -145,19 +145,11 @@ body
 
 .card.event
 {
-    /*transform: perspective(1000px) rotateX(0deg);*/
-    /*opacity: 1;*/
-    /* transition: transform 1s, opacity 1s; */
 
-    
 }
 
-.event.new-event
+.event.new-event:not(.event-meta)
 {
-    /*transform: perspective(1000px) rotateX(90deg);*/
-    /*opacity: 0;*/
-    /* transition: transform 1s, opacity 1s; */
-
     animation-name: rotatein;
     animation-duration: 0.8s;
 }
@@ -167,7 +159,6 @@ body
     from {transform: perspective(1000px) rotateX(90deg);opacity:0;}
     to {transform: perspective(1000px) rotateX(0deg);opacity:1;}
 }
-
 
 .fade-event
 {
