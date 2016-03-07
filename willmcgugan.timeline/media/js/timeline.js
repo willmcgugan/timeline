@@ -231,7 +231,7 @@ streams = {};
             });
         }
 
-		self.update_events = function(events, reset)
+		self.update_events = function(events, reset, anim)
 		{
             if(reset)
             {
@@ -240,7 +240,7 @@ streams = {};
 			$(events.reverse()).each(function(i, event_update){
 				self.add_event(event_update);
 			});
-			self.check_updates(reset);
+			self.check_updates(reset, anim);
 		}
 
 		self.add_event = function(event_update)
@@ -266,7 +266,7 @@ streams = {};
 			self.reset();
 		}
 
-		self.check_updates = function(reset)
+		self.check_updates = function(reset, anim)
 		{
 			if(!self.event_stack.length)
 			{
@@ -297,7 +297,10 @@ streams = {};
 					var $existing_event = $('#event-' + event_update.id);
 					$existing_event.addClass('new-event');
                     bind_event($existing_event);
-                    $existing_event.hide().slideDown('fast');
+                    if(anim && !$existing_event.hasClass('event-meta'))
+                    {
+                        $existing_event.hide().slideDown('fast');
+                    }
 				}
 	            self.event_stack = [];
 			});
@@ -393,9 +396,9 @@ streams = {};
             var $first = $stream.find('.event:first');
             var order = $first.length ? $first.data('order') : 0;
 			self.query_events(
-				{'order': order},
+				{'order': order, 'max_results':50},
 				function(result){
-					self.update_events(result.events);
+					self.update_events(result.events, false, true);
 				}
 			);
 		}

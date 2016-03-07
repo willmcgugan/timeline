@@ -43,6 +43,7 @@
             <rpc:parameter name="filter_streams" type="list" required="no" default="[]">list of stream PKs</rpc:parameter>
             <rpc:parameter name="filter_hashtags" type="string" required="no" default="''">hashtag query text</rpc:parameter>
             <rpc:parameter name="request_index" type="number" default="0">an integer that will be returned in the response</rpc:parameter>
+            <rpc:parameter name="max_results" type="number" default="10">Number of results to return</rpc:parameter>
 
             <tl:get-events source="${source}" dst="events"/>
 
@@ -57,7 +58,7 @@
                 <let tag_events="tag.events ? tag.events : []"/>
                 <db:query src="events" dst="events" filter="#Event.id in tag_events"/>
             </for>
-            
+
             <if test="new">
                 <db:query src="events" dst="events" filter="#Event.id gt order"/>
             </if>
@@ -66,7 +67,7 @@
             </else>
 
             <db:query src="events" dst="events"
-                orderby="-id,-insert_seconds"  maxresults="new ? 50 : 10" distinct="yes"/>
+                orderby="-id,-insert_seconds"  maxresults="min:[50, max_results]" distinct="yes"/>
             <list dst="events_html"/>
             <for src="events" dst="event">
                 <tl:render-event event="event" dst="html" link_to_stream="not (source ^= 'stream')"/>
