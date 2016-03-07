@@ -21,7 +21,7 @@
                 let:uuid=".url.stream_slug" />
             <let initial.stream="stream.uuid"/>
         </else>
-        
+
         <str dst="action" if=".request.GET.format">.?format=${.request.GET.format}</str>
         <forms:get form="#form.event" src="initial" dst="form" action="${action or '.'}"/>
 
@@ -43,8 +43,8 @@
 
                     <if test="not stream.user">
                         <!-- More strict rate-limiting for unclaimed streams -->
-                        <tl:rate-limit resource="stream-${data.stream}" span="60" max="5">
-                            <str dst="rate_msg">Unclaimed streams are rate-limited to 5 events a minute</str>
+                        <tl:rate-limit resource="stream-${data.stream}" span="60" max="10">
+                            <str dst="rate_msg">Unclaimed streams are rate-limited to 10 events a minute</str>
                             <serve-json-object let:status="'ratelimited'" let:msg="rate_msg"/>
                         </tl:rate-limit>
                         <tl:rate-limit resource="stream-${data.stream}" span="60 * 15" max="30">

@@ -201,7 +201,7 @@
             <attribute name="max" required="yes">max number of requests</attribute>
         </signature>
 
-        <let start="int:floor:(.time / span) * span" />
+        <let start="floor:(.time / span) * span" />
         <db:get-or-create model="#RateBucket" dst="bucket"
             let:resource="resource" let:start="start" let:span="span"/>
         <inc dst="bucket.count"/>
