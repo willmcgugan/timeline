@@ -1,4 +1,4 @@
-{%- cache for 24h key [event.uuid, event.update, link_to_stream, link_title] if not .debug -%}
+{%- cache for 24h key [new_event, event.uuid, event.update, link_to_stream, link_title] if not .debug -%}
 <div id="event-${event.uuid}" class="event event-${event.type}{% if new_event %} new-event{% endif %}" data-order="${event.id}" data-type="${event.type}" data-update="${event.update}" data-time="${event.time.epoch}">
 	{%- emptyblock "content" -%}
 </div>

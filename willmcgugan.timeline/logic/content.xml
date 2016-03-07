@@ -199,7 +199,8 @@ You can add events with virtually any technology.
     <content libname="content.event" extends="#content.base" template="view_event.html">
         <let-str menu="event"/>
         <section name="event">
-            <node template="event.html" let:event="event" let:link_to_stream="yes"/>
+            <node template="event.html"
+                let:event="event" let:link_to_stream="yes" let:new_event="yes"/>
         </section>
         <section name="comments">
             <comments:comments
