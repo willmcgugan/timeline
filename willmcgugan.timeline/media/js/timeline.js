@@ -300,9 +300,11 @@ streams = {};
 				}
 	            self.event_stack = [];
 			});
+            /*
 			setTimeout(function(){
 				$('.event').removeClass('new-event');
 			}, 50);
+            */
 		}
 
 		self.check_append_events = function()
