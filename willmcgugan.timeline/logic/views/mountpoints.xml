@@ -9,6 +9,7 @@
     xmlns:tn="http://moyaproject.com/thumbnail">
 
    <mountpoint name="main">
+
         <!-- TODO: API page -->
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />

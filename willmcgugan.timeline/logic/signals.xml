@@ -32,4 +32,13 @@
             <tl:send-notifications/>
         </thread>
     </handle>
+
+    <handle signal="moya.comments.new-comment">
+        <trace path="signal.data.commentobject.object_url" dst="match"
+            app="timeline" name="event"/>
+        <if test="match">
+            <db:get model="timeline#Event" let:uuid="match.data.event_id" dst="event"/>
+            <echo>comment on ${event}</echo>
+        </if>
+    </handle>
 </moya>
