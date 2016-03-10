@@ -10,6 +10,9 @@
 
    <mountpoint name="main">
 
+        <url route="/bad/">
+            <echo>${1/0}</echo>
+        </url>
         <!-- TODO: API page -->
         <url route="/api/public/" methods="GET,POST" view='#jsonrpc.public' name="jsonrpc_public" />
         <url route="/api/private/" methods="GET,POST" view='#jsonrpc.private' name="jsonrpc_private" />

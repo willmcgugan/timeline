@@ -136,4 +136,10 @@
         <integer name="count" default="0"/>
     </model>
 
+    <model libname="Unsubscribe" xmlns="http://moyaproject.com/db">
+        <unique-together>
+            <foreign-key model="auth#User" name="user" null="no"/>
+            <string name="list" null="no" length="20">List name (short identifier)</string>
+        </unique-together>
+    </model>
 </moya>

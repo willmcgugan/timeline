@@ -223,4 +223,15 @@
         <db:get-or-create model="#Subscription" dst="subscription"
             let:stream="stream" let:timeline="timeline"/>
     </tag>
+
+    <tag name="if-subscribed-list">
+        <doc>Execite if a users is not-unsubscribed to a mail list</doc>
+        <signature>
+            <attribute name="user" default=".user">A user (logged in user as default)</attribute>
+            <attribute name="list" type="text">Name of mailing list</attribute>
+        </signature>
+        <db:if-not-exists model="#Unsubscribe" let:user="user" let:list="list" if="user">
+            <yield/>
+        </db:if-not-exists>
+    </tag>
 </moya>

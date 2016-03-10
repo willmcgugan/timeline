@@ -3,7 +3,8 @@
     xmlns:rpc="http://moyaproject.com/jsonrpc"
     xmlns:let="http://moyaproject.com/let"
     xmlns:db="http://moyaproject.com/db"
-    xmlns:tl="http://willmcgugan.com/timeline">
+    xmlns:tl="http://willmcgugan.com/timeline"
+    xmlns:email="http://moyaproject.com/email">
 
     <!-- Here's an example JSONRPC interface to get you started. -->
 
@@ -85,6 +86,16 @@
                 let:user=".user" let:slug="'default'"/>
             <db:get-or-create model="#Subscription" dst="subscription"
                 let:stream="stream" let:timeline="timeline"/>
+
+            <tl:if-subscribed-list list="new_subscription" if="stream.user and stream.user.email">
+                <get-fq-url name="user_streams" let:username=".user.username" dst="subscriber_url"/>
+                <email:send email="#email.new_subscription"
+                    to=".user.email"
+                    let:user="stream.user"
+                    let:subscriber=".user"
+                    let:stream="stream"
+                    let:subscriber_url="subscriber_url" />
+            </tl:if-subscribed-list>
 
             <return-dict let:status="'ok'" />
         </rpc:method>
