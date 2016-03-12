@@ -1,0 +1,11 @@
+{% extends "/email/base.html" %}
+
+{% block 'content' %}
+<p>Dear ${user.username},</p>
+
+<p>An inthing.io user posted a comment on your event '${event.title}'.</p>
+
+<p>
+    <a class="action-link" href="${event.url}#comment${comment.id}">View comment</a>
+</p>
+{% end-block %}

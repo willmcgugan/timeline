@@ -1,3 +1,4 @@
 {%- block "content" %}{% endblock -%}
 --
 ${.settings.project_title}
+${.site.url}

@@ -3,7 +3,8 @@
     xmlns:let="http://moyaproject.com/let"
     xmlns:db="http://moyaproject.com/db"
     xmlns:tl="http://willmcgugan.com/timeline"
-    xmlns:comments="http://moyaproject.com/comments">
+    xmlns:comments="http://moyaproject.com/comments"
+    xmlns:email="http://moyaproject.com/email">
 
     <handle signal="moya.comments.new-comment">
     	<let event_uuid="(partition:[signal.data.commentobject.object, '-'])[-1]"/>
@@ -35,13 +36,17 @@
     </handle>
 
     <handle signal="moya.comments.new-comment">
-        <let commentobject="signal.data.commentobject"/>
+        <let commentobject="signal.data.commentobject"
+            comment="signal.data.comment"/>
         <trace path="commentobject.object_url" dst="match"
             app="timeline" name="event"/>
         <if test="match">
             <db:get model="timeline#Event" let:uuid="match.data.event_id" dst="event"/>
-            <comments:subscribe if="event.stream.user"
-                user="event.stream.user" commentobject="commentobject"/>
+            <email:send email="#email.new_comment" if="event.stream.user and event.stream.user.email"
+                to="${event.stream.user.email}"
+                let:event="event"
+                let:user="event.stream.user"
+                let:comment="comment"/>
         </if>
     </handle>
 </moya>

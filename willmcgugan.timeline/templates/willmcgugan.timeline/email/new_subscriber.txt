@@ -1,9 +1,11 @@
 {% extends "/email/base.txt" %}
 
-{% block content %}
+{% block content -%}
 Dear ${user.username},
 
-We thought you would like to know that ${subscriber.username} has subscribed to your stream '${stream.title}' (${stream.url}).
+We thought you would like to know that inthing.io user, ${subscriber.username}, has subscribed to your stream '${stream.title}' (${stream.url}).
 
-See ${subscriber.username}'s streams here: ${subscriber_url}
+Click the following link to see ${subscriber.username}'s streams.
+
+${subscriber_url}
 {% end-block %}

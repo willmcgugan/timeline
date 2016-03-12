@@ -100,6 +100,12 @@
             </m:return>
         </property>
 
+        <property name="url">
+            <m:return>
+                <m:get-fq-url name="event" let:event_id="object.uuid"/>
+            </m:return>
+        </property>
+
     </model>
 
     <model libname="Image" xmlns="http://moyaproject.com/db">

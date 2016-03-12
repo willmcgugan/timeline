@@ -91,7 +91,7 @@
                 if="stream.user and stream.user.email and stream.user != .user">
                 <get-fq-url name="user_streams" let:username=".user.username" dst="subscriber_url"/>
                 <email:send email="#email.new_subscription"
-                    to="stream.user.email"
+                    to="${stream.user.email}"
                     let:user="stream.user"
                     let:subscriber=".user"
                     let:stream="stream"

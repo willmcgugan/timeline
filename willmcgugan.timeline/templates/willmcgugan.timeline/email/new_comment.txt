@@ -1,0 +1,9 @@
+{% extends "/email/base.txt" %}
+
+{% block content -%}
+Dear ${user.username},
+
+A new comment was posted on your stream.
+
+${event.url}#comment${comment.id}
+{% end-block %}
