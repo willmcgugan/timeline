@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block "title" %}Internal Server Error{% end-block %}
+
+{% block "body" %}
+<h1>500 - Internal Server Error</h1>
+<p>
+The server encountered an error. The tech team have been automatically notified.
+</p>
+
+<p>
+Please <a href="{% url 'feedback' from 'feedback' %}">contact us</a> if this error is a problem for you.
+</p>
+
+{% endblock %}

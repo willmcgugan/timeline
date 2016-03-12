@@ -1,0 +1,10 @@
+<moya xmlns="http://moyaproject.com">
+
+    <email libname="email.new_subscription" xmlns="http://moyaproject.com/email"
+        from="${.app.settings.email_from}"
+        subject="[inthing] you have a new subscriber">
+        <text template="email/new_subscriber.txt"/>
+        <html template="email/new_subscriber.html"/>
+    </email>
+
+</moya>

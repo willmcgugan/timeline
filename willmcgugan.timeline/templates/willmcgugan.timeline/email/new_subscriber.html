@@ -1,0 +1,13 @@
+{% extends "/email/base.html" %}
+
+{% block 'content' %}
+<p>Dear ${user.username},</p>
+
+<p>We thought you would like to know that ${subscriber.username} has subscribed to your stream, <a hef="${stream.url}">${stream.title}</a>.</p>
+
+<p>
+    <a class="action-link">View ${subscriber.username}'s streams</a>
+</p>
+
+<p>Great! People are interested in your content!</p>
+{% end-block %}
