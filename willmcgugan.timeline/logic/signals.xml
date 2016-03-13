@@ -38,15 +38,20 @@
     <handle signal="moya.comments.new-comment">
         <let commentobject="signal.data.commentobject"
             comment="signal.data.comment"/>
+        <return if="comment.parent"/> <!-- top level comments only -->
         <trace path="commentobject.object_url" dst="match"
             app="timeline" name="event"/>
         <if test="match">
             <db:get model="timeline#Event" let:uuid="match.data.event_id" dst="event"/>
-            <email:send email="#email.new_comment" if="event.stream.user and event.stream.user.email"
-                to="${event.stream.user.email}"
-                let:event="event"
-                let:user="event.stream.user"
-                let:comment="comment"/>
+            <let stream_owner="event.stream.user"/>
+            <tl:if-subscribed-list user="stream_owner" list="subscribe_notifications"
+                if="stream_owner and stream_owner.email and stream_owner != comment.user">
+                <email:send email="#email.new_comment"
+                    to="${stream_owner.email}"
+                    let:event="event"
+                    let:user="event.stream.user"
+                    let:comment="comment"/>
+            </tl:if-subscribed-list>
         </if>
     </handle>
 </moya>
