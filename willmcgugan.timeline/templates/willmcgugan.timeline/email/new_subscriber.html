@@ -3,7 +3,7 @@
 {% block 'content' -%}
 <p>Dear ${user.username},</p>
 
-<p>We thought you would like to know that inthing user <b>${subscriber.username}</b> has subscribed to your stream, <a hef="${stream.url}">${stream.title}</a>.</p>
+<p>We thought you would like to know that inthing user <b>${subscriber.username}</b> has subscribed to your stream, <a href="${stream.url}">${stream.title}</a>.</p>
 
 <p>
     <a class="action-link" href="{% url 'user_streams' from 'timeline' with username=subscriber.username %}">View ${subscriber.username}'s streams</a>
