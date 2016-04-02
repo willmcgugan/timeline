@@ -35,11 +35,8 @@
             <option value="+2">urgent (+2)</option>
         </select>
         <input name="generator" label="Generator" placeholder="Name of device that generated this event"/>
-        <select name="markup" maxlength="20" label="Markup" initial="'markdown'">
-            <option value="markdown"/>
-            <option value="text"/>
-            <option value="html"/>
-        </select>
+        <m:get-choices choices="#choices.markup" dst="markup_choices"/>
+        <select name="markup" maxlength="20" label="Markup" initial="'markdown'" choices="markup_choices"/>
         <text-area name="text" label="Text" placeholder="Text associated with the event (will be processed as the above markup)"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
