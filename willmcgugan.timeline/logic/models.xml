@@ -85,8 +85,10 @@
     	<string name="type" length="30"/>
     	<integer name="priority" default="0"/>
     	<string name="title" length="100" null="yes" blank="yes"/>
-    	<text name="text" null="yes" blank="yes" />
+    	<text name="description" null="yes" blank="yes" />
+        <text name="text" null="yes" blank="yes" />
     	<string name="markup" length="20" default="markup"/>
+        <string name="code_language" length="20" null="yes" />
     	<text name="info_json" null="yes" blank="yes"/>
         <integer name="update" default="0"/>
         <integer name="numcomments" default="0"/>
@@ -94,9 +96,9 @@
         <property name="info" expression="info_json ? {} : json:info_json" />
         <property name="priority_name" expression=".app.enum['enum.priority'][priority].name"/>
 
-        <property name="text_html">
+        <property name="description_html">
             <m:return>
-                <m:process-markup src="object.text or ''" type="${object.markup}"/>
+                <m:process-markup src="object.description or ''" type="${object.markup}"/>
             </m:return>
         </property>
 

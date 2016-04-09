@@ -128,7 +128,7 @@
 
     <view libname="view.tag.stream" content="#content.tag.stream">
         <let tag_slug=".url.tag_slug"/>
-        <db:get model="#Tag" let:name="lower:.url.tag_slug" dst="tag"/>
+        <db:get-required model="#Tag" let:name="lower:.url.tag_slug" dst="tag"/>
     </view>
 
 </moya>

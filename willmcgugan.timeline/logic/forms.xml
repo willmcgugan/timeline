@@ -13,8 +13,9 @@
     </choices>
 
     <choices libname="choices.event">
-        <choice value="text"/>
-        <choice value="image"/>
+        <choice value="code" label="Code Event"/>
+        <choice value="text" label="Text Event"/>
+        <choice value="image" label="Image Event"/>
     </choices>
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
@@ -37,7 +38,9 @@
         <input name="generator" label="Generator" placeholder="Name of device that generated this event"/>
         <m:get-choices choices="#choices.markup" dst="markup_choices"/>
         <select name="markup" maxlength="20" label="Markup" initial="'markdown'" choices="markup_choices"/>
-        <text-area name="text" label="Text" placeholder="Text associated with the event (will be processed as the above markup)"/>
+        <select name="code_language" maxlength="20" label="Language (programming)" adapt="lower:str:value"/>
+        <text-area name="description" label="Description" maxlength="16 * 1024" placeholder="Text associated with the event (will be processed as the above markup)"/>
+        <text-area name="text" label="Additional Text" maxlength="64 * 1024" placeholder="Additional text associated with the event (not processed as markup)"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
 

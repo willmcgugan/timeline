@@ -59,6 +59,7 @@
                         let:type="data.type or 'text'"
                         let:priority="int:data.priority"
                         let:title="data.title"
+                        let:description="data.description"
                         let:text="data.text"
                         let:markup="data.markup"
                         let:generator="data.generator or 'inthing api'"

@@ -1,0 +1,20 @@
+{% extends "../stream/card.html" %}
+
+{% block "content" %}
+<div class="content">
+{# common components to event card #}
+{%- include "fragments/card/header.html" -%}
+{%- include "fragments/card/priority.html" -%}
+{%- include "fragments/card/title.html" -%}
+
+{%- if event.code %}
+<div class="event-content">
+{%- include "fragments/card/description.html" -%}
+    <pre><code>${event.code}</code><pre>
+</div>
+{%- endif %}
+
+{%- include "fragments/card/expand.html" %}
+{%- include "fragments/card/footer.html" %}
+</div>
+{% endblock %}
