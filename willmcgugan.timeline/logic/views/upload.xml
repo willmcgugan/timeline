@@ -61,6 +61,7 @@
                         let:title="data.title"
                         let:description="data.description"
                         let:text="data.text"
+                        let:code_language="data.code_language"
                         let:markup="data.markup"
                         let:generator="data.generator or 'inthing api'"
                         let:insert_seconds="round:[.time, 6]"/>

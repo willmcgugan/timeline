@@ -7,10 +7,10 @@
 {%- include "fragments/card/priority.html" -%}
 {%- include "fragments/card/title.html" -%}
 
-{%- if event.code %}
+{%- if event.text %}
 <div class="event-content">
 {%- include "fragments/card/description.html" -%}
-    <pre><code>${event.code}</code><pre>
+    <pre><code class="language-${event.code_language}">${strip:event.text}</code><pre>
 </div>
 {%- endif %}
 

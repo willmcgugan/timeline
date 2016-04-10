@@ -105,7 +105,7 @@ class NotifyHandler(websocket.WebSocketHandler):
         log.debug('%s left', self.request.remote_ip)
 
 
-def make_app(secret, api_url):
+def make_app(secret):
     """Create the Tornado web application object."""
     app = web.Application([
         (r'^/watch/(?P<path>.*?)$', WatchHandler),
