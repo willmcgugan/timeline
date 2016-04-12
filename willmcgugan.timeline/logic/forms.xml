@@ -3,7 +3,8 @@
     xmlns:m="http://moyaproject.com"
     xmlns:db="http://moyaproject.com/db"
     xmlns:w="http://moyaproject.com/widgets"
-    xmlns:let="http://moyaproject.com/let">
+    xmlns:let="http://moyaproject.com/let"
+    xmlns:tl="http://willmcgugan.com/timeline">
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	<input name="stream" label="Stream" placeholder="Stream ID or path" required="yes" help="A stream UUID or path ( e.g. /will/test/ ) "/>
@@ -30,7 +31,7 @@
             <fail if="values.type=='image' and not bool:.request.FILES.image">Required for image type</fail>
         </validate-field>
         <validate-field field="password">
-            <db:get model="#Stream" dst="stream" let:uuid="values.stream"/>
+            <tl:get-stream id="values.stream" dst="stream"/>
             <fail if="stream.user and not values.password">
                 this stream requires a password
             </fail>

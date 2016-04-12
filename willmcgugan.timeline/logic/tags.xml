@@ -12,7 +12,6 @@
     		<attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
             <attribute name="user" type="expression" missing="no" required="no">A user</attribute>
     	</signature>
-
     	<if test="id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
             <db:get model="#Stream" let:uuid="id" dst="stream" />
         </if>
@@ -20,7 +19,7 @@
             <db:get model="#Stream" let:user="user" let:slug="id" dst="stream" />
         </else>
         <else>
-            <trace path="slashjoin:['/', id, '/']" app="timeline" name="stream,user_stream" dst="url_trace"/>
+            <trace path="abspath:slashtrail:id" app="timeline" name="stream,user_stream" dst="url_trace"/>
             <db:get model="#Stream" dst="stream" if="url_trace.name=='stream'"
                 let:stream_id="url_trace.data.stream_id"/>
             <db:get model="#Stream" dst="stream" if="url_trace.name=='user_stream'"
