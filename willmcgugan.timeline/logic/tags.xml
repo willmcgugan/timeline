@@ -19,7 +19,7 @@
             <db:get model="#Stream" let:user="user" let:slug="id" dst="stream" />
         </else>
         <else>
-            <trace path="abspath:slashtrail:id" app="timeline" name="stream,user_stream" dst="url_trace"/>
+            <trace path="abspath:trailingslash:id" app="timeline" name="stream,user_stream" dst="url_trace"/>
             <db:get model="#Stream" dst="stream" if="url_trace.name=='stream'"
                 let:stream_id="url_trace.data.stream_id"/>
             <db:get model="#Stream" dst="stream" if="url_trace.name=='user_stream'"
