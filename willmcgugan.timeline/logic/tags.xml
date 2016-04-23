@@ -7,7 +7,7 @@
     <!-- define your tags here -->
 
     <tag name="get-stream">
-    	<doc>Get a stream object from a UUID, slug, or path</doc>
+    	<doc>Get a stream object from a UUID, slug, URL or path</doc>
     	<signature>
     		<attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
             <attribute name="user" type="expression" missing="no" required="no">A user</attribute>
@@ -19,6 +19,7 @@
             <db:get model="#Stream" let:user="user" let:slug="id" dst="stream" />
         </else>
         <else>
+            <let id="(url:id).path" if="'://' in id"/>
             <trace path="abspath:trailingslash:id" app="timeline" name="stream,user_stream" dst="url_trace"/>
             <db:get model="#Stream" dst="stream" if="url_trace.name=='stream'"
                 let:stream_id="url_trace.data.stream_id"/>
