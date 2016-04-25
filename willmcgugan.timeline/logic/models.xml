@@ -93,15 +93,18 @@
         <integer name="update" default="0"/>
         <integer name="numcomments" default="0"/>
 
-        <property name="info" expression="info_json ? {} : json:info_json" />
-        <property name="priority_name" expression=".app.enum['enum.priority'][priority].name"/>
+        <string name="sound" length="20" null="yes"/>
 
+        <float name="latitude" null="yes"/>
+        <float name="longitude" null="yes"/>
+
+        <property name="info" expression="info_json ? json:info_json : {}" />
+        <property name="priority_name" expression=".app.enum['enum.priority'][priority].name"/>
         <property name="description_html">
             <m:return>
                 <m:process-markup src="object.description or ''" type="${object.markup}"/>
             </m:return>
         </property>
-
         <property name="url">
             <m:return>
                 <m:get-fq-url name="event" let:event_id="object.uuid"/>

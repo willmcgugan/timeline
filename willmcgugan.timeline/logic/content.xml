@@ -71,22 +71,20 @@ Add `?format=json` to the URL to return a JSON response
             <get-fq-url name="stream_upload" dst="add_event_url"
                 let:stream_slug="stream.uuid"/>
         </else>
-        <w:info if="stream.user">
-            <markdown>Post away, ${.user.username}! It's your stream.</markdown>
-        </w:info>
+
         <w:warning if="not stream.user">
             <markdown>This stream is unclaimed, anyone may post to it!</markdown>
         </w:warning>
-        <w:well>
-            <scope-node template="copy/getcode/credentials.html"/>
-        </w:well>
+
+        <scope-node template="copy/getcode/credentials.html"/>
+
         <markdown>
 #### Adding Events
 
 You can add events with virtually any technology.
         </markdown>
         <defer to="#macro.content.get-code.apis"/>
-        
+
     </macro>
 
     <content libname="content.stream" extends="#content.stream.base">
@@ -134,7 +132,6 @@ You can add events with virtually any technology.
         </section>
     </content>
 
-
     <content libname="content.stream.claim" extends="#content.stream">
         <section name="main" merge="replace">
             <tl:card title="Claim Stream?" dismiss="no">
@@ -142,7 +139,6 @@ You can add events with virtually any technology.
             </tl:card>
         </section>
     </content>
-
 
     <content libname="content.user.subscriptions" extends="#content.stream.base">
         <title>Subscriptions</title>

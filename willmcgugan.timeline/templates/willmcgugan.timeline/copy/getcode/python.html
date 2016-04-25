@@ -10,10 +10,13 @@ You can then post events to your stream with the following:
 ```python
 import inthing
 {%- if stream.password %}
-stream = inthing.Stream(id="${stream.uuid}", password="${stream.password}")
+stream = inthing.Stream("${stream.uuid}", password="${stream.password}")
 {%- else %}
-stream = inthing.Stream(id="${stream.uuid}")
+stream = inthing.Stream("${stream.uuid}")
 {%- endif %}
 stream.text("Hello, World! #helloworld", title="New Event")
 ```
+
+See the [inthing docs](http://inthing.readthedocs.org/en/latest/) for more information.
+
 {% end-markup-block %}
