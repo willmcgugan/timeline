@@ -80,8 +80,6 @@ Add `?format=json` to the URL to return a JSON response
 
         <markdown>
 #### Adding Events
-
-You can add events with virtually any technology.
         </markdown>
         <defer to="#macro.content.get-code.apis"/>
 
