@@ -1,9 +1,9 @@
 {% if event.description %}
 <div class="event-content">
-{%- extract as 'description' replace safe:(description|'addpclass'(class='description')) %}
-    {% sanitize rules data:'sanitize_rules.json' -%}
+{% sanitize rules data:'sanitize_rules.json' -%}
+    {%- extract as 'description' replace safe:(description|'addpclass'(class='description')) -%}
     {% markup event.description as [event.markup, 'text'] %}
-    {% end-sanitize -%}
-{%- endextract %}
+    {%- endextract -%}
+{% end-sanitize -%}
 </div>
 {% endif %}
