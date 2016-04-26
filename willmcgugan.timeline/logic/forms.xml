@@ -8,7 +8,7 @@
 
     <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	<input name="stream" label="Stream" placeholder="Stream ID or path" required="yes" help="A stream UUID or path ( e.g. /will/test/ ) "/>
-    	<password name="password" required="no" label="Password" placeholder="Stream password"/>
+    	<input name="password" required="no" label="Password" placeholder="Stream password"/>
         <input name="title" label="Title" required="yes" placeholder="Descriptive title of this event"/>
         <input name="generator" label="Generator" placeholder="Name of device that generated this event"/>
         <input name="time" label="Time" type="integer" placeholder="epoch time (leave blank for current time)"/>
@@ -22,8 +22,8 @@
         </select>
         <select name="code_language" maxlength="20" initial="''" choices="sorted:data:'code_types.json'" label="Code Language" adapt="lower:str:value"/>
         <select name="markup" maxlength="20" label="Markup" initial="'markdown'" choices="sorted:data:'markup_types.json'"/>
-        <text-area name="description" label="Description" maxlength="16 * 1024" placeholder="Text associated with the event (will be processed as the above markup)"/>
-        <text-area name="text" label="Text" maxlength="64 * 1024" placeholder="Text associated with the event (e.g. code for 'code' events)"/>
+        <text-area name="description" label="Description" maxlength="16 * 1024" placeholder="Descriptive text associated with the event (will be processed as the above markup)"/>
+        <text-area name="text" label="Text" maxlength="64 * 1024" placeholder="Additional text associated with some event types (e.g. code for 'code' events)"/>
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
 
