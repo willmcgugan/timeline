@@ -95,7 +95,7 @@
 
         <string name="sound" length="20" null="yes"/>
 
-        <string name="gps_source" lengt="40" null="yes"/>
+        <string name="gps_source" length="40" null="yes"/>
         <float name="latitude" null="yes"/>
         <float name="longitude" null="yes"/>
 
