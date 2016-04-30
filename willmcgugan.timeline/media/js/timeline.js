@@ -577,8 +577,9 @@ $(function(){
         }
     })
 
-    link_hashtags($('.event-view .event'));
-    update_times($('.event-view .event .time-ago'));
+    link_hashtags($('#event-view .event'));
+    update_times($('#event-view .event .time-ago'));
+    setInterval(function(){update_times($('#event-view .event .time-ago'));}, 1000);
 });
 
 

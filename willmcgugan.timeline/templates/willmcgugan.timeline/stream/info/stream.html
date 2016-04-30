@@ -28,7 +28,19 @@
             </li>
           </ul>
         </div>
+        {% elif not stream.password %}
+        <div class="btn-group stream-actions-button">
+          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-wrench text-info"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" data-toggle="modal" data-target="#code_modal">
+                <i class="fa fa-code"></i> Get the Code!</a>
+            </li>
+          </ul>
+        </div>
         {% endif %}
+
 
         {% include "fragments/card/stream_image.html" %}
 

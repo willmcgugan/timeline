@@ -72,8 +72,8 @@ Add `?format=json` to the URL to return a JSON response
                 let:stream_slug="stream.uuid"/>
         </else>
 
-        <w:warning if="not stream.user">
-            <markdown>This stream is unclaimed, anyone may post to it!</markdown>
+        <w:warning if="not stream.password">
+            <markdown>This stream has no password, anyone may post to it!</markdown>
         </w:warning>
 
         <scope-node template="copy/getcode/credentials.html"/>
@@ -112,7 +112,7 @@ Add `?format=json` to the URL to return a JSON response
                 </node>
             </tl:modal>
 
-            <tl:modal id="code_modal" class="modal-wide" title="Get the Code" if="stream and stream|'can_manage_stream'">
+            <tl:modal id="code_modal" class="modal-wide" title="Get the Code" if="stream and (stream|'can_manage_stream' or not stream.password)">
                 <defer to="#macro.content.get-code"/>
             </tl:modal>
 
