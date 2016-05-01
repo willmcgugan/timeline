@@ -27,11 +27,15 @@
         <upload name="image" label="Upload"/>
         <submit-button text="Upload"/>
 
+        <validate-field field="stream">
+           <fail if="not stream">
+                stream does not exist
+           </fail>
+        </validate-field>
         <validate-field field="image">
             <fail if="values.type=='image' and not bool:.request.FILES.image">Required for image type</fail>
         </validate-field>
         <validate-field field="password">
-            <tl:get-stream id="values.stream" dst="stream"/>
             <fail if="stream.user and not values.password">
                 this stream requires a password
             </fail>

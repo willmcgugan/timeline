@@ -26,7 +26,8 @@
         <forms:get form="#form.event" src="initial" dst="form" action="${action or '.'}"/>
 
         <if-post>
-            <forms:validate src="form">
+            <tl:get-stream id=".request.POST.stream" dst="stream" default="None"/>
+            <forms:validate src="form" let:stream="stream">
                 <let data="form.data"/>
 
                 <!-- Rate limit 1 -->

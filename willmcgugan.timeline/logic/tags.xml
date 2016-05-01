@@ -11,6 +11,9 @@
     	<signature>
     		<attribute name="id" type="expression" missing="no">A stream UUID or slug</attribute>
             <attribute name="user" type="expression" missing="no" required="no">A user</attribute>
+            <attribute name="default" type="expression" missing="no" default="sentinel:'nodefault'">
+                Default to return if stream does not exist
+            </attribute>
     	</signature>
     	<if test="id matches /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/">
             <db:get model="#Stream" let:uuid="id" dst="stream" />
@@ -26,9 +29,9 @@
             <db:get model="#Stream" dst="stream" if="url_trace.name=='user_stream'"
                 filter="#Stream.user.username==url_trace.data.username" let:slug="url_trace.data.stream_slug"/>
         </else>
-        <throw exception="willmcgugan.timeline.missing.stream" msg="No stream called '${id}'"
-            if="not stream"/>
-        <return value="stream"/>
+        <return value="stream" if="stream"/>
+        <return value="default" if="default is not sentinel:'nodefault'"/>
+        <throw exception="willmcgugan.timeline.missing.stream" msg="No stream called '${id}'"/>
     </tag>
 
     <tag name="get-stream-required">
