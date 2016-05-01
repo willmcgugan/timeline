@@ -54,7 +54,6 @@
     </view>
 
     <view libname="view.user.subscriptions" content="#content.user.subscriptions" requires=".user">
-        <breakpoint />
         <db:get-required model="moya.auth#User" dst="user"
             let:username=".url.username"/>
         <tl:get-timeline user="user" dst="timeline"/>
