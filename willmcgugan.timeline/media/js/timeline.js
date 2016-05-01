@@ -4,8 +4,7 @@ function link_hashtags($container)
 
         function do_highlight(el)
         {
-            var count = el.childNodes.length;
-            for (i=0; i<count; i++)
+            for (var i=0; i<el.childNodes.length; i++)
             {
                 var node = el.childNodes[i];
                 if(node.nodeType != 3)
@@ -15,7 +14,10 @@ function link_hashtags($container)
                         do_highlight(node);
                     }
                 }
-                else
+            }
+            for (var i=0; i<el.childNodes.length; i++)
+            {
+                if(node.nodeType == 3)
                 {
                     var new_text = node.textContent.replace(
                         /\#(\w+)/g,
