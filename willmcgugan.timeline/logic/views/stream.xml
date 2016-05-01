@@ -54,9 +54,10 @@
     </view>
 
     <view libname="view.user.subscriptions" content="#content.user.subscriptions" requires=".user">
+        <breakpoint />
         <db:get-required model="moya.auth#User" dst="user"
             let:username=".url.username"/>
-        <tl:get-timeline let:user="user" dst="timeline"/>
+        <tl:get-timeline user="user" dst="timeline"/>
         <get-url name="user_subscriptions" let:username="user.username" dst="watch_url"/>
     </view>
 
@@ -66,7 +67,7 @@
     <view libname="view.user.streams" content="#content.user.streams">
         <db:get-required model="moya.auth#User" dst="owner"
             let:username=".url.username"/>
-        <tl:get-timeline let:user="owner" dst="timeline"/>
+        <tl:get-timeline user="owner" dst="timeline"/>
         <get-url name="user_streams" let:username="owner.username" dst="watch_url"/>
         <let user=".user"/>
 
