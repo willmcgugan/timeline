@@ -7,6 +7,7 @@
             <img alt="gravatar" src="//www.gravatar.com/avatar/${md5:lower:(comment.user.email or comment.commenter_email)}?s=58&amp;d=identicon"/>
         </div>
     </a>
+
     <div class="comment-body" style="display:block">
         <h4 class="media-heading">${comment.user.display_name or comment.commenter_name}</h4>
         <h6 class="pull-right text-muted">
@@ -14,8 +15,10 @@
                 <moya insert="willmcgugan.timeline#insert.comment.time" app="timeline" data-timestamp="${comment.time.epoch}"></moya>
             </span>
         </h6>
-        
+
+        {%- cache for 1d key [commentobject.id, commentobject.updates, comment.id] %}
         {% include "widgets/comment_markup.html" %}
+        {%- end-cache %}
 
         {%- if commentobject.allow_new %}
         <div class="moya-comment-actions">
@@ -25,9 +28,9 @@
             </a>
         </div>
         {%- endif %}
-        
-        
+
     </div>
+
     {%- if commentobject.allow_new %}
     {% include "widgets/comment_form_reply.html" %}
     {%- endif %}
@@ -39,48 +42,6 @@
     </div>
     {%- endif %}
 </div>
-
-{#
-<div class="moya-comment clearfix level-${comment.level}{% if comment.level > 0 %} reply{% endif %}">
-    <div class="moya-comment-body{% if comment.user %} user{% endif %} moya-comment-${comment.id}">
-        <a href="#comment${comment.id}">
-            <img class="gravatar" alt="gravatar" src="//www.gravatar.com/avatar/${md5:lower:(comment.user.email or comment.commenter_email)}?s=36&amp;d=identicon"/>
-        </a>
-        <div class="text">
-            <div class="comment-header">
-                {%- if comment.commenter_url %}
-                <a href="${comment.commenter_url}" class="name">${comment.user.display_name or comment.commenter_name}</a>
-                {%- else %}
-                <span class="name">${comment.user.display_name or comment.commenter_name}</span>
-                {%- endif %}
-
-                <span class="time"> &mdash; <moya insert="willmcgugan.timeline#insert.comment.time" app="techblog" data-timestamp="${comment.time.epoch}"></moya></span>
-            </div>
-
-                {% include "widgets/comment_markup.html" %}
-                {%- if commentobject.allow_new %}
-                <div class="moya-comment-actions">
-                    <a href="#" data-commentid="${comment.id}" class="reply">
-                        <i class="fa fa-reply"></i>
-                        {% trans %}Reply to ${comment.user.display_name or comment.commenter_name}{% end %}
-                    </a>
-                </div>
-                {%- endif %}
-
-        </div>
-    </div>
-    {%- if commentobject.allow_new %}
-    {% include "widgets/comment_form_reply.html" %}
-    {%- endif %}
-    {%- if commentgraph[comment.id] %}
-    <div class="moya-comments">
-        {%- for comment in commentgraph[comment.id] %}
-        {%- call "comment" %}
-        {%- endfor %}
-    </div>
-    {%- endif %}
-</div>
-#}
 {%- enddef %}
 
 <div id="techblog-comments">
@@ -141,13 +102,11 @@
 
 {%- if comments %}
 {% markup-block as 'moya' %}
-{% cache for 1d key [commentobject.id, commentobject.updates, bool:.user] %}
 <div class="moya-comments root media-area media-area-small">
 {%- for comment in commentgraph.root %}
 {%- call "comment"  %}
 {%- endfor %}
 </div>
-{% endcache %}
 {% end-markup-block %}
 {%- endif %}
 
