@@ -38,7 +38,7 @@
 
         <url route="/tag/{tag_slug}/" view="#view.tag.stream" name="tag_stream">
             <!-- Redirect if tag name is not in canonical form -->
-            <redirect name="tag_stream" let:tag_name="slug:.url.tag_slug"
+            <redirect name="tag_stream" let:tag_slug="slug:.url.tag_slug"
                 if="slug:.url.tag_slug != .url.tag_slug"/>
         </url>
 
