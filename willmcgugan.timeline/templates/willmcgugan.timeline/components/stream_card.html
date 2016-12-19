@@ -1,19 +1,23 @@
 
 <div class="card card-user with-image stream-card">
 
-    <div class="content">
+    <div class="card-content">
 
-        <div class="author">
+        <div class="user">
             <a href="{% url 'user_stream' with username=stream.user.username, stream_slug=stream.slug %}">
-            {%- if stream.image %}
-            <img class="avatar" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
-            {%- else %}
-            <img class="avatar" src="{% media 'img/defaultstream.jpg' %}" alt="...">
-            {%- endif %}
+
+                <div class="photo">
+                    {%- if stream.image %}
+                    <img  src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                    {%- else %}
+                    <img  src="{% media 'img/defaultstream.jpg' %}" alt="...">
+                    {%- endif %}
+                </div>
+
             </a>
-            <h4 class="title">
+            <div class="info">
                 <a href="{% url 'user_stream' with username=stream.user.username, stream_slug=stream.slug %}">${stream.title}</a>
-            </h4>
+            </div>
         </div>
 
         <p class="description text-center">

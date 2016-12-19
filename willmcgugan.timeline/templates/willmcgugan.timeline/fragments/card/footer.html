@@ -1,4 +1,4 @@
-	<div class="footer">
+	<div class="card-footer">
 		<div class="author">${event.generator or '?'}</div>
 		<i class="text-muted fa fa-angle-double-right"></i>
 		{%- compact %}
@@ -8,7 +8,7 @@
 		{% if link_to_stream %}</a>{% endif %}
 		</div>
 		{%- end-compact %}
-			
+
 		<div class="stats pull-right">
 			{%- if event.numcomments %}
 			<a href="{% url 'event' with event_id=event.uuid %}#comments">

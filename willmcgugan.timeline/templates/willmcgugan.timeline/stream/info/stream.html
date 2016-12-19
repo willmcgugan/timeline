@@ -1,56 +1,40 @@
 
 {% let can_manage=stream|'can_manage_stream' %}
-<div class="card card-user with-image">
 
-    <div class="content">
 
-        {% if can_manage %}
-        <div class="btn-group stream-actions-button">
-          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-wrench text-info"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#" data-toggle="modal" data-target="#code_modal">
-                <i class="fa fa-code"></i> Get the Code!</a>
-            </li>
-            {% if stream.user %}
-            <li role="separator" class="divider"></li>
-            <li>
-                <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit stream</a>
-            </li>
-            <li>
-                <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;"><i class="fa fa-photo"></i> Change photo</a>
-            </li>
-            {% endif %}
-            <li role="separator" class="divider"></li>
-            <li>
-                <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New stream</a>
-            </li>
-          </ul>
+    <div class="user">
+
+
+
+
+        <div {% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
+
+                {% if can_manage %}
+                <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">
+                {% endif %}
+
+                    <div class="photo">
+                        {% if stream.image %}
+                        <img src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                        {% else %}
+                        <img  src="{% media 'img/defaultstream.jpg' %}" alt="...">
+                        {% endif %}
+                    </div>
+
+                {% if can_manage %}
+                </a>
+                {% endif %}
         </div>
-        {% elif not stream.password %}
-        <div class="btn-group stream-actions-button">
-          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-wrench text-info"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#" data-toggle="modal" data-target="#code_modal">
-                <i class="fa fa-code"></i> Get the Code!</a>
-            </li>
-          </ul>
-        </div>
-        {% endif %}
 
-
-        {% include "fragments/card/stream_image.html" %}
-
-        <p class="description text-center text-muted">
+        {% if stream.description %}
+        <p class="info">
             ${stream.description}
         </p>
+        {% endif %}
 
         {% if stream.user %}
         <p class="description text-center">
-            <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i>${stream.user.username}</a>
+            <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i> ${stream.user.username}</a>
         </p>
         {% endif %}
 
@@ -79,9 +63,5 @@
     <div class="stream-info-footer text-center">
         {% with title=stream.title %}{% include "fragments/social.html" %}{% endwith %}
     </div>
-
-</div>
-
-
 
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% with theme_color=color:[72,131,220] * 0.85 %}
+    <meta name="theme-color" content="${theme_color}">
+    <meta name="msapplication-navbutton-color" content="${theme_color}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="${theme_color}">
+    {% end-with %}
+
+    <title>{% block "title" %}${title}{% end %}</title>
+
+    {% block "includecss" %}{% render include.css %}{% end %}
+    {% block "css" %}{% render sections.css %}{% end %}
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{% media 'img/favicons/apple-touch-icon-57x57.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% media 'img/favicons/apple-touch-icon-60x60.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% media 'img/favicons/apple-touch-icon-72x72.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% media 'img/favicons/apple-touch-icon-76x76.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% media 'img/favicons/apple-touch-icon-114x114.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% media 'img/favicons/apple-touch-icon-120x120.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% media 'img/favicons/apple-touch-icon-144x144.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% media 'img/favicons/apple-touch-icon-152x152.png' from 'timeline' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% media 'img/favicons/apple-touch-icon-180x180.png' from 'timeline' %}">
+    <link rel="icon" type="image/png" href="{% media 'img/favicons/favicon-32x32.png' from 'timeline' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% media 'img/favicons/android-chrome-192x192.png' from 'timeline' %}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{% media 'img/favicons/favicon-96x96.png' from 'timeline' %}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{% media 'img/favicons/favicon-16x16.png' from 'timeline' %}" sizes="16x16">
+    <link rel="manifest" href="{% media 'img/favicons/manifest.json' from 'timeline' %}">
+    <link rel="mask-icon" href="{% media 'img/favicons/safari-pinned-tab.svg' from 'timeline' %}" color="#5bbad5">
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300" rel="stylesheet" type="text/css">
+
+    <link href="{% media 'css/bootstrap.min.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/gsdk.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/pe-icon-7-stroke.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/timeline.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/events.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'css/login-register.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+    <link href="{% media 'highlight/styles/github-gist.css' from 'timeline' %}" rel="stylesheet" type="text/css">
+
+    {% block "jshead" %}{% render sections.jshead %}{% end %}
+    {% block "head" %}{% render sections.head %}{% end %}
+
+</head>
+
+<body id="{% block 'bodyid' %}${config.page_id or 'timeline-view'}{% end-block %}" data-rpcurl="{% url 'jsonrpc_private' from 'willmcgugan.timeline' %}" {% data-attrib config or {} %}>
+
+{% block "navar" %}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+
+      <button id="menu-toggle" type="button" class="navbar-toggle">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">
+      <img src="{% media 'img/thing.svg' from 'timeline' %}" width="32" class="pull-left" style="opacity:0.5;margin-right:1em;"/>
+        inthing.io
+      </a>
+
+    </div>
+
+    {% include "menu.html" from 'willmcgugan.timeline' %}
+
+  </div><!-- /.container-fluid -->
+</nav>
+{% endblock %}
+
+{% block "bodycontainer" %}
+<div class="container body-content">
+{% block "body" %}
+<div class="margin-top-20">
+{% render sections.body %}
+</div>
+{% endblock %}
+<br>
+{% endblock %}
+</div>
+
+{% if not .user %}
+{% include "forms/login.html" from "willmcgugan.timeline" %}
+{% endif %}
+
+{% block "footer" %}
+{% include "footer.html" from "timeline" %}
+{% endblock %}
+
+  <script src="{% media 'js/jquery-1.10.2.js' from 'timeline' %}"></script>
+  <script src="{% media 'js/bootstrap.min.js' from 'timeline' %}"></script>
+  <script src="{% media 'js/gsdk-checkbox.js' from 'timeline' %}"></script>
+  <script src="{% media 'js/gsdk-bootstrapswitch.js' from 'timeline' %}"></script>
+  <script src="{% media 'js/gsdk-radio.js' from 'timeline' %}"></script>
+  <script src="{% media 'js/get-shit-done.js' from 'timeline' %}"></script>
+
+{% block "includejs" %}{% render include.js %}{% endblock %}
+{% block "js" %}{% render sections.js unique %}{% endblock %}
+{% block "jsfoot" %}{% render sections.jsfoot unique %}{% endblock %}
+
+  {% include "/ga.html" %}
+
+<body>
+<html>

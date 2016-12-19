@@ -1,7 +1,28 @@
 {% extends "../stream/card.html" %}
 
+{#
 {% block "content" %}
 <div class="content">
 {% include "fragments/card/common.html" %}
 </div>
 {% endblock %}
+
+#}
+
+{% block "content" %}
+
+    {#
+    <div class="card-header card-header-icon" data-background-color="green">
+        <i class="material-icons">language</i>
+    </div>
+    #}
+
+    <div class="card-content">
+        {% include "fragments/card/common.html" %}
+
+    </div>
+
+    {%- include "fragments/card/footer.html" %}
+
+{% endblock %}
+

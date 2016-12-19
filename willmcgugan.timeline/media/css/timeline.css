@@ -472,17 +472,6 @@ pre code.hljs *
     display:none;
 }
 
-.stream-actions-button .btn
-{
-    border:0px;
-}
-
-.stream-actions-button
-{
-    float:left;
-    position:absolute;
-}
-
 .dash-streams .card
 {
     height:130px;
