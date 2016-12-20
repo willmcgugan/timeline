@@ -1,4 +1,5 @@
-	<div class="card-footer">
+{#
+	<div class="timeline-footer">
 		<div class="author">${event.generator or '?'}</div>
 		<i class="text-muted fa fa-angle-double-right"></i>
 		{%- compact %}
@@ -9,11 +10,14 @@
 		</div>
 		{%- end-compact %}
 
-		<div class="stats pull-right">
+		<div class="pull-right">
+			<span class="time-ago" data-time="${event.time.epoch}">
 			{%- if event.numcomments %}
 			<a href="{% url 'event' with event_id=event.uuid %}#comments">
 				<i class="fa fa-comment"></i> ${event.numcomments}
 			</a>
 			{%- endif %}
         </div>
+
 	</div>
+#}

@@ -25,6 +25,20 @@
             let:stream="stream" let:timeline="timeline"/>
     </view>
 
+    <view libname="view.stream.edit" content="#content.stream.edit">
+        <db:get-required model="moya.auth#User" let:username=".url.username" dst="user"/>
+        <tl:get-stream-required user="user" id=".url.stream_slug" dst="stream"/>
+        <forbidden if="user != .user"/>
+        <forms:get form="#form.stream.edit" src="stream" dst="form"/>
+        <forms:validate src="form" let:stream="stream">
+            <forms:apply src="form" dst="stream"/>
+            <let stream.slug="slug:stream.title"/>
+            <tl:user-message>**Success** You clearly do not fear change!</tl:user-message>
+            <redirect name="user_stream" let:username="stream.user.username" let:stream_slug="stream.slug"/>
+        </forms:validate>
+
+    </view>
+
     <view libname="view.stream.claim" content="#content.stream.claim" requires=".user">
         <tl:get-stream-required id=".url.stream_id" dst="stream"/>
         <forms:get form="#form.stream.claim" dst="form"/>

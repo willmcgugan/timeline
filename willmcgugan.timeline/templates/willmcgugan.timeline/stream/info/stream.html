@@ -4,9 +4,6 @@
 
     <div class="user">
 
-
-
-
         <div {% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
 
                 {% if can_manage %}
@@ -32,11 +29,13 @@
         </p>
         {% endif %}
 
+        {#
         {% if stream.user %}
         <p class="description text-center">
             <a title="View ${stream.user.username}'s streams" data-toggle="tooltip" href="{% url 'user_streams' with username=stream.user.username %}"><i class="fa fa-male"></i> ${stream.user.username}</a>
         </p>
         {% endif %}
+        #}
 
         {% if stream %}
         <div class="text-center">
@@ -53,6 +52,24 @@
 
     </div>
 
+    <ul class="nav">
+        <li>
+            <a href="./widgets.html" data-toggle="modal" data-target="#code_modal">
+                <i class="material-icons">code</i>
+                <p>Get the Code!</p>
+            </a>
+        </li>
+        {% if can_manags %}
+        <li>
+            <a href="{% url 'user_stream_edit' with username=stream.user.username, stream_slug=stream.slug %}">
+                <i class="material-icons">edit</i>
+                Edit stream
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+
+    {#
     <div class="card-refine">
         <div class="panel-group card-refine">
             {% include "fragments/filter/event_type.html" %}
@@ -63,5 +80,5 @@
     <div class="stream-info-footer text-center">
         {% with title=stream.title %}{% include "fragments/social.html" %}{% endwith %}
     </div>
-
+    #}
 

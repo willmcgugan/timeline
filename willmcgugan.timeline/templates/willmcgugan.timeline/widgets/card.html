@@ -1,6 +1,6 @@
 <div {% attrib (class='card', id=self.id, style=self.hidden ? 'display:none;': '') %}>
 
-<div class="modal-header">
+<div class="card-header">
 
 {%- if self.close %}
 <button type="button" class="close hide-button" data-hide="#${self.id}" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -12,7 +12,7 @@
 
 </div>
 
-<div class="content">
+<div class="card-content">
 {%- children -%}
 </div>
 </div>

@@ -3,9 +3,14 @@
 
 
 {% block "content" %}
+<div class="timeline-panel">
+
+    <div class="timeline-heading">
+        <span class="label label-danger">${event.title}</span>
+    </div>
 
     {% if event.image %}
-    <div class="card-image" data-header-animation="false">
+    <div class="timeline-content">
         {%- if link_title %}
         <a href="{% url 'event' with event_id=event.uuid %}">
             <img src="${event.image.path|'thumbnail'(processor='large')}" />
@@ -13,12 +18,11 @@
         {%- else %}
         <img src="${event.image.path|'thumbnail'(processor='large')}" />
         {%- endif %}
+        {% include "fragments/card/common.html" %}
     </div>
     {% endif %}
 
-    <div class="card-content">
-        {% include "fragments/card/common.html" %}
-    </div>
-
+    {%- include "fragments/card/footer.html" %}
+</div>
 
 {% end-block %}

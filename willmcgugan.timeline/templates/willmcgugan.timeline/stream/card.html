@@ -1,11 +1,18 @@
 {%- cache for 24h key [new_event, event.uuid, event.numcomments, event.update, link_to_stream, link_title] -%}
 {% compact %}
-<div id="event-${event.uuid}"
-{% attrib class=['card', 'event', 'event-priority-' + event.priority_name, 'event-' + event.type, new_event ? 'new-event' : None, event.text ? None : 'no-text'] %}
+
+<li id="event-${event.uuid}"
+{% attrib class=['timeline-inverted', 'event', 'event-priority-' + event.priority_name, 'event-' + event.type, new_event ? 'new-event' : None, event.text ? None : 'no-text'] %}
 data-type="${event.type}" data-update="${event.update}" data-order="${event.id}" data-time="${round:[event.insert_seconds, 6]}" data-pk="${event.id}">
 {% end-compact %}
 
+{# <span class="time-ago" data-time="${event.time.epoch}"></span> #}
+
+    <div class="timeline-badge danger">
+        <i class="material-icons">card_travel</i>
+    </div>
+
 	{%- emptyblock "content" -%}
 
-</div>
+</li>
 {%- endcache %}

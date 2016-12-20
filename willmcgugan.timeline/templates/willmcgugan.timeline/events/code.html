@@ -1,5 +1,6 @@
 {% extends "../stream/card.html" %}
 
+{#
 {% block "content" %}
 <div class="content">
 {# common components to event card #}
@@ -18,3 +19,22 @@
 {%- include "fragments/card/footer.html" %}
 </div>
 {% endblock %}
+#}
+
+
+{% block "content" %}
+
+<div class="timeline-panel">
+    <div class="timeline-header" {# data-background-color="green" #}>
+        <h4>${event.title}</h4>
+    </div>
+
+    <div class="tinmeline-content">
+        <pre><code class="language-${event.code_language}">${strip:event.text}</code></pre>
+    </div>
+
+    {%- include "fragments/card/footer.html" %}
+<div class="timeline-panel">
+
+{% endblock %}
+

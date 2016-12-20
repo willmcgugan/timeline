@@ -58,6 +58,8 @@
         <!-- URL to POST events to -->
         <url route="/{username}/{stream_slug}/add/" view="#view.stream.upload" name="user_stream_upload"/>
 
+        <url route="/{username}/{stream_slug}/edit/" view="#view.stream.edit" name="user_stream_edit"/>
+
     </mountpoint>
 
 

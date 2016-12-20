@@ -1,3 +1,28 @@
+#inthing .events-container .alert.alert-with-icon i.material-icons
+{
+    margin-top:-10px;
+}
+
+#inthing .events-container .alert
+{
+    margin-top:0px;
+}
+
+#inthing .events-container .event
+{
+   /* margin-top:32px; */
+}
+
+#inthing .timeline
+{
+    margin-top:0px;
+}
+
+#inthing .timeline > li
+{
+    margin-bottom:0px;
+}
+
 #code_modal .bash.hljs
 {
     white-space: pre-wrap;
@@ -214,13 +239,17 @@ body
 
 pre
 {
-    background: #f8f8f8 !important;
+    /*
+    background: #fff !important;
+    color:#555;
+*/
     overflow-x:auto;
     border:none;
     padding:2px;
     margin-top:0px;
-    margin-bottom:16px;
+    margin-bottom:8px;
     font-size:13px;
+    line-height:18px;
     box-sizing: border-box;
     font-family:monospace;
 }
@@ -300,7 +329,7 @@ pre code.hljs *
     overflow:hidden;
 }
 
-.card .image-container img
+.card .image-container img, .timeline-content  img
 {
     width:100%;
 }

@@ -1,8 +1,16 @@
 {% extends "../stream/event.html" %}
 
 {% block "content" %}
-<div class="alert alert-info alert-with-icon" data-notify="container">
-    <i class="material-icons" data-notify="icon">notifications</i>
-    <span><a href="${event.stream.url}">{% markup event.text as event.markup %}</a></span>
+<div class="timeline-panel">
+
+    <div class="timeline-heading">
+    <h4>Meta</h4>
+    </div>
+
+    <div class="timeline-content" data-notify="container">
+        <a href="${event.stream.url}">{% markup event.text as event.markup %}</a>
+    </div>
+
 </div>
+
 {% endblock %}

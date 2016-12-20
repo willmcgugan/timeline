@@ -2,11 +2,41 @@
 
 {% block "title" %}${event.title}{% endblock %}
 
+{% block "body" %}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% render sections.event %}
+                </div>
+                <div class="col-md-2">
+                    <div class="visible-lg-block">
+                        {% if previous_event %}
+                        <a title="Previous event" data-placement="bottom" data-toggle="tooltip" class="previous-event" href="{% url 'event' with event_id=previous_event.uuid %}">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                        {% endif %}
+                        {% if next_event %}
+                        <a title="Next event" data-placement="bottom" data-toggle="tooltip" class="next-event" href="{% url 'event' with event_id=next_event.uuid %}">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% render sections.comments %}
+                </div>
+            </div>
+
+{% end-block %}
+
+{#
 {% block "bodycontainer" %}
 
 <div class="body-content">
 
-    <div class="timelines event-view section section-gray">
+    <div class="timelines event-view">
     	<div class="container timeline-container">
 
     		<div class="row hidden-lg margin-bottom-20">
@@ -74,3 +104,4 @@
 </div>
 
 {% endblock %}
+#}

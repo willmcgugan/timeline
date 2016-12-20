@@ -1,7 +1,7 @@
 
 <div id="${id}" {% data-attrib config %}>
 {% include "fragments/new_events.html" %}
-	<div class="events-container">
+	<ul class="timeline timeline-simple events-container">
 	{%- for event in events %}
 	{% include "event.html" %}
 	{%- endfor %}

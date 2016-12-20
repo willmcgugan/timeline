@@ -1,3 +1,40 @@
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Company
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Portfolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        <a href="http://www.creative-tim.com">inthing.io</a>
+                    </p>
+                </div>
+            </footer>
+
+{#
 {% cache for 1h if not .debug %}
 <footer class="footer footer-big footer-black">
 	<div class="container">
@@ -50,19 +87,6 @@
                                 <i class="fa fa-twitter"></i> Twitter
                             </a>
                         </li>
-                        {#
-                        <li>
-                            <a href="#" class="btn btn-social btn-facebook btn-simple">
-                                <i class="fa fa-facebook-square"></i> Facebook
-                            </a>
-                        </li>
-
-                        <li>
-                             <a href="#" class="btn btn-social btn-reddit btn-simple">
-                                <i class="fa fa-google-plus-square"></i> Google+
-                            </a>
-                        </li>
-                        #}
 
                     </ul>
                 </nav>
@@ -70,11 +94,12 @@
 			</div>
 		</div>
 
-        
+
 		<div class="copyright">
             {# &copy; 2016 Will McGugan #}
 		</div>
-        
+
 	</div>
 </footer>
 {% end-cache %}
+#}

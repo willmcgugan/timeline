@@ -6,7 +6,7 @@
     xmlns:let="http://moyaproject.com/let"
     xmlns:tl="http://willmcgugan.com/timeline">
 
-    <form libname="form.event" legend="New Event" style="horizontal" xmlns="http://moyaproject.com/forms">
+    <form libname="form.event" style="horizontal" xmlns="http://moyaproject.com/forms">
     	<input name="stream" label="Stream" placeholder="Stream ID or path" required="yes" help="A stream UUID or path ( e.g. /will/test/ ) "/>
     	<input name="password" required="no" label="Password" placeholder="Stream password"/>
         <input name="title" label="Title" required="yes" placeholder="Descriptive title of this event"/>
@@ -75,7 +75,7 @@
         <input name="title" label="Title" required="yes"/>
         <input name="password" label="Password" help="The stream password is required in the API." required="yes"/>
         <text-area name="description" label="Description"/>
-        <submit-button class="btn btn-round" text="Save"/>
+        <submit-button class="btn btn-round btn-primary" text="Save"/>
 
         <validate-field field="title">
             <db:if-exists model="#Stream"

@@ -35,7 +35,9 @@ Add `?format=json` to the URL to return a JSON response
     		<w:success if="event">
     			Added event ${event.uuid}
     		</w:success>
-            <render src="form"/>
+            <tl:card title="New Event">
+                <render src="form"/>
+            </tl:card>
     	</section>
     </content>
 
@@ -78,9 +80,6 @@ Add `?format=json` to the URL to return a JSON response
 
         <scope-node template="copy/getcode/credentials.html"/>
 
-        <markdown>
-#### Adding Events
-        </markdown>
         <defer to="#macro.content.get-code.apis"/>
 
     </macro>
@@ -100,10 +99,6 @@ Add `?format=json` to the URL to return a JSON response
 
             <node template="copy/unclaimed.html" let:stream="stream" if="not stream.user"/>
 
-            <tl:card title="Edit Stream" id="stream-edit" hidden="not edit_form.bound" dismiss="yes" if="edit_form">
-                <render src="edit_form"/>
-            </tl:card>
-
             <tl:modal id="img_modal" title="Change Stream Photo" class="modal-md" if="stream.user and stream|'can_manage_stream'">
                 <node template="modals/stream_image_dialog.html">
                     <imglib:uploader collection="stream.imgcollection"
@@ -118,9 +113,6 @@ Add `?format=json` to the URL to return a JSON response
 
             <tl:card title="How do I post events?" dismiss="yes"
                 if="stream.empty and (stream.user == .user or stream.user is None)">
-                <markdown>
-                    Use any of the following methods to post events to this stream, and they will appear here *instantly*.
-                </markdown>
                 <defer to="#macro.content.get-code.apis"/>
             </tl:card>
 
@@ -137,6 +129,15 @@ Add `?format=json` to the URL to return a JSON response
             </tl:card>
         </section>
     </content>
+
+    <content libname="content.stream.edit" extends="#content.stream">
+        <section name="main" merge="replace">
+            <tl:card title="Edit Stream" dismiss="no">
+                <render src="form"/>
+            </tl:card>
+        </section>
+    </content>
+
 
     <content libname="content.user.subscriptions" extends="#content.stream.base">
         <title>Subscriptions</title>
