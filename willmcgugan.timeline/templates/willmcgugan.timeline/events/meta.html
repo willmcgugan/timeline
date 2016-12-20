@@ -1,15 +1,15 @@
-{% extends "../stream/event.html" %}
+{% extends "../stream/card.html" %}
 
 {% block "content" %}
 <div class="timeline-panel">
 
-    <div class="timeline-heading">
-    <h4>Meta</h4>
-    </div>
-
-    <div class="timeline-content" data-notify="container">
+    <div class="timeline-body" data-notify="container">
         <a href="${event.stream.url}">{% markup event.text as event.markup %}</a>
     </div>
+
+    <h6>
+<span class="time-ago" data-time="${event.time.epoch}"></span>
+    </h6>
 
 </div>
 

@@ -10,7 +10,7 @@
     </div>
 
     {% if event.image %}
-    <div class="timeline-content">
+    <div class="timeline-body">
         {%- if link_title %}
         <a href="{% url 'event' with event_id=event.uuid %}">
             <img src="${event.image.path|'thumbnail'(processor='large')}" />

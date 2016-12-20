@@ -334,7 +334,7 @@ pre code.hljs *
     overflow:hidden;
 }
 
-.card .image-container img, .timeline-content  img
+.card .image-container img, .timeline-body  img
 {
     width:100%;
 }
