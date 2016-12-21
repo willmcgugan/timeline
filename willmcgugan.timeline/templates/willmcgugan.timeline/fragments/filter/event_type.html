@@ -8,33 +8,17 @@
 ]
 {% end-data %}
 
-{#
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h6 class="panel-title">
-            <a data-toggle="collapse" href="#filter-types" class="collapsed">
-                Filter by Type
-                <i class="fa fa-caret-up pull-right"></i>
-            </a>
-        </h6>
-    </div>
 
-    <div id="filter-types" class="panel-collapse collapse out">
-        <div class="panel-body">
+    <div id="filter-types" class="check-box-radios">
 
             {% for type, type_label, icon in filter_types %}
-            <label class="checkbox unchecked">
-                <span class="icons">
-                    <span class="first-icon fa fa-square-o"></span>
-                    <span class="second-icon fa fa-check-square-o"></span>
-                </span>
-                <input type="checkbox" name="${type}" class="event-type" data-filter="${type}" value="" data-toggle="checkbox">
-                {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
-            </label>
+            <div class="togglebutton">
+                <label>
+                    <input class="event-type" type="checkbox" checked="checked" data-filter="${type}">
+                    {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
+                </label>
+            </div>
             {% endfor %}
 
-        </div>
-
     </div>
-</div>
-#}
+

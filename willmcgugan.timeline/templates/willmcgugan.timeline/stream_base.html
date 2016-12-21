@@ -36,6 +36,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
 
                 <div class="navbar-header">
 
+                {#
                    {% if can_manage %}
 
                       <button type="button" class="btn btn-white btn-round dropdown-toggle btn-fab btn-fab-mini" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,6 +73,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                       </ul>
 
                     {% endif %}
+                #}
 
                     <h4>${title}</h4>
                 </div>
@@ -108,37 +110,8 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <div class="container-fluid">
             	<div class="row">
                     <div class="col-md-3">
-
-
-
-                            <div class="checkbox-radios">
-
-                                <div class="togglebutton">
-                                    <label>
-                                        <input type="checkbox" checked=""> Toggle is on
-                                    </label>
-                                </div>
-
-                                <div class="togglebutton">
-                                    <label>
-                                        <input type="checkbox" checked=""> Toggle is on
-                                    </label>
-                                </div>
-
-                                <div class="togglebutton">
-                                    <label>
-                                        <input type="checkbox" checked=""> Toggle is on
-                                    </label>
-                                </div>
-
-                                <div class="togglebutton">
-                                    <label>
-                                        <input type="checkbox" checked=""> Toggle is on
-                                    </label>
-                                </div>
-
-                            </div>
-
+                    {% include "fragments/filter/event_type.html" %}
+                    {% include "fragments/filter/hashtag.html" %}
 
                     </div>
             		<div class="col-md-9">
