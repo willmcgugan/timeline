@@ -1,0 +1,17 @@
+<div class="card card-profile">
+    <div class="card-avatar">
+        <a href="#pablo">
+                {% if stream.image.file %}
+                <img class="avatar pull-left" src="${stream.image.file|'thumbnail'(processor='stream_info')}" alt="...">
+                {% endif %}
+        </a>
+    </div>
+    <div class="card-content">
+        <h6 class="category text-gray">@ ${stream.user.username}</h6>
+        <h4 class="card-title">${stream.title}</h4>
+        <p class="description">
+            ${stream.description}
+        </p>
+        {# <a href="#pablo" class="btn btn-rose btn-round">Follow</a> #}
+    </div>
+</div>

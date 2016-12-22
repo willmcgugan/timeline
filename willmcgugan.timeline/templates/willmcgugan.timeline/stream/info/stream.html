@@ -4,7 +4,7 @@
 
     <div class="user">
 
-        <div {% if can_manage %} title="Click to change photo" data-toggle="tooltip"{% endif %}>
+        <div {% if can_manage %} title="Click to change photo" data-placement="bottom" data-toggle="tooltip"{% endif %}>
 
                 {% if can_manage %}
                 <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;">

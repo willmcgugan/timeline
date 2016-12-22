@@ -89,8 +89,12 @@ Add `?format=json` to the URL to return a JSON response
         <str dst="stream_title">${stream.title}</str>
 
         <let require_pass="bool:stream.user"/>
-        <section name="side" >
+        <section name="sidebar" >
             <tl:stream-info stream="stream"/>
+        </section>
+
+        <section name="side">
+            <scope-node template="fragments/filter/event_type.html" />
         </section>
 
         <section name="main">
@@ -143,7 +147,7 @@ Add `?format=json` to the URL to return a JSON response
         <title>Subscriptions</title>
         <let-str menu="subscriptions"/>
         <section name="side" merge="prepend">
-            <node template="stream/info/subscriptions.html" withscope="yes" />
+            <scope-node template="fragments/filter/event_type.html" />
         </section>
         <section name="main">
             <node template="copy/no_subscriptions.html" withscope="yes" if="not timeline.streams"/>
@@ -165,7 +169,11 @@ Add `?format=json` to the URL to return a JSON response
         <title>${title:owner.username}'s Streams</title>
         <let-str menu="user_streams"/>
         <section name="side" merge="prepend">
-            <node template="stream/info/user_streams.html" withscope="yes"/>
+            <scope-node template="fragments/filter/event_type.html" />
+            <for src="streams" dst="stream">
+                <node template="fragments/stream_card.html" let:stream="stream"/>
+            </for>
+            <!-- <node template="stream/info/user_streams.html" withscope="yes"/> -->
         </section>
         <section name="main">
             <tl:render-user-message/>

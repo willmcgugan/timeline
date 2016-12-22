@@ -5,9 +5,8 @@
 
 {% block "bodycontainer" %}
 
-<div class="wrapper">
-
 {% block "sidebar" %}
+<div class="wrapper">
 	<div class="sidebar" data-active-color="rose" data-background-color="black" data-image="{% media 'assets/img/sidebar-1.jpg' from 'timeline' %}">
     <!--
 Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
@@ -25,7 +24,21 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         </a>
     </div>
     <div class="sidebar-wrapper">
-        {% block 'side' %}{% render sections.side %}{% endblock %}
+        {% render sections.sidebar %}
+        <ul class="nav">
+            <li {% attrib class=[menu=='user_streams' and 'active'] %}>
+                <a href="{% url 'user_streams' with username=.user.username %}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li {% attrib class=[menu=='subscriptions' and 'active'] %}>
+                <a href="{% url 'user_subscriptions' with username=.user.username %}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Subscriptions</p>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 {% end-block %}
@@ -35,46 +48,6 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <div class="container-fluid">
 
                 <div class="navbar-header">
-
-                {#
-                   {% if can_manage %}
-
-                      <button type="button" class="btn btn-white btn-round dropdown-toggle btn-fab btn-fab-mini" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">build</i>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#code_modal">
-                            <i class="fa fa-code"></i> Get the Code!</a>
-                        </li>
-                        {% if stream.user %}
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="#" onclick="event.preventDefault(); $('#stream-edit').fadeIn(); return false;"><i class="fa fa-edit"></i> Edit stream</a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="event.preventDefault(); $('#img_modal').modal(); return false;"><i class="fa fa-photo"></i> Change photo</a>
-                        </li>
-                        {% endif %}
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <a href="{% url 'new_stream' %}"><i class="fa fa-star"></i> New stream</a>
-                        </li>
-                      </ul>
-
-                    {% elif not stream.password %}
-
-                      <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="glyphicon glyphicon-wrench text-info"></i>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#code_modal">
-                            <i class="fa fa-code"></i> Get the Code!</a>
-                        </li>
-                      </ul>
-
-                    {% endif %}
-                #}
-
                     <h4>${title}</h4>
                 </div>
 
@@ -110,9 +83,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <div class="container-fluid">
             	<div class="row">
                     <div class="col-sm-4">
-                    {% include "fragments/filter/event_type.html" %}
-                    {% include "fragments/filter/hashtag.html" %}
-
+                    {% block 'side' %}{% render sections.side %}{% endblock %}
                     </div>
             		<div class="col-sm-8">
                         <ul class="timeline timeline-simple">
