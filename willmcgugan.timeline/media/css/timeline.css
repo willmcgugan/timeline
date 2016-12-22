@@ -4,6 +4,69 @@
     color:#999;
 }
 
+#inthing .tooltip
+{
+    position:fixed;
+}
+
+.timeline-header h4
+{
+    margin-top:0px;
+}
+
+#inthing .timeline-badge.with-image
+{
+
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.timeline::before
+{
+    display:none;
+}
+
+.timeline li.event
+{
+    overflow:hidden;
+
+}
+
+.timeline li.event::after
+{
+    content:' ';
+
+    position:absolute;
+    width:4px;
+    height:30px;
+    background-color:#dbdbdb;
+    left:5%;
+    margin-left:-1.5px;
+    top:0px;
+}
+
+.timeline li.event:first-child::after
+{
+    display:none;
+}
+
+.timeline li.event:last-child::before
+{
+    display:none;
+}
+
+.timeline li.event::before
+{
+    content:' ';
+
+    position:absolute;
+    width:4px;
+    height:10000px;
+    background-color:#dbdbdb;
+    left:5%;
+    margin-left:-1.5px;
+    top:40px;
+}
+
 #inthing .timeline-badge
 {
     background-size: 100% 100%;

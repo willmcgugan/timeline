@@ -6,13 +6,12 @@
 data-type="${event.type}" data-update="${event.update}" data-order="${event.id}" data-time="${round:[event.insert_seconds, 6]}" data-pk="${event.id}">
 {% end-compact %}
 
-{# <span class="time-ago" data-time="${event.time.epoch}"></span> #}
-
     {% let badge_image=event.stream.image ? event.stream.image.file|'thumbnail'(processor='stream_info') : None %}
 
-    <div class="timeline-badge danger" {% if badge_image %} style="background-image:url(${badge_image});"{% endif %}>
-        {# <i class="material-icons">card_travel</i> #}
-    </div>
+
+    <a href="${event.stream.url}" {% attrib class=['timeline-badge', badge_image ? 'with-image' : 'info'] %} class="timeline-badge info" data-toggle="tooltip" title="${event.stream.description}" {% if badge_image %} style="background-image:url(${badge_image});"{% endif %}>
+        {% if not badge_image %}<i class="material-icons">fingerprint</i>{% endif %}
+    </a>
 
 	{%- emptyblock "content" -%}
 
