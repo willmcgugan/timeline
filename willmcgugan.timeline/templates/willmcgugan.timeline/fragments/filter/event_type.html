@@ -9,16 +9,23 @@
 {% end-data %}
 
 
-    <div id="filter-types" class="check-box-radios">
 
-            {% for type, type_label, icon in filter_types %}
-            <div class="togglebutton">
-                <label>
-                    <input class="event-type" type="checkbox" checked="checked" data-filter="${type}">
-                    {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
-                </label>
-            </div>
-            {% endfor %}
+    <div class="card">
+    <div class="card-header card-header-text" data-background-color="orange">
+                                    <h4 class="card-title">Filters</h4>
 
+                                </div>
+        <div id="filter-types" class="card-content check-box-radios">
+
+                {% for type, type_label, icon in filter_types %}
+                <div class="togglebutton">
+                    <label>
+                        <input class="event-type" type="checkbox" checked="checked" data-filter="${type}">
+                        {% if icon %}<i class="fa ${icon}"></i> {% endif %}${type_label}
+                    </label>
+                </div>
+                {% endfor %}
+
+        </div>
     </div>
 
