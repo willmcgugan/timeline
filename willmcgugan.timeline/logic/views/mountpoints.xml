@@ -43,7 +43,7 @@
         </url>
 
         <url route="/tag/" name="tag_search">
-            <redirect name="tag_stream" let:tag_slug="slug:.request.GET.q"/>
+            <redirect name="tag_stream" let:tag_slug="slug:(.request.GET.q or 'helloworld')"/>
         </url>
 
         <url route="/{username}/" methods="GET">
