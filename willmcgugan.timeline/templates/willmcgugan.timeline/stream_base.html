@@ -109,12 +109,12 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         <div class="content">
             <div class="container-fluid">
             	<div class="row">
-                    <div class="col-md-4">
+                    <div class="col-sm-4">
                     {% include "fragments/filter/event_type.html" %}
                     {% include "fragments/filter/hashtag.html" %}
 
                     </div>
-            		<div class="col-md-8">
+            		<div class="col-sm-8">
                         <ul class="timeline timeline-simple">
             			     {% block 'main' %}{% render sections.main %}{% endblock %}
                         </ul>
