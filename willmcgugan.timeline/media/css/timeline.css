@@ -593,7 +593,7 @@ pre code.hljs *
     clear:both;
 }
 
-a.hashtag
+a.hashtag, a.mention
 {
    font-weight:bold;
 }

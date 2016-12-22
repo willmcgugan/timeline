@@ -20,10 +20,18 @@ function link_hashtags($container)
                 if(node.nodeType == 3)
                 {
                     var new_text = node.textContent.replace(
-                        /\#(\w+)/g,
+                        /([#@])(\w+)/g,
                         function(match) {
-                            var tag = match.substr(1);
-                            return '<a class="hashtag" href="/tag/' + tag + '/">#' + tag + '</a>';
+                            var type = match[0];
+                            var text = match.substr(1);
+                            if (type == '#')
+                            {
+                                return '<a class="hashtag" href="/tag/' + text + '/">#' + text + '</a>';
+                            }
+                            else
+                            {
+                                return '<a class="mention" href="/' + text + '">@' + text + '</a>';
+                            }
                         }
                     );
                     var replace_node = document.createElement('span');
