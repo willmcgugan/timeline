@@ -4,6 +4,12 @@
     color:#999;
 }
 
+#inthing .timeline-badge
+{
+    background-size: 100% 100%;
+    background-attachment: center center;
+}
+
 #inthing .events-container .alert.alert-with-icon i.material-icons
 {
     margin-top:-10px;

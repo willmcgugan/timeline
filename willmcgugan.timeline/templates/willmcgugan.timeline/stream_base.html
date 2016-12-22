@@ -38,6 +38,14 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                     <p>Subscriptions</p>
                 </a>
             </li>
+            {% if permission:'admin' %}
+            <li {% attrib class=[menu=='admin' and 'active'] %}>
+                <a href="{% url 'admin_meta' %}">
+                    <i class="material-icons">dashboard</i>
+                    <p>Admin</p>
+                </a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </div>
@@ -62,9 +70,9 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                         <li class="separator hidden-lg hidden-md"></li>
                     </ul>
 
-                    <form class="navbar-form navbar-right" role="search">
+                    <form action="{% url 'tag_search' %}" method="get" class="navbar-form navbar-right" role="search">
                         <div class="form-group form-search is-empty">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input name="q" type="text" class="form-control" {% attrib value=tag_slug %} placeholder="Search">
                             <span class="material-input"></span>
                         </div>
                         <button type="submit" class="btn btn-white btn-round btn-just-icon">

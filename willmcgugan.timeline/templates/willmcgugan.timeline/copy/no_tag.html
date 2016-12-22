@@ -1,6 +1,16 @@
+{#
 <div class="alert alert-warn" id="no-tag">
 <button type="button" class="close hide-button" data-hide="#no-tag" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 <p>
     <b>No events tagged with #${tag_slug}</b> &mdash; when we get any, you will be the first to know!
 </p>
 </div>
+#}
+
+    <div id="no-tag" class="alert alert-info alert-with-icon" data-notify="container">
+        <i class="material-icons" data-notify="icon">notifications</i>
+        <button type="button" aria-hidden="true" class="close hide-button" data-hide="#no-tag" aria-label="Close">
+            <i class="material-icons">close</i>
+        </button>
+        <span data-notify="message"><b>No events tagged with #${tag_slug}</b> &mdash; when we get any, you will be the first to know!</span>
+    </div>

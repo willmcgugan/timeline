@@ -157,8 +157,9 @@ Add `?format=json` to the URL to return a JSON response
 
     <content libname="content.admin.meta" extends="#content.stream.base">
         <title>Admin Meta</title>
+        <let-str menu="admin"/>
         <section name="side">
-            <scope-node template="stream/info/meta.html"/>
+            <scope-node template="fragments/filter/event_type.html" />
         </section>
         <section name="main">
             <tl:stream source="admin-meta" size="50"/>
@@ -190,7 +191,7 @@ Add `?format=json` to the URL to return a JSON response
         <title>Events tagged with #${tag_slug}</title>
         <let-str menu="tag_stream"/>
         <section name="side" merge="append">
-            <node template="stream/info/tag.html" withscope="yes"/>
+            <scope-node template="fragments/filter/event_type.html" />
         </section>
         <section name="main">
             <tl:render-user-message/>

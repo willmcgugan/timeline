@@ -14,7 +14,7 @@
             <attribute name="size" type="integer" default="10"/>
     	</signature>
         <tl:get-events source="${source}" dst="events"/>
-        <db:query src="events" dst="events"
+        <db:query src="events" dst="events" if="events"
             orderby="-id,-insert_seconds"  maxresults="size" distinct="yes"/>
     	<true dst="link_event"/>
     	<dict dst="config"

@@ -8,8 +8,10 @@ data-type="${event.type}" data-update="${event.update}" data-order="${event.id}"
 
 {# <span class="time-ago" data-time="${event.time.epoch}"></span> #}
 
-    <div class="timeline-badge danger">
-        <i class="material-icons">card_travel</i>
+    {% let badge_image=event.stream.image ? event.stream.image.file|'thumbnail'(processor='stream_info') : None %}
+
+    <div class="timeline-badge danger" {% if badge_image %} style="background-image:url(${badge_image});"{% endif %}>
+        {# <i class="material-icons">card_travel</i> #}
     </div>
 
 	{%- emptyblock "content" -%}

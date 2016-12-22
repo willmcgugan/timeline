@@ -42,6 +42,10 @@
                 if="slug:.url.tag_slug != .url.tag_slug"/>
         </url>
 
+        <url route="/tag/" name="tag_search">
+            <redirect name="tag_stream" let:tag_slug="slug:.request.GET.q"/>
+        </url>
+
         <url route="/{username}/" methods="GET">
             <!-- Twitter like convention for user pages -->
             <redirect name="user_streams" let:username=".url.username" />
