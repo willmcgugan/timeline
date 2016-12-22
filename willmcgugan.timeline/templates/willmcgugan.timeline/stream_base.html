@@ -29,7 +29,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <li {% attrib class=[menu=='user_streams' and 'active'] %}>
                 <a href="{% url 'user_streams' with username=.user.username %}">
                     <i class="material-icons">dashboard</i>
-                    <p>Profile</p>
+                    <p>Your Streams</p>
                 </a>
             </li>
             <li {% attrib class=[menu=='subscriptions' and 'active'] %}>
